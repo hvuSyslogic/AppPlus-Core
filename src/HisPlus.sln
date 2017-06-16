@@ -1,0 +1,114 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPlus-Core", "main\AppPlus-Core\AppPlus-Core.csproj", "{E9578BD9-26F5-41CF-A78F-42E704D2928A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPlus-Infrastructure", "main\AppPlus-Infrastructrure\AppPlus-Infrastructure.csproj", "{70A18834-0849-4693-AE65-1610A8E0EB7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPlus-Client", "main\AppPlus-Client\AppPlus-Client.csproj", "{FBA6129F-8BEF-4854-92F6-AEE573D6EBC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{33AD564A-06DE-4985-B6AA-6F874999B926}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "001 AppPlus-Core", "001 AppPlus-Core", "{16D79C93-C630-46EF-B3E9-0319AF011895}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPlus-Core-Tests", "main\AppPlus-Core-Tests\AppPlus-Core-Tests.csproj", "{74273477-7BAD-4272-A7B2-FB9F2585F802}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPlus-Client-Tests", "main\AppPlus-Client-Tests\AppPlus-Client-Tests.csproj", "{C09590F2-C34C-4553-B146-C8D1F7F01A9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{477A7DAE-105D-48B3-AC8F-3BD615AAD098}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitattributes = ..\.gitattributes
+		..\.gitignore = ..\.gitignore
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus", "main\HisPlus-Server\HisPlus.csproj", "{B0DAFCD5-4994-49BE-868E-54D6E33AD496}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Contracts", "main\HisPlus-Contracts\HisPlus-Contracts.csproj", "{6DE0DAB6-3E4B-43EE-8473-F7A61D0D9CD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Services", "main\HisPlus-Services\HisPlus-Services.csproj", "{3D36ED5F-8B85-48D8-B9E6-BDE34495967E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Service-Remote-Tests", "main\HisPlus-Service-Remote-Tests\HisPlus-Service-Remote-Tests.csproj", "{B1292C46-4B3D-4DC2-8881-66BB72B169C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Service-Local-Tests", "main\HisPlus-Service-Local-Tests\HisPlus-Service-Local-Tests.csproj", "{F4BC0FCD-7B71-4DE8-BAB3-A0DD69A024F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Domain", "main\HisPlus-Domain\HisPlus-Domain.csproj", "{9B4FD8FF-73EF-4E18-9ABE-18B1D0737263}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "002 HisPlus", "002 HisPlus", "{EE7A444F-C548-432D-8B20-03C6C9B3DD95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "003 UnitTests", "003 UnitTests", "{DD4ADB69-38E2-46BF-B7BA-451C38C6C675}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E9578BD9-26F5-41CF-A78F-42E704D2928A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9578BD9-26F5-41CF-A78F-42E704D2928A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9578BD9-26F5-41CF-A78F-42E704D2928A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9578BD9-26F5-41CF-A78F-42E704D2928A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70A18834-0849-4693-AE65-1610A8E0EB7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70A18834-0849-4693-AE65-1610A8E0EB7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70A18834-0849-4693-AE65-1610A8E0EB7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70A18834-0849-4693-AE65-1610A8E0EB7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBA6129F-8BEF-4854-92F6-AEE573D6EBC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBA6129F-8BEF-4854-92F6-AEE573D6EBC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBA6129F-8BEF-4854-92F6-AEE573D6EBC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBA6129F-8BEF-4854-92F6-AEE573D6EBC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74273477-7BAD-4272-A7B2-FB9F2585F802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74273477-7BAD-4272-A7B2-FB9F2585F802}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74273477-7BAD-4272-A7B2-FB9F2585F802}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74273477-7BAD-4272-A7B2-FB9F2585F802}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C09590F2-C34C-4553-B146-C8D1F7F01A9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C09590F2-C34C-4553-B146-C8D1F7F01A9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C09590F2-C34C-4553-B146-C8D1F7F01A9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C09590F2-C34C-4553-B146-C8D1F7F01A9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0DAFCD5-4994-49BE-868E-54D6E33AD496}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0DAFCD5-4994-49BE-868E-54D6E33AD496}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0DAFCD5-4994-49BE-868E-54D6E33AD496}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0DAFCD5-4994-49BE-868E-54D6E33AD496}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DE0DAB6-3E4B-43EE-8473-F7A61D0D9CD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DE0DAB6-3E4B-43EE-8473-F7A61D0D9CD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DE0DAB6-3E4B-43EE-8473-F7A61D0D9CD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DE0DAB6-3E4B-43EE-8473-F7A61D0D9CD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D36ED5F-8B85-48D8-B9E6-BDE34495967E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D36ED5F-8B85-48D8-B9E6-BDE34495967E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D36ED5F-8B85-48D8-B9E6-BDE34495967E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D36ED5F-8B85-48D8-B9E6-BDE34495967E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1292C46-4B3D-4DC2-8881-66BB72B169C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1292C46-4B3D-4DC2-8881-66BB72B169C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1292C46-4B3D-4DC2-8881-66BB72B169C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1292C46-4B3D-4DC2-8881-66BB72B169C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4BC0FCD-7B71-4DE8-BAB3-A0DD69A024F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4BC0FCD-7B71-4DE8-BAB3-A0DD69A024F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4BC0FCD-7B71-4DE8-BAB3-A0DD69A024F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4BC0FCD-7B71-4DE8-BAB3-A0DD69A024F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B4FD8FF-73EF-4E18-9ABE-18B1D0737263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B4FD8FF-73EF-4E18-9ABE-18B1D0737263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B4FD8FF-73EF-4E18-9ABE-18B1D0737263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B4FD8FF-73EF-4E18-9ABE-18B1D0737263}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E9578BD9-26F5-41CF-A78F-42E704D2928A} = {16D79C93-C630-46EF-B3E9-0319AF011895}
+		{70A18834-0849-4693-AE65-1610A8E0EB7E} = {16D79C93-C630-46EF-B3E9-0319AF011895}
+		{FBA6129F-8BEF-4854-92F6-AEE573D6EBC6} = {16D79C93-C630-46EF-B3E9-0319AF011895}
+		{74273477-7BAD-4272-A7B2-FB9F2585F802} = {DD4ADB69-38E2-46BF-B7BA-451C38C6C675}
+		{C09590F2-C34C-4553-B146-C8D1F7F01A9C} = {DD4ADB69-38E2-46BF-B7BA-451C38C6C675}
+		{B0DAFCD5-4994-49BE-868E-54D6E33AD496} = {EE7A444F-C548-432D-8B20-03C6C9B3DD95}
+		{6DE0DAB6-3E4B-43EE-8473-F7A61D0D9CD6} = {EE7A444F-C548-432D-8B20-03C6C9B3DD95}
+		{3D36ED5F-8B85-48D8-B9E6-BDE34495967E} = {EE7A444F-C548-432D-8B20-03C6C9B3DD95}
+		{B1292C46-4B3D-4DC2-8881-66BB72B169C6} = {DD4ADB69-38E2-46BF-B7BA-451C38C6C675}
+		{F4BC0FCD-7B71-4DE8-BAB3-A0DD69A024F1} = {DD4ADB69-38E2-46BF-B7BA-451C38C6C675}
+		{9B4FD8FF-73EF-4E18-9ABE-18B1D0737263} = {EE7A444F-C548-432D-8B20-03C6C9B3DD95}
+	EndGlobalSection
+EndGlobal
