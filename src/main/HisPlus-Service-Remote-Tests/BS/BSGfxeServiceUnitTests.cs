@@ -24,7 +24,7 @@ namespace AppPlus.His.Services.Tests.BS
         [Trait(TraitName, "Retrieve")]
         public void RetrieveAll_OK_TestMethod()
         {
-            var result = ServiceHandler.CallService((IBSGfxeService x) => x.RetrieveAll());
+            var result = CallService((IBSGfxeService x) => x.RetrieveAll());
             Assert.NotNull(result);
             Assert.True(result.Count() > 0);
         }
@@ -62,7 +62,7 @@ namespace AppPlus.His.Services.Tests.BS
             var item = result.FirstOrDefault();
             
             var exists = ServiceHandler.CallService((IBSGfxeService x) => x.Contains(item));
-            Assert.True(exists);            
+            Assert.True(exists);
         }
 
         [Fact(DisplayName = "002_ContainsByExpression_ExcludeKey_OK")]

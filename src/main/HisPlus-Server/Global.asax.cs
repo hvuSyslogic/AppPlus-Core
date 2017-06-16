@@ -33,11 +33,11 @@ namespace HisPlus
 
         private void Application_Initialize()
         {
-            AppPlusConfigurator hisPlusConfigurator = new AppPlusConfigurator();
-
-            hisPlusConfigurator.BuildMapper(typeof(BSGfxeService).Assembly)
-                .BuildContext<HisPlus.Domain.HisDbContext>(ConnectionString)
-                .RegisterAssembly(typeof(IBSGfxeService).Assembly, typeof(BSGfxeService).Assembly);
+           UnityContainer.Container = AppPlusConfigurator.Config()
+                .RegisterMapProfiles(typeof(BSGfxeService).Assembly)
+                .RegisterStorage<HisPlus.Domain.HisDbContext>(ConnectionString)
+                .RegisterServices(typeof(IBSGfxeService).Assembly, typeof(BSGfxeService).Assembly)
+            ;
         }
 
         protected void Session_Start(object sender, EventArgs e)

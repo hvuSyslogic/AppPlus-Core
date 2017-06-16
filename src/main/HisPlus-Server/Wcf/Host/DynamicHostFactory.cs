@@ -38,8 +38,8 @@ namespace HisPlus.Wcf.Host
         public override ServiceHostBase CreateServiceHost(string reference, Uri[] baseAddresses)
         {
             ArgumentValidation(reference, baseAddresses);
-            
-            var containerRegistrations = IoCContainer.Instance.Registrations;
+
+            var containerRegistrations = UnityContainer.Container.Registrations;
 
             var registration = containerRegistrations.Where(x => x.MappedToType.Name.ToLower() == reference.ToLower()).FirstOrDefault();
             if (registration == null)

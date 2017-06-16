@@ -9,6 +9,6 @@ using System.Threading.Tasks;
 namespace HisPlus.Contracts.Services.BS
 {
     public interface IBSGfxeService : IGenericService<BsGfxeDto, int>
-    {
+    {        
     }
 }

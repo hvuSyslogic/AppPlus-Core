@@ -20,7 +20,7 @@ namespace AppPlus.Core.EntityFramework
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private bool disposed;        
+        private bool disposed;
         private IDictionary<Type, object> repositories = new Dictionary<Type, object>();
 
         #region Construct(s)

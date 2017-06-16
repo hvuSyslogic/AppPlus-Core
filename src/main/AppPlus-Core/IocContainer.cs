@@ -7,7 +7,7 @@ using Microsoft.Practices.Unity;
 
 namespace AppPlus.Core
 {
-    public class IoCContainer
+    internal class IoCContainer
     {
         private IoCContainer() { }    
 

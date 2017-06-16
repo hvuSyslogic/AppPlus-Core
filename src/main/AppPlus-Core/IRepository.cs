@@ -9,7 +9,7 @@ using AppPlus.Infrastructure.Contracts.Messages;
 
 namespace AppPlus.Core
 {
-    public partial interface IGenericRepository<TEntity>
+    public partial interface IRepository<TEntity>
         where TEntity : EntityRoot, new()
     {
         #region Create

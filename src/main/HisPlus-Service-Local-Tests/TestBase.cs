@@ -20,13 +20,13 @@ namespace AppPlus.His.Domain.Tests
 
         static TestBase()
         {
-            AppPlusConfigurator hisPlusConfigurator = new AppPlusConfigurator();
-
-            hisPlusConfigurator.BuildMapper(typeof(BSGfxeService).Assembly)
-                .BuildContext<HisPlus.Domain.HisDbContext>(ConnectionString)
-                .RegisterAssembly(typeof(IBSGfxeService).Assembly, typeof(BSGfxeService).Assembly);
+            Container = AppPlusConfigurator.Config()
+                .RegisterMapProfiles(typeof(BSGfxeService).Assembly)
+                .RegisterStorage<HisPlus.Domain.HisDbContext>(ConnectionString)
+                .RegisterServices(typeof(IBSGfxeService).Assembly, typeof(BSGfxeService).Assembly)
+            ;
         }
 
-        protected static IUnityContainer Container { get { return IoCContainer.Instance; } }
+        protected static IUnityContainer Container { get; set; }
     }
 }

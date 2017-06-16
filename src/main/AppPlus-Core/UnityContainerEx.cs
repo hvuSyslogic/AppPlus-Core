@@ -9,6 +9,9 @@ using Microsoft.Practices.Unity;
 using AppPlus.Core;
 using AppPlus.Core.Service;
 using AppPlus.Infrastructure.Contracts.Services;
+using System.Data.Entity;
+using AppPlus.Core.EntityFramework;
+using AutoMapper;
 
 namespace AppPlus.Core
 {
@@ -51,6 +54,32 @@ namespace AppPlus.Core
             Log.DebugFormat("=================================================== {0} types was registered successfully ========================================================", totalOfRegisteredTypes);
             
             return unityContainer;
+        }
+
+        public static IUnityContainer RegisterMapProfiles(this IUnityContainer container, Assembly profileAssembly)
+        {
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfiles(profileAssembly);
+            });
+
+            return container;
+        }
+
+        public static IUnityContainer RegisterStorage<TDbContext>(this IUnityContainer container, string connectionString)
+             where TDbContext : DbContext
+        {
+            container.RegisterType<DbContext, TDbContext>(new InjectionConstructor(connectionString))
+                .RegisterType<IUnitOfWork, UnitOfWork<TDbContext>>()
+                .RegisterType<ICommandWrapper, CommandWrapper>()                
+                ;
+
+            return container;      
+        }
+
+        public static IUnityContainer RegisterServices(this IUnityContainer container, Assembly fromAssembly, Assembly toAssembly)
+        {
+            return container.RegisterAssembly(fromAssembly, toAssembly);
         }
 
         private static bool IsDerivedOfGenericType(this Type type, Type genericType)
