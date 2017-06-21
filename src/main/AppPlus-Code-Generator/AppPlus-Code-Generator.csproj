@@ -1,0 +1,1634 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{45ADB831-0B3A-41C3-8CCB-AF7084488A87}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AppPlus.Code.Generator</RootNamespace>
+    <AssemblyName>AppPlus.Code.Generator</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serialize.Linq, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serialize.Linq.1.3.0\lib\net45\Serialize.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="T4\HisPlus.Contracts\Messages\BaseTableRoleDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BkStoreLogDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsAddrssCommittDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsAnaeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsAnaeItemDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsAreaCommitteeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsAreaDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsAreaPoliceStationDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsAreaProvinceDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsAreaRegionDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsBacteriaDrugDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsBacteriaDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsBacteriaGramDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsBacteriaShuDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsBacteriaStandTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsBacteriaTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsBaseCheckDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsBaseCureDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsBaseDrugDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsBaseDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsBaseNurseDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsBedDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsBranchDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsCareGroupDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsCertificateDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsCommitteeRoadDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsCompanyDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsCountryDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsDeptTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsDiagRoomDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsDocLevelDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsDocRegTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsDoctorBackDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsDoctorDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsDrugFormDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsDrugFormUnitDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsDrugFormUsageDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsEducationDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsEducationIllDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsEduLevelDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsEqTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsExecLocationDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsFamilyDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsFeeTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsFeeTypeSubDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsFixChargeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsFluidDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsFrequencyDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsFrequencyTimeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsFromHospitalDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsGfxeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsGroupDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsGroupSub2DTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsGroupSubDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsHealthEduRecDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsHospitalDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsHouseDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsHsFeetyDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsInfectionDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsInfReasonDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsInfReasonTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsInfSystemDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsInfSystemTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsInvInItemDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsInvMzItemDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemAttachDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsitemcustomDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsitemcustomgroupDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemDrugDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemEquipmentDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemFirstPageDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemFirstPageTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemFrequencyDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemIllTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemItemDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemLocationDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemNameDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemNameMultiDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemOpDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemPacDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemPatTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemPeopleDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemPersonDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemUnitDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemUsageDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemYbDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsItemYbTipDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsJcGroupAttachDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsJcGroupDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsJcGroupItemDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsLabSourceDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsLabSourceItem0510DTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsLabSourceItemDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsLessonTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsLimitDocLevDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsLimitGroupDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsLocationDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsLocationRoomWindowDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsLocBranchDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsLocPatTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsLocSystemDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsLocSystemSub2DTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsLocSystemSubDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsManufacturerDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsMzFeetyDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsNationDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsNewDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsnotYbDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsOaGroupDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsOaGroupSubDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsOpDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsOpsItemDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsOpsRoomDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsOuMergeFeeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsPatFingerDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsPatientDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsPatientYbIllDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsPatIllDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsPatMenuIndexDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsPatTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsPatTypeLimitDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsPatTypeYbIllDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsPayWayDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsPositionDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsPriceAddDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsQuestionDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsRegPatAmountDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsRegSpanSubDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsRegTimeSpanDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsRegTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsRelationDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsReportNurseItemDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsRoomDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsRoomGroupDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsRoomWindowDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsScoreDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsSexDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsSpecialityDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsSubjectDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsTallyGroupDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsTallyTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsTestPaperDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsTubeTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUnitDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUnitRatioDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUsageDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUsageItemDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUserDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUserEmrTemplateDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUserHouseDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUserImageDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUserLocationDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUserMenuDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUserModuleDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUserPointDtlDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUserPointDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUserRoleDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUserRoomDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUserWindowDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsUserWordDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsWorkTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsXdGroupDtlDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsXdGroupDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsXdRpDtlDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsXdRpDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsYbCodeSpecDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsYbIllTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\BsZyFeetyDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Services\IBsItemService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Services\IBsLocationService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Services\IBsPatientService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Services\IBsPatientYbIllService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Messages\MessageContract.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contracts\Services\ServiceContract.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BaseTableRole.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BkStoreLog.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsAddrssCommitt.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsAnae.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsAnaeItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsArea.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsAreaCommittee.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsAreaPoliceStation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsAreaProvince.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsAreaRegion.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsBacteria.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsBacteriaDrug.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsBacteriaGram.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsBacteriaShu.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsBacteriaStandType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsBacteriaType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsBed.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsBranch.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsCareGroup.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsCertificate.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsCommitteeRoad.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsCompany.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsCountry.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsDeptType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsDiagRoom.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsDocLevel.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsDocRegType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsDoctor.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsDrugForm.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsDrugFormUnit.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsDrugFormUsage.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsEducation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsEducationIll.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsEduLevel.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsEqType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsExecLocation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsFamily.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsFeeType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsFeeTypeSub.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsFixCharge.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsFluid.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsFrequency.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsFrequencyTime.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsFromHospital.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsGfxe.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsGroup.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsGroupSub.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsGroupSub2.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsHealthEduRec.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsHospital.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsHouse.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsHsFeety.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsInfection.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsInfReason.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsInfReasonType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsInfSystem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsInfSystemType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsInvInItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsInvMzItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemAttach.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Bsitemcustom.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Bsitemcustomgroup.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemDrug.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemEquipment.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemFirstPage.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemFirstPageType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemFrequency.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemIllType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemLocation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemName.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemNameMulti.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemOp.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemPac.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemPatType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemPeople.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemPerson.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemUnit.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemUsage.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemYb.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemYbTip.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsJcGroup.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsJcGroupAttach.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsJcGroupItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsLabSource.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsLabSourceItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsLabSourceItem0510.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsLessonType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsLimitDocLev.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsLimitGroup.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsLocation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsLocationRoomWindow.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsLocBranch.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsLocPatType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsLocSystem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsLocSystemSub.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsLocSystemSub2.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsManufacturer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsMzFeety.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsNation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsNew.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsOaGroup.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsOaGroupSub.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsOp.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsOpsItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsOpsRoom.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsOuMergeFee.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsPatFinger.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsPatient.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsPatientYbIll.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsPatIll.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsPatMenuIndex.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsPatType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsPatTypeLimit.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsPatTypeYbIll.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsPayWay.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsPosition.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsPriceAdd.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsQuestion.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsRegPatAmount.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsRegSpanSub.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsRegTimeSpan.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsRegType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsRelation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsReportNurseItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsRoom.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsRoomGroup.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsRoomWindow.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsScore.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsSex.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsSpeciality.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsSubject.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsTallyGroup.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsTallyType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsTestPaper.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsTubeType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUnit.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUnitRatio.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUsage.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUsageItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUser.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUserEmrTemplate.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUserHouse.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUserLocation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUserMenu.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUserModule.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUserPoint.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUserPointDtl.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUserRole.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUserRoom.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUserWindow.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsUserWord.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsWorkType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsXdGroup.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsXdGroupDtl.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsXdRp.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsXdRpDtl.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsYbCodeSpec.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsYbIllType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsZyFeety.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BaseTableRoleMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsAddrssCommittMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsAnaeItemMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsAnaeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsAreaCommitteeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsAreaMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsAreaPoliceStationMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsAreaProvinceMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsAreaRegionMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsBacteriaDrugMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsBacteriaGramMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsBacteriaMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsBacteriaShuMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsBacteriaStandTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsBacteriaTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsBedMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsBranchMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsCareGroupMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsCertificateMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsCommitteeRoadMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsCompanyMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsCountryMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsDeptTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsDiagRoomMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsDocLevelMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsDocRegTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsDoctorMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsDrugFormMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsDrugFormUnitMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsDrugFormUsageMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsEducationIllMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsEducationMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsEduLevelMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsEqTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsExecLocationMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsFamilyMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsFeeTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsFeeTypeSubMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsFixChargeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsFluidMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsFrequencyMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsFrequencyTimeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsFromHospitalMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsGfxeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsGroupMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsGroupSub2Map.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsGroupSubMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsHealthEduRecMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsHospitalMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsHouseMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsHsFeetyMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsInfectionMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsInfReasonMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsInfReasonTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsInfSystemMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsInfSystemTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsInvInItemMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsInvMzItemMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemAttachMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsitemcustomgroupMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsitemcustomMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemDrugMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemEquipmentMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemFirstPageMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemFrequencyMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemIllTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemItemMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemLocationMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemNameMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemNameMultiMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemPacMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemPatTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemPeopleMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemPersonMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemUnitMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemUsageMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemYbMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemYbTipMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsJcGroupAttachMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsJcGroupItemMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsJcGroupMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsLabSourceItemMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsLabSourceMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsLessonTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsLimitDocLevMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsLimitGroupMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsLocationMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsLocationRoomWindowMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsLocBranchMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsLocPatTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsLocSystemMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsLocSystemSub2Map.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsLocSystemSubMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsManufacturerMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsMzFeetyMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsNationMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsNewMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsOaGroupMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsOaGroupSubMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsOpMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsOpsItemMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsOpsRoomMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsOuMergeFeeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsPatFingerMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsPatientMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsPatientYbIllMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsPatIllMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsPatMenuIndexMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsPatTypeLimitMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsPatTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsPatTypeYbIllMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsPayWayMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsPositionMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsPriceAddMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsQuestionMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsRegPatAmountMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsRegSpanSubMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsRegTimeSpanMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsRegTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsRelationMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsRoomGroupMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsRoomMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsRoomWindowMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsScoreMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsSexMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsSpecialityMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsSubjectMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsTallyGroupMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsTallyTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsTestPaperMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsTubeTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUnitMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUnitRatioMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUsageItemMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUsageMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUserEmrTemplateMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUserHouseMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUserLocationMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUserMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUserMenuMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUserModuleMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUserPointDtlMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUserPointMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUserRoleMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUserRoomMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUserWindowMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsUserWordMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsWorkTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsXdGroupDtlMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsXdGroupMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsXdRpDtlMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsXdRpMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsYbCodeSpecMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsYbIllTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsZyFeetyMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\Map.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsLocationService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsPatientService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsPatientYbIllService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\Services.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="T4\Includes\EF.Reverse.Service.ttinclude" />
+    <None Include="T4\Includes\EF.Reverse.ServiceContract.ttinclude" />
+    <None Include="T4\Includes\EF.Reverse.POCO.Core.ttinclude" />
+    <None Include="T4\Includes\EF.Reverse.POCO.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="T4\HisPlus.Contracts\Messages\MessageContract.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MessageContract.cs</LastGenOutput>
+    </Content>
+    <Content Include="T4\HisPlus.Domain\Mappings\Map.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Map.cs</LastGenOutput>
+    </Content>
+    <Content Include="T4\HisPlus.Contracts\Services\ServiceContract.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ServiceContract.cs</LastGenOutput>
+    </Content>
+    <Content Include="T4\HisPlus.Domain\Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </Content>
+    <Content Include="T4\HisPlus.Services\Services.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Services.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppPlus-Core\AppPlus-Core.csproj">
+      <Project>{e9578bd9-26f5-41cf-a78f-42e704d2928a}</Project>
+      <Name>AppPlus-Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AppPlus-Infrastructrure\AppPlus-Infrastructure.csproj">
+      <Project>{70a18834-0849-4693-ae65-1610a8e0eb7e}</Project>
+      <Name>AppPlus-Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HisPlus-Contracts\HisPlus-Contract.csproj">
+      <Project>{6de0dab6-3e4b-43ee-8473-f7a61d0d9cd6}</Project>
+      <Name>HisPlus-Contract</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

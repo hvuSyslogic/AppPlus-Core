@@ -86,7 +86,8 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BS\BSGfxeService.cs" />
+    <Compile Include="BS\BsLocationService.cs" />
+    <Compile Include="BS\BsGfxeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -102,9 +103,9 @@
       <Project>{70a18834-0849-4693-ae65-1610a8e0eb7e}</Project>
       <Name>AppPlus-Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HisPlus-Contracts\HisPlus-Contracts.csproj">
+    <ProjectReference Include="..\HisPlus-Contracts\HisPlus-Contract.csproj">
       <Project>{6de0dab6-3e4b-43ee-8473-f7a61d0d9cd6}</Project>
-      <Name>HisPlus-Contracts</Name>
+      <Name>HisPlus-Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\HisPlus-Domain\HisPlus-Domain.csproj">
       <Project>{9b4fd8ff-73ef-4e18-9abe-18b1d0737263}</Project>

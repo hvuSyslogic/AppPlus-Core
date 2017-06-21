@@ -9,23 +9,23 @@ using System.Collections.ObjectModel;
 using log4net;
 using AppPlus.Client.Binding;
 using System.ServiceModel;
-using AppPlus.Infrastructure.Contracts.Services;
+using AppPlus.Infrastructure.Contract.Services;
+using AppPlus.Infrastructure.Configuration;
 
 namespace AppPlus.Client
 {
     public class ProxyManager
     {
-        public static string ServiceHost { get; set; }
-
-        public static int Port { get; set; }
-
         public static BindingType BindingType { get; set; }
 
         public static T GetProxy<T>()
             where T : IServiceRoot
         {
+            var host = AppConfigurator.AppServiceConfig.Host;
+            var port = AppConfigurator.AppServiceConfig.Port;
+
             string service = typeof(T).Name.Substring(1);
-            string url = string.Format(Constants.Uri, ServiceHost, Port, service);
+            string url = string.Format(Constants.Uri, host, port, service);
             return GetProxy<T>(BindingType.BasicHttpBinding, url);
         }
 

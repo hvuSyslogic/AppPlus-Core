@@ -10,11 +10,11 @@ using System.Text;
 using log4net;
 using Microsoft.Practices.Unity;
 using Z.EntityFramework.Plus;
-using AppPlus.Infrastructure.Contracts.Messages;
+using AppPlus.Infrastructure.Contract.Messages;
 
 namespace AppPlus.Core.EntityFramework
 {
-    internal partial class Repository<TEntity> : IGenericRepository<TEntity>
+    internal partial class Repository<TEntity> : IRepository<TEntity>
         where TEntity : EntityRoot, new()
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -119,20 +119,21 @@ namespace AppPlus.Core.EntityFramework
         #endregion
 
         #region Delete
-        public virtual TEntity Delete(params object[] keyValues)
+        public virtual void Delete(object id)
         {
-            return this.EFSet.Remove(this.Retrieve(keyValues));
+            //var entity = EFSet.Local.FirstOrDefault(ent => EqualityComparer<object>.Default.Equals(ent.Id, id));
+            this.EFSet.Remove(this.Retrieve(id));
         }
 
-        public virtual TEntity Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             if (this.EFContext.Entry<TEntity>(entity).State == EntityState.Detached)
             {
                 this.EFSet.Attach(entity);
             }
 
-            return this.EFSet.Remove(entity);
-        }        
+            this.EFSet.Remove(entity);
+        }
 
         public virtual IEnumerable<TEntity> Delete(IEnumerable<TEntity> entities)
         {
@@ -152,6 +153,13 @@ namespace AppPlus.Core.EntityFramework
         }
         #endregion
 
+        #region LongCount
+        public virtual long LongCount(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            return (predicate == null) ? this.EFSet.LongCount() : this.EFSet.Where(predicate).LongCount();
+        }
+        #endregion
+
         #region Contains
         public virtual bool Contains(Expression<Func<TEntity, bool>> predicate)
         {
@@ -160,19 +168,15 @@ namespace AppPlus.Core.EntityFramework
         #endregion
 
         #region Filter
-        public virtual IQueryable<TEntity> Filter(
-            Expression<Func<TEntity, bool>> predicate,
-            out int total,
-            int index = 0,
-            int size = 50)
+        public virtual IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate, out int total, int pageNumber = 0, int pageSize = 50)
         {
-            int skipCount = index * size;
+            int skipCount = pageNumber * pageSize;
 
             IQueryable<TEntity> query = (predicate == null) ? this.EFSet : this.EFSet.Where(predicate);
 
             query = query.AsNoTracking();
 
-            query = (skipCount == 0) ? query.Take(size) : query.Skip(skipCount).Take(size);
+            query = (skipCount == 0) ? query.Take(pageSize) : query.Skip(skipCount).Take(pageSize);
 
             total = query.Count();
 

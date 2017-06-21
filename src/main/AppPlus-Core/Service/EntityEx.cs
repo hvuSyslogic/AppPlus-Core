@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using AppPlus.Infrastructure.Contracts.Messages;
+using AppPlus.Infrastructure.Contract.Messages;
 
 namespace AppPlus.Core.Service
 {

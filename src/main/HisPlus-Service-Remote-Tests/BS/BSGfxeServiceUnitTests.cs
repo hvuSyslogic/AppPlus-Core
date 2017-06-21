@@ -8,13 +8,14 @@ using Serialize.Linq.Extensions;
 using Xunit;
 using AppPlus.Client;
 using System.ServiceModel;
-using AppPlus.His.Services.Tests.BS.Fixture;
-using HisPlus.Contracts.Services.BS;
-using HisPlus.Contracts.Messages.BS;
+using HisPlus.Contract.Services;
+using HisPlus.Service.Remote.Tests.Common;
+using HisPlus.Service.Remote.Tests.Common.Fixture;
+using HisPlus.Contract.Messages;
 
-namespace AppPlus.His.Services.Tests.BS
+namespace HisPlus.Service.Remote.Tests.BS
 {
-    public class BSGfxeServiceUnitTests : TestBase, IClassFixture<BSGfxeServiceFixture>
+    public class BSGfxeServiceUnitTests : TestBase, IClassFixture<CommonServiceTestsFixture>
     {
         private const string TraitName = "BSGfxeServiceUnitTests";
         private const string TraitValue = "费用限额基础数据";
@@ -24,7 +25,7 @@ namespace AppPlus.His.Services.Tests.BS
         [Trait(TraitName, "Retrieve")]
         public void RetrieveAll_OK_TestMethod()
         {
-            var result = CallService((IBSGfxeService x) => x.RetrieveAll());
+            var result = CallService((IBsGfxeService x) => x.RetrieveAll());
             Assert.NotNull(result);
             Assert.True(result.Count() > 0);
         }
@@ -33,7 +34,7 @@ namespace AppPlus.His.Services.Tests.BS
         [Trait(TraitName, "Retrieve")]
         public void RetrieveById_OK_TestMethod()
         {
-            var result = ServiceHandler.CallService((IBSGfxeService x) => x.RetrieveById(Constants.QUOTA_ID));
+            var result = ServiceHandler.CallService((IBsGfxeService x) => x.RetrieveById(Constants.QUOTA_ID));
             Assert.NotNull(result);
             Assert.True(result.Id == Constants.QUOTA_ID);
         }
@@ -42,12 +43,22 @@ namespace AppPlus.His.Services.Tests.BS
         [Trait(TraitName, "Retrieve")]
         public void RetrieveByExpression_OK_TestMethod()
         {
-            Expression<Func<BsGfxeDto, bool>> expression = ((BsGfxeDto x) => !x.IsActive);
+            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => !x.IsActive);
             var expressionNode = expression.ToExpressionNode();
-
-            var result = ServiceHandler.CallService((IBSGfxeService x) => x.Retrieve(expressionNode));
+            
+            var result = ServiceHandler.CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
             Assert.NotNull(result);
-            Assert.True(result.Count() > 0);
+            Assert.True(result.Count() > 0); 
+        }
+
+        [Fact(DisplayName = "004_RetrieveByExpression_NOK")]
+        [Trait(TraitName, "Retrieve")]
+        public void RetrieveByExpression_NOK_TestMethod()
+        {
+            Assert.Throws<FaultException>(() =>
+            {
+                var result = ServiceHandler.CallService((IBsGfxeService x) => x.Retrieve(null));            
+            });
         }        
         #endregion
 
@@ -56,12 +67,12 @@ namespace AppPlus.His.Services.Tests.BS
         [Trait(TraitName, "Contains")]
         public void ContainsByEntity_OK_TestMethod()
         {
-            var result = ServiceHandler.CallService((IBSGfxeService x) => x.RetrieveAll());
+            var result = ServiceHandler.CallService((IBsGfxeService x) => x.RetrieveAll());
             Assert.NotNull(result);
             Assert.NotEmpty(result);
             var item = result.FirstOrDefault();
             
-            var exists = ServiceHandler.CallService((IBSGfxeService x) => x.Contains(item));
+            var exists = ServiceHandler.CallService((IBsGfxeService x) => x.Contains(item));
             Assert.True(exists);
         }
 
@@ -69,22 +80,22 @@ namespace AppPlus.His.Services.Tests.BS
         [Trait(TraitName, "Contains")]
         public void ContainsByExpression_ExcludeKey_OK_TestMethod()
         {
-            Expression<Func<BsGfxeDto, bool>> expression = ((BsGfxeDto x) => x.IsActive);
+            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IsActive);
             var expressionNode = expression.ToExpressionNode();
-            var result = ServiceHandler.CallService((IBSGfxeService x) => x.Contains(expressionNode));
-            Assert.True(result);            
+            var result = ServiceHandler.CallService((IBsGfxeService x) => x.Contains(expressionNode));
+            Assert.True(result);          
         }
 
         [Fact(DisplayName = "003_ContainsByExpression_IncludeKey_NOK")]
         [Trait(TraitName, "Contains")]
         public void ContainsByExpression_NOK_TestMethod()
         {
-            Expression<Func<BsGfxeDto, bool>> expression = ((BsGfxeDto x) => x.Id > 0);
+            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.Id > 0);
             var expressionNode = expression.ToExpressionNode();
 
             Assert.Throws<FaultException>(() =>
             {
-                var result = ServiceHandler.CallService((IBSGfxeService x) => x.Contains(expressionNode));
+                var result = ServiceHandler.CallService((IBsGfxeService x) => x.Contains(expressionNode));
             });
         }
         #endregion
@@ -94,7 +105,7 @@ namespace AppPlus.His.Services.Tests.BS
         [Trait(TraitName, "Count")]        
         public void Count_TestMethod()
         {
-            var result = ServiceHandler.CallService((IBSGfxeService x) => x.Count());
+            var result = ServiceHandler.CallService((IBsGfxeService x) => x.Count());
             Assert.NotNull(result);
             Assert.True(result > 0);
         }
@@ -103,15 +114,15 @@ namespace AppPlus.His.Services.Tests.BS
         [Trait(TraitName, "Count")]
         public void CountByExpression_ExcludeKey_OK_TestMethod()
         {
-            Expression<Func<BsGfxeDto, bool>> expression = ((BsGfxeDto x) => x.IsActive);
+            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IsActive);
             var expressionNode = expression.ToExpressionNode();
-            var result = ServiceHandler.CallService((IBSGfxeService x) => x.Count(expressionNode));
+            var result = ServiceHandler.CallService((IBsGfxeService x) => x.Count(expressionNode));
             Assert.NotNull(result);
             Assert.True(result > 0);
 
-            expression = ((BsGfxeDto x) => x.PyCode == "CSFYXE");
+            expression = ((BsGfxeDTO x) => x.PyCode == "CSFYXE");
             expressionNode = expression.ToExpressionNode();
-            result = ServiceHandler.CallService((IBSGfxeService x) => x.Count(expressionNode));
+            result = ServiceHandler.CallService((IBsGfxeService x) => x.Count(expressionNode));
             Assert.NotNull(result);
             Assert.True(result > 0);
         }
@@ -120,13 +131,13 @@ namespace AppPlus.His.Services.Tests.BS
         [Trait(TraitName, "Count")]
         public void CountByExpression_IncludeKey_NOK_TestMethod()
         {
-            Expression<Func<BsGfxeDto, bool>> expression = ((BsGfxeDto x) => x.Id > 0);
+            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.Id > 0);
             var expressionNode = expression.ToExpressionNode();
 
             Assert.Throws<FaultException>(() => 
             {
-                var result = ServiceHandler.CallService((IBSGfxeService x) => x.Count(expressionNode));                
-            }); 
+                var result = ServiceHandler.CallService((IBsGfxeService x) => x.Count(expressionNode));
+            });
         }
         #endregion
 
@@ -135,7 +146,7 @@ namespace AppPlus.His.Services.Tests.BS
         [Trait(TraitName, "Create")]
         public void Create_TestMethod()
         {
-            var result = ServiceHandler.CallService((IBSGfxeService x) => x.RetrieveAll());
+            var result = ServiceHandler.CallService((IBsGfxeService x) => x.RetrieveAll());
             Assert.NotNull(result);
             Assert.True(result.Count() > 0);
 
@@ -146,7 +157,7 @@ namespace AppPlus.His.Services.Tests.BS
             newItem.WbCode = "CCCCCC";
             newItem.IsActive = false;
             newItem.F4 = Constants.FLAG_TO_TEST;
-            newItem = ServiceHandler.CallService((IBSGfxeService x) => x.Create(newItem));
+            newItem = ServiceHandler.CallService((IBsGfxeService x) => x.Create(newItem));
             
             Assert.NotNull(newItem);
             Assert.True(newItem.Id > 0);            
@@ -158,9 +169,9 @@ namespace AppPlus.His.Services.Tests.BS
         [Trait(TraitName, "Update")]
         public void Update_TestMethod()
         {
-            Expression<Func<BsGfxeDto, bool>> expression = ((BsGfxeDto x) => x.F4 == Constants.FLAG_TO_TEST);
+            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.F4 == Constants.FLAG_TO_TEST);
             var expressionNode = expression.ToExpressionNode();
-            var result = ServiceHandler.CallService((IBSGfxeService x) => x.Retrieve(expressionNode));
+            var result = ServiceHandler.CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
             Assert.NotNull(result);
             Assert.True(result.Count() > 0);
 
@@ -173,9 +184,9 @@ namespace AppPlus.His.Services.Tests.BS
             itemToBeUpdated.PyCode = "CSGX";
             itemToBeUpdated.WbCode = "CCCC";
             itemToBeUpdated.IsActive = true;
-            ServiceHandler.CallService((IBSGfxeService x) => x.Update(itemToBeUpdated));
+            ServiceHandler.CallService((IBsGfxeService x) => x.Update(itemToBeUpdated));
 
-            var updatedItem = ServiceHandler.CallService((IBSGfxeService x) => x.RetrieveById(itemToBeUpdated.Id));
+            var updatedItem = ServiceHandler.CallService((IBsGfxeService x) => x.RetrieveById(itemToBeUpdated.Id));
             Assert.NotNull(updatedItem);
             Assert.True(updatedItem.Code == code);
         }
@@ -184,9 +195,9 @@ namespace AppPlus.His.Services.Tests.BS
         [Trait(TraitName, "Update")]
         public void UpdateAll_TestMethod()
         {
-            Expression<Func<BsGfxeDto, bool>> expression = ((BsGfxeDto x) => x.F4 == Constants.FLAG_TO_TEST);
+            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.F4 == Constants.FLAG_TO_TEST);
             var expressionNode = expression.ToExpressionNode();
-            var result = ServiceHandler.CallService((IBSGfxeService x) => x.Retrieve(expressionNode));
+            var result = ServiceHandler.CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
             Assert.NotNull(result);
             Assert.NotEmpty(result);
             string F1 = "TESTING DATA";
@@ -196,8 +207,8 @@ namespace AppPlus.His.Services.Tests.BS
                 item.F1 = F1;
             }
 
-            ServiceHandler.CallService((IBSGfxeService x) => x.Update(result));
-            result = ServiceHandler.CallService((IBSGfxeService x) => x.Retrieve(expressionNode));
+            ServiceHandler.CallService((IBsGfxeService x) => x.Update(result));
+            result = ServiceHandler.CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
             foreach (var item in result)
             {
                 Assert.Equal(F1, item.F1);

@@ -8,10 +8,11 @@ using log4net;
 using Microsoft.Practices.Unity;
 using AppPlus.Core;
 using AppPlus.Core.Service;
-using AppPlus.Infrastructure.Contracts.Services;
+using AppPlus.Infrastructure.Contract.Services;
 using System.Data.Entity;
 using AppPlus.Core.EntityFramework;
 using AutoMapper;
+using AppPlus.Infrastructure.Configuration;
 
 namespace AppPlus.Core
 {
@@ -25,7 +26,7 @@ namespace AppPlus.Core
                 .Where(x => typeof(IServiceRoot).IsAssignableFrom(x));
 
             var allMappedToTypes = toAssembly.GetTypes()
-                .Where(x => x.IsClass && x.IsDerivedOfGenericType(typeof(AbstractService<,,>)));
+                .Where(x => x.IsClass && x.IsDerivedOfGenericType(typeof(AbstractService<,>)));
 
             Log.Debug("=================================================== Starting to register types in assembly =======================================================");
             Log.DebugFormat("Registered Assembly: {0} ", fromAssembly.FullName);
@@ -71,14 +72,14 @@ namespace AppPlus.Core
         {
             container.RegisterType<DbContext, TDbContext>(new InjectionConstructor(connectionString))
                 .RegisterType<IUnitOfWork, UnitOfWork<TDbContext>>()
-                .RegisterType<ICommandWrapper, CommandWrapper>()                
+                .RegisterType<ICommandWrapper, CommandWrapper>()
                 ;
 
             return container;      
         }
 
         public static IUnityContainer RegisterServices(this IUnityContainer container, Assembly fromAssembly, Assembly toAssembly)
-        {
+        {            
             return container.RegisterAssembly(fromAssembly, toAssembly);
         }
 

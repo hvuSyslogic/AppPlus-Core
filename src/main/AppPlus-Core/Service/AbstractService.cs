@@ -17,27 +17,29 @@ using AutoMapper.QueryableExtensions;
 using Serialize.Linq.Nodes;
 using Serialize.Linq.Extensions;
 using Serialize.Linq.Serializers;
-using AppPlus.Infrastructure.Contracts.Messages;
-using AppPlus.Infrastructure.Contracts.Services;
+using AppPlus.Infrastructure.Contract.Messages;
+using AppPlus.Infrastructure.Contract.Services;
 using AppPlus.Core.Common.CodeContracts;
+using AppPlus.Infrastructure.Configuration;
+using AppPlus.Core.EntityFramework;
 
 namespace AppPlus.Core.Service
 {
     [GlobalExceptionHandlerBehaviourAttribute(typeof(GlobalExceptionHandler))]
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
-    public abstract class AbstractService<TEntity, TDTO, TKey> : Profile, IGenericService<TDTO, TKey>
-        where TEntity : EntityBase<TKey>, new()
-        where TDTO : DtoBase<TKey>, new()
+    public abstract class AbstractService<TEntity, TDTO> : Profile, IGenericService<TDTO>
+        where TEntity : EntityRoot, new()
+        where TDTO : DtoRoot, new()
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private bool _disposed = false;
-
+        
         #region Properties
         [Dependency]
-        public virtual ICommandWrapper CommandWrapper
+        protected virtual ICommandWrapper CommandWrapper
         {
-            get { return IoCContainer.Instance.Resolve<ICommandWrapper>(); }
+            get { return AppConfigurator.Container.Resolve<ICommandWrapper>(); }
         }
         #endregion
 
@@ -45,7 +47,7 @@ namespace AppPlus.Core.Service
         [Obsolete]
         protected override void Configure()
         {
-            CreateMap<TEntity, TDTO>().ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id)).ReverseMap();
+            CreateMap<TEntity, TDTO>().ReverseMap();
         }
         #endregion
 
@@ -55,7 +57,7 @@ namespace AppPlus.Core.Service
             Requires.NotNull(dto, "dto");
 
             var entity = dto.MapTo<TEntity>();
-
+            
             using (var command = CommandWrapper)
             {
                 command.Execute(uow =>
@@ -86,7 +88,7 @@ namespace AppPlus.Core.Service
         #endregion
 
         #region Retrieve
-        public virtual TDTO RetrieveById(TKey id)
+        public virtual TDTO RetrieveById(object id)
         {
             //Required.NotNullOrZero(id, "id");
 
@@ -104,15 +106,17 @@ namespace AppPlus.Core.Service
         public virtual IEnumerable<TDTO> Retrieve(ExpressionNode predicateExpressionNode)
         {
             Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
+            
+            var expression = predicateExpressionNode.ToBooleanExpression<TDTO>();
 
-            var predicateExpression = Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());
+            var predicateExpression = Mapper.Map<Expression<Func<TEntity, bool>>>(expression);
 
             using (var command = CommandWrapper)
             {
                 return command.Execute(uow =>
                 {
                     IEnumerable<TEntity> entities = uow.Retrieve<TEntity>(predicateExpression);
-
+                    
                     return entities.MapTo<TDTO>();
                 });
             }
@@ -172,7 +176,7 @@ namespace AppPlus.Core.Service
         #endregion
 
         #region Delete
-        public virtual void DeleteById(TKey id)
+        public virtual void DeleteById(object id)
         {
             //Required.NotNullOrZero(id, "id");
 
@@ -280,15 +284,19 @@ namespace AppPlus.Core.Service
 
         public virtual bool Contains(TDTO dto)
         {
-            Requires.NotNull(dto, "dto");
-                        
-            using (var command = CommandWrapper)
-            {
-                return command.Execute(uow =>
-                {
-                    return uow.Retrieve<TEntity>(dto.Id) != null;
-                });
-            }
+            Requires.NotNull(dto, "dto");                        
+            
+            //TODO:
+
+            //using (var command = CommandWrapper)
+            //{
+            //    return command.Execute(uow =>
+            //    {
+            //        return uow.Retrieve<TEntity>(dto.Id) != null;
+            //    });
+            //}
+
+            return true;
         }
 
         public virtual bool Contains(ExpressionNode predicateExpressionNode)
@@ -334,19 +342,22 @@ namespace AppPlus.Core.Service
         {
             Requires.NotNullOrEmpty(dtos, "dtos");
 
-            var addedEntityCollection = dtos.Where(x => x.Id.Equals(0)).MapTo<TEntity>();
-            var modifiedEntityCollection = dtos.Where(x => !x.Id.Equals(0)).MapTo<TEntity>();
+            //TODO:
+            //var addedEntityCollection = dtos.Where(x => x.Id.Equals(0)).MapTo<TEntity>();
+            //var modifiedEntityCollection = dtos.Where(x => !x.Id.Equals(0)).MapTo<TEntity>();
 
-            using (var command = CommandWrapper)
-            {
-                command.Execute(uow =>
-                {
-                    uow.Create(addedEntityCollection);
-                    uow.Update(modifiedEntityCollection);
-                }, TransactionOption.DBTransaction);
+            //using (var command = CommandWrapper)
+            //{
+            //    command.Execute(uow =>
+            //    {
+            //        uow.Create(addedEntityCollection);
+            //        uow.Update(modifiedEntityCollection);
+            //    }, new UnitOfWorkSettings() { TransactionScope = TransactionOption.DBTransaction });
 
-                return new Tuple<int, int>(addedEntityCollection.Count(), modifiedEntityCollection.Count());
-            }
+            //    return new Tuple<int, int>(addedEntityCollection.Count(), modifiedEntityCollection.Count());
+            //}
+
+            return new Tuple<int, int>(1, 1);
         }
 
         #endregion

@@ -26,7 +26,7 @@ namespace HisPlus.Domain
 
         protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {                      
-            modelBuilder.Configurations.AddFromAssembly(typeof(BS.BsGfxe).Assembly);
+            modelBuilder.Configurations.AddFromAssembly(typeof(BsGfxe).Assembly);
         }
 
         public override int SaveChanges()

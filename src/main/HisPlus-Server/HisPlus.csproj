@@ -110,7 +110,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="UnityContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wcf\ClientInterpector.cs" />
     <Compile Include="Wcf\Host\Constants.cs" />
@@ -144,9 +143,9 @@
       <Project>{70a18834-0849-4693-ae65-1610a8e0eb7e}</Project>
       <Name>AppPlus-Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HisPlus-Contracts\HisPlus-Contracts.csproj">
+    <ProjectReference Include="..\HisPlus-Contracts\HisPlus-Contract.csproj">
       <Project>{6de0dab6-3e4b-43ee-8473-f7a61d0d9cd6}</Project>
-      <Name>HisPlus-Contracts</Name>
+      <Name>HisPlus-Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\HisPlus-Domain\HisPlus-Domain.csproj">
       <Project>{9b4fd8ff-73ef-4e18-9abe-18b1d0737263}</Project>

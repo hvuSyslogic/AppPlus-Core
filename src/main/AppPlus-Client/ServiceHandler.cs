@@ -8,7 +8,9 @@ using System.Threading;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
 using log4net;
-using AppPlus.Infrastructure.Contracts.Services;
+using AppPlus.Infrastructure.Contract.Services;
+using AppPlus.Infrastructure.Configuration;
+using Microsoft.Practices.Unity;
 
 namespace AppPlus.Client
 {
@@ -18,20 +20,36 @@ namespace AppPlus.Client
                 
         public static void CallService<T>(Expression<Action<T>> expression)
             where T : IServiceRoot
-        {    
-            using (T proxy = ProxyManager.GetProxy<T>())
+        {
+            if (AppConfigurator.AppServiceConfig.ServiceMode == ServiceMode.Local)
             {
-                Process(proxy, expression.Compile());
+                var service = AppConfigurator.Container.Resolve<T>();
+                expression.Compile()(service);
+            }
+            else
+            {
+                using (T proxy = ProxyManager.GetProxy<T>())
+                {
+                    Process(proxy, expression.Compile());
+                }
             }
         }
 
         public static TResult CallService<T, TResult>(Expression<Func<T, TResult>> expression)
             where T : IServiceRoot
         {
-            using (T proxy = ProxyManager.GetProxy<T>())
+            if (AppConfigurator.AppServiceConfig.ServiceMode == ServiceMode.Local)
             {
-                return Process(proxy, expression.Compile());
+                var service = AppConfigurator.Container.Resolve<T>();
+                return expression.Compile()(service);
             }
+            else
+            {
+                using (T proxy = ProxyManager.GetProxy<T>())
+                {
+                    return Process(proxy, expression.Compile());
+                }
+            }           
         }
 
         private static void Process<T>(T proxy, Action<T> action)

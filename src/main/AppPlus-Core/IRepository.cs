@@ -5,12 +5,11 @@ using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using AppPlus.Infrastructure.Contracts.Messages;
+using AppPlus.Infrastructure.Contract.Messages;
 
 namespace AppPlus.Core
 {
-    public partial interface IRepository<TEntity>
-        where TEntity : EntityRoot, new()
+    public partial interface IRepository<TEntity> where TEntity :  EntityRoot, new()
     {
         #region Create
         TEntity Create(TEntity entity);
@@ -36,17 +35,23 @@ namespace AppPlus.Core
         #endregion
 
         #region Delete
-        TEntity Delete(params object[] keyValues);
+        
+        void Delete(TEntity entity);
 
-        TEntity Delete(TEntity entity);        
+        void Delete(object id);        
 
         IEnumerable<TEntity> Delete(IEnumerable<TEntity> entities);
 
-        int Delete(Expression<Func<TEntity, bool>> predicate);
+        int Delete(Expression<Func<TEntity, bool>> predicate = null);
+
         #endregion
 
         #region Count
         int Count(Expression<Func<TEntity, bool>> predicate);
+        #endregion
+
+        #region LongCount
+        long LongCount(Expression<Func<TEntity, bool>> predicate = null);
         #endregion
 
         #region Contains
@@ -54,7 +59,7 @@ namespace AppPlus.Core
         #endregion
 
         #region Filter
-        IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate, out int total, int index = 0, int size = 50);
+        IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate, out int total, int pageNumber = 0, int pageSize = 50);
         #endregion
     }
 }

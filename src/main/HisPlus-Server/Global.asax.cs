@@ -11,8 +11,9 @@ using AutoMapper;
 using AppPlus.Core.Service;
 using AppPlus.Core;
 using HisPlus.Wcf.Host;
-using HisPlus.Services.BS;
-using HisPlus.Contracts.Services.BS;
+using HisPlus.Services;
+using HisPlus.Contract.Services;
+using AppPlus.Infrastructure.Configuration;
 
 namespace HisPlus
 {
@@ -33,10 +34,10 @@ namespace HisPlus
 
         private void Application_Initialize()
         {
-           UnityContainer.Container = AppPlusConfigurator.Config()
-                .RegisterMapProfiles(typeof(BSGfxeService).Assembly)
-                .RegisterStorage<HisPlus.Domain.HisDbContext>(ConnectionString)
-                .RegisterServices(typeof(IBSGfxeService).Assembly, typeof(BSGfxeService).Assembly)
+           AppConfigurator.Container
+               .RegisterMapProfiles(typeof(BsGfxeService).Assembly)               
+               .RegisterStorage<HisPlus.Domain.HisDbContext>(ConnectionString)               
+               .RegisterServices(typeof(IBsGfxeService).Assembly, typeof(BsGfxeService).Assembly)
             ;
         }
 

@@ -7,7 +7,7 @@ using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
-using AppPlus.Infrastructure.Contracts.Messages;
+using AppPlus.Infrastructure.Contract.Messages;
 
 namespace AppPlus.Core
 {    

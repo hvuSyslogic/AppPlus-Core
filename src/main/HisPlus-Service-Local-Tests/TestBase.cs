@@ -6,27 +6,26 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using AppPlus.Infrastructure.Contracts.Services;
+using AppPlus.Infrastructure.Contract.Services;
 using AppPlus.Core.Service;
-using HisPlus.Services.BS;
-using HisPlus.Domain.BS;
-using HisPlus.Contracts.Services.BS;
+using HisPlus.Services;
+using HisPlus.Contract.Services;
+using HisPlus.Domain;
+using AppPlus.Infrastructure.Configuration;
 
-namespace AppPlus.His.Domain.Tests
+namespace HisPlus.Service.Local.Tests
 {
     public class TestBase
     {
         const string ConnectionString = "AppPlus.His";
 
         static TestBase()
-        {
-            Container = AppPlusConfigurator.Config()
-                .RegisterMapProfiles(typeof(BSGfxeService).Assembly)
-                .RegisterStorage<HisPlus.Domain.HisDbContext>(ConnectionString)
-                .RegisterServices(typeof(IBSGfxeService).Assembly, typeof(BSGfxeService).Assembly)
+        {            
+            var Container = AppConfigurator.Container
+                .RegisterMapProfiles(typeof(BsGfxeService).Assembly)
+                .RegisterStorage<HisDbContext>(ConnectionString)
+                .RegisterServices(typeof(IBsGfxeService).Assembly, typeof(BsGfxeService).Assembly)
             ;
         }
-
-        protected static IUnityContainer Container { get; set; }
     }
 }

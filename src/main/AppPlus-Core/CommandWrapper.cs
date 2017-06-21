@@ -7,6 +7,7 @@ using System.Transactions;
 using System.Data.Entity;
 using log4net;
 using Microsoft.Practices.Unity;
+using AppPlus.Core.EntityFramework;
 
 namespace AppPlus.Core
 {
@@ -22,18 +23,20 @@ namespace AppPlus.Core
             this.unitOfWork = unitOfWork;
         }
 
-        public void Execute(Action<IUnitOfWork> action, TransactionOption option = TransactionOption.Default)
+        public void Execute(Action<IUnitOfWork> action, UnitOfWorkSettings unitOfWorkSettings = null)
         {
             if (action == null)
             {
                 throw new ArgumentNullException("action");
             }
 
+            unitOfWorkSettings = unitOfWorkSettings ?? new UnitOfWorkSettings() { TransactionScope = TransactionOption.Default };
+
             using (unitOfWork)
             {
                 try
                 {
-                    switch (option)
+                    switch (unitOfWorkSettings.TransactionScope)
                     {
                         case TransactionOption.Default:
                             this.ExecuteCommand(action);
@@ -69,7 +72,7 @@ namespace AppPlus.Core
             }
         }
 
-        public TResult Execute<TResult>(Func<IUnitOfWork, TResult> action, TransactionOption option = TransactionOption.Default)
+        public TResult Execute<TResult>(Func<IUnitOfWork, TResult> action, UnitOfWorkSettings unitOfWorkSettings = null)
         {
             TResult result = default(TResult);
 
@@ -78,11 +81,13 @@ namespace AppPlus.Core
                 throw new ArgumentNullException("action");
             }
 
+            unitOfWorkSettings = unitOfWorkSettings ?? new UnitOfWorkSettings() { TransactionScope = TransactionOption.Default };
+
             using (unitOfWork)
             {
                 try
                 {
-                    switch (option)
+                    switch (unitOfWorkSettings.TransactionScope)
                     {
                         case TransactionOption.Default:
                             result = this.ExecuteCommand(action);

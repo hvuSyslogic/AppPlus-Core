@@ -8,5 +8,8 @@ namespace AppPlus.Core.EntityFramework
 {
     public class UnitOfWorkSettings
     {
+        public UnitOfWorkSettings() { }
+
+        public TransactionOption TransactionScope { get; set; }
     }
 }

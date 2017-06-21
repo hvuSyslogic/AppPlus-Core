@@ -10,87 +10,72 @@ using Serialize.Linq.Nodes;
 using AutoMapper;
 using System.Linq.Expressions;
 using Serialize.Linq.Extensions;
-using HisPlus.Domain.BS;
 using System.ServiceModel;
 using Serialize.Linq.Serializers;
-using HisPlus.Contracts.Messages.BS;
-using HisPlus.Contracts.Services.BS;
+using HisPlus.Contract.Services;
+using AppPlus.Client;
+using HisPlus.Contract.Messages;
 
-namespace AppPlus.His.Domain.Tests.BS
+namespace HisPlus.Service.Local.Tests
 {
     public class LambdaExpressionUnitTests : TestBase
     {
         private const string TraitName = "继承属性兰不达表达式的测试";
         private const string TraitValue = "RetrieveByExpression";
 
-        [Fact(DisplayName = "001_Call_Service_Inheritance_NOK")]
+        [Fact(DisplayName = "001_Call_Service_Inheritance_AutoMapperMappingException_NOK")]
         [Trait(TraitName, TraitValue)]
-        public void TestMethod_Call_Service_Inheritance_NOK()
+        public void TestMethod_Call_Service_Inheritance_AutoMapperMappingException_NOK()
         {
-            IBSGfxeService service = Container.Resolve<IBSGfxeService>();
-            Assert.NotNull(service);
-
-            Expression<Func<BsGfxeDto, bool>> expression = (BsGfxeDto x) => x.Id == 3;
+            Expression<Func<BsGfxeDTO, bool>> expression = (BsGfxeDTO x) => x.Id == 3;
 
             ExpressionNode predicateExpressionNode = expression.ToExpressionNode();
             
             Assert.Throws<AutoMapperMappingException>(() =>
             {
-               var result = service.Retrieve(predicateExpressionNode);
-            });                
+               var result = ServiceHandler.CallService((IBsGfxeService x) => x.Retrieve(predicateExpressionNode));
+            });
         }
 
         [Fact(DisplayName = "002_Call_Service_NoneInheritance_OK")]
         [Trait(TraitName, TraitValue)]
         public void TestMethod_Call_Service_NoneInheritance_OK()
-        {
-            IBSGfxeService service = Container.Resolve<IBSGfxeService>();
-            Assert.NotNull(service);
-
-            Expression<Func<BsGfxeDto, bool>> expression = (BsGfxeDto x) => x.IsActive;
+        {            
+            Expression<Func<BsGfxeDTO, bool>> expression = (BsGfxeDTO x) => x.IsActive;
             
             ExpressionNode predicateExpressionNode = expression.ToExpressionNode();
-                        
-            var result = service.Retrieve(predicateExpressionNode);
+
+            var result = ServiceHandler.CallService((IBsGfxeService x) => x.Retrieve(predicateExpressionNode));
+
             Assert.NotNull(result);
             Assert.NotEmpty(result);
         }
 
-        [Fact(DisplayName = "003_Call_Repository_Inheritance_OK")]
+        [Fact(DisplayName = "003_Call_Service_Inheritance_InvalidCastException_NOK")]
         [Trait(TraitName, TraitValue)]
-        public void TestMethod_Call_Repository_Inheritance_OK()
+        public void TestMethod_Call_Repository_Inheritance_InvalidCastException_NOK()
         {
-            //ICommandWrapper commandWrapper = Container.Resolve<ICommandWrapper>();
-            //Assert.NotNull(commandWrapper);
-
-            //Expression<Func<BsGfxe, bool>> expression = (BsGfxe x) => x.Id == 3;
-            
-            //using (var command = commandWrapper)
-            //{
-            //    var result = command.Execute(uow => 
-            //    {
-            //        return uow.Repository<BsGfxe>().Retrieve(expression).ToList();
-            //    });
-
-            //    Assert.NotNull(result);
-            //    Assert.NotEmpty(result);
-            //}
+            Expression<Func<BsGfxeDTO, bool>> expression = (BsGfxeDTO x) => x.Id == 3;
+                   
+            ExpressionNode predicateExpressionNode = expression.ToExpressionNode();
+            Assert.Throws<AutoMapperMappingException>(() =>
+            {
+                var result = ServiceHandler.CallService((IBsGfxeService x) => x.Retrieve(predicateExpressionNode));
+                //Assert.NotNull(result);
+                //Assert.NotEmpty(result);
+            });          
         }
 
         [Fact]
         public void TestMethod_Contains()
         {
-            IBSGfxeService service = Container.Resolve<IBSGfxeService>();
-            Assert.NotNull(service);
-            
-            var result = service.RetrieveAll();
-
+            var result = ServiceHandler.CallService((IBsGfxeService x) => x.RetrieveAll());
             Assert.NotNull(result);
             Assert.NotEmpty(result);
 
             var item = result.FirstOrDefault();
 
-            var contains = service.Contains(item);
+            var contains = ServiceHandler.CallService((IBsGfxeService x) => x.Contains(item));
 
             Assert.True(contains);
         }

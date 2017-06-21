@@ -30,7 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus", "main\HisPlus-Server\HisPlus.csproj", "{B0DAFCD5-4994-49BE-868E-54D6E33AD496}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Contracts", "main\HisPlus-Contracts\HisPlus-Contracts.csproj", "{6DE0DAB6-3E4B-43EE-8473-F7A61D0D9CD6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Contract", "main\HisPlus-Contracts\HisPlus-Contract.csproj", "{6DE0DAB6-3E4B-43EE-8473-F7A61D0D9CD6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Services", "main\HisPlus-Services\HisPlus-Services.csproj", "{3D36ED5F-8B85-48D8-B9E6-BDE34495967E}"
 EndProject
@@ -43,6 +43,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "002 HisPlus", "002 HisPlus", "{EE7A444F-C548-432D-8B20-03C6C9B3DD95}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "003 UnitTests", "003 UnitTests", "{DD4ADB69-38E2-46BF-B7BA-451C38C6C675}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPlus-Code-Generator", "main\AppPlus-Code-Generator\AppPlus-Code-Generator.csproj", "{45ADB831-0B3A-41C3-8CCB-AF7084488A87}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "003 Code Generator", "003 Code Generator", "{4E29C5FA-0B88-4111-95B0-5515099575A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,6 +98,10 @@ Global
 		{9B4FD8FF-73EF-4E18-9ABE-18B1D0737263}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B4FD8FF-73EF-4E18-9ABE-18B1D0737263}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B4FD8FF-73EF-4E18-9ABE-18B1D0737263}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45ADB831-0B3A-41C3-8CCB-AF7084488A87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45ADB831-0B3A-41C3-8CCB-AF7084488A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45ADB831-0B3A-41C3-8CCB-AF7084488A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45ADB831-0B3A-41C3-8CCB-AF7084488A87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,5 +118,6 @@ Global
 		{B1292C46-4B3D-4DC2-8881-66BB72B169C6} = {DD4ADB69-38E2-46BF-B7BA-451C38C6C675}
 		{F4BC0FCD-7B71-4DE8-BAB3-A0DD69A024F1} = {DD4ADB69-38E2-46BF-B7BA-451C38C6C675}
 		{9B4FD8FF-73EF-4E18-9ABE-18B1D0737263} = {EE7A444F-C548-432D-8B20-03C6C9B3DD95}
+		{45ADB831-0B3A-41C3-8CCB-AF7084488A87} = {4E29C5FA-0B88-4111-95B0-5515099575A8}
 	EndGlobalSection
 EndGlobal

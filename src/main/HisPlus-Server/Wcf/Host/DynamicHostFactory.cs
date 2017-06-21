@@ -10,46 +10,31 @@ using Microsoft.Practices.Unity;
 using log4net;
 using System.ServiceModel.Security;
 using AppPlus.Core;
+using AppPlus.Infrastructure.Configuration;
 
 namespace HisPlus.Wcf.Host
 {
     public class DynamicHostFactory : ServiceHostFactory
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
-        private void ArgumentValidation(string reference, Uri[] baseAddresses)
-        {
-            if (string.IsNullOrEmpty(reference))
-            {
-                throw new ArgumentNullException("reference");
-            }
-
-            if (baseAddresses == null)
-            {
-                throw new ArgumentNullException("baseAddresses");
-            }
-
-            if (!baseAddresses.Any())
-            {
-                throw new ArgumentException("baseAddresses can not be empty.");
-            }
-        }
-
+       
         public override ServiceHostBase CreateServiceHost(string reference, Uri[] baseAddresses)
         {
             ArgumentValidation(reference, baseAddresses);
 
-            var containerRegistrations = UnityContainer.Container.Registrations;
+            var containerRegistrations = AppConfigurator.Container.Registrations;
 
             var registration = containerRegistrations.Where(x => x.MappedToType.Name.ToLower() == reference.ToLower()).FirstOrDefault();
             if (registration == null)
             {
                 throw new ArgumentOutOfRangeException(string.Format("Invalid service name '{0}'", reference));
             }
-
+            
             Type registeredType = registration.RegisteredType;
             Type mappedToType = registration.MappedToType;
-      
+
+            //object serviceType = AppConfigurator.Container.Resolve(mappedToType);
+
             ServiceHost host = new ServiceHost(mappedToType, baseAddresses);
             
             TimeSpan ts = new TimeSpan(0, 10, 0);
@@ -108,6 +93,24 @@ namespace HisPlus.Wcf.Host
             }
             
             return host;
-        }     
+        }
+
+        private void ArgumentValidation(string reference, Uri[] baseAddresses)
+        {
+            if (string.IsNullOrEmpty(reference))
+            {
+                throw new ArgumentNullException("reference");
+            }
+
+            if (baseAddresses == null)
+            {
+                throw new ArgumentNullException("baseAddresses");
+            }
+
+            if (!baseAddresses.Any())
+            {
+                throw new ArgumentException("baseAddresses can not be empty.");
+            }
+        }
     }
 }

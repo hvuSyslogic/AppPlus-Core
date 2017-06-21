@@ -11,7 +11,8 @@ using System.Reflection;
 using log4net;
 using Microsoft.Practices.Unity;
 using Z.EntityFramework.Plus;
-using AppPlus.Infrastructure.Contracts.Messages;
+using AppPlus.Infrastructure.Contract.Messages;
+using AppPlus.Infrastructure.Configuration;
 
 namespace AppPlus.Core.EntityFramework
 {
@@ -41,17 +42,17 @@ namespace AppPlus.Core.EntityFramework
             get { return EFContext != null; } 
         }
 
-        private IGenericRepository<TEntity> GenericRepository<TEntity>()
+        private IRepository<TEntity> Repo<TEntity>()
            where TEntity : EntityRoot, new()
-        {
-            var repository = IoCContainer.Instance.Resolve<Repository<TEntity>>(new ParameterOverrides { { "unitOfWork", this } });
-
+        {            
             if (!repositories.ContainsKey(typeof(TEntity)))
             {
+                var repository = AppConfigurator.Container.Resolve<Repository<TEntity>>(new ParameterOverrides { { "unitOfWork", this } });
+
                 repositories.Add(new KeyValuePair<Type, object>(typeof(TEntity), repository));                
             }
 
-            return (IGenericRepository<TEntity>)repositories[typeof(TEntity)];
+            return (IRepository<TEntity>)repositories[typeof(TEntity)];
         }
 
         #endregion
@@ -60,13 +61,13 @@ namespace AppPlus.Core.EntityFramework
         public virtual TEntity Create<TEntity>(TEntity entity)
             where TEntity : EntityRoot, new()
         {
-            return GenericRepository<TEntity>().Create(entity);
+            return Repo<TEntity>().Create(entity);
         }
 
         public virtual IEnumerable<TEntity> Create<TEntity>(IEnumerable<TEntity> entities)
            where TEntity : EntityRoot, new()
         {
-            return GenericRepository<TEntity>().Create(entities);
+            return Repo<TEntity>().Create(entities);
         }
         #endregion
 
@@ -74,14 +75,14 @@ namespace AppPlus.Core.EntityFramework
         public virtual TEntity Retrieve<TEntity>(params object[] keyValues)
             where TEntity : EntityRoot, new()
         {
-            return GenericRepository<TEntity>().Retrieve(keyValues);
+            return Repo<TEntity>().Retrieve(keyValues);
         }
 
         public virtual IQueryable<TEntity> Retrieve<TEntity>(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, 
             IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
             where TEntity : EntityRoot, new()
         {
-            return GenericRepository<TEntity>().Retrieve(predicate, orderBy, includeProperties);
+            return Repo<TEntity>().Retrieve(predicate, orderBy, includeProperties);
         }
 
         //public IQueryable<TEntity> Retrieve<TEntity>(string sql, params object[] parameters)
@@ -95,19 +96,19 @@ namespace AppPlus.Core.EntityFramework
         public virtual void Update<TEntity>(TEntity entity)
             where TEntity : EntityRoot, new()
         {
-            GenericRepository<TEntity>().Update(entity);
+            Repo<TEntity>().Update(entity);
         }
 
         public virtual void Update<TEntity>(IEnumerable<TEntity> entities)
            where TEntity : EntityRoot, new()
         {
-            GenericRepository<TEntity>().Update(entities);
+            Repo<TEntity>().Update(entities);
         }
 
         public virtual int Update<TEntity>(Expression<Func<TEntity, TEntity>> updateExpression, Expression<Func<TEntity, bool>> predicate = null)
             where TEntity : EntityRoot, new()
         {
-            return GenericRepository<TEntity>().Update(updateExpression, predicate);
+            return Repo<TEntity>().Update(updateExpression, predicate);
         }
         #endregion
 
@@ -115,25 +116,25 @@ namespace AppPlus.Core.EntityFramework
         public virtual void Delete<TEntity>(params object[] keyValues)
             where TEntity : EntityRoot, new()
         {
-            GenericRepository<TEntity>().Delete(keyValues);
+            Repo<TEntity>().Delete(keyValues);
         }
 
         public virtual void Delete<TEntity>(TEntity entity)
             where TEntity : EntityRoot, new()
         {
-            GenericRepository<TEntity>().Delete(entity);
+            Repo<TEntity>().Delete(entity);
         }
 
         public virtual void Delete<TEntity>(IEnumerable<TEntity> entities)
             where TEntity : EntityRoot, new()
         {
-            GenericRepository<TEntity>().Delete(entities);
+            Repo<TEntity>().Delete(entities);
         }
 
         public virtual int Delete<TEntity>(Expression<Func<TEntity, bool>> predicate)
             where TEntity : EntityRoot, new()
         {
-            return GenericRepository<TEntity>().Delete(predicate);
+            return Repo<TEntity>().Delete(predicate);
         }
         #endregion     
 
@@ -143,28 +144,28 @@ namespace AppPlus.Core.EntityFramework
             where TEntityOuter : EntityRoot, new()
             where TEntityInner : EntityRoot, new()
         {
-            return GenericRepository<TEntityOuter>().Retrieve().Join(GenericRepository<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, resultSelector).AsQueryable();
+            return Repo<TEntityOuter>().Retrieve().Join(Repo<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, resultSelector).AsQueryable();
         }
 
         public virtual IQueryable<TResult> Join<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector, IEqualityComparer<object> comparer)
             where TEntityOuter : EntityRoot, new()
             where TEntityInner : EntityRoot, new()
         {
-            return GenericRepository<TEntityOuter>().Retrieve().Join(GenericRepository<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, resultSelector, comparer).AsQueryable();
+            return Repo<TEntityOuter>().Retrieve().Join(Repo<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, resultSelector, comparer).AsQueryable();
         }
 
         public virtual IQueryable<TResult> LeftJoin<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector)
             where TEntityOuter : EntityRoot, new()
             where TEntityInner : EntityRoot, new()
         {
-            return GenericRepository<TEntityOuter>().Retrieve().GroupJoin(GenericRepository<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, (p, q) => resultSelector(p, q.FirstOrDefault())).AsQueryable();
+            return Repo<TEntityOuter>().Retrieve().GroupJoin(Repo<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, (p, q) => resultSelector(p, q.FirstOrDefault())).AsQueryable();
         }
 
         public virtual IQueryable<TResult> LeftJoin<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector, IEqualityComparer<object> comparer)
             where TEntityOuter : EntityRoot, new()
             where TEntityInner : EntityRoot, new()
         {
-            return GenericRepository<TEntityOuter>().Retrieve().GroupJoin(GenericRepository<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, (p, q) => resultSelector(p, q.FirstOrDefault()), comparer).AsQueryable();
+            return Repo<TEntityOuter>().Retrieve().GroupJoin(Repo<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, (p, q) => resultSelector(p, q.FirstOrDefault()), comparer).AsQueryable();
         }
 
         #endregion                
@@ -216,7 +217,7 @@ namespace AppPlus.Core.EntityFramework
         public virtual int Count<TEntity>(Expression<Func<TEntity, bool>> predicate = null)
             where TEntity : EntityRoot, new()
         {
-            return GenericRepository<TEntity>().Count(predicate);
+            return Repo<TEntity>().Count(predicate);
         }
         #endregion
 
@@ -225,7 +226,7 @@ namespace AppPlus.Core.EntityFramework
         public virtual bool Contains<TEntity>(Expression<Func<TEntity, bool>> predicate)
             where TEntity : EntityRoot, new()
         {
-            return GenericRepository<TEntity>().Contains(predicate);
+            return Repo<TEntity>().Contains(predicate);
         }
 
         #endregion
@@ -237,7 +238,7 @@ namespace AppPlus.Core.EntityFramework
         {
             int total = 0;
 
-            return new Tuple<IQueryable<TEntity>, int>(GenericRepository<TEntity>().Filter(predicate, out total, index, size), total);
+            return new Tuple<IQueryable<TEntity>, int>(Repo<TEntity>().Filter(predicate, out total, index, size), total);
         }
 
         #endregion
@@ -270,13 +271,6 @@ namespace AppPlus.Core.EntityFramework
         }
 
         #endregion
-
-        //public void Query(Action query)
-        //{
-        //    query.Invoke();
-
-        //    SaveChanges(true);
-        //}
 
         public virtual void SaveChanges(bool withDisposing = false)
         {
