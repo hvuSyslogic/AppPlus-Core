@@ -103,7 +103,7 @@
       <Project>{70a18834-0849-4693-ae65-1610a8e0eb7e}</Project>
       <Name>AppPlus-Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HisPlus-Contracts\HisPlus-Contract.csproj">
+    <ProjectReference Include="..\HisPlus-Contract\HisPlus-Contract.csproj">
       <Project>{6de0dab6-3e4b-43ee-8473-f7a61d0d9cd6}</Project>
       <Name>HisPlus-Contract</Name>
     </ProjectReference>

@@ -1,0 +1,529 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6DE0DAB6-3E4B-43EE-8473-F7A61D0D9CD6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HisPlus.Contract</RootNamespace>
+    <AssemblyName>HisPlus.Contract</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <BuildPackage>true</BuildPackage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\build\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\build\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Serialize.Linq, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serialize.Linq.1.3.0\lib\net45\Serialize.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Messages\BS\BaseTableRoleDTO.cs" />
+    <Compile Include="Messages\BS\BkStoreLogDTO.cs" />
+    <Compile Include="Messages\BS\BsAddrssCommittDTO.cs" />
+    <Compile Include="Messages\BS\BsAnaeDTO.cs" />
+    <Compile Include="Messages\BS\BsAnaeItemDTO.cs" />
+    <Compile Include="Messages\BS\BsAreaCommitteeDTO.cs" />
+    <Compile Include="Messages\BS\BsAreaDTO.cs" />
+    <Compile Include="Messages\BS\BsAreaPoliceStationDTO.cs" />
+    <Compile Include="Messages\BS\BsAreaProvinceDTO.cs" />
+    <Compile Include="Messages\BS\BsAreaRegionDTO.cs" />
+    <Compile Include="Messages\BS\BsBacteriaDrugDTO.cs" />
+    <Compile Include="Messages\BS\BsBacteriaDTO.cs" />
+    <Compile Include="Messages\BS\BsBacteriaGramDTO.cs" />
+    <Compile Include="Messages\BS\BsBacteriaShuDTO.cs" />
+    <Compile Include="Messages\BS\BsBacteriaStandTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsBacteriaTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsBaseCheckDTO.cs" />
+    <Compile Include="Messages\BS\BsBaseCureDTO.cs" />
+    <Compile Include="Messages\BS\BsBaseDrugDTO.cs" />
+    <Compile Include="Messages\BS\BsBaseDTO.cs" />
+    <Compile Include="Messages\BS\BsBaseNurseDTO.cs" />
+    <Compile Include="Messages\BS\BsBedDTO.cs" />
+    <Compile Include="Messages\BS\BsBpCureDtlDTO.cs" />
+    <Compile Include="Messages\BS\BsBpCureDTO.cs" />
+    <Compile Include="Messages\BS\BsBpEvaluateDTO.cs" />
+    <Compile Include="Messages\BS\BsBpEvaluateTestDTO.cs" />
+    <Compile Include="Messages\BS\BsBphisIllRelationDTO.cs" />
+    <Compile Include="Messages\BS\BsBpIllListDTO.cs" />
+    <Compile Include="Messages\BS\BsBpItemDTO.cs" />
+    <Compile Include="Messages\BS\BsBpPatientGroupDTO.cs" />
+    <Compile Include="Messages\BS\BsBranchDTO.cs" />
+    <Compile Include="Messages\BS\BsCareGroupDTO.cs" />
+    <Compile Include="Messages\BS\BsCertificateDTO.cs" />
+    <Compile Include="Messages\BS\BsCheckTestListDTO.cs" />
+    <Compile Include="Messages\BS\BsCommitteeRoadDTO.cs" />
+    <Compile Include="Messages\BS\BsCompanyDTO.cs" />
+    <Compile Include="Messages\BS\BsCountryDTO.cs" />
+    <Compile Include="Messages\BS\BsDeptTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsDiagRoomDTO.cs" />
+    <Compile Include="Messages\BS\BsDocLevelDTO.cs" />
+    <Compile Include="Messages\BS\BsDocRegTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsdocregtypeTemp36DTO.cs" />
+    <Compile Include="Messages\BS\BsDoctorDTO.cs" />
+    <Compile Include="Messages\BS\BsDrugFormDTO.cs" />
+    <Compile Include="Messages\BS\BsDrugFormUnitDTO.cs" />
+    <Compile Include="Messages\BS\BsDrugFormUsageDTO.cs" />
+    <Compile Include="Messages\BS\BsEducationDTO.cs" />
+    <Compile Include="Messages\BS\BsEducationIllDTO.cs" />
+    <Compile Include="Messages\BS\BsEduLevelDTO.cs" />
+    <Compile Include="Messages\BS\BsEqTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsEvaluateDTO.cs" />
+    <Compile Include="Messages\BS\BsExecLocationDTO.cs" />
+    <Compile Include="Messages\BS\BsFamilyDTO.cs" />
+    <Compile Include="Messages\BS\BsFeeTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsFeeTypeSubDTO.cs" />
+    <Compile Include="Messages\BS\BsFixChargeDTO.cs" />
+    <Compile Include="Messages\BS\BsFluidDTO.cs" />
+    <Compile Include="Messages\BS\BsFrequencyDTO.cs" />
+    <Compile Include="Messages\BS\BsFrequencyTimeDTO.cs" />
+    <Compile Include="Messages\BS\BsFromHospitalDTO.cs" />
+    <Compile Include="Messages\BS\BsGfxeDTO.cs" />
+    <Compile Include="Messages\BS\BsGroupDTO.cs" />
+    <Compile Include="Messages\BS\BsGroupSub2DTO.cs" />
+    <Compile Include="Messages\BS\BsGroupSubDTO.cs" />
+    <Compile Include="Messages\BS\BsHealthEduRecDTO.cs" />
+    <Compile Include="Messages\BS\BsHospitalDTO.cs" />
+    <Compile Include="Messages\BS\BsHouseDTO.cs" />
+    <Compile Include="Messages\BS\BsHsFeetyDTO.cs" />
+    <Compile Include="Messages\BS\BsIllListCureRuleDescDTO.cs" />
+    <Compile Include="Messages\BS\BsIllListDTO.cs" />
+    <Compile Include="Messages\BS\BsInfectionDTO.cs" />
+    <Compile Include="Messages\BS\BsInfReasonDTO.cs" />
+    <Compile Include="Messages\BS\BsInfReasonTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsInfSystemDTO.cs" />
+    <Compile Include="Messages\BS\BsInfSystemTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsInvInItemDTO.cs" />
+    <Compile Include="Messages\BS\BsInvMzItemDTO.cs" />
+    <Compile Include="Messages\BS\BsItemAttachDTO.cs" />
+    <Compile Include="Messages\BS\BsItemBpIdDTO.cs" />
+    <Compile Include="Messages\BS\BsitemcustomDTO.cs" />
+    <Compile Include="Messages\BS\BsitemcustomgroupDTO.cs" />
+    <Compile Include="Messages\BS\BsItemDrugDTO.cs" />
+    <Compile Include="Messages\BS\BsItemDTO.cs" />
+    <Compile Include="Messages\BS\BsItemEquipmentDTO.cs" />
+    <Compile Include="Messages\BS\BsItemFirstPageDTO.cs" />
+    <Compile Include="Messages\BS\BsItemFirstPageTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsItemFrequencyDTO.cs" />
+    <Compile Include="Messages\BS\BsItemIllTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsItemItemDTO.cs" />
+    <Compile Include="Messages\BS\BsItemListADTO.cs" />
+    <Compile Include="Messages\BS\BsItemListDTO.cs" />
+    <Compile Include="Messages\BS\BsItemLocationDTO.cs" />
+    <Compile Include="Messages\BS\BsItemNameDTO.cs" />
+    <Compile Include="Messages\BS\BsItemNameMultiDTO.cs" />
+    <Compile Include="Messages\BS\BsItemOpDTO.cs" />
+    <Compile Include="Messages\BS\BsItemPacDTO.cs" />
+    <Compile Include="Messages\BS\BsItemPatTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsItemPeopleDTO.cs" />
+    <Compile Include="Messages\BS\BsItemPersonDTO.cs" />
+    <Compile Include="Messages\BS\BsItemUnitDTO.cs" />
+    <Compile Include="Messages\BS\BsItemUsageDTO.cs" />
+    <Compile Include="Messages\BS\BsItemYbDTO.cs" />
+    <Compile Include="Messages\BS\BsItemYbTipDTO.cs" />
+    <Compile Include="Messages\BS\BsJcGroupAttachDTO.cs" />
+    <Compile Include="Messages\BS\BsJcGroupDTO.cs" />
+    <Compile Include="Messages\BS\BsJcGroupItemDTO.cs" />
+    <Compile Include="Messages\BS\BsLabSourceDTO.cs" />
+    <Compile Include="Messages\BS\BsLabSourceItem0510DTO.cs" />
+    <Compile Include="Messages\BS\BsLabSourceItemDTO.cs" />
+    <Compile Include="Messages\BS\BsLessonTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsLimitDocLevDTO.cs" />
+    <Compile Include="Messages\BS\BsLimitGroupDTO.cs" />
+    <Compile Include="Messages\BS\BsLocationDTO.cs" />
+    <Compile Include="Messages\BS\BsLocationRoomWindowDTO.cs" />
+    <Compile Include="Messages\BS\BsLocBranchDTO.cs" />
+    <Compile Include="Messages\BS\BsLocPatTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsLocSystemDTO.cs" />
+    <Compile Include="Messages\BS\BsLocSystemSub2DTO.cs" />
+    <Compile Include="Messages\BS\BsLocSystemSubDTO.cs" />
+    <Compile Include="Messages\BS\BsManufacturerDTO.cs" />
+    <Compile Include="Messages\BS\BsMzFeetyDTO.cs" />
+    <Compile Include="Messages\BS\BsNationDTO.cs" />
+    <Compile Include="Messages\BS\BsNewDTO.cs" />
+    <Compile Include="Messages\BS\BsOaGroupDTO.cs" />
+    <Compile Include="Messages\BS\BsOaGroupSubDTO.cs" />
+    <Compile Include="Messages\BS\BsOpDTO.cs" />
+    <Compile Include="Messages\BS\BsOpsItemDTO.cs" />
+    <Compile Include="Messages\BS\BsOpsRoomDTO.cs" />
+    <Compile Include="Messages\BS\BsOuMergeFeeDTO.cs" />
+    <Compile Include="Messages\BS\BsPatFingerDTO.cs" />
+    <Compile Include="Messages\BS\BsPatientDTO.cs" />
+    <Compile Include="Messages\BS\BsPatientYbIllDTO.cs" />
+    <Compile Include="Messages\BS\BsPatIllDTO.cs" />
+    <Compile Include="Messages\BS\BsPatMenuIndexDTO.cs" />
+    <Compile Include="Messages\BS\BsPatTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsPatTypeLimitDTO.cs" />
+    <Compile Include="Messages\BS\BsPatTypeYbIllDTO.cs" />
+    <Compile Include="Messages\BS\BsPayWayDTO.cs" />
+    <Compile Include="Messages\BS\BsPositionDTO.cs" />
+    <Compile Include="Messages\BS\BsPriceAddDTO.cs" />
+    <Compile Include="Messages\BS\BsQuestionDTO.cs" />
+    <Compile Include="Messages\BS\BsRegPatAmountDTO.cs" />
+    <Compile Include="Messages\BS\BsRegSpanSubDTO.cs" />
+    <Compile Include="Messages\BS\BsRegTimeSpanDTO.cs" />
+    <Compile Include="Messages\BS\BsRegTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsRelationDTO.cs" />
+    <Compile Include="Messages\BS\BsReportNurseItemDTO.cs" />
+    <Compile Include="Messages\BS\BsRoomDTO.cs" />
+    <Compile Include="Messages\BS\BsRoomGroupDTO.cs" />
+    <Compile Include="Messages\BS\BsRoomWindowDTO.cs" />
+    <Compile Include="Messages\BS\BsScoreDTO.cs" />
+    <Compile Include="Messages\BS\BsSexDTO.cs" />
+    <Compile Include="Messages\BS\BsSpecialityDTO.cs" />
+    <Compile Include="Messages\BS\BsSpecialtyRoomDTO.cs" />
+    <Compile Include="Messages\BS\BsSubjectDTO.cs" />
+    <Compile Include="Messages\BS\BsTallyGroupDTO.cs" />
+    <Compile Include="Messages\BS\BsTallyTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsTestPaperDTO.cs" />
+    <Compile Include="Messages\BS\BsTubeTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsUnitDTO.cs" />
+    <Compile Include="Messages\BS\BsUnitRatioDTO.cs" />
+    <Compile Include="Messages\BS\BsUsageDTO.cs" />
+    <Compile Include="Messages\BS\BsUsageItemDTO.cs" />
+    <Compile Include="Messages\BS\BsUserDTO.cs" />
+    <Compile Include="Messages\BS\BsUserEmrTemplateDTO.cs" />
+    <Compile Include="Messages\BS\BsUserHouseDTO.cs" />
+    <Compile Include="Messages\BS\BsUserLocationDTO.cs" />
+    <Compile Include="Messages\BS\BsUserMenuDTO.cs" />
+    <Compile Include="Messages\BS\BsUserModuleDTO.cs" />
+    <Compile Include="Messages\BS\BsUserPointDtlDTO.cs" />
+    <Compile Include="Messages\BS\BsUserPointDTO.cs" />
+    <Compile Include="Messages\BS\BsUserRoleDTO.cs" />
+    <Compile Include="Messages\BS\BsUserRoomDTO.cs" />
+    <Compile Include="Messages\BS\BsUserWindowDTO.cs" />
+    <Compile Include="Messages\BS\BsUserWordDTO.cs" />
+    <Compile Include="Messages\BS\BsWorkTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsXdGroupDtlDTO.cs" />
+    <Compile Include="Messages\BS\BsXdGroupDTO.cs" />
+    <Compile Include="Messages\BS\BsXdRpDtlDTO.cs" />
+    <Compile Include="Messages\BS\BsXdRpDTO.cs" />
+    <Compile Include="Messages\BS\BsYbCodeSpecDTO.cs" />
+    <Compile Include="Messages\BS\BsYbIllTypeDTO.cs" />
+    <Compile Include="Messages\BS\BsZyFeetyDTO.cs" />
+    <Compile Include="Messages\GBL\GblAutoUpdateDTO.cs" />
+    <Compile Include="Messages\GBL\GblAutoUpdateOldDTO.cs" />
+    <Compile Include="Messages\GBL\GblBaseTableItemDTO.cs" />
+    <Compile Include="Messages\GBL\GblCatalogExceptDTO.cs" />
+    <Compile Include="Messages\GBL\GblCatalogJoinDTO.cs" />
+    <Compile Include="Messages\GBL\GblCatalogKeyDTO.cs" />
+    <Compile Include="Messages\GBL\GblChinCharDTO.cs" />
+    <Compile Include="Messages\GBL\GblCurrentUserDTO.cs" />
+    <Compile Include="Messages\GBL\GblElClassDTO.cs" />
+    <Compile Include="Messages\GBL\GblElGroupDTO.cs" />
+    <Compile Include="Messages\GBL\GblEmailDTO.cs" />
+    <Compile Include="Messages\GBL\GblEmailUserDTO.cs" />
+    <Compile Include="Messages\GBL\GblEmrBranchDTO.cs" />
+    <Compile Include="Messages\GBL\GblEmrCatalogDTO.cs" />
+    <Compile Include="Messages\GBL\GblEmrFileDTO.cs" />
+    <Compile Include="Messages\GBL\GblEmrQcGroupDTO.cs" />
+    <Compile Include="Messages\GBL\GblEmrQcItemDTO.cs" />
+    <Compile Include="Messages\GBL\GblFieldDescDTO.cs" />
+    <Compile Include="Messages\GBL\GblFormEditDTO.cs" />
+    <Compile Include="Messages\GBL\GblFuctionDTO.cs" />
+    <Compile Include="Messages\GBL\GblFunDemoDTO.cs" />
+    <Compile Include="Messages\GBL\GblFunTraceDTO.cs" />
+    <Compile Include="Messages\GBL\GblGetSequenceNumDTO.cs" />
+    <Compile Include="Messages\GBL\GblInvRegDTO.cs" />
+    <Compile Include="Messages\GBL\GblKeyLockSettingDTO.cs" />
+    <Compile Include="Messages\GBL\GblLastIdDTO.cs" />
+    <Compile Include="Messages\GBL\GblLatDayRunTimeDTO.cs" />
+    <Compile Include="Messages\GBL\GblModiHostDTO.cs" />
+    <Compile Include="Messages\GBL\GblModuleDTO.cs" />
+    <Compile Include="Messages\GBL\GblMrkDTO.cs" />
+    <Compile Include="Messages\GBL\GblOnlinerDTO.cs" />
+    <Compile Include="Messages\GBL\GblPatientMenuDTO.cs" />
+    <Compile Include="Messages\GBL\GblPhoneMsgDTO.cs" />
+    <Compile Include="Messages\GBL\GblPrinterDTO.cs" />
+    <Compile Include="Messages\GBL\GblQuestionDTO.cs" />
+    <Compile Include="Messages\GBL\GblReportDetailDTO.cs" />
+    <Compile Include="Messages\GBL\GblReportDTO.cs" />
+    <Compile Include="Messages\GBL\GblReportGroupDTO.cs" />
+    <Compile Include="Messages\GBL\GblRoleDTO.cs" />
+    <Compile Include="Messages\GBL\GblRoleModuleDTO.cs" />
+    <Compile Include="Messages\GBL\GblSettingDTO.cs" />
+    <Compile Include="Messages\GBL\GblSystemDTO.cs" />
+    <Compile Include="Messages\GBL\GblSystemFunctionDTO.cs" />
+    <Compile Include="Messages\GBL\GblSystemMenuDTO.cs" />
+    <Compile Include="Messages\GBL\GblTraceDTO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BS\IBaseTableRoleService.cs" />
+    <Compile Include="Services\BS\IBkStoreLogService.cs" />
+    <Compile Include="Services\BS\IBsAddrssCommittService.cs" />
+    <Compile Include="Services\BS\IBsAnaeItemService.cs" />
+    <Compile Include="Services\BS\IBsAnaeService.cs" />
+    <Compile Include="Services\BS\IBsAreaCommitteeService.cs" />
+    <Compile Include="Services\BS\IBsAreaPoliceStationService.cs" />
+    <Compile Include="Services\BS\IBsAreaProvinceService.cs" />
+    <Compile Include="Services\BS\IBsAreaRegionService.cs" />
+    <Compile Include="Services\BS\IBsAreaService.cs" />
+    <Compile Include="Services\BS\IBsBacteriaDrugService.cs" />
+    <Compile Include="Services\BS\IBsBacteriaGramService.cs" />
+    <Compile Include="Services\BS\IBsBacteriaService.cs" />
+    <Compile Include="Services\BS\IBsBacteriaShuService.cs" />
+    <Compile Include="Services\BS\IBsBacteriaStandTypeService.cs" />
+    <Compile Include="Services\BS\IBsBacteriaTypeService.cs" />
+    <Compile Include="Services\BS\IBsBaseCheckService.cs" />
+    <Compile Include="Services\BS\IBsBaseCureService.cs" />
+    <Compile Include="Services\BS\IBsBaseDrugService.cs" />
+    <Compile Include="Services\BS\IBsBaseNurseService.cs" />
+    <Compile Include="Services\BS\IBsBaseService.cs" />
+    <Compile Include="Services\BS\IBsBedService.cs" />
+    <Compile Include="Services\BS\IBsBpCureDtlService.cs" />
+    <Compile Include="Services\BS\IBsBpCureService.cs" />
+    <Compile Include="Services\BS\IBsBpEvaluateService.cs" />
+    <Compile Include="Services\BS\IBsBpEvaluateTestService.cs" />
+    <Compile Include="Services\BS\IBsBphisIllRelationService.cs" />
+    <Compile Include="Services\BS\IBsBpIllListService.cs" />
+    <Compile Include="Services\BS\IBsBpItemService.cs" />
+    <Compile Include="Services\BS\IBsBpPatientGroupService.cs" />
+    <Compile Include="Services\BS\IBsBranchService.cs" />
+    <Compile Include="Services\BS\IBsCareGroupService.cs" />
+    <Compile Include="Services\BS\IBsCertificateService.cs" />
+    <Compile Include="Services\BS\IBsCheckTestListService.cs" />
+    <Compile Include="Services\BS\IBsCommitteeRoadService.cs" />
+    <Compile Include="Services\BS\IBsCompanyService.cs" />
+    <Compile Include="Services\BS\IBsCountryService.cs" />
+    <Compile Include="Services\BS\IBsDeptTypeService.cs" />
+    <Compile Include="Services\BS\IBsDiagRoomService.cs" />
+    <Compile Include="Services\BS\IBsDocLevelService.cs" />
+    <Compile Include="Services\BS\IBsDocRegTypeService.cs" />
+    <Compile Include="Services\BS\IBsdocregtypeTemp36Service.cs" />
+    <Compile Include="Services\BS\IBsDoctorService.cs" />
+    <Compile Include="Services\BS\IBsDrugFormService.cs" />
+    <Compile Include="Services\BS\IBsDrugFormUnitService.cs" />
+    <Compile Include="Services\BS\IBsDrugFormUsageService.cs" />
+    <Compile Include="Services\BS\IBsEducationIllService.cs" />
+    <Compile Include="Services\BS\IBsEducationService.cs" />
+    <Compile Include="Services\BS\IBsEduLevelService.cs" />
+    <Compile Include="Services\BS\IBsEqTypeService.cs" />
+    <Compile Include="Services\BS\IBsExecLocationService.cs" />
+    <Compile Include="Services\BS\IBsFamilyService.cs" />
+    <Compile Include="Services\BS\IBsFeeTypeService.cs" />
+    <Compile Include="Services\BS\IBsFeeTypeSubService.cs" />
+    <Compile Include="Services\BS\IBsFixChargeService.cs" />
+    <Compile Include="Services\BS\IBsFluidService.cs" />
+    <Compile Include="Services\BS\IBsFrequencyService.cs" />
+    <Compile Include="Services\BS\IBsFrequencyTimeService.cs" />
+    <Compile Include="Services\BS\IBsFromHospitalService.cs" />
+    <Compile Include="Services\BS\IBsGfxeService.cs" />
+    <Compile Include="Services\BS\IBsGroupService.cs" />
+    <Compile Include="Services\BS\IBsGroupSub2Service.cs" />
+    <Compile Include="Services\BS\IBsGroupSubService.cs" />
+    <Compile Include="Services\BS\IBsHealthEduRecService.cs" />
+    <Compile Include="Services\BS\IBsHospitalService.cs" />
+    <Compile Include="Services\BS\IBsHouseService.cs" />
+    <Compile Include="Services\BS\IBsHsFeetyService.cs" />
+    <Compile Include="Services\BS\IBsIllListService.cs" />
+    <Compile Include="Services\BS\IBsInfectionService.cs" />
+    <Compile Include="Services\BS\IBsInfReasonService.cs" />
+    <Compile Include="Services\BS\IBsInfReasonTypeService.cs" />
+    <Compile Include="Services\BS\IBsInfSystemService.cs" />
+    <Compile Include="Services\BS\IBsInfSystemTypeService.cs" />
+    <Compile Include="Services\BS\IBsInvInItemService.cs" />
+    <Compile Include="Services\BS\IBsInvMzItemService.cs" />
+    <Compile Include="Services\BS\IBsItemAttachService.cs" />
+    <Compile Include="Services\BS\IBsItemBpIdService.cs" />
+    <Compile Include="Services\BS\IBsitemcustomgroupService.cs" />
+    <Compile Include="Services\BS\IBsitemcustomService.cs" />
+    <Compile Include="Services\BS\IBsItemDrugService.cs" />
+    <Compile Include="Services\BS\IBsItemEquipmentService.cs" />
+    <Compile Include="Services\BS\IBsItemFirstPageService.cs" />
+    <Compile Include="Services\BS\IBsItemFrequencyService.cs" />
+    <Compile Include="Services\BS\IBsItemIllTypeService.cs" />
+    <Compile Include="Services\BS\IBsItemItemService.cs" />
+    <Compile Include="Services\BS\IBsItemListService.cs" />
+    <Compile Include="Services\BS\IBsItemLocationService.cs" />
+    <Compile Include="Services\BS\IBsItemNameMultiService.cs" />
+    <Compile Include="Services\BS\IBsItemNameService.cs" />
+    <Compile Include="Services\BS\IBsItemPacService.cs" />
+    <Compile Include="Services\BS\IBsItemPatTypeService.cs" />
+    <Compile Include="Services\BS\IBsItemPeopleService.cs" />
+    <Compile Include="Services\BS\IBsItemPersonService.cs" />
+    <Compile Include="Services\BS\IBsItemService.cs" />
+    <Compile Include="Services\BS\IBsItemUnitService.cs" />
+    <Compile Include="Services\BS\IBsItemUsageService.cs" />
+    <Compile Include="Services\BS\IBsItemYbService.cs" />
+    <Compile Include="Services\BS\IBsItemYbTipService.cs" />
+    <Compile Include="Services\BS\IBsJcGroupAttachService.cs" />
+    <Compile Include="Services\BS\IBsJcGroupItemService.cs" />
+    <Compile Include="Services\BS\IBsJcGroupService.cs" />
+    <Compile Include="Services\BS\IBsLabSourceItemService.cs" />
+    <Compile Include="Services\BS\IBsLabSourceService.cs" />
+    <Compile Include="Services\BS\IBsLessonTypeService.cs" />
+    <Compile Include="Services\BS\IBsLimitDocLevService.cs" />
+    <Compile Include="Services\BS\IBsLimitGroupService.cs" />
+    <Compile Include="Services\BS\IBsLocationRoomWindowService.cs" />
+    <Compile Include="Services\BS\IBsLocationService.cs" />
+    <Compile Include="Services\BS\IBsLocBranchService.cs" />
+    <Compile Include="Services\BS\IBsLocPatTypeService.cs" />
+    <Compile Include="Services\BS\IBsLocSystemService.cs" />
+    <Compile Include="Services\BS\IBsLocSystemSub2Service.cs" />
+    <Compile Include="Services\BS\IBsLocSystemSubService.cs" />
+    <Compile Include="Services\BS\IBsManufacturerService.cs" />
+    <Compile Include="Services\BS\IBsMzFeetyService.cs" />
+    <Compile Include="Services\BS\IBsNationService.cs" />
+    <Compile Include="Services\BS\IBsNewService.cs" />
+    <Compile Include="Services\BS\IBsOaGroupService.cs" />
+    <Compile Include="Services\BS\IBsOaGroupSubService.cs" />
+    <Compile Include="Services\BS\IBsOpService.cs" />
+    <Compile Include="Services\BS\IBsOpsItemService.cs" />
+    <Compile Include="Services\BS\IBsOpsRoomService.cs" />
+    <Compile Include="Services\BS\IBsOuMergeFeeService.cs" />
+    <Compile Include="Services\BS\IBsPatFingerService.cs" />
+    <Compile Include="Services\BS\IBsPatientService.cs" />
+    <Compile Include="Services\BS\IBsPatientYbIllService.cs" />
+    <Compile Include="Services\BS\IBsPatIllService.cs" />
+    <Compile Include="Services\BS\IBsPatMenuIndexService.cs" />
+    <Compile Include="Services\BS\IBsPatTypeLimitService.cs" />
+    <Compile Include="Services\BS\IBsPatTypeService.cs" />
+    <Compile Include="Services\BS\IBsPatTypeYbIllService.cs" />
+    <Compile Include="Services\BS\IBsPayWayService.cs" />
+    <Compile Include="Services\BS\IBsPositionService.cs" />
+    <Compile Include="Services\BS\IBsPriceAddService.cs" />
+    <Compile Include="Services\BS\IBsQuestionService.cs" />
+    <Compile Include="Services\BS\IBsRegPatAmountService.cs" />
+    <Compile Include="Services\BS\IBsRegSpanSubService.cs" />
+    <Compile Include="Services\BS\IBsRegTimeSpanService.cs" />
+    <Compile Include="Services\BS\IBsRegTypeService.cs" />
+    <Compile Include="Services\BS\IBsRelationService.cs" />
+    <Compile Include="Services\BS\IBsRoomGroupService.cs" />
+    <Compile Include="Services\BS\IBsRoomService.cs" />
+    <Compile Include="Services\BS\IBsRoomWindowService.cs" />
+    <Compile Include="Services\BS\IBsScoreService.cs" />
+    <Compile Include="Services\BS\IBsSexService.cs" />
+    <Compile Include="Services\BS\IBsSpecialityService.cs" />
+    <Compile Include="Services\BS\IBsSpecialtyRoomService.cs" />
+    <Compile Include="Services\BS\IBsSubjectService.cs" />
+    <Compile Include="Services\BS\IBsTallyGroupService.cs" />
+    <Compile Include="Services\BS\IBsTallyTypeService.cs" />
+    <Compile Include="Services\BS\IBsTestPaperService.cs" />
+    <Compile Include="Services\BS\IBsTubeTypeService.cs" />
+    <Compile Include="Services\BS\IBsUnitRatioService.cs" />
+    <Compile Include="Services\BS\IBsUnitService.cs" />
+    <Compile Include="Services\BS\IBsUsageItemService.cs" />
+    <Compile Include="Services\BS\IBsUsageService.cs" />
+    <Compile Include="Services\BS\IBsUserEmrTemplateService.cs" />
+    <Compile Include="Services\BS\IBsUserHouseService.cs" />
+    <Compile Include="Services\BS\IBsUserLocationService.cs" />
+    <Compile Include="Services\BS\IBsUserMenuService.cs" />
+    <Compile Include="Services\BS\IBsUserModuleService.cs" />
+    <Compile Include="Services\BS\IBsUserPointDtlService.cs" />
+    <Compile Include="Services\BS\IBsUserPointService.cs" />
+    <Compile Include="Services\BS\IBsUserRoleService.cs" />
+    <Compile Include="Services\BS\IBsUserRoomService.cs" />
+    <Compile Include="Services\BS\IBsUserService.cs" />
+    <Compile Include="Services\BS\IBsUserWindowService.cs" />
+    <Compile Include="Services\BS\IBsUserWordService.cs" />
+    <Compile Include="Services\BS\IBsWorkTypeService.cs" />
+    <Compile Include="Services\BS\IBsXdGroupDtlService.cs" />
+    <Compile Include="Services\BS\IBsXdGroupService.cs" />
+    <Compile Include="Services\BS\IBsXdRpDtlService.cs" />
+    <Compile Include="Services\BS\IBsXdRpService.cs" />
+    <Compile Include="Services\BS\IBsYbCodeSpecService.cs" />
+    <Compile Include="Services\BS\IBsYbIllTypeService.cs" />
+    <Compile Include="Services\BS\IBsZyFeetyService.cs" />
+    <Compile Include="Services\GBL\IGblAutoUpdateOldService.cs" />
+    <Compile Include="Services\GBL\IGblAutoUpdateService.cs" />
+    <Compile Include="Services\GBL\IGblBaseTableItemService.cs" />
+    <Compile Include="Services\GBL\IGblCatalogExceptService.cs" />
+    <Compile Include="Services\GBL\IGblCatalogJoinService.cs" />
+    <Compile Include="Services\GBL\IGblCatalogKeyService.cs" />
+    <Compile Include="Services\GBL\IGblChinCharService.cs" />
+    <Compile Include="Services\GBL\IGblCurrentUserService.cs" />
+    <Compile Include="Services\GBL\IGblElClassService.cs" />
+    <Compile Include="Services\GBL\IGblElGroupService.cs" />
+    <Compile Include="Services\GBL\IGblEmailService.cs" />
+    <Compile Include="Services\GBL\IGblEmailUserService.cs" />
+    <Compile Include="Services\GBL\IGblEmrBranchService.cs" />
+    <Compile Include="Services\GBL\IGblEmrCatalogService.cs" />
+    <Compile Include="Services\GBL\IGblEmrFileService.cs" />
+    <Compile Include="Services\GBL\IGblEmrQcGroupService.cs" />
+    <Compile Include="Services\GBL\IGblEmrQcItemService.cs" />
+    <Compile Include="Services\GBL\IGblFieldDescService.cs" />
+    <Compile Include="Services\GBL\IGblFormEditService.cs" />
+    <Compile Include="Services\GBL\IGblFuctionService.cs" />
+    <Compile Include="Services\GBL\IGblFunDemoService.cs" />
+    <Compile Include="Services\GBL\IGblFunTraceService.cs" />
+    <Compile Include="Services\GBL\IGblGetSequenceNumService.cs" />
+    <Compile Include="Services\GBL\IGblInvRegService.cs" />
+    <Compile Include="Services\GBL\IGblKeyLockSettingService.cs" />
+    <Compile Include="Services\GBL\IGblLastIdService.cs" />
+    <Compile Include="Services\GBL\IGblLatDayRunTimeService.cs" />
+    <Compile Include="Services\GBL\IGblModiHostService.cs" />
+    <Compile Include="Services\GBL\IGblModuleService.cs" />
+    <Compile Include="Services\GBL\IGblMrkService.cs" />
+    <Compile Include="Services\GBL\IGblOnlinerService.cs" />
+    <Compile Include="Services\GBL\IGblPatientMenuService.cs" />
+    <Compile Include="Services\GBL\IGblPhoneMsgService.cs" />
+    <Compile Include="Services\GBL\IGblPrinterService.cs" />
+    <Compile Include="Services\GBL\IGblQuestionService.cs" />
+    <Compile Include="Services\GBL\IGblReportDetailService.cs" />
+    <Compile Include="Services\GBL\IGblReportGroupService.cs" />
+    <Compile Include="Services\GBL\IGblReportService.cs" />
+    <Compile Include="Services\GBL\IGblRoleModuleService.cs" />
+    <Compile Include="Services\GBL\IGblRoleService.cs" />
+    <Compile Include="Services\GBL\IGblSettingService.cs" />
+    <Compile Include="Services\GBL\IGblSystemFunctionService.cs" />
+    <Compile Include="Services\GBL\IGblSystemMenuService.cs" />
+    <Compile Include="Services\GBL\IGblSystemService.cs" />
+    <Compile Include="Services\GBL\IGblTraceService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppPlus-Infrastructrure\AppPlus-Infrastructure.csproj">
+      <Project>{70a18834-0849-4693-ae65-1610a8e0eb7e}</Project>
+      <Name>AppPlus-Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "main\AppPlus-Code-Generator\App.config"
 //     Connection String Name: "AppPlus.His"
-//     Connection String:      "Data Source=(local);Initial Catalog=HIS;Integrated Security=True;Application Name=AppPlus Code Generator"
+//     Connection String:      "Data Source=192.168.1.225;Initial Catalog=GBLNHISShow;UID=sa;password=**zapped**;;Application Name=AppPlus Code Generator"
 // ------------------------------------------------------------------------------------------------
 using AppPlus.Core.Service;
 using HisPlus.Contract.Messages;

@@ -9,7 +9,7 @@ namespace HisPlus.Domain
         {    
         }
 
-        public long PatId { get; set; }
+        public int PatId { get; set; }
         public int? IcdId { get; set; }
         public string IllDesc { get; set; }
         public short? LsWestChin { get; set; }

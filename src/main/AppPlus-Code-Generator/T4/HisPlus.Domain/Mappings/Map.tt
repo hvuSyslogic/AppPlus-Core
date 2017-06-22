@@ -134,10 +134,9 @@
     //              TableFilterInclude = new Regex("^table_name1$|^table_name2$|etc");
     //              ColumnFilterExclude = new Regex("^FK_.*$");
     SchemaFilterExclude = null;
-    SchemaFilterInclude = null;
-    
-	TableFilterExclude = new Regex("^BsIllness*|BkStoreLog|BsBase|BsUserImage|BsnotYb|BsLabSourceItem_0510|BsdocregtypeTemp36|BsDoctorBack|BsdocregtypeTemp$");
-    TableFilterInclude = new Regex("^BS*");
+    SchemaFilterInclude = null;    
+    TableFilterExclude = new Regex("^BsIllness*|BkStoreLog|BsUserImage|BsnotYb|BsLabSourceItem0510|BsdocregtypeTemp36|BsDoctorBack");
+    TableFilterInclude = new Regex("^BS*|^Gbl*");
     //TableFilterInclude = new Regex("^BsItem$|^BsLocation$|BsPatient");
     ColumnFilterExclude = null;
 
@@ -148,7 +147,7 @@
     {
         // Example: Exclude any table in dbo schema with "order" in its name.
         //if(t.Schema.Equals("dbo", StringComparison.InvariantCultureIgnoreCase) && t.NameHumanCase.ToLowerInvariant().Contains("order"))
-        //    return false;
+        //    return false;		
 
         return true;
     };
@@ -263,7 +262,7 @@
     {
         //if (t.ClassName == "User")
         //    return ": IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>";
-		var pocoBaseClass = " : AppPlus.Infrastructure.Contract.Messages.EntityBase<{0}>";
+		var pocoBaseClass = " : EntityBase<{0}>";
 		var col = t.Columns.Where(x => x.IsPrimaryKey).First();		
 		var pkType = col.PropertyType;
 
@@ -275,7 +274,7 @@
     {
         //if (t.ClassName == "User")
         //    return ": IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>";
-		var pocoBaseClass = " : AppPlus.Infrastructure.Contract.Messages.DtoBase<{0}>";
+		var pocoBaseClass = " : DtoBase<{0}>";
 		var col = t.Columns.Where(x => x.IsPrimaryKey).First();		
 		var pkType = col.PropertyType;
 

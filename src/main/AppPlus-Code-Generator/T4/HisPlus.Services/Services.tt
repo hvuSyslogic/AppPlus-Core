@@ -135,8 +135,8 @@
     //              ColumnFilterExclude = new Regex("^FK_.*$");
     SchemaFilterExclude = null;
     SchemaFilterInclude = null;
-    TableFilterExclude = null;
-    TableFilterInclude = new Regex("^BsItem$|^BsLocation$|BsPatient");
+    TableFilterExclude = new Regex("^BsIllness*|BkStoreLog|BsUserImage|BsnotYb|BsLabSourceItem0510|BsdocregtypeTemp36|BsDoctorBack");
+    TableFilterInclude = new Regex("^BS*|^Gbl*");
     ColumnFilterExclude = null;
 
     // Filtering of tables using a function. This can be used in conjunction with the Regex's above.

@@ -11,7 +11,7 @@ namespace HisPlus.Domain
 
         public int ItemId { get; set; }
         public int UserId { get; set; }
-        public long? PatId { get; set; }
+        public int? PatId { get; set; }
         public System.DateTime? FromTime { get; set; }
         public System.DateTime? ToTime { get; set; }
         public bool? IsExcept { get; set; }

@@ -3,7 +3,7 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace HisPlus.Domain
 {
-    public class BsPatient : EntityBase<long>
+    public class BsPatient : EntityBase<int>
     {
         public BsPatient()
         {    
@@ -37,7 +37,7 @@ namespace HisPlus.Domain
         public string Sensitive { get; set; }
         public string IdCardNo { get; set; }
         public bool IsBaby { get; set; }
-        public long? MotherPatId { get; set; }
+        public int? MotherPatId { get; set; }
         public string MedicareNo { get; set; }
         public string AccountNo { get; set; }
         public string PhoneWork { get; set; }

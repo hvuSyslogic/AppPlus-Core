@@ -29,7 +29,7 @@ namespace HisPlus.Domain
         public string Director { get; set; }
         public int? DeptTypeId { get; set; }
         public bool? IsCostApp { get; set; }
-        public short? AppLevel { get; set; }
+        public int? AppLevel { get; set; }
         public string PyCode { get; set; }
         public string WbCode { get; set; }
         public int? Area { get; set; }
