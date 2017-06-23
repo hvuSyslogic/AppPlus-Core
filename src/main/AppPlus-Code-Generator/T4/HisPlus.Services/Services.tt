@@ -8,7 +8,7 @@
     // Main settings **********************************************************************************************************************
     ConnectionStringName = "AppPlus.His";   // Searches for this connection string in config files listed below in the ConfigFilenameSearchOrder setting
     //ConnectionStringName is the only required setting
-    Namespace = "HisPlus.Contract.Services"; // Override the default namespace here
+    Namespace = "HisPlus.Services"; // Override the default namespace here
     DbContextName = "HisDbContext";
     //DbContextInterfaceName = "IMyDbContext"; //Defaults to "I" + DbContextName
     DbContextInterfaceBaseClasses = "System.IDisposable";    // Specify what the base classes are for your database context interface
@@ -136,7 +136,7 @@
     SchemaFilterExclude = null;
     SchemaFilterInclude = null;
     TableFilterExclude = new Regex("^BsIllness*|BkStoreLog|BsUserImage|BsnotYb|BsLabSourceItem0510|BsdocregtypeTemp36|BsDoctorBack");
-    TableFilterInclude = new Regex("^BS*|^Gbl*");
+    TableFilterInclude = new Regex("^Ck*|^Dg*|^In*|^Ou*|^Rm*|^Rd*");
     ColumnFilterExclude = null;
 
     // Filtering of tables using a function. This can be used in conjunction with the Regex's above.

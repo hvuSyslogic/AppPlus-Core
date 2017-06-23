@@ -136,7 +136,7 @@
     SchemaFilterExclude = null;
     SchemaFilterInclude = null;    
     TableFilterExclude = new Regex("^BsIllness*|BkStoreLog|BsUserImage|BsnotYb|BsLabSourceItem0510|BsdocregtypeTemp36|BsDoctorBack");
-    TableFilterInclude = new Regex("^BS*|^Gbl*");
+    TableFilterInclude = new Regex("^Ck*|^Dg*|^In*|^Ou*|^Rm*|^Rd*");
     //TableFilterInclude = new Regex("^BsItem$|^BsLocation$|BsPatient");
     ColumnFilterExclude = null;
 

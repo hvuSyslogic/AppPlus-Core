@@ -909,7 +909,7 @@ if(MakeClassesPartial) {#>
 
         partial void InitializePartial();
 <#} }#>
-<# int DataMemberOrder = 1;
+<#
 foreach(Column col in tbl.Columns.OrderBy(x => x.Ordinal).Where(x => !x.Hidden))
 {
 #>

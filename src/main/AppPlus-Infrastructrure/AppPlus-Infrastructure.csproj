@@ -72,7 +72,7 @@
     <Compile Include="Contract\Messages\EntityRoot.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SharedAssemblyInfo.cs" />
+    <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="Contract\Messages\DtoBase.cs" />
     <Compile Include="Contract\Messages\ResponseStatus.cs" />
     <Compile Include="Contract\Messages\ServiceFault.cs" />

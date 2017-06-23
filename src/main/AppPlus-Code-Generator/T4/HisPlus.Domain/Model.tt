@@ -136,7 +136,7 @@
     SchemaFilterExclude = null;
     SchemaFilterInclude = null;
     TableFilterExclude = new Regex("^BsIllness*|BkStoreLog|BsItemListA|BsUserImage|BsnotYb|BsLabSourceItem0510|BsdocregtypeTemp36|BsDoctorBack");
-    TableFilterInclude = new Regex("^BS*|^Gbl*");
+    TableFilterInclude = new Regex("^Ck*|^Dg*|^In*|^Ou*|^Rm*|^Rd*");
     ColumnFilterExclude = null;
 
     // Filtering of tables using a function. This can be used in conjunction with the Regex's above.
@@ -146,14 +146,7 @@
     {
         // Example: Exclude any table in dbo schema with "order" in its name.
         //if(t.Schema.Equals("dbo", StringComparison.InvariantCultureIgnoreCase) && t.NameHumanCase.ToLowerInvariant().Contains("order"))
-        //    return false;
-
-		var col = t.Columns.Where(x => x.IsPrimaryKey).FirstOrDefault();
-		if (col == null)
-		{
-			return false;
-		}
-		
+        //    return false;		
         return true;
     };
 
