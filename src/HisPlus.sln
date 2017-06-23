@@ -9,13 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPlus-Infrastructure", "m
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPlus-Client", "main\AppPlus-Client\AppPlus-Client.csproj", "{FBA6129F-8BEF-4854-92F6-AEE573D6EBC6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{33AD564A-06DE-4985-B6AA-6F874999B926}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "001 AppPlus-Core", "001 AppPlus-Core", "{16D79C93-C630-46EF-B3E9-0319AF011895}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPlus-Core-Tests", "main\AppPlus-Core-Tests\AppPlus-Core-Tests.csproj", "{74273477-7BAD-4272-A7B2-FB9F2585F802}"
@@ -47,6 +40,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPlus-Code-Generator", "main\AppPlus-Code-Generator\AppPlus-Code-Generator.csproj", "{45ADB831-0B3A-41C3-8CCB-AF7084488A87}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "003 Code Generator", "003 Code Generator", "{4E29C5FA-0B88-4111-95B0-5515099575A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E78C62AD-3E76-4067-923C-CC8D69BAF7C5}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

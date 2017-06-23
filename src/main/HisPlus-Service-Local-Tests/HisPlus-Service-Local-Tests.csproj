@@ -132,7 +132,7 @@
     </ProjectReference>
     <ProjectReference Include="..\HisPlus-Service\HisPlus-Service.csproj">
       <Project>{3d36ed5f-8b85-48d8-b9e6-bde34495967e}</Project>
-      <Name>HisPlus-Services</Name>
+      <Name>HisPlus-Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

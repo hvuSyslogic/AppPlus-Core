@@ -384,6 +384,7 @@
     <Compile Include="RM\RmZyBackService.cs" />
     <Compile Include="RM\RmZyOutDtlService.cs" />
     <Compile Include="RM\RmZyOutService.cs" />
+    <Compile Include="TraceService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
