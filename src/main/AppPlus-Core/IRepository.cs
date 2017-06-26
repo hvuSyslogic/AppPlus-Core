@@ -47,7 +47,7 @@ namespace AppPlus.Core
         #endregion
 
         #region Count
-        int Count(Expression<Func<TEntity, bool>> predicate);
+        int Count(Expression<Func<TEntity, bool>> predicate = null);
         #endregion
 
         #region LongCount
@@ -55,7 +55,7 @@ namespace AppPlus.Core
         #endregion
 
         #region Contains
-        bool Contains(Expression<Func<TEntity, bool>> predicate);
+        bool Contains(Expression<Func<TEntity, bool>> predicate = null);
         #endregion
 
         #region Filter

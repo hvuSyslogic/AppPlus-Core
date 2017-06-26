@@ -10,8 +10,8 @@ using AppPlus.Infrastructure.Contract.Messages;
 namespace AppPlus.Infrastructure.Contract.Services
 {
     [ServiceContract]
-    public interface IGenericService<TDTO> : IServiceRoot
-        where TDTO : DtoRoot, new()
+    public interface IGenericService<TDTO, TKey> : IServiceRoot
+        where TDTO : DtoBase<TKey>, new()
     {
         #region Create
         [OperationContract(Name = "Create")]

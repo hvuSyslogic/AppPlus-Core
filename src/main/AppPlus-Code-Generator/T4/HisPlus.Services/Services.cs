@@ -11,16 +11,16 @@
 //     Connection String Name: "AppPlus.His"
 //     Connection String:      "Data Source=192.168.1.225;Initial Catalog=GBLNHISShow;UID=sa;password=**zapped**;;Application Name=AppPlus Code Generator"
 // ------------------------------------------------------------------------------------------------
-using AppPlus.Core.Service;
-using HisPlus.Contract.Messages;
-using HisPlus.Contract.Services;
-using HisPlus.Domain;
-using HisPlus.Domain.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AppPlus.Core;
+using AppPlus.Core.Service;
+using HisPlus.Contract.Messages;
+using HisPlus.Contract.Services;
+using HisPlus.Domain;
 
 namespace HisPlus.Services
 {

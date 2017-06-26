@@ -27,9 +27,9 @@ namespace AppPlus.Core.Service
 {
     [GlobalExceptionHandlerBehaviourAttribute(typeof(GlobalExceptionHandler))]
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
-    public abstract class AbstractService<TEntity, TDTO> : Profile, IGenericService<TDTO>
-        where TEntity : EntityRoot, new()
-        where TDTO : DtoRoot, new()
+    public abstract class AbstractService<TEntity, TDTO, TKey> : Profile, IGenericService<TDTO, TKey>
+        where TEntity : EntityBase<TKey>, new()
+        where TDTO : DtoBase<TKey>, new()
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -57,16 +57,13 @@ namespace AppPlus.Core.Service
             Requires.NotNull(dto, "dto");
 
             var entity = dto.MapTo<TEntity>();
-            
-            using (var command = CommandWrapper)
+                        
+            UnitOfWork.Do(uow => 
             {
-                command.Execute(uow =>
-                {
-                    uow.Create<TEntity>(entity);
-                });
+                uow.Repo<TEntity>().Create(entity);                
+            });
 
-                return entity.MapTo<TDTO>();
-            }
+            return entity.MapTo<TDTO>();
         }
 
         public virtual IEnumerable<TDTO> Create(IEnumerable<TDTO> dtos)
@@ -75,14 +72,11 @@ namespace AppPlus.Core.Service
 
             var entities = dtos.MapTo<TEntity>();
 
-            using (var command = CommandWrapper)
+            UnitOfWork.Do(uow => 
             {
-                command.Execute(uow =>
-                {
-                    uow.Create(entities);
-                });
-            }
-
+                uow.Repo<TEntity>().Create(entities);
+            });
+            
             return entities.MapTo<TDTO>();
         }
         #endregion
@@ -90,49 +84,34 @@ namespace AppPlus.Core.Service
         #region Retrieve
         public virtual TDTO RetrieveById(object id)
         {
-            //Required.NotNullOrZero(id, "id");
+            Requires.NotNull(id, "id");
 
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow =>
             {
-                return command.Execute(uow =>
-                {
-                    TEntity entity = uow.Retrieve<TEntity>(id);
-
-                    return entity.MapTo<TDTO>();
-                });
-            }
+                return uow.Repo<TEntity>().Retrieve(id).MapTo<TDTO>();
+            });
         }
-       
+
         public virtual IEnumerable<TDTO> Retrieve(ExpressionNode predicateExpressionNode)
         {
             Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
-            
+
             var expression = predicateExpressionNode.ToBooleanExpression<TDTO>();
 
-            var predicateExpression = Mapper.Map<Expression<Func<TEntity, bool>>>(expression);
+            var predicateExpression = Mapper.Map<Expression<Func<TEntity, bool>>>(expression);       
 
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow => 
             {
-                return command.Execute(uow =>
-                {
-                    IEnumerable<TEntity> entities = uow.Retrieve<TEntity>(predicateExpression);
-                    
-                    return entities.MapTo<TDTO>();
-                });
-            }
+                return uow.Repo<TEntity>().Retrieve(predicateExpression).MapTo<TDTO>();
+            });
         }
 
         public virtual IEnumerable<TDTO> RetrieveAll()
         {
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow => 
             {
-                return command.Execute(uow =>
-                {
-                    IEnumerable<TEntity> entities = uow.Retrieve<TEntity>();
-
-                    return entities.MapTo<TDTO>();
-                });
-            }
+                return uow.Repo<TEntity>().Retrieve().MapTo<TDTO>();
+            });
         }
         #endregion
 
@@ -142,14 +121,11 @@ namespace AppPlus.Core.Service
             Requires.NotNull(dto, "dto");
 
             var entity = dto.MapTo<TEntity>();
-
-            using (var command = CommandWrapper)
+            
+            UnitOfWork.Do(uow => 
             {
-                command.Execute(uow =>
-                {
-                    uow.Update<TEntity>(entity);
-                });
-            }
+                uow.Repo<TEntity>().Update(entity);
+            });
         }
 
         public virtual void Update(IEnumerable<TDTO> dtos)
@@ -158,13 +134,10 @@ namespace AppPlus.Core.Service
 
             var entities = dtos.MapTo<TEntity>();
 
-            using (var command = CommandWrapper)
+            UnitOfWork.Do(uow => 
             {
-                command.Execute(uow =>
-                {
-                    uow.Update(entities);
-                });
-            }
+                uow.Repo<TEntity>().Update(entities);
+            });            
         }
 
         //public int Update<TEntity>(Expression<Func<TEntity, TEntity>> updateExpression,
@@ -178,15 +151,12 @@ namespace AppPlus.Core.Service
         #region Delete
         public virtual void DeleteById(object id)
         {
-            //Required.NotNullOrZero(id, "id");
+            Requires.NotNull(id, "id");
 
-            using (var command = CommandWrapper)
+            UnitOfWork.Do(uow => 
             {
-                command.Execute(uow =>
-                {
-                    uow.Delete<TEntity>(id);
-                });
-            }
+                uow.Repo<TEntity>().Delete(id);
+            });
         }
 
         public virtual bool Delete(TDTO dto)
@@ -194,14 +164,11 @@ namespace AppPlus.Core.Service
             Requires.NotNull(dto, "dto");
 
             var entity = dto.MapTo<TEntity>();
-
-            using (var command = CommandWrapper)
+          
+            UnitOfWork.Do(uow =>
             {
-                command.Execute(uow =>
-                {
-                    uow.Delete<TEntity>(entity);
-                });
-            }
+                uow.Repo<TEntity>().Delete(entity);
+            });
 
             return true;
         }
@@ -212,15 +179,10 @@ namespace AppPlus.Core.Service
 
             var entities = dtos.MapTo<TEntity>();
 
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow =>
             {
-                command.Execute(uow =>
-                {
-                    uow.Delete(entities);
-                });
-            }
-
-            return dtos.Count();
+                return uow.Repo<TEntity>().Delete(entities).Count();
+            });
         }
 
         public virtual int Delete(ExpressionNode predicateExpressionNode)
@@ -229,25 +191,19 @@ namespace AppPlus.Core.Service
 
             var predicateExpression = (predicateExpressionNode == null)
                 ? null : Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());
-
-            using (var command = CommandWrapper)
+            
+            return UnitOfWork.Do(uow => 
             {
-                return command.Execute(uow =>
-                {
-                    return uow.Delete<TEntity>(predicateExpression);
-                });
-            }
+                return uow.Repo<TEntity>().Delete(predicateExpression);
+            });
         }
 
         public virtual int DeleteAll()
         {
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow =>
             {
-                return command.Execute(uow =>
-                {
-                    return uow.Delete<TEntity>();
-                });
-            }
+                return uow.Repo<TEntity>().Delete();
+            });
         }
         #endregion
 
@@ -255,28 +211,22 @@ namespace AppPlus.Core.Service
 
         public virtual int Count()
         {
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow =>
             {
-                return command.Execute(uow =>
-                {
-                    return uow.Count<TEntity>();
-                });
-            }
+                return uow.Repo<TEntity>().Count(null);
+            });
         }
 
         public virtual int Count(ExpressionNode predicateExpressionNode)
         {
             Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
 
-            var predicate = Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());
+            var predicate = Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());           
 
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow =>
             {
-                return command.Execute(uow =>
-                {
-                    return uow.Count<TEntity>(predicate);
-                });
-            }
+                return uow.Repo<TEntity>().Count(predicate);
+            });
         }
         #endregion
 
@@ -284,7 +234,7 @@ namespace AppPlus.Core.Service
 
         public virtual bool Contains(TDTO dto)
         {
-            Requires.NotNull(dto, "dto");                        
+            Requires.NotNull(dto, "dto");
             
             //TODO:
 
@@ -305,13 +255,10 @@ namespace AppPlus.Core.Service
 
             var predicate = Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());
 
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow => 
             {
-                return command.Execute(uow =>
-                {
-                    return uow.Contains(predicate);
-                });
-            }
+                return uow.Repo<TEntity>().Contains(predicate);
+            });
         }
 
         #endregion
@@ -320,18 +267,16 @@ namespace AppPlus.Core.Service
 
         public virtual IEnumerable<TDTO> Filter(ExpressionNode predicateExpressionNode, int index = 0, int size = 50)
         {
-            Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
+            //Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
 
-            var predicate = (predicateExpressionNode == null)
-                   ? null : Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());
+            //var predicate = (predicateExpressionNode == null)
+            //       ? null : Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());           
 
-            using (var command = CommandWrapper)
-            {
-                return command.Execute(uow =>
-                {
-                    return uow.Filter(predicate, index, size).Item1.MapTo<TDTO>();
-                });
-            }
+            //return UnitOfWork.Do(uow => 
+            //{
+            //    uow.Repo<TEntity>().Filter(predicate, index, size).Item1.MapTo<TDTO>();
+            //});
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -360,33 +305,7 @@ namespace AppPlus.Core.Service
             return new Tuple<int, int>(1, 1);
         }
 
-        #endregion
-
-        //#region ExecuteDataSet
-
-        //protected virtual DataSet ExecuteDataSet(string cmdText, DbParameter[] parameters, CommandType commandType)
-        //{
-        //    using (var command = CommandWrapper)
-        //    {
-        //        return command.Execute(uow =>
-        //        {
-        //            return uow.ExecuteDataSet(cmdText, parameters, commandType);
-        //        });
-        //    }
-        //}
-
-        //protected virtual DataTable ExecuteDataTable(string cmdText, DbParameter[] parameters, CommandType commandType)
-        //{
-        //    using (var command = CommandWrapper)
-        //    {
-        //        return command.Execute(uow =>
-        //        {
-        //            return uow.ExecuteDataTable(cmdText, parameters, commandType);
-        //        });
-        //    }
-        //}
-
-        //#endregion
+        #endregion      
 
         #region Dispose
 

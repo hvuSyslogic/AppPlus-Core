@@ -41,7 +41,7 @@ if (!GenerateSeparateFiles)
 {
     usingsAll.AddRange(usingsContext);
 }
-foreach(var usingStatement in usingsAll.Distinct().OrderBy(x => x)) { #>
+foreach(var usingStatement in usingsAll.Distinct()) { #>
 using <#= usingStatement #>;
 <# } #>
 
@@ -522,12 +522,13 @@ if (IncludeTableValuedFunctions)
 <# }
  if(ElementsToGenerate.HasFlag(Elements.Poco)){
  if(!GenerateSeparateFiles) { #>
-    #region POCO classes
+    #region Service classes
 	
 <# } #>
 <#
 foreach(Table tbl in from t in tables.Where(t => !t.IsMapping).OrderBy(x => x.NameHumanCase) select t)
 {
+	if (!WithPrimarykey(tbl)) continue;
 #>
 <# fileManager.StartNewFile(tbl.NameHumanCase + "Service" + FileExtension);
 if(!tbl.HasPrimaryKey) { #>
@@ -536,6 +537,8 @@ if(!tbl.HasPrimaryKey) { #>
 <# } #>
 <#if(IncludeComments != CommentsStyle.None){#>    // <#=tbl.Name#>
 <# } #>
+	<# if(AddWcfDataAttributes) { #>[GlobalExceptionHandlerBehaviourAttribute(typeof(GlobalExceptionHandler))]
+<# }#>
     public <# if(MakeClassesPartial) { #>partial <# } #>class <#=tbl.NameHumanCase#>Service<#=WriteServiceBaseClasses != null ? WriteServiceBaseClasses(tbl) : "" #>
     {
     }

@@ -26,7 +26,7 @@ namespace AppPlus.Core
                 .Where(x => typeof(IServiceRoot).IsAssignableFrom(x));
 
             var allMappedToTypes = toAssembly.GetTypes()
-                .Where(x => x.IsClass && x.IsDerivedOfGenericType(typeof(AbstractService<,>)));
+                .Where(x => x.IsClass && x.IsDerivedOfGenericType(typeof(AbstractService<,,>)));
 
             Log.Debug("=================================================== Starting to register types in assembly =======================================================");
             Log.DebugFormat("Registered Assembly: {0} ", fromAssembly.FullName);
@@ -71,7 +71,8 @@ namespace AppPlus.Core
              where TDbContext : DbContext
         {
             container.RegisterType<DbContext, TDbContext>(new InjectionConstructor(connectionString))
-                .RegisterType<IUnitOfWork, UnitOfWork<TDbContext>>()
+                .RegisterType<DbContext, TDbContext>()
+                .RegisterType<IUnitOfWork, UnitOfWork>()
                 .RegisterType<ICommandWrapper, CommandWrapper>()
                 ;
 

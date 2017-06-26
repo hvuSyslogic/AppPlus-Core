@@ -1877,6 +1877,7 @@ SELECT  SERVERPROPERTY('Edition') AS Edition,
                     Table table = null;
                     while(rdr.Read())
                     {
+					try{
                         string schema = rdr["SchemaName"].ToString().Trim();
                         if(IsFilterExcluded(schemaFilterExclude, schemaFilterInclude, schema))
                             continue;
@@ -1935,6 +1936,10 @@ SELECT  SERVERPROPERTY('Edition') AS Edition,
                         var col = CreateColumn(rdr, rxClean, table, useCamelCase, columnFilterExclude, updateColumn);
                         if(col != null)
                             table.Columns.Add(col);
+							}catch(Exception ex)
+				{
+					var a = 1;
+				}
                     }
                 }
 

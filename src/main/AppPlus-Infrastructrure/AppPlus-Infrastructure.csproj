@@ -74,7 +74,6 @@
     </Compile>
     <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="Contract\Messages\DtoBase.cs" />
-    <Compile Include="Contract\Messages\ResponseStatus.cs" />
     <Compile Include="Contract\Messages\ServiceFault.cs" />
     <Compile Include="Contract\Services\IGenericService.cs" />
     <Compile Include="Contract\Services\IServiceRoot.cs" />
@@ -85,6 +84,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Contract\Messages\exclude%28do not delete%29\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

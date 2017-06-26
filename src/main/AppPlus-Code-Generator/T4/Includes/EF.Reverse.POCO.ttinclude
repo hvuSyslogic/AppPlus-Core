@@ -41,7 +41,8 @@ if (!GenerateSeparateFiles)
 {
     usingsAll.AddRange(usingsContext);
 }
-foreach(var usingStatement in usingsAll.Distinct().OrderBy(x => x)) { #>
+//.OrderBy(x => x)
+foreach(var usingStatement in usingsAll.Distinct()) { #>
 using <#= usingStatement #>;
 <# } #>
 
@@ -815,6 +816,7 @@ if (IncludeTableValuedFunctions)
 <#
 foreach(Table tbl in from t in tables.Where(t => !t.IsMapping).OrderBy(x => x.NameHumanCase) select t)
 {
+	if (!WithPrimarykey(tbl)) continue;
 #>
 <# fileManager.StartNewFile(tbl.NameHumanCase + FileExtension);
 if(!tbl.HasPrimaryKey) { #>
@@ -889,7 +891,8 @@ if(!tbl.HasPrimaryKey) { #>
 <# } #>
 <#if(IncludeComments != CommentsStyle.None){#>    // <#=tbl.Name#>
 <# } #>
-<# if(AddWcfDataAttributes) { #>    [System.Runtime.Serialization.DataContract]
+<# if(AddWcfDataAttributes) { #>    [Serializable]
+    [DataContract]
 <# }#>
     public <# if(MakeClassesPartial) { #>partial <# } #>class <#=tbl.NameHumanCase+DataTransferObjectClassName#><#=WritePocoDTOBaseClasses != null ? WritePocoDTOBaseClasses(tbl) : "" #>
     {
@@ -904,9 +907,7 @@ if(tbl.Columns.Where(c => c.Default != string.Empty && !c.Hidden).Count() > 0 ||
 if(MakeClassesPartial) {#>
             InitializePartial();
 <#}#>        }
-
 <#if(MakeClassesPartial) {#>
-
         partial void InitializePartial();
 <#} }#>
 <#
@@ -918,13 +919,13 @@ foreach(Column col in tbl.Columns.OrderBy(x => x.Ordinal).Where(x => !x.Hidden))
         /// <#=col.SummaryComments#>
         ///</summary>
 <# } #>
-<# if(AddWcfDataAttributes) { #>        [System.Runtime.Serialization.DataMember]
-<# } #>
 <# if (!col.IsPrimaryKey && !col.NameHumanCase.Equals("Id", StringComparison.InvariantCultureIgnoreCase)) { #>
+
+<# if(AddWcfDataAttributes) { #>        [DataMember]
+<# } #>
         <#= WritePocoColumn(col) #>
 <# } #>
-<# if(AddWcfDataAttributes) { #>
-<# } } #>
+<#  } #>
     }
 <# } }
 if(ElementsToGenerate.HasFlag(Elements.PocoDTO) && !GenerateSeparateFiles) { #>
@@ -939,6 +940,7 @@ if(!GenerateSeparateFiles) { #>
 <#
 foreach(Table tbl in tables.Where(t => !t.IsMapping && t.HasPrimaryKey).OrderBy(x => x.NameHumanCase))
 {
+	if (!WithPrimarykey(tbl)) continue;
 #>
 <# fileManager.StartNewFile(tbl.NameHumanCase + ConfigurationClassName + FileExtension);
 if(IncludeComments != CommentsStyle.None){#>    // <#=tbl.Name#>
@@ -1004,9 +1006,10 @@ if(returnModelCount < 2)
 {
     foreach (var returnColumn in sp.ReturnModels.First())
     { #>
-<# if(AddWcfDataAttributes) { #>        [System.Runtime.Serialization.DataMember(Order = <#=DataMemberOrder++#>, IsRequired = <#=StoredProcedure.IsNullable(returnColumn) ? "false" : "true"#>)]
+<# if(AddWcfDataAttributes) { #>        [DataMember(Order = <#=DataMemberOrder++#>, IsRequired = <#=StoredProcedure.IsNullable(returnColumn) ? "false" : "true"#>)]
 <# } #>
         <#= WriteStoredProcReturnColumn(returnColumn) #>
+
 <#  }
 } else {
     int model = 0;

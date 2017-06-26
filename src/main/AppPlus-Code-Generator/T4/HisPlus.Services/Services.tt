@@ -42,7 +42,7 @@
     AddUnitTestingDbContext = false; // Will add a FakeDbContext and FakeDbSet for easy unit testing
     IncludeQueryTraceOn9481Flag = false; // If SqlServer 2014 appears frozen / take a long time when this file is saved, try setting this to true (you will also need elevated privileges).
     UsePrivateSetterForComputedColumns = true; // If the columns is computed, use a private setter.
-    AdditionalNamespaces = new[] { "AppPlus.Core.Service", "HisPlus.Contract.Messages", "HisPlus.Contract.Services", "HisPlus.Domain", "System", "System.Collections.Generic", "System.Linq", "System.Text", "System.Threading.Tasks" };  // To include extra namespaces, include them here. i.e. "Microsoft.AspNet.Identity.EntityFramework"
+    AdditionalNamespaces = new[] { "System", "System.Collections.Generic", "System.Linq", "System.Text", "System.Threading.Tasks", "AppPlus.Core", "AppPlus.Core.Service", "HisPlus.Contract.Messages", "HisPlus.Contract.Services", "HisPlus.Domain" };  // To include extra namespaces, include them here. i.e. "Microsoft.AspNet.Identity.EntityFramework"
     AdditionalContextInterfaceItems = new[] // To include extra db context interface items, include them here. Also set MakeClassesPartial=true, and implement the partial DbContext class functions.
     {
         ""  //  example: "void SetAutoDetectChangesEnabled(bool flag);"
@@ -104,10 +104,10 @@
     //      UnitOfWorkNamespace = "YourProject.Context";
     //      PocoConfigurationNamespace = "YourProject.Maps";
     // You also need to set the following to the namespace where they now live:
-    PocoNamespace = "HisPlus.Domain";
+    PocoNamespace = "";
     ContextNamespace = "";
     UnitOfWorkNamespace = "";
-    PocoConfigurationNamespace = "HisPlus.Domain.Mapping";
+    PocoConfigurationNamespace = "";
 
 
     // Schema *****************************************************************************************************************************
@@ -136,9 +136,14 @@
     SchemaFilterExclude = null;
     SchemaFilterInclude = null;
     TableFilterExclude = null;
-    TableFilterInclude = new Regex("^Trace");
+    TableFilterInclude = null;//new Regex("^BsLocation$");
     ColumnFilterExclude = null;
 
+	Func<Table, bool> WithPrimarykey = t =>
+    {
+		var keyColumns = t.Columns.Where(x => x.IsPrimaryKey).Count();
+		return keyColumns == 1;
+    };
     // Filtering of tables using a function. This can be used in conjunction with the Regex's above.
     // Regex are used first to filter the list down, then this function is run last.
     // Return true to include the table, return false to exclude it.
@@ -239,7 +244,7 @@
 
     // WCF ********************************************************************************************************************************
     // This is only intended as a helper, to get you started creating WCF contracts, and to save a lot of typing.
-    AddWcfDataAttributes = false;
+    AddWcfDataAttributes = true;
     ExtraWcfDataContractAttributes = "";    // This string is inserted into the  [DataContract] attribute, before the closing square bracket.
     // Example: "";                                           = [DataContract]
     //          "(Namespace = \"http://www.contoso.com\")";   = [DataContract(Namespace = "http://www.contoso.com")]
@@ -261,9 +266,12 @@
     {
         //if (t.ClassName == "User")
         //    return ": IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>";
-		var pocoBaseClass = " : AbstractService<{0}, {1}>, I{0}Service";		
-		
-        return string.Format(pocoBaseClass, t.NameHumanCase, t.NameHumanCase + DataTransferObjectClassName);
+		var pocoBaseClass = " : AbstractService<{0}, {1}, {2}>, I{0}Service";
+
+		var col = t.Columns.Where(x => x.IsPrimaryKey).FirstOrDefault();
+		var primaryKeyType = (col == null) ? "" : col.PropertyType;
+				
+        return string.Format(pocoBaseClass, t.NameHumanCase, t.NameHumanCase + DataTransferObjectClassName, primaryKeyType);
     };
 
 	// Writes optional base classes

@@ -41,7 +41,7 @@ if (!GenerateSeparateFiles)
 {
     usingsAll.AddRange(usingsContext);
 }
-foreach(var usingStatement in usingsAll.Distinct().OrderBy(x => x)) { #>
+foreach(var usingStatement in usingsAll.Distinct()) { #>
 using <#= usingStatement #>;
 <# } #>
 
@@ -809,12 +809,13 @@ if (IncludeTableValuedFunctions)
 <# }
  if(ElementsToGenerate.HasFlag(Elements.Poco)){
  if(!GenerateSeparateFiles) { #>
-    #region POCO classes
+    #region Service Contract classes
 	
 <# } #>
 <#
 foreach(Table tbl in from t in tables.Where(t => !t.IsMapping).OrderBy(x => x.NameHumanCase) select t)
 {
+	if (!WithPrimarykey(tbl)) continue;
 #>
 <# fileManager.StartNewFile("I" + tbl.NameHumanCase + "Service" + FileExtension);
 if(!tbl.HasPrimaryKey) { #>
@@ -823,75 +824,18 @@ if(!tbl.HasPrimaryKey) { #>
 <# } #>
 <#if(IncludeComments != CommentsStyle.None){#>    // <#=tbl.Name#>
 <# } #>
+<# if(AddWcfDataAttributes) { #>    [ServiceContract]
+<# }#>
     public <# if(MakeClassesPartial) { #>partial <# } #>interface I<#=tbl.NameHumanCase#>Service<#=WriteServiceBaseClasses != null ? WriteServiceBaseClasses(tbl) : "" #>
     {
     }
 <# } }
 if(ElementsToGenerate.HasFlag(Elements.Poco) && !GenerateSeparateFiles) { #>
     #endregion
-
-
-<# }
-
-if(ElementsToGenerate.HasFlag(Elements.PocoDTO)){
- if(!GenerateSeparateFiles) { #>
-    #region PocoDTO classes
-
 <# } #>
-<#
-foreach(Table tbl in from t in tables.Where(t => !t.IsMapping).OrderBy(x => x.NameHumanCase) select t)
-{
-#>
-<# fileManager.StartNewFile(tbl.NameHumanCase+DataTransferObjectClassName + FileExtension);
-if(!tbl.HasPrimaryKey) { #>
-    // The table '<#=tbl.Name#>' is not usable by entity framework because it
-    // does not have a primary key. It is listed here for completeness.
-<# } #>
-<#if(IncludeComments != CommentsStyle.None){#>    // <#=tbl.Name#>
-<# } #>
-<# if(AddWcfDataAttributes) { #>    [System.Runtime.Serialization.DataContract]
-<# }#>
-    public <# if(MakeClassesPartial) { #>partial <# } #>class <#=tbl.NameHumanCase+DataTransferObjectClassName#><#=WritePocoDTOBaseClasses != null ? WritePocoDTOBaseClasses(tbl) : "" #>
-    {
-<# WritePocoBaseClassBody(tbl); #>
-<# 
-if(tbl.Columns.Where(c => c.Default != string.Empty && !c.Hidden).Count() > 0 || tbl.ReverseNavigationCtor.Count() > -1 || MakeClassesPartial) 
-{ 
-#>
-        public <#=tbl.NameHumanCase+DataTransferObjectClassName#>()
-        {
-<# 
-if(MakeClassesPartial) {#>
-            InitializePartial();
-<#}#>        }
-
-<#if(MakeClassesPartial) {#>
-
-        partial void InitializePartial();
-<#} }#>
-<# int DataMemberOrder = 1;
-foreach(Column col in tbl.Columns.OrderBy(x => x.Ordinal).Where(x => !x.Hidden))
-{
-#>
-<#if((IncludeExtendedPropertyComments == CommentsStyle.InSummaryBlock || IncludeComments == CommentsStyle.InSummaryBlock) && !string.IsNullOrEmpty(col.SummaryComments)){#>
-        ///<summary>
-        /// <#=col.SummaryComments#>
-        ///</summary>
-<# } #>
-<# if(AddWcfDataAttributes) { #>        [System.Runtime.Serialization.DataMember]
-<# } #>
-<# if (!col.IsPrimaryKey && !col.NameHumanCase.Equals("Id", StringComparison.InvariantCultureIgnoreCase)) { #>
-        <#= WritePocoColumn(col) #>
-<# } #>
-<# if(AddWcfDataAttributes) { #>
-<# } } #>
-    }
-<# } }
-if(ElementsToGenerate.HasFlag(Elements.PocoDTO) && !GenerateSeparateFiles) { #>
+<# if(ElementsToGenerate.HasFlag(Elements.PocoDTO) && !GenerateSeparateFiles) { #>
     #endregion
-
 <# } #>
-
 <# 
 if(storedProcs.Any() && ElementsToGenerate.HasFlag(Elements.Poco)){
 if(!GenerateSeparateFiles) { #>

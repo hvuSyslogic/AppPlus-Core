@@ -135,10 +135,16 @@
     //              ColumnFilterExclude = new Regex("^FK_.*$");
     SchemaFilterExclude = null;
     SchemaFilterInclude = null;
-    TableFilterExclude = new Regex("^BsIllness*|BkStoreLog|BsItemListA|BsUserImage|BsnotYb|BsLabSourceItem0510|BsdocregtypeTemp36|BsDoctorBack");
+    TableFilterExclude = null; // new Regex("^BsIllness*|BkStoreLog|BsItemListA|BsUserImage|BsnotYb|BsLabSourceItem0510|BsdocregtypeTemp36|BsDoctorBack");
     //TableFilterInclude = new Regex("^Ck*|^Dg*|^In*|^Ou*|^Rm*|^Rd*");
-	TableFilterInclude = new Regex("^Trace");
+	TableFilterInclude = null;
     ColumnFilterExclude = null;
+
+	Func<Table, bool> WithPrimarykey = t =>
+    {
+		var keyColumns = t.Columns.Where(x => x.IsPrimaryKey).Count();
+		return keyColumns == 1;
+    };
 
     // Filtering of tables using a function. This can be used in conjunction with the Regex's above.
     // Regex are used first to filter the list down, then this function is run last.
@@ -254,7 +260,7 @@
         // Example:
         // if(t.ClassName.StartsWith("Order"))
         //     WriteLine("    [SomeAttribute]");
-    };
+    };	
 
     // Writes optional base classes
     Func<Table, string> WritePocoBaseClasses = t =>
