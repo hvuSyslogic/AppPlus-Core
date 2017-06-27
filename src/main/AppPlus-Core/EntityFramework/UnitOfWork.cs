@@ -13,11 +13,11 @@ using Microsoft.Practices.Unity;
 using Z.EntityFramework.Plus;
 using AppPlus.Infrastructure.Contract.Messages;
 using AppPlus.Infrastructure.Configuration;
-using AppPlus.Core.Common.CodeContracts;
 
 namespace AppPlus.Core.EntityFramework
 {
-    public class UnitOfWork : IUnitOfWork        
+    public class UnitOfWork<TDbContext> : IUnitOfWork
+        where TDbContext : DbContext
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -31,31 +31,25 @@ namespace AppPlus.Core.EntityFramework
             EFContext = context;
         }
 
-        private UnitOfWork(UnitOfWorkSettings settings)
-        {
-            Settings = settings ?? UnitOfWorkSettings.Default;
-        }
         #endregion
 
         #region Properties
 
-        public UnitOfWorkSettings Settings { get; private set; }
-
         public virtual DbContext EFContext { get; set; }
 
-        //public bool IsConnectionOpen 
-        //{
-        //    get { return EFContext != null; } 
-        //}
+        public bool IsConnectionOpen
+        {
+            get { return EFContext != null; }
+        }
 
-        public virtual IRepository<TEntity> Repo<TEntity>()
+        private IRepository<TEntity> Repo<TEntity>()
            where TEntity : EntityRoot, new()
         {
             if (!repositories.ContainsKey(typeof(TEntity)))
             {
                 var repository = AppConfigurator.Container.Resolve<Repository<TEntity>>(new ParameterOverrides { { "unitOfWork", this } });
 
-                repositories.Add(new KeyValuePair<Type, object>(typeof(TEntity), repository));                
+                repositories.Add(new KeyValuePair<Type, object>(typeof(TEntity), repository));
             }
 
             return (IRepository<TEntity>)repositories[typeof(TEntity)];
@@ -63,144 +57,118 @@ namespace AppPlus.Core.EntityFramework
 
         #endregion
 
-        /// <summary>
-        /// Start database transaction.
-        /// </summary>
-        public static void Do(Action<IUnitOfWork> work, UnitOfWorkSettings settings = null)
+        #region Create
+        public virtual TEntity Create<TEntity>(TEntity entity)
+            where TEntity : EntityRoot, new()
         {
-            Requires.NotNull(work, "work");
-
-            using (var uow = new UnitOfWork(settings))
-            {
-                work(uow);
-            }
+            return Repo<TEntity>().Create(entity);
         }
 
-        /// <summary>
-        /// Start database transaction and return result from it.
-        /// </summary>   
-        public static TResult Do<TResult>(Func<IUnitOfWork, TResult> work, UnitOfWorkSettings settings = null)
+        public virtual IEnumerable<TEntity> Create<TEntity>(IEnumerable<TEntity> entities)
+           where TEntity : EntityRoot, new()
         {
-            Requires.NotNull(work, "work");
+            return Repo<TEntity>().Create(entities);
+        }
+        #endregion
 
-            using (var uow = new UnitOfWork(settings))
-            {
-                return work(uow);
-            }
+        #region Retrieve
+        public virtual TEntity Retrieve<TEntity>(params object[] keyValues)
+            where TEntity : EntityRoot, new()
+        {
+            return Repo<TEntity>().Retrieve(keyValues);
         }
 
-        //#region Create
-        //public virtual TEntity Create<TEntity>(TEntity entity)
+        public virtual IQueryable<TEntity> Retrieve<TEntity>(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>,
+            IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
+            where TEntity : EntityRoot, new()
+        {
+            return Repo<TEntity>().Retrieve(predicate, orderBy, includeProperties);
+        }
+
+        //public IQueryable<TEntity> Retrieve<TEntity>(string sql, params object[] parameters)
         //    where TEntity : EntityRoot, new()
         //{
-        //    return Repo<TEntity>().Create(entity);
+        //    return UowRepository<TEntity>().Retrieve(sql, parameters);
         //}
+        #endregion
 
-        //public virtual IEnumerable<TEntity> Create<TEntity>(IEnumerable<TEntity> entities)
-        //   where TEntity : EntityRoot, new()
-        //{
-        //    return Repo<TEntity>().Create(entities);
-        //}
-        //#endregion
+        #region Update
+        public virtual void Update<TEntity>(TEntity entity)
+            where TEntity : EntityRoot, new()
+        {
+            Repo<TEntity>().Update(entity);
+        }
 
-        //#region Retrieve
-        //public virtual TEntity Retrieve<TEntity>(params object[] keyValues)
-        //    where TEntity : EntityRoot, new()
-        //{
-        //    return Repo<TEntity>().Retrieve(keyValues);
-        //}
+        public virtual void Update<TEntity>(IEnumerable<TEntity> entities)
+           where TEntity : EntityRoot, new()
+        {
+            Repo<TEntity>().Update(entities);
+        }
 
-        //public virtual IQueryable<TEntity> Retrieve<TEntity>(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, 
-        //    IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
-        //    where TEntity : EntityRoot, new()
-        //{
-        //    return Repo<TEntity>().Retrieve(predicate, orderBy, includeProperties);
-        //}
+        public virtual int Update<TEntity>(Expression<Func<TEntity, TEntity>> updateExpression, Expression<Func<TEntity, bool>> predicate = null)
+            where TEntity : EntityRoot, new()
+        {
+            return Repo<TEntity>().Update(updateExpression, predicate);
+        }
+        #endregion
 
-        ////public IQueryable<TEntity> Retrieve<TEntity>(string sql, params object[] parameters)
-        ////    where TEntity : EntityRoot, new()
-        ////{
-        ////    return UowRepository<TEntity>().Retrieve(sql, parameters);
-        ////}
-        //#endregion
+        #region Delete
+        public virtual void Delete<TEntity>(params object[] keyValues)
+            where TEntity : EntityRoot, new()
+        {
+            Repo<TEntity>().Delete(keyValues);
+        }
 
-        //#region Update
-        //public virtual void Update<TEntity>(TEntity entity)
-        //    where TEntity : EntityRoot, new()
-        //{
-        //    Repo<TEntity>().Update(entity);
-        //}
+        public virtual void Delete<TEntity>(TEntity entity)
+            where TEntity : EntityRoot, new()
+        {
+            Repo<TEntity>().Delete(entity);
+        }
 
-        //public virtual void Update<TEntity>(IEnumerable<TEntity> entities)
-        //   where TEntity : EntityRoot, new()
-        //{
-        //    Repo<TEntity>().Update(entities);
-        //}
+        public virtual void Delete<TEntity>(IEnumerable<TEntity> entities)
+            where TEntity : EntityRoot, new()
+        {
+            Repo<TEntity>().Delete(entities);
+        }
 
-        //public virtual int Update<TEntity>(Expression<Func<TEntity, TEntity>> updateExpression, Expression<Func<TEntity, bool>> predicate = null)
-        //    where TEntity : EntityRoot, new()
-        //{
-        //    return Repo<TEntity>().Update(updateExpression, predicate);
-        //}
-        //#endregion
+        public virtual int Delete<TEntity>(Expression<Func<TEntity, bool>> predicate)
+            where TEntity : EntityRoot, new()
+        {
+            return Repo<TEntity>().Delete(predicate);
+        }
+        #endregion
 
-        //#region Delete
-        //public virtual void Delete<TEntity>(params object[] keyValues)
-        //    where TEntity : EntityRoot, new()
-        //{
-        //    Repo<TEntity>().Delete(keyValues);
-        //}
+        #region Join Supports
 
-        //public virtual void Delete<TEntity>(TEntity entity)
-        //    where TEntity : EntityRoot, new()
-        //{
-        //    Repo<TEntity>().Delete(entity);
-        //}
+        public virtual IQueryable<TResult> Join<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector)
+            where TEntityOuter : EntityRoot, new()
+            where TEntityInner : EntityRoot, new()
+        {
+            return Repo<TEntityOuter>().Retrieve().Join(Repo<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, resultSelector).AsQueryable();
+        }
 
-        //public virtual void Delete<TEntity>(IEnumerable<TEntity> entities)
-        //    where TEntity : EntityRoot, new()
-        //{
-        //    Repo<TEntity>().Delete(entities);
-        //}
+        public virtual IQueryable<TResult> Join<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector, IEqualityComparer<object> comparer)
+            where TEntityOuter : EntityRoot, new()
+            where TEntityInner : EntityRoot, new()
+        {
+            return Repo<TEntityOuter>().Retrieve().Join(Repo<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, resultSelector, comparer).AsQueryable();
+        }
 
-        //public virtual int Delete<TEntity>(Expression<Func<TEntity, bool>> predicate)
-        //    where TEntity : EntityRoot, new()
-        //{
-        //    return Repo<TEntity>().Delete(predicate);
-        //}
-        //#endregion     
+        public virtual IQueryable<TResult> LeftJoin<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector)
+            where TEntityOuter : EntityRoot, new()
+            where TEntityInner : EntityRoot, new()
+        {
+            return Repo<TEntityOuter>().Retrieve().GroupJoin(Repo<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, (p, q) => resultSelector(p, q.FirstOrDefault())).AsQueryable();
+        }
 
-        //#region Join Supports
+        public virtual IQueryable<TResult> LeftJoin<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector, IEqualityComparer<object> comparer)
+            where TEntityOuter : EntityRoot, new()
+            where TEntityInner : EntityRoot, new()
+        {
+            return Repo<TEntityOuter>().Retrieve().GroupJoin(Repo<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, (p, q) => resultSelector(p, q.FirstOrDefault()), comparer).AsQueryable();
+        }
 
-        //public virtual IQueryable<TResult> Join<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector)
-        //    where TEntityOuter : EntityRoot, new()
-        //    where TEntityInner : EntityRoot, new()
-        //{
-        //    return Repo<TEntityOuter>().Retrieve().Join(Repo<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, resultSelector).AsQueryable();
-        //}
-
-        //public virtual IQueryable<TResult> Join<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector, IEqualityComparer<object> comparer)
-        //    where TEntityOuter : EntityRoot, new()
-        //    where TEntityInner : EntityRoot, new()
-        //{
-        //    return Repo<TEntityOuter>().Retrieve().Join(Repo<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, resultSelector, comparer).AsQueryable();
-        //}
-
-        //public virtual IQueryable<TResult> LeftJoin<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector)
-        //    where TEntityOuter : EntityRoot, new()
-        //    where TEntityInner : EntityRoot, new()
-        //{
-        //    return Repo<TEntityOuter>().Retrieve().GroupJoin(Repo<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, (p, q) => resultSelector(p, q.FirstOrDefault())).AsQueryable();
-        //}
-
-        //public virtual IQueryable<TResult> LeftJoin<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector, IEqualityComparer<object> comparer)
-        //    where TEntityOuter : EntityRoot, new()
-        //    where TEntityInner : EntityRoot, new()
-        //{
-        //    return Repo<TEntityOuter>().Retrieve().GroupJoin(Repo<TEntityInner>().Retrieve(), outerKeySelector, innerKeySelector, (p, q) => resultSelector(p, q.FirstOrDefault()), comparer).AsQueryable();
-        //}
-
-        //#endregion                
+        #endregion
 
         //#region Execute DataTable(DataSet)
 
@@ -244,36 +212,36 @@ namespace AppPlus.Core.EntityFramework
 
         //#endregion
 
-        //#region Count
+        #region Count
 
-        //public virtual int Count<TEntity>(Expression<Func<TEntity, bool>> predicate = null)
-        //    where TEntity : EntityRoot, new()
-        //{
-        //    return Repo<TEntity>().Count(predicate);
-        //}
-        //#endregion
+        public virtual int Count<TEntity>(Expression<Func<TEntity, bool>> predicate = null)
+            where TEntity : EntityRoot, new()
+        {
+            return Repo<TEntity>().Count(predicate);
+        }
+        #endregion
 
-        //#region Contains
+        #region Contains
 
-        //public virtual bool Contains<TEntity>(Expression<Func<TEntity, bool>> predicate)
-        //    where TEntity : EntityRoot, new()
-        //{
-        //    return Repo<TEntity>().Contains(predicate);
-        //}
+        public virtual bool Contains<TEntity>(Expression<Func<TEntity, bool>> predicate)
+            where TEntity : EntityRoot, new()
+        {
+            return Repo<TEntity>().Contains(predicate);
+        }
 
-        //#endregion
+        #endregion
 
-        //#region Filter
+        #region Filter
 
-        //public virtual Tuple<IQueryable<TEntity>, int> Filter<TEntity>(Expression<Func<TEntity, bool>> predicate, int index = 0, int size = 50)
-        //    where TEntity : EntityRoot, new()
-        //{
-        //    int total = 0;
+        public virtual Tuple<IQueryable<TEntity>, int> Filter<TEntity>(Expression<Func<TEntity, bool>> predicate, int index = 0, int size = 50)
+            where TEntity : EntityRoot, new()
+        {
+            int total = 0;
 
-        //    return new Tuple<IQueryable<TEntity>, int>(Repo<TEntity>().Filter(predicate, out total, index, size), total);
-        //}
+            return new Tuple<IQueryable<TEntity>, int>(Repo<TEntity>().Filter(predicate, out total, index, size), total);
+        }
 
-        //#endregion
+        #endregion
 
         #region Dispose
 

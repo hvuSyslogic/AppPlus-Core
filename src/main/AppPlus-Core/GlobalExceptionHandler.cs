@@ -39,14 +39,14 @@ namespace AppPlus.Core
                     //    select y.ErrorMessage);
                     
                 });
-                GlobalExceptionHandler.Log.Error(error);
+                Log.Error(error);
             }
             else
             {
                 error = error.Unwrap();
                 serviceFault.Messages.Add(error.Message);
                 serviceFault.Type = error.GetType().FullName;
-                GlobalExceptionHandler.Log.Error(error);
+                Log.Error(error);
             }
             FaultException<ServiceFault> faultException = new FaultException<ServiceFault>(serviceFault, new FaultReason(serviceFault.Type));
             MessageFault fault2 = faultException.CreateMessageFault();

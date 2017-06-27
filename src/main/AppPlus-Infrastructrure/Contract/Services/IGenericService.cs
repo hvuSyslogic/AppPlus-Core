@@ -12,6 +12,7 @@ namespace AppPlus.Infrastructure.Contract.Services
     [ServiceContract]
     public interface IGenericService<TDTO, TKey> : IServiceRoot
         where TDTO : DtoBase<TKey>, new()
+        where TKey : struct
     {
         #region Create
         [OperationContract(Name = "Create")]
@@ -23,7 +24,7 @@ namespace AppPlus.Infrastructure.Contract.Services
 
         #region Retrieve
         [OperationContract(Name = "RetrieveByKey")]
-        TDTO RetrieveById(object id);
+        TDTO RetrieveById(TKey id);
 
         [OperationContract(Name = "RetrieveByExpression")]
         IEnumerable<TDTO> Retrieve(ExpressionNode predicateExpressionNode);
@@ -50,13 +51,13 @@ namespace AppPlus.Infrastructure.Contract.Services
 
         #region Delete
         [OperationContract(Name = "DeleteByKey")]
-        void DeleteById(object id);
+        void DeleteById(TKey id);
 
         [OperationContract(Name = "DeleteByEntity")]
-        bool Delete(TDTO dto);        
+        void Delete(TDTO dto);        
 
         [OperationContract(Name = "BatchDelete")]
-        int Delete(IEnumerable<TDTO> dtos);
+        void Delete(IEnumerable<TDTO> dtos);
 
         [OperationContract(Name = "DeleteByExpression")]
         int Delete(ExpressionNode predicateExpressionNode);
@@ -82,13 +83,13 @@ namespace AppPlus.Infrastructure.Contract.Services
         [OperationContract(Name = "Contains")]
         bool Contains(TDTO dto);
 
-        [OperationContract(Name = "ContainsBy")]
+        [OperationContract(Name = "ContainsByExpression")]
         bool Contains(ExpressionNode predicateExpressionNode);
         #endregion
 
         #region Filter
         [OperationContract(Name = "Filter")]
-        IEnumerable<TDTO> Filter(ExpressionNode predicateExpressionNode, int index = 0, int size = 50);
+        IEnumerable<TDTO> Filter(ExpressionNode predicateExpressionNode, int pageNumber = 0, int pageSize = 50);
         #endregion
     }
 }

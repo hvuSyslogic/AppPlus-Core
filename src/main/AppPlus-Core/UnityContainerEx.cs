@@ -25,12 +25,12 @@ namespace AppPlus.Core
             var allRegisteredTypes = fromAssembly.GetTypes()
                 .Where(x => typeof(IServiceRoot).IsAssignableFrom(x));
 
-            var allMappedToTypes = toAssembly.GetTypes()
-                .Where(x => x.IsClass && x.IsDerivedOfGenericType(typeof(AbstractService<,,>)));
+            var allMappedToTypes = toAssembly.GetTypes()                
+                .Where(x => x.IsClass && (x.IsDerivedOfGenericType(typeof(AbstractService<,,>)) || x.IsSubclassOf(typeof(ServiceRoot))));
 
-            Log.Debug("=================================================== Starting to register types in assembly =======================================================");
-            Log.DebugFormat("Registered Assembly: {0} ", fromAssembly.FullName);
-            Log.DebugFormat("Mapped TypeAssembly: {0} ", toAssembly.FullName);
+            //Log.Debug("=================================================== Starting to register types in assembly =======================================================");
+            //Log.DebugFormat("Registered Assembly: {0} ", fromAssembly.FullName);
+            //Log.DebugFormat("Mapped TypeAssembly: {0} ", toAssembly.FullName);
 
             int totalOfRegisteredTypes = 0;
 
@@ -45,14 +45,14 @@ namespace AppPlus.Core
                         if (!unityContainer.IsRegistered(registeredType))
                         {
                             unityContainer.RegisterType(registeredType, mappedToType);
-                            Log.DebugFormat("Type {0} ==========> {1}", mappedToType.FullName, registeredType.FullName);
+                            //Log.DebugFormat("Type {0} ==========> {1}", mappedToType.FullName, registeredType.FullName);
                             totalOfRegisteredTypes++;
                         }
                     }
                 }
             }
             
-            Log.DebugFormat("=================================================== {0} types was registered successfully ========================================================", totalOfRegisteredTypes);
+            //Log.DebugFormat("=================================================== {0} types was registered successfully ========================================================", totalOfRegisteredTypes);
             
             return unityContainer;
         }
@@ -72,7 +72,7 @@ namespace AppPlus.Core
         {
             container.RegisterType<DbContext, TDbContext>(new InjectionConstructor(connectionString))
                 .RegisterType<DbContext, TDbContext>()
-                .RegisterType<IUnitOfWork, UnitOfWork>()
+                .RegisterType<IUnitOfWork, UnitOfWork<TDbContext>>()
                 .RegisterType<ICommandWrapper, CommandWrapper>()
                 ;
 

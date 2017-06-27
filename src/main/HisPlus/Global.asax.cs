@@ -34,10 +34,10 @@ namespace HisPlus
 
         private void Application_Initialize()
         {
-           AppConfigurator.Container
-               .RegisterMapProfiles(typeof(BsGfxeService).Assembly)               
+           AppConfigurator.Container               
                .RegisterStorage<HisPlus.Domain.HisDbContext>(ConnectionString)               
                .RegisterServices(typeof(IBsGfxeService).Assembly, typeof(BsGfxeService).Assembly)
+               .RegisterMapProfiles(typeof(BsGfxeService).Assembly)
             ;
         }
 

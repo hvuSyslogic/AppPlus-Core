@@ -14,18 +14,22 @@ using HisPlus.Domain;
 using AppPlus.Infrastructure.Configuration;
 using System.Linq.Expressions;
 using AppPlus.Client;
+using log4net;
 
 namespace HisPlus.Service.Local.Tests
 {
     public class TestBase
     {
         const string ConnectionString = "HisPlus";
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         static TestBase()
-        {            
-            var Container = AppConfigurator.Container
-                .RegisterMapProfiles(typeof(BsGfxeService).Assembly)
+        {
+            Log.Error("TestBase Constructor");
+
+            var Container = AppConfigurator.Container                
                 .RegisterStorage<HisDbContext>(ConnectionString)
+                .RegisterMapProfiles(typeof(BsGfxeService).Assembly)
                 .RegisterServices(typeof(IBsGfxeService).Assembly, typeof(BsGfxeService).Assembly)
             ;
         }

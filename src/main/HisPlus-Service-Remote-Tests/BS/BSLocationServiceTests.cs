@@ -1,7 +1,7 @@
 ﻿using AppPlus.Client;
 using HisPlus.Contract.Services;
 using HisPlus.Service.Remote.Tests.Common;
-using HisPlus.Service.Remote.Tests.Common.Fixture;
+using HisPlus.Service.Remote.Tests.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace HisPlus.His.Service.Remote.Tests.BS
         [Fact]
         public void TestMethod()
         {
-            var result = ServiceHandler.CallService((IBsLocationService x) => x.RetrieveAll());
+            var result = CallService((IBsLocationService x) => x.RetrieveAll());
 
             Assert.NotNull(result);
             Assert.NotEmpty(result);

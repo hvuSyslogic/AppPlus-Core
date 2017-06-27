@@ -11,7 +11,7 @@ using Xunit;
 using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
 
-namespace HisPlus.Service.Local.Tests.Common.Fixture
+namespace HisPlus.Service.Local.Tests.Common
 {
     public class CommonServiceTestsFixture : TestBase, IDisposable
     {

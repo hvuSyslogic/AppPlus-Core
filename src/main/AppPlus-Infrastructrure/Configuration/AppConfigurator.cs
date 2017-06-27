@@ -40,8 +40,6 @@ namespace AppPlus.Infrastructure.Configuration
 
             return Container;
         }
-
-
     }
 
     public enum ServiceMode

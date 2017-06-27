@@ -15,12 +15,13 @@ namespace AppPlus.Core
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private bool disposed;
-        private IUnitOfWork unitOfWork;
+        private bool _disposed;
+        private IUnitOfWork _unitOfWork;
 
+        [InjectionConstructor]
         public CommandWrapper(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
+            this._unitOfWork = unitOfWork;
         }
 
         public void Execute(Action<IUnitOfWork> action, UnitOfWorkSettings unitOfWorkSettings = null)
@@ -32,7 +33,7 @@ namespace AppPlus.Core
 
             unitOfWorkSettings = unitOfWorkSettings ?? new UnitOfWorkSettings() { TransactionScope = TransactionOption.Default };
 
-            using (unitOfWork)
+            using (_unitOfWork)
             {
                 try
                 {
@@ -59,10 +60,10 @@ namespace AppPlus.Core
                 catch(Exception ex) 
                 {
                     Log.Error(ex);
-                    if (unitOfWork != null)
+                    if (_unitOfWork != null)
                     {
-                        unitOfWork.Dispose();
-                        unitOfWork = null;
+                        _unitOfWork.Dispose();
+                        _unitOfWork = null;
                     }
 
                     Log.Error(ex.Unwrap());
@@ -83,7 +84,7 @@ namespace AppPlus.Core
 
             unitOfWorkSettings = unitOfWorkSettings ?? new UnitOfWorkSettings() { TransactionScope = TransactionOption.Default };
 
-            using (unitOfWork)
+            using (_unitOfWork)
             {
                 try
                 {
@@ -108,10 +109,10 @@ namespace AppPlus.Core
                 }
                 catch(Exception ex)
                 {
-                    if (unitOfWork != null)
+                    if (_unitOfWork != null)
                     {
-                        unitOfWork.Dispose();
-                        unitOfWork = null;
+                        _unitOfWork.Dispose();
+                        _unitOfWork = null;
                     }
                     
                     Log.Error(ex.Unwrap());
@@ -126,13 +127,13 @@ namespace AppPlus.Core
 
         private void ExecuteCommand(Action<IUnitOfWork> action)
         {
-            action(unitOfWork);
-            unitOfWork.SaveChanges();
+            action(_unitOfWork);
+            _unitOfWork.SaveChanges();
         }
 
         private void ExecuteTXCommand(Action<IUnitOfWork> action)
         {
-            var db = unitOfWork.EFContext.Database;
+            var db = _unitOfWork.EFContext.Database;
 
             using (var tx = db.BeginTransaction())
             {
@@ -179,8 +180,8 @@ namespace AppPlus.Core
         {
             TResult result = default(TResult);
 
-            result = action(this.unitOfWork);
-            unitOfWork.SaveChanges();
+            result = action(this._unitOfWork);
+            _unitOfWork.SaveChanges();
 
             return result;
         }
@@ -189,7 +190,7 @@ namespace AppPlus.Core
         {
             TResult result = default(TResult);
 
-            var db = this.unitOfWork.EFContext.Database;
+            var db = this._unitOfWork.EFContext.Database;
 
             using (var tx = db.BeginTransaction())
             {
@@ -246,19 +247,19 @@ namespace AppPlus.Core
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!this._disposed)
             {
                 if (disposing)
                 {
-                    if (this.unitOfWork != null)
+                    if (this._unitOfWork != null)
                     {
-                        this.unitOfWork.Dispose();
-                        this.unitOfWork = null;
+                        this._unitOfWork.Dispose();
+                        this._unitOfWork = null;
                     }
                 }
             }
 
-            this.disposed = true;
+            this._disposed = true;
         }
     }
 }

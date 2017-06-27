@@ -112,6 +112,18 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wcf\ClientInterpector.cs" />
+    <Compile Include="Wcf\DependencyInjection\DependencyInjectionInstanceProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Wcf\DependencyInjection\DependencyInjectionServiceBehavior.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Wcf\DependencyInjection\DependencyInjectionServiceHost.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Wcf\DependencyInjection\DependencyInjectionServiceHostFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Wcf\Host\Constants.cs" />
     <Compile Include="Wcf\Host\DynamicHostFactory.cs" />
     <Compile Include="Wcf\Host\ServiceFile.cs" />

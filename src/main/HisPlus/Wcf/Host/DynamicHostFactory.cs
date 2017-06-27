@@ -11,10 +11,11 @@ using log4net;
 using System.ServiceModel.Security;
 using AppPlus.Core;
 using AppPlus.Infrastructure.Configuration;
+using HisPlus.Wcf.DependencyInjection;
 
 namespace HisPlus.Wcf.Host
 {
-    public class DynamicHostFactory : ServiceHostFactory
+    public class DynamicHostFactory : DependencyInjectionServiceHostFactory //ServiceHostFactory
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
        
@@ -35,7 +36,7 @@ namespace HisPlus.Wcf.Host
 
             //object serviceType = AppConfigurator.Container.Resolve(mappedToType);
 
-            ServiceHost host = new ServiceHost(mappedToType, baseAddresses);
+            ServiceHost host = new DependencyInjectionServiceHost(mappedToType, baseAddresses);
             
             TimeSpan ts = new TimeSpan(0, 10, 0);
 
@@ -93,6 +94,13 @@ namespace HisPlus.Wcf.Host
             }
             
             return host;
+        }
+
+        protected override void RegisterDependencies()
+        {
+            //DependencyFactory.Container.RegisterType(typeof(IExampleRepository), typeof(ExampleRepository), new ContainerControlledLifetimeManager());
+
+            Log.Error("+++++++++++++++++++++++++++++");
         }
 
         private void ArgumentValidation(string reference, Uri[] baseAddresses)

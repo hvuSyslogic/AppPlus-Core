@@ -1,6 +1,6 @@
 ﻿using AppPlus.Client;
 using HisPlus.Contract.Services;
-using HisPlus.Service.Local.Tests.Common.Fixture;
+using HisPlus.Service.Local.Tests.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ namespace HisPlus.Service.Local.Tests.BS
         [Fact]
         public void TestMethod()
         {
-            var result = ServiceHandler.CallService((IBsLocationService x) => x.RetrieveAll());
+            var result = CallService((IBsLocationService x) => x.RetrieveAll());
         }
     }
 }

@@ -15,99 +15,99 @@ namespace AppPlus.Core
         #region Properties
 
         DbContext EFContext { get; set; }
-    
-        //bool IsConnectionOpen { get; }
+
+        bool IsConnectionOpen { get; }
 
         #endregion
 
-        //#region Create 
-        //TEntity Create<TEntity>(TEntity entity)
+        #region Create
+        TEntity Create<TEntity>(TEntity entity)
+            where TEntity : EntityRoot, new();
+
+        IEnumerable<TEntity> Create<TEntity>(IEnumerable<TEntity> entities)
+            where TEntity : EntityRoot, new();
+        #endregion
+
+        #region Retrieve
+        TEntity Retrieve<TEntity>(params object[] keyValue)
+            where TEntity : EntityRoot, new();
+
+        IQueryable<TEntity> Retrieve<TEntity>(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>,
+            IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
+            where TEntity : EntityRoot, new();
+
+        //IQueryable<TEntity> Retrieve<TEntity>(string sql, params object[] parameters)
         //    where TEntity : EntityRoot, new();
+        #endregion
 
-        //IEnumerable<TEntity> Create<TEntity>(IEnumerable<TEntity> entities)
-        //    where TEntity : EntityRoot, new();
-        //#endregion
+        #region Update
 
-        //#region Retrieve
-        //TEntity Retrieve<TEntity>(params object[] keyValue)
-        //    where TEntity : EntityRoot, new();        
+        void Update<TEntity>(TEntity entity)
+            where TEntity : EntityRoot, new();
 
-        //IQueryable<TEntity> Retrieve<TEntity>(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, 
-        //    IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
-        //    where TEntity : EntityRoot, new();
+        void Update<TEntity>(IEnumerable<TEntity> entities)
+            where TEntity : EntityRoot, new();
 
-        ////IQueryable<TEntity> Retrieve<TEntity>(string sql, params object[] parameters)
-        ////    where TEntity : EntityRoot, new();
-        //#endregion
+        int Update<TEntity>(Expression<Func<TEntity, TEntity>> updateExpression,
+            Expression<Func<TEntity, bool>> predicate = null)
+            where TEntity : EntityRoot, new();
+        #endregion
 
-        //#region Update
+        #region Delete
+        void Delete<TEntity>(params object[] keyValues) where TEntity : EntityRoot, new();
 
-        //void Update<TEntity>(TEntity entity)
-        //    where TEntity : EntityRoot, new();
+        void Delete<TEntity>(TEntity entity)
+            where TEntity : EntityRoot, new();
 
-        //void Update<TEntity>(IEnumerable<TEntity> entities)
-        //    where TEntity : EntityRoot, new();
+        void Delete<TEntity>(IEnumerable<TEntity> entities)
+            where TEntity : EntityRoot, new();
 
-        //int Update<TEntity>(Expression<Func<TEntity, TEntity>> updateExpression,
-        //    Expression<Func<TEntity, bool>> predicate = null)
-        //    where TEntity : EntityRoot, new();                
-        //#endregion
+        int Delete<TEntity>(Expression<Func<TEntity, bool>> predicate = null)
+            where TEntity : EntityRoot, new();
+        #endregion
 
-        //#region Delete
-        //void Delete<TEntity>(params object[] keyValues) where TEntity : EntityRoot, new();
+        #region Count
 
-        //void Delete<TEntity>(TEntity entity) 
-        //    where TEntity : EntityRoot, new();
+        int Count<TEntity>(Expression<Func<TEntity, bool>> predicate = null)
+            where TEntity : EntityRoot, new();
+        #endregion
 
-        //void Delete<TEntity>(IEnumerable<TEntity> entities)
-        //    where TEntity : EntityRoot, new();
+        #region Contains
 
-        //int Delete<TEntity>(Expression<Func<TEntity, bool>> predicate = null) 
-        //    where TEntity : EntityRoot, new();
-        //#endregion
+        bool Contains<TEntity>(Expression<Func<TEntity, bool>> predicate)
+            where TEntity : EntityRoot, new();
 
-        //#region Count
+        #endregion
 
-        //int Count<TEntity>(Expression<Func<TEntity, bool>> predicate = null) 
-        //    where TEntity : EntityRoot, new();
-        //#endregion
+        #region Filter
 
-        //#region Contains
+        Tuple<IQueryable<TEntity>, int> Filter<TEntity>(Expression<Func<TEntity, bool>> predicate, int index = 0, int size = 50)
+            where TEntity : EntityRoot, new();
 
-        //bool Contains<TEntity>(Expression<Func<TEntity, bool>> predicate) 
-        //    where TEntity : EntityRoot, new();
-
-        //#endregion
-
-        //#region Filter
-
-        //Tuple<IQueryable<TEntity>, int> Filter<TEntity>(Expression<Func<TEntity, bool>> predicate, int index = 0, int size = 50) 
-        //    where TEntity : EntityRoot, new();
-
-        //#endregion
+        #endregion
 
         //void Query(Action query);
 
         void SaveChanges(bool withDisposing = false);
 
-        //#region Join
-        //IQueryable<TResult> Join<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector)
-        //    where TEntityInner : EntityRoot, new()
-        //    where TEntityOuter : EntityRoot, new();
+        #region Join
+        IQueryable<TResult> Join<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector)
+            where TEntityInner : EntityRoot, new()
+            where TEntityOuter : EntityRoot, new();
 
-        //IQueryable<TResult> Join<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector, IEqualityComparer<object> comparer)
-        //    where TEntityInner : EntityRoot, new()
-        //    where TEntityOuter : EntityRoot, new();
+        IQueryable<TResult> Join<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector, IEqualityComparer<object> comparer)
+            where TEntityInner : EntityRoot, new()
+            where TEntityOuter : EntityRoot, new();
 
-        //IQueryable<TResult> LeftJoin<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector)
-        //    where TEntityInner : EntityRoot, new()
-        //    where TEntityOuter : EntityRoot, new();
+        IQueryable<TResult> LeftJoin<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector)
+            where TEntityInner : EntityRoot, new()
+            where TEntityOuter : EntityRoot, new();
 
-        //IQueryable<TResult> LeftJoin<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector, IEqualityComparer<object> comparer)
-        //    where TEntityInner : EntityRoot, new()
-        //    where TEntityOuter : EntityRoot, new();
+        IQueryable<TResult> LeftJoin<TEntityOuter, TEntityInner, TResult>(Func<TEntityOuter, object> outerKeySelector, Func<TEntityInner, object> innerKeySelector, Func<TEntityOuter, TEntityInner, TResult> resultSelector, IEqualityComparer<object> comparer)
+            where TEntityInner : EntityRoot, new()
+            where TEntityOuter : EntityRoot, new();
 
-        //#endregion
+        #endregion
 
         //#region ExecuteDataSet
 
@@ -116,7 +116,5 @@ namespace AppPlus.Core
         //DataTable ExecuteDataTable(string commandText, DbParameter[] parameters, CommandType commandType);
 
         //#endregion
-
-        IRepository<TEntity> Repo<TEntity>() where TEntity : EntityRoot, new();
-    }    
+    }
 }
