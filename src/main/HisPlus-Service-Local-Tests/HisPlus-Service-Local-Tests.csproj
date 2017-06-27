@@ -99,7 +99,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BS\BSLocationServiceTests.cs" />
+    <Compile Include="Common\CommonServiceTestsFixture.cs" />
     <Compile Include="BS\LambdaExpressionUnitTests.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBase.cs" />
   </ItemGroup>

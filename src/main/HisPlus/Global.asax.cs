@@ -21,7 +21,7 @@ namespace HisPlus
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private const string ConnectionString = "HIS";
+        private const string ConnectionString = "HisPlus";
 
         protected void Application_Start(object sender, EventArgs e)
         {

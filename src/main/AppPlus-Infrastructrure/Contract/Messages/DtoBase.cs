@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace AppPlus.Infrastructure.Contract.Messages
 {
+    [Serializable]
+    [DataContract]
     public abstract class DtoBase<TKey> : DtoRoot
     {        
         [DataMember(Order = 1)]

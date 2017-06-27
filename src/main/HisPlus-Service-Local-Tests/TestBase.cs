@@ -12,12 +12,14 @@ using HisPlus.Services;
 using HisPlus.Contract.Services;
 using HisPlus.Domain;
 using AppPlus.Infrastructure.Configuration;
+using System.Linq.Expressions;
+using AppPlus.Client;
 
 namespace HisPlus.Service.Local.Tests
 {
     public class TestBase
     {
-        const string ConnectionString = "AppPlus.His";
+        const string ConnectionString = "HisPlus";
 
         static TestBase()
         {            
@@ -26,6 +28,18 @@ namespace HisPlus.Service.Local.Tests
                 .RegisterStorage<HisDbContext>(ConnectionString)
                 .RegisterServices(typeof(IBsGfxeService).Assembly, typeof(BsGfxeService).Assembly)
             ;
+        }
+
+        internal protected static void CallService<T>(Expression<Action<T>> expression)
+            where T : AppPlus.Infrastructure.Contract.Services.IServiceRoot
+        {
+            ServiceHandler.CallService(expression);
+        }
+
+        internal protected static TResult CallService<T, TResult>(Expression<Func<T, TResult>> expression)
+            where T : AppPlus.Infrastructure.Contract.Services.IServiceRoot
+        {
+            return ServiceHandler.CallService(expression);
         }
     }
 }
