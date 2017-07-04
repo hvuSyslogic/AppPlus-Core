@@ -40,15 +40,12 @@ namespace HisPlus.Contract.Messages
         public int? OperId { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
+        public string BloodDonor { get; set; }
 
         [DataMember]
-        public string F2 { get; set; }
+        public int? MzRegId { get; set; }
 
         [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
+        public string Receptor { get; set; }
     }
 }

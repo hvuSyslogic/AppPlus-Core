@@ -49,18 +49,12 @@ namespace HisPlus.Contract.Messages
         public string Memo { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public decimal AfterStockNum { get; set; }
+
+        [DataMember]
+        public decimal? BeforeStockTotalNum { get; set; }
+
+        [DataMember]
+        public decimal? AfterStockTotalNum { get; set; }
     }
 }

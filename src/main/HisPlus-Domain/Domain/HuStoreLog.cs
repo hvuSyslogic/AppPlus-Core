@@ -22,9 +22,7 @@ namespace HisPlus.Domain
         public string BillNo { get; set; }
         public short LsActType { get; set; }
         public string Memo { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
+        public decimal? BeforeStockNumSum { get; set; }
+        public decimal? AfterStockNumSum { get; set; }
     }
 }

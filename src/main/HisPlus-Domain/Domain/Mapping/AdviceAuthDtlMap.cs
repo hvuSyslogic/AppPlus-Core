@@ -66,14 +66,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.Adcolor).HasColumnName(@"Adcolor").IsOptional().HasColumnType("int");
             Property(x => x.IsManual).HasColumnName(@"IsManual").IsRequired().HasColumnType("bit");
             Property(x => x.IsArrearage).HasColumnName(@"IsArrearage").IsOptional().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F5).HasColumnName(@"F5").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F6).HasColumnName(@"F6").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F7).HasColumnName(@"F7").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F8).HasColumnName(@"F8").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IsTodayIn).HasColumnName(@"IsTodayIn").IsOptional().HasColumnType("bit");
             Property(x => x.DrugReqId1).HasColumnName(@"DrugReqId1").IsOptional().HasColumnType("int");
             Property(x => x.DrugReqId2).HasColumnName(@"DrugReqId2").IsOptional().HasColumnType("int");
@@ -87,6 +79,10 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.ExecuteId2).HasColumnName(@"ExecuteId2").IsOptional().HasColumnType("int");
             Property(x => x.Dosage).HasColumnName(@"Dosage").IsOptional().HasColumnType("decimal").HasPrecision(10,4);
             Property(x => x.ExecDoctorId).HasColumnName(@"ExecDoctorId").IsOptional().HasColumnType("int");
+            Property(x => x.IsYbxj).HasColumnName(@"IsYbxj").IsOptional().HasColumnType("bit");
+            Property(x => x.IsAutoMatic).HasColumnName(@"IsAutoMatic").IsOptional().HasColumnType("bit");
+            Property(x => x.YbType).HasColumnName(@"YBType").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
+            Property(x => x.IsPriority).HasColumnName(@"IsPriority").IsOptional().HasColumnType("bit");
         }
     }
 }

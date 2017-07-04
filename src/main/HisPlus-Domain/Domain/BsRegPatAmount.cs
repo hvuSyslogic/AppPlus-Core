@@ -17,10 +17,6 @@ namespace HisPlus.Domain
         public decimal OtherFee2 { get; set; }
         public decimal PaySel { get; set; }
         public decimal TallyFee { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public short IconIndex { get; set; }
     }
 }

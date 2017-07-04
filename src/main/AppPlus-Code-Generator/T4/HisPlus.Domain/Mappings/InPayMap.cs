@@ -25,10 +25,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.Remain).HasColumnName(@"Remain").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.OperTime).HasColumnName(@"OperTime").IsRequired().HasColumnType("smalldatetime");
             Property(x => x.OperId).HasColumnName(@"OperID").IsRequired().HasColumnType("int");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.CancelPaywayId).HasColumnName(@"CancelPaywayId").IsOptional().HasColumnType("int");
         }
     }

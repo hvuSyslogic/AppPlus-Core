@@ -28,10 +28,6 @@ namespace HisPlus.Domain
         public bool? IsPrint { get; set; }
         public string Memo { get; set; }
         public int? ParentId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public string TextRange { get; set; }
         public decimal? Price { get; set; }
         public decimal? Discount { get; set; }

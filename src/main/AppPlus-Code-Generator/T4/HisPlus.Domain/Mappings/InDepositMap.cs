@@ -28,13 +28,10 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.CancelOperTime).HasColumnName(@"CancelOperTime").IsOptional().HasColumnType("smalldatetime");
             Property(x => x.CancelOperId).HasColumnName(@"CancelOperId").IsOptional().HasColumnType("int");
             Property(x => x.InvoId).HasColumnName(@"InvoId").IsOptional().HasColumnType("int");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.HospitalId).HasColumnName(@"HospitalId").IsOptional().HasColumnType("int");
             Property(x => x.CheckTime).HasColumnName(@"CheckTime").IsOptional().HasColumnType("datetime");
             Property(x => x.CancelCheckTime).HasColumnName(@"CancelCheckTime").IsOptional().HasColumnType("datetime");
+            Property(x => x.PayWayName).HasColumnName(@"PayWayName").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
         }
     }
 }

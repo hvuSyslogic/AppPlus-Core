@@ -51,10 +51,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsCancel).HasColumnName(@"IsCancel").IsRequired().HasColumnType("bit");
             Property(x => x.CancelId).HasColumnName(@"CancelId").IsOptional().HasColumnType("int");
             Property(x => x.IsManual).HasColumnName(@"IsManual").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.HostName).HasColumnName(@"HostName").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.ExecuteId).HasColumnName(@"ExecuteId").IsOptional().HasColumnType("int");
             Property(x => x.RegDate).HasColumnName(@"RegDate").IsOptional().IsFixedLength().IsUnicode(false).HasColumnType("char").HasMaxLength(10);

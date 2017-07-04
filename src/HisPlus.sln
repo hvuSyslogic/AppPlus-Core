@@ -33,13 +33,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Service-Local-Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Domain", "main\HisPlus-Domain\HisPlus-Domain.csproj", "{9B4FD8FF-73EF-4E18-9ABE-18B1D0737263}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "002 HisPlus", "002 HisPlus", "{EE7A444F-C548-432D-8B20-03C6C9B3DD95}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "003 HisPlus", "003 HisPlus", "{EE7A444F-C548-432D-8B20-03C6C9B3DD95}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "003 UnitTests", "003 UnitTests", "{DD4ADB69-38E2-46BF-B7BA-451C38C6C675}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "004 UnitTests", "004 UnitTests", "{DD4ADB69-38E2-46BF-B7BA-451C38C6C675}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPlus-Code-Generator", "main\AppPlus-Code-Generator\AppPlus-Code-Generator.csproj", "{45ADB831-0B3A-41C3-8CCB-AF7084488A87}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "003 Code Generator", "003 Code Generator", "{4E29C5FA-0B88-4111-95B0-5515099575A8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "002 Code Generator", "002 Code Generator", "{4E29C5FA-0B88-4111-95B0-5515099575A8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E78C62AD-3E76-4067-923C-CC8D69BAF7C5}"
 	ProjectSection(SolutionItems) = preProject
@@ -47,12 +47,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E78C62
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Antler-Core", "main\Antler-Core\Antler-Core.csproj", "{61E50BED-1EA6-48C6-BEE9-E4471AEE4635}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Antler-EntityFramework", "main\Antler-EntityFramework\Antler-EntityFramework.csproj", "{34FCF9A5-7B9F-4A9A-A8B0-4FDA717744BD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Antler-Windsor", "main\Antler-Windsor\Antler-Windsor.csproj", "{91A50383-D6EB-4303-91E8-BD3634E20CAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -108,18 +102,6 @@ Global
 		{45ADB831-0B3A-41C3-8CCB-AF7084488A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45ADB831-0B3A-41C3-8CCB-AF7084488A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45ADB831-0B3A-41C3-8CCB-AF7084488A87}.Release|Any CPU.Build.0 = Release|Any CPU
-		{61E50BED-1EA6-48C6-BEE9-E4471AEE4635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{61E50BED-1EA6-48C6-BEE9-E4471AEE4635}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{61E50BED-1EA6-48C6-BEE9-E4471AEE4635}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{61E50BED-1EA6-48C6-BEE9-E4471AEE4635}.Release|Any CPU.Build.0 = Release|Any CPU
-		{34FCF9A5-7B9F-4A9A-A8B0-4FDA717744BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34FCF9A5-7B9F-4A9A-A8B0-4FDA717744BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34FCF9A5-7B9F-4A9A-A8B0-4FDA717744BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34FCF9A5-7B9F-4A9A-A8B0-4FDA717744BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{91A50383-D6EB-4303-91E8-BD3634E20CAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91A50383-D6EB-4303-91E8-BD3634E20CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91A50383-D6EB-4303-91E8-BD3634E20CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91A50383-D6EB-4303-91E8-BD3634E20CAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

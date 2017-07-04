@@ -26,13 +26,16 @@ namespace HisPlus.Domain
         public short? OverNum { get; set; }
         public short? CompanyNum { get; set; }
         public string Memo { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? Days { get; set; }
         public int? Danger { get; set; }
         public int? Heavy { get; set; }
         public int? Acute { get; set; }
+        public short? Second { get; set; }
+        public short? Ops { get; set; }
+        public short? ChildBirth { get; set; }
+        public short? FirstNurse { get; set; }
+        public short? Third { get; set; }
+        public short? Diff { get; set; }
+        public short? Other { get; set; }
     }
 }

@@ -13,9 +13,5 @@ namespace HisPlus.Domain
         public int? Spanlimitnum { get; set; }
         public int? Sublimitnum { get; set; }
         public int? Timespansubid { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
     }
 }

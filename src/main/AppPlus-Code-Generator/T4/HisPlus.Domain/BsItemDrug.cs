@@ -39,10 +39,6 @@ namespace HisPlus.Domain
         public int? CompId { get; set; }
         public bool? IsBatch { get; set; }
         public bool? IsSave { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public short? IconIndex { get; set; }
         public int? DrugId { get; set; }
         public string BuyInCode { get; set; }

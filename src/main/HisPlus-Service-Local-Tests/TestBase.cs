@@ -18,15 +18,13 @@ using log4net;
 
 namespace HisPlus.Service.Local.Tests
 {
-    public class TestBase
+    public abstract class TestBase
     {
         const string ConnectionString = "HisPlus";
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         static TestBase()
         {
-            Log.Error("TestBase Constructor");
-
             var Container = AppConfigurator.Container                
                 .RegisterStorage<HisDbContext>(ConnectionString)
                 .RegisterMapProfiles(typeof(BsGfxeService).Assembly)

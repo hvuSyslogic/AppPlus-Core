@@ -17,9 +17,6 @@ namespace HisPlus.Domain
         public bool IsAffirm { get; set; }
         public System.DateTime? AffirmTime { get; set; }
         public int? AffirmOperid { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
+        public bool? IsAuth { get; set; }
     }
 }

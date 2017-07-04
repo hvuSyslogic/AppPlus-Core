@@ -28,10 +28,6 @@ namespace HisPlus.Domain
         public decimal? SelfPayB3 { get; set; }
         public decimal? OutTopSelfFee { get; set; }
         public decimal? SelfFee { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public decimal? BchzylbxAmount { get; set; }
         public string AccountAttribute { get; set; }
         public decimal? BcProportion { get; set; }
@@ -84,10 +80,7 @@ namespace HisPlus.Domain
         public decimal? OriginalA19 { get; set; }
         public decimal? OriginalA20 { get; set; }
         public int? HospId { get; set; }
-        public string F5 { get; set; }
-        public string F6 { get; set; }
-        public string F7 { get; set; }
-        public string F8 { get; set; }
         public System.DateTime? InvoYbTime { get; set; }
+        public string YbPatType { get; set; }
     }
 }

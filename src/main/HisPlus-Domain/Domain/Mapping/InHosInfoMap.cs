@@ -76,10 +76,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsEndChg).HasColumnName(@"IsEndChg").IsRequired().HasColumnType("bit");
             Property(x => x.EndChgOperId).HasColumnName(@"EndChgOperID").IsOptional().HasColumnType("int");
             Property(x => x.EndchgoperTime).HasColumnName(@"EndchgoperTime").IsOptional().HasColumnType("smalldatetime");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.Memo).HasColumnName(@"Memo").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
             Property(x => x.MotherHospId).HasColumnName(@"MotherHospId").IsOptional().HasColumnType("int");
             Property(x => x.FromHospitalId).HasColumnName(@"FromHospitalId").IsOptional().HasColumnType("int");
@@ -97,13 +93,11 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.Number2).HasColumnName(@"NUMBER2").IsOptional().HasColumnType("int");
             Property(x => x.Number3).HasColumnName(@"NUMBER3").IsOptional().HasColumnType("int");
             Property(x => x.Number4).HasColumnName(@"NUMBER4").IsOptional().HasColumnType("int");
-            Property(x => x.F5).HasColumnName(@"F5").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(20);
-            Property(x => x.F6).HasColumnName(@"F6").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(20);
-            Property(x => x.F7).HasColumnName(@"F7").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(20);
-            Property(x => x.F8).HasColumnName(@"F8").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(20);
             Property(x => x.YbbzCode).HasColumnName(@"YBBZCode").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(20);
             Property(x => x.AmountAuth).HasColumnName(@"AmountAuth").IsOptional().HasColumnType("bit");
             Property(x => x.Author).HasColumnName(@"Author").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
+            Property(x => x.AgeStr).HasColumnName(@"AgeStr").IsOptional().HasColumnType("nvarchar").HasMaxLength(30);
+            Property(x => x.Age).HasColumnName(@"Age").IsOptional().HasColumnType("smallint");
         }
     }
 }

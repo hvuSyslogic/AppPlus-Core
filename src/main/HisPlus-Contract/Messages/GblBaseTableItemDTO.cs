@@ -46,18 +46,6 @@ namespace HisPlus.Contract.Messages
         public string OrderField { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public bool? IsToWmr { get; set; }
     }
 }

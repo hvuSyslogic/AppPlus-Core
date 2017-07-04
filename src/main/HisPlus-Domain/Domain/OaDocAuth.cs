@@ -16,10 +16,6 @@ namespace HisPlus.Domain
         public System.DateTime? AuthOperTime { get; set; }
         public bool? IsReject { get; set; }
         public string RejectReason { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public short? LsReadClass { get; set; }
     }
 }

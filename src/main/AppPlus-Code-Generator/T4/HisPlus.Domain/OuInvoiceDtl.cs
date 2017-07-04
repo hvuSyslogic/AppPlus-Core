@@ -34,10 +34,6 @@ namespace HisPlus.Domain
         public short? LsReportType { get; set; }
         public string Memo { get; set; }
         public int? RecipeItemId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? RecipeGroupId { get; set; }
         public int? DocLocId { get; set; }
     }

@@ -127,18 +127,6 @@ namespace HisPlus.Contract.Messages
         public string CancelMemo { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public int? TimeSpanId { get; set; }
 
         [DataMember]
@@ -163,16 +151,7 @@ namespace HisPlus.Contract.Messages
         public System.DateTime? CancelTallyTime { get; set; }
 
         [DataMember]
-        public string F5 { get; set; }
-
-        [DataMember]
         public string F6 { get; set; }
-
-        [DataMember]
-        public string F7 { get; set; }
-
-        [DataMember]
-        public string F8 { get; set; }
 
         [DataMember]
         public int? TimeSpanSubId { get; set; }
@@ -197,5 +176,14 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public bool? IsRegist { get; set; }
+
+        [DataMember]
+        public string Diagnose { get; set; }
+
+        [DataMember]
+        public string PreRegRegWay { get; set; }
+
+        [DataMember]
+        public bool? IsRegister { get; set; }
     }
 }

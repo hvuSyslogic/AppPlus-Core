@@ -26,14 +26,11 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.Memo).HasColumnName(@"Memo").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IsPend).HasColumnName(@"IsPend").IsRequired().HasColumnType("bit");
             Property(x => x.IsExecuted).HasColumnName(@"IsExecuted").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.PatId).HasColumnName(@"PatId").IsOptional().HasColumnType("int");
             Property(x => x.IsDosage).HasColumnName(@"IsDosage").IsOptional().HasColumnType("bit");
             Property(x => x.DosageOperId).HasColumnName(@"DosageOperId").IsOptional().HasColumnType("int");
             Property(x => x.DosageTime).HasColumnName(@"DosageTime").IsOptional().HasColumnType("smalldatetime");
+            Property(x => x.HospitalId).HasColumnName(@"HospitalId").IsOptional().HasColumnType("int");
         }
     }
 }

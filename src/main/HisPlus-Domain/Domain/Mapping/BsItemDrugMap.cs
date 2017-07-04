@@ -45,10 +45,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.CompId).HasColumnName(@"CompId").IsOptional().HasColumnType("int");
             Property(x => x.IsBatch).HasColumnName(@"IsBatch").IsOptional().HasColumnType("bit");
             Property(x => x.IsSave).HasColumnName(@"IsSave").IsOptional().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IconIndex).HasColumnName(@"IconIndex").IsOptional().HasColumnType("smallint");
             Property(x => x.DrugId).HasColumnName(@"DrugID").IsOptional().HasColumnType("int");
             Property(x => x.BuyInCode).HasColumnName(@"BuyInCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);

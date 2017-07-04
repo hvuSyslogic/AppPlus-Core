@@ -24,10 +24,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.Description).HasColumnName(@"Description").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
             Property(x => x.LabelId).HasColumnName(@"LabelId").IsOptional().HasColumnType("int");
             Property(x => x.Reminder).HasColumnName(@"Reminder").IsOptional().HasColumnType("smalldatetime");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
         }
     }
 }

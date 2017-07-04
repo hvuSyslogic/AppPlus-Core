@@ -18,9 +18,5 @@ namespace HisPlus.Domain
         public int? InLocId { get; set; }
         public System.DateTime? InOperTime { get; set; }
         public int? InOperId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
     }
 }

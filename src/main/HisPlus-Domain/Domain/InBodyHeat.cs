@@ -40,10 +40,6 @@ namespace HisPlus.Domain
         public bool IsReject { get; set; }
         public System.DateTime? DeadTime { get; set; }
         public int? LocationId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public decimal? Bg { get; set; }
         public string CwInject { get; set; }
         public string JmInject { get; set; }
@@ -53,5 +49,6 @@ namespace HisPlus.Domain
         public string MemoUp1 { get; set; }
         public string MemoDn1 { get; set; }
         public System.DateTime? RecordTime { get; set; }
+        public string TimeQuantum { get; set; }
     }
 }

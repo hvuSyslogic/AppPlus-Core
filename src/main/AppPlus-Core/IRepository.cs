@@ -6,11 +6,23 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using AppPlus.Infrastructure.Contract.Messages;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 
 namespace AppPlus.Core
 {
     public partial interface IRepository<TEntity> where TEntity :  EntityRoot, new()
     {
+        #region Properties
+
+        //public virtual DbSet<TEntity> EFSet { get; set; }
+
+        //public virtual DbContext Session { get; set; }
+
+        //ObjectContext ObjectContext();
+        
+        #endregion
+
         #region Create
         TEntity Create(TEntity entity);
 

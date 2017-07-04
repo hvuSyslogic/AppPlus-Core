@@ -1,5 +1,8 @@
-﻿using AppPlus.Core.Common.CodeContracts;
+﻿using AppPlus.Core;
+using AppPlus.Core.EntityFramework;
+using AppPlus.Core.Infrastructure.CodeContracts;
 using AppPlus.Core.Service;
+using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
 using HisPlus.Domain;
 using log4net;
@@ -8,11 +11,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppPlus.His.Services
+namespace HisPlus.Services
 {
+    [GlobalErrorBehaviorAttribute(typeof(GlobalErrorHandler))]    
     public class SampleService : ServiceRoot, ISampleService
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -21,37 +26,43 @@ namespace AppPlus.His.Services
         public IGblRoleService RoleService { get; set; }
 
         [Dependency]
-        public IGblRoleModuleService RoleModuleService { get; set; }
+        public IGblRoleModuleService RoleModuleService { get; set; }        
 
-        public void test()
+        public IEnumerable<GblRoleDTO> L1CacheTest()
         {
-            //using (var command = CommandWrapper)
-            //{
-            //    command.Execute(x =>
-            //    {
-            //        command.Execute(uow =>
-            //        {
-            //            Log.Debug("uow 1: " + uow.GetHashCode());
+            
+            return UnitOfWork.Do(uow => 
+            {
+                var currentDateTime = GetCurrentDateTime();
+                var date = uow.Repo<BsPatient>();
 
-            //            var role = uow.Retrieve<GblRole>().FirstOrDefault();
-            //            Requires.NotNull(role, "role");
-            //            role.F4 = "DELETED";
-            //            uow.Update<GblRole>(role);
-            //        });
+                var query1 = uow.Repo<GblRole>().Retrieve();
+                var query2 = uow.Repo<BsPatient>().Retrieve()
+                    .Where(x => (x.BirthDate > currentDateTime));
+                
+                query2.ToList();
 
-            //        command.Execute(uow =>
-            //        {
-            //            Log.Debug("uow 2: " + uow.GetHashCode());
+                return query1.MapTo<GblRoleDTO>();
+            });
+        }
 
-            //            var roleModule = uow.Retrieve<GblRoleModule>().FirstOrDefault();
-            //            Requires.NotNull(roleModule, "roleModule");
+        public bool TransactionTest()
+        {
+            return UnitOfWork.Do(uow => 
+            {
+                var role = uow.Repo<GblRole>().Retrieve().FirstOrDefault();
+                Requires.NotNull(role, "role");
+                
+                uow.Repo<GblRole>().Update(role);                
 
-            //            roleModule.Id = 0;
-            //            roleModule.ModuleId = 9999999;
-            //            uow.Create<GblRoleModule>(roleModule);
-            //        });
-            //    }, new Core.EntityFramework.UnitOfWorkSettings() { TransactionScope = Core.TransactionOption.TransactionScope });                
-            //}
+                var roleModule = uow.Repo<GblRoleModule>().Retrieve().FirstOrDefault();
+                Requires.NotNull(roleModule, "roleModule");
+
+                roleModule.ModuleId = 9999999;
+                uow.Repo<GblRoleModule>().Create(roleModule);
+
+                return true;
+            });
         }
     }
 }

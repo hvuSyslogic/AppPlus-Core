@@ -40,10 +40,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.Canceloperid).HasColumnName(@"CANCELOPERID").IsOptional().HasColumnType("int");
             Property(x => x.Cancelmemo).HasColumnName(@"CANCELMEMO").IsOptional().HasColumnType("nvarchar").HasMaxLength(1000);
             Property(x => x.Involastid).HasColumnName(@"INVOLASTID").IsOptional().HasColumnType("int");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(200);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(200);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(200);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(200);
             Property(x => x.Hospitalid).HasColumnName(@"HOSPITALID").IsOptional().HasColumnType("int");
             Property(x => x.Name).HasColumnName(@"NAME").IsRequired().HasColumnType("nvarchar").HasMaxLength(60);
             Property(x => x.Inpatno).HasColumnName(@"INPATNO").IsRequired().HasColumnType("nvarchar").HasMaxLength(26);

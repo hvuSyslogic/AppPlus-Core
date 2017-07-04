@@ -22,10 +22,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsTest).HasColumnName(@"IsTest").IsOptional().HasColumnType("bit");
             Property(x => x.LsClass).HasColumnName(@"LsClass").IsOptional().HasColumnType("smallint");
             Property(x => x.OrderBy).HasColumnName(@"OrderBy").IsRequired().HasColumnType("int");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.Code).HasColumnName(@"Code").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(10);
         }
     }

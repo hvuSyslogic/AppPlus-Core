@@ -43,22 +43,13 @@ namespace HisPlus.Domain
         public System.DateTime? AuthOperTime { get; set; }
         public int? AuthOperId { get; set; }
         public string Memo { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public bool? IsOtherFee { get; set; }
         public short? Sn { get; set; }
-        public string F5 { get; set; }
-        public string F6 { get; set; }
-        public string F7 { get; set; }
         public short? FirstDay { get; set; }
         public short? LastDay { get; set; }
         public int ExecLocId { get; set; }
-        public string F8 { get; set; }
         public int? ExecDoctorId { get; set; }
-        public string BpReason { get; set; }
-        public bool? IsBp { get; set; }
-        public int? CureDtlId { get; set; }
+        public bool? IsYbxj { get; set; }
+        public string YbType { get; set; }
     }
 }

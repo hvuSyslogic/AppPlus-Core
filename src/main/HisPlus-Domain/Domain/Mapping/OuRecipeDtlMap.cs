@@ -45,24 +45,18 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IssueOperId).HasColumnName(@"IssueOperId").IsOptional().HasColumnType("int");
             Property(x => x.IsToBack).HasColumnName(@"IsToBack").IsRequired().HasColumnType("bit");
             Property(x => x.IsBack).HasColumnName(@"IsBack").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IsDoctorInput).HasColumnName(@"IsDoctorInput").IsOptional().HasColumnType("bit");
             Property(x => x.RecNum).HasColumnName(@"RecNum").IsOptional().HasColumnType("int");
             Property(x => x.RecipeTime).HasColumnName(@"RecipeTime").IsOptional().HasColumnType("smalldatetime");
             Property(x => x.LocationId).HasColumnName(@"LocationId").IsOptional().HasColumnType("int");
             Property(x => x.DoctorId).HasColumnName(@"DoctorId").IsOptional().HasColumnType("int");
-            Property(x => x.F5).HasColumnName(@"F5").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F6).HasColumnName(@"F6").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F7).HasColumnName(@"F7").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F8).HasColumnName(@"F8").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.AllPageNo).HasColumnName(@"AllPageNo").IsOptional().HasColumnType("int");
             Property(x => x.PageNo).HasColumnName(@"PageNo").IsOptional().HasColumnType("int");
             Property(x => x.CureDtlId).HasColumnName(@"CureDtlId").IsOptional().HasColumnType("int");
             Property(x => x.IsBp).HasColumnName(@"IsBP").IsOptional().HasColumnType("bit");
             Property(x => x.BpReason).HasColumnName(@"BPReason").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
+            Property(x => x.YbType).HasColumnName(@"YbType").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
+            Property(x => x.InvoNo).HasColumnName(@"InvoNo").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
         }
     }
 }

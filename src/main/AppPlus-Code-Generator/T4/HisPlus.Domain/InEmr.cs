@@ -21,10 +21,6 @@ namespace HisPlus.Domain
         public bool IsAuth { get; set; }
         public System.DateTime? AuthOperTime { get; set; }
         public int? AuthOperId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public byte[] XmlContent { get; set; }
         public bool? IsRealease { get; set; }
         public System.DateTime? RealeaseTime { get; set; }
@@ -37,11 +33,11 @@ namespace HisPlus.Domain
         public int? ClosedOperId { get; set; }
         public bool? IsCheck { get; set; }
         public int? LocationId { get; set; }
-        public string F5 { get; set; }
         public bool? IsDelete { get; set; }
         public System.DateTime? OperTime2 { get; set; }
-        public string F6 { get; set; }
-        public string F7 { get; set; }
-        public string F8 { get; set; }
+        public short? NodeOrderBy { get; set; }
+        public string DeptName { get; set; }
+        public string BedName { get; set; }
+        public string EmrTypeName { get; set; }
     }
 }

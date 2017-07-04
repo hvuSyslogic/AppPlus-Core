@@ -11,138 +11,109 @@ using log4net;
 using AppPlus.Infrastructure.Contract.Services;
 using AppPlus.Infrastructure.Configuration;
 using Microsoft.Practices.Unity;
+using AppPlus.Infrastructure;
+using AppPlus.Infrastructure.Contract.Messages;
+using AppPlus.Infrastructure.Exceptions;
+using AppPlus.Core.Infrastructure.CodeContracts;
 
 namespace AppPlus.Client
 {
     public class ServiceHandler
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-                
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);        
+
+        static ServiceHandler()
+        {
+            LocalMode = AppConfigurator.AppServiceConfig.ServiceMode == ServiceMode.Local;
+        }
+
+
+        private static bool LocalMode
+        {
+            get;
+            set;
+        }
+
         public static void CallService<T>(Expression<Action<T>> expression)
             where T : IServiceRoot
         {
-            if (AppConfigurator.AppServiceConfig.ServiceMode == ServiceMode.Local)
+            using (T service = LocalMode ? AppConfigurator.Container.Resolve<T>() : ProxyManager.GetProxy<T>())
             {
-                var service = AppConfigurator.Container.Resolve<T>();
-                expression.Compile()(service);
-            }
-            else
-            {
-                using (T proxy = ProxyManager.GetProxy<T>())
-                {
-                    Process(proxy, expression.Compile());
-                }
+                Perform<T>(service, expression);
             }
         }
 
         public static TResult CallService<T, TResult>(Expression<Func<T, TResult>> expression)
             where T : IServiceRoot
         {
-            if (AppConfigurator.AppServiceConfig.ServiceMode == ServiceMode.Local)
+            using (T service = LocalMode ? AppConfigurator.Container.Resolve<T>() : ProxyManager.GetProxy<T>())
             {
-                var service = AppConfigurator.Container.Resolve<T>();
-                return expression.Compile()(service);
+                return Perform<T, TResult>(service, expression);
             }
-            else
-            {
-                using (T proxy = ProxyManager.GetProxy<T>())
-                {
-                    return Process(proxy, expression.Compile());
-                }
-            }           
         }
 
-        private static void Process<T>(T proxy, Action<T> action)
-             where T : IServiceRoot
+        private static void Perform<T>(T service, Expression<Action<T>> action)
+            where T : IServiceRoot
         {
-            bool responseStatus = false;
-
+            Requires.NotNull(action, "action");
+            
             try
             {
-                action(proxy);
-
-                var client = (proxy as IClientChannel);
-                if (client.State != CommunicationState.Faulted)
-                {
-                    client.Close();
-                    client.Dispose();
-                }
+                action.Compile()(service);
             }
-            //catch (FaultException<Response<object>> fe)
             catch (Exception ex)
             {
-                //Log.Error(fe.Detail);
+                string description = "Exception caught at Client Application ServiceHandler";
+                string errMsg = ex.BuildMessage(description);
+
+                Log.Error(errMsg);
                 throw;
             }
             finally
             {
-                if (!responseStatus)
-                {
-                    try
-                    {
-                        var clientChannel = proxy as IClientChannel;
-                        CloseClientChannel(clientChannel);
-                    }
-                    catch (Exception e)
-                    {
-                        Log.Error(e);
-                        throw;
-                    }
-                }
-            }
-        }        
+                CloseClientChannel(service);
+            }            
+        }
 
-        private static TResult Process<T, TResult>(T proxy, Func<T, TResult> func)
-             where T : IServiceRoot
+        private static TResult Perform<T, TResult>(T service, Expression<Func<T, TResult>> expression) 
+            where T : IServiceRoot
         {
-            bool responseStatus = false;
-            TResult result = default(TResult);
+            Requires.NotNull(expression, "expression");
 
             try
             {
-                result = func(proxy);
-                var client = (proxy as IClientChannel);
-                if (client.State != CommunicationState.Faulted)
-                {
-                    client.Close();
-                    client.Dispose();
-                }
-                responseStatus = true;
+                return expression.Compile()(service);
             }
-            //catch (FaultException<Response<object>> fe)
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                //Log.Error(fe);
+                string description = "Exception caught at Client Application ServiceHandler";
+                string errMsg = ex.BuildMessage(description);
+
+                Log.Error(errMsg);
                 throw;
             }
             finally
             {
-                if (!responseStatus)               
-                {
-                    try
-                    {
-                        var clientChannel = proxy as IClientChannel;
-                        CloseClientChannel(clientChannel);
-                    }
-                    catch (Exception e)
-                    {
-                        Log.Error(e.Message);
-                        throw;
-                    }
-                }
+                CloseClientChannel(service);
             }
-
-            return result;
         }
 
-        private static void CloseClientChannel(IClientChannel clientChannel)
+        private static void CloseClientChannel<T>(T service) where T : IServiceRoot
         {
-            if (clientChannel != null)
+            var client = (service as IClientChannel);
+            if (client != null)
             {
-                clientChannel.Abort();
-                clientChannel.Dispose();
+                if (client.State == CommunicationState.Faulted)
+                {
+                    client.Abort();
+                }
+                else
+                {
+                    client.Close();
+                }
+
+                client.Dispose();
             }
         }
-
     }
 }

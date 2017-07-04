@@ -46,10 +46,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsReject).HasColumnName(@"IsReject").IsRequired().HasColumnType("bit");
             Property(x => x.DeadTime).HasColumnName(@"DeadTime").IsOptional().HasColumnType("datetime");
             Property(x => x.LocationId).HasColumnName(@"LocationId").IsOptional().HasColumnType("int");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.Bg).HasColumnName(@"BG").IsOptional().HasColumnType("decimal").HasPrecision(8,2);
             Property(x => x.CwInject).HasColumnName(@"CwInject").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.JmInject).HasColumnName(@"JmInject").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
@@ -59,6 +55,7 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.MemoUp1).HasColumnName(@"MemoUp1").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.MemoDn1).HasColumnName(@"MemoDn1").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.RecordTime).HasColumnName(@"RecordTime").IsOptional().HasColumnType("datetime");
+            Property(x => x.TimeQuantum).HasColumnName(@"TimeQuantum").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
         }
     }
 }

@@ -20,10 +20,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsForYk).HasColumnName(@"IsForYk").IsRequired().HasColumnType("bit");
             Property(x => x.IsForYf).HasColumnName(@"IsForYf").IsRequired().HasColumnType("bit");
             Property(x => x.IsForRecipe).HasColumnName(@"IsForRecipe").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IconIndex).HasColumnName(@"IconIndex").IsRequired().HasColumnType("smallint");
         }
     }

@@ -18,9 +18,8 @@ namespace HisPlus.Domain
         public string Memo { get; set; }
         public System.DateTime? OperTime { get; set; }
         public int? OperId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
+        public string BloodDonor { get; set; }
+        public int? MzRegId { get; set; }
+        public string Receptor { get; set; }
     }
 }

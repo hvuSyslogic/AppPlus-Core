@@ -15,9 +15,6 @@ namespace HisPlus.Domain
         public int? PaywayId { get; set; }
         public decimal? Amount { get; set; }
         public string Memo { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
+        public short? CallOrder { get; set; }
     }
 }

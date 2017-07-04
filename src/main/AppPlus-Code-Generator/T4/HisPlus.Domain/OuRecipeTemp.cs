@@ -45,17 +45,11 @@ namespace HisPlus.Domain
         public bool IsIssue { get; set; }
         public bool IsBack { get; set; }
         public string RoomWindowName { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public System.DateTime? OperTime { get; set; }
         public int? LsReportType { get; set; }
         public int? DosageOperId { get; set; }
         public System.DateTime? DosageTime { get; set; }
-        public string F5 { get; set; }
-        public string F6 { get; set; }
-        public string F7 { get; set; }
-        public string F8 { get; set; }
+        public int? PatTypeId { get; set; }
+        public int? PatId { get; set; }
     }
 }

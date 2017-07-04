@@ -29,10 +29,6 @@ namespace HisPlus.Domain
         public int? ConfirmOperId { get; set; }
         public System.DateTime? ConfirmOperTime { get; set; }
         public int? DetailId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? ExecuteId { get; set; }
         public string RegDate { get; set; }
         public int? LsSecMarkType { get; set; }
@@ -43,5 +39,9 @@ namespace HisPlus.Domain
         public int? OperId { get; set; }
         public decimal? PriceIn { get; set; }
         public bool? LsArrearage { get; set; }
+        public string DoctorName { get; set; }
+        public bool? IsOutDrug { get; set; }
+        public string UsageMemo { get; set; }
+        public System.DateTime? UseTime { get; set; }
     }
 }

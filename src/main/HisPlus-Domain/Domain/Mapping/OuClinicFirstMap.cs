@@ -26,10 +26,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.CheckUp).HasColumnName(@"CheckUp").IsOptional().HasColumnType("nvarchar").HasMaxLength(1000);
             Property(x => x.CheckCt).HasColumnName(@"CheckCT").IsOptional().HasColumnType("nvarchar").HasMaxLength(1000);
             Property(x => x.Disposal).HasColumnName(@"Disposal").IsOptional().HasColumnType("nvarchar").HasMaxLength(1000);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.Impression).HasColumnName(@"Impression").IsOptional().HasColumnType("nvarchar").HasMaxLength(1000);
             Property(x => x.Analys).HasColumnName(@"Analys").IsOptional().HasColumnType("nvarchar").HasMaxLength(1000);
             Property(x => x.Others).HasColumnName(@"Others").IsOptional().HasColumnType("nvarchar").HasMaxLength(1000);

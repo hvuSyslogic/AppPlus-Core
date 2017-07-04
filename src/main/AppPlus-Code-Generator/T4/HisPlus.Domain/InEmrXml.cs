@@ -14,10 +14,6 @@ namespace HisPlus.Domain
         public int CatalogId { get; set; }
         public string XmlField { get; set; }
         public string XmlValue { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? InEmrId { get; set; }
     }
 }

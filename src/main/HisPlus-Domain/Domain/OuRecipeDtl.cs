@@ -39,23 +39,17 @@ namespace HisPlus.Domain
         public int? IssueOperId { get; set; }
         public bool IsToBack { get; set; }
         public bool IsBack { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public bool? IsDoctorInput { get; set; }
         public int? RecNum { get; set; }
         public System.DateTime? RecipeTime { get; set; }
         public int? LocationId { get; set; }
         public int? DoctorId { get; set; }
-        public string F5 { get; set; }
-        public string F6 { get; set; }
-        public string F7 { get; set; }
-        public string F8 { get; set; }
         public int? AllPageNo { get; set; }
         public int? PageNo { get; set; }
         public int? CureDtlId { get; set; }
         public bool? IsBp { get; set; }
         public string BpReason { get; set; }
+        public string YbType { get; set; }
+        public string InvoNo { get; set; }
     }
 }

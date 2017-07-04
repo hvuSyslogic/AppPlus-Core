@@ -24,10 +24,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.MedicineRatio).HasColumnName(@"MedicineRatio").IsRequired().HasColumnType("decimal").HasPrecision(8,2);
             Property(x => x.OrderBy).HasColumnName(@"OrderBy").IsRequired().HasColumnType("smallint");
             Property(x => x.IsActive).HasColumnName(@"IsActive").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IconIndex).HasColumnName(@"IconIndex").IsRequired().HasColumnType("smallint");
             Property(x => x.SpecialityId).HasColumnName(@"SpecialityId").IsOptional().HasColumnType("int");
             Property(x => x.BedSum).HasColumnName(@"BedSum").IsOptional().HasColumnType("smallint");
@@ -39,13 +35,11 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.PyCode).HasColumnName(@"PyCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
             Property(x => x.WbCode).HasColumnName(@"WbCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(6);
             Property(x => x.Area).HasColumnName(@"Area").IsOptional().HasColumnType("int");
-            Property(x => x.F5).HasColumnName(@"F5").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F6).HasColumnName(@"F6").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F7).HasColumnName(@"F7").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F8).HasColumnName(@"F8").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.OuRoomId).HasColumnName(@"OuRoomId").IsOptional().HasColumnType("int");
             Property(x => x.InRoomId).HasColumnName(@"InRoomId").IsOptional().HasColumnType("int");
             Property(x => x.IsPriceSub).HasColumnName(@"IsPriceSub").IsOptional().HasColumnType("bit");
+            Property(x => x.IsClinical).HasColumnName(@"IsClinical").IsOptional().HasColumnType("bit");
+            Property(x => x.IsChinLocation).HasColumnName(@"IsChinLocation").IsOptional().HasColumnType("bit");
         }
     }
 }

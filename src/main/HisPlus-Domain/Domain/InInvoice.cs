@@ -34,10 +34,6 @@ namespace HisPlus.Domain
         public int? CancelOperId { get; set; }
         public string CancelMemo { get; set; }
         public int? InvoLastId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? YbIllId { get; set; }
         public int? HospitalId { get; set; }
         public System.DateTime? CheckTime { get; set; }
@@ -45,5 +41,7 @@ namespace HisPlus.Domain
         public decimal? ReAmount { get; set; }
         public System.DateTime? ReAmountDate { get; set; }
         public string ReAmountMemo { get; set; }
+        public string DepositBillNo { get; set; }
+        public int? CancelHospital { get; set; }
     }
 }

@@ -18,10 +18,6 @@ namespace HisPlus.Domain
         public System.DateTime? SignTime { get; set; }
         public int? SignOperId { get; set; }
         public bool IsBack { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public string Memo { get; set; }
         public int? BuyId { get; set; }
         public int? BuyWayId { get; set; }

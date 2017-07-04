@@ -24,10 +24,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.PanicLow).HasColumnName(@"PanicLow").IsRequired().HasColumnType("decimal").HasPrecision(18,4);
             Property(x => x.PanicHigh).HasColumnName(@"PanicHigh").IsRequired().HasColumnType("decimal").HasPrecision(18,4);
             Property(x => x.PrintResult).HasColumnName(@"PrintResult").IsRequired().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.TextRange).HasColumnName(@"TextRange").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
             Property(x => x.LsAgeUnit).HasColumnName(@"LsAgeUnit").IsOptional().HasColumnType("smallint");
             Property(x => x.MachineId).HasColumnName(@"MachineId").IsOptional().HasColumnType("int");

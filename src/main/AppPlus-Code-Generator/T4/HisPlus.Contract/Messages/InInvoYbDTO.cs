@@ -70,18 +70,6 @@ namespace HisPlus.Contract.Messages
         public decimal? SelfFee { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public decimal? BchzylbxAmount { get; set; }
 
         [DataMember]
@@ -238,18 +226,9 @@ namespace HisPlus.Contract.Messages
         public int? HospId { get; set; }
 
         [DataMember]
-        public string F5 { get; set; }
-
-        [DataMember]
-        public string F6 { get; set; }
-
-        [DataMember]
-        public string F7 { get; set; }
-
-        [DataMember]
-        public string F8 { get; set; }
-
-        [DataMember]
         public System.DateTime? InvoYbTime { get; set; }
+
+        [DataMember]
+        public string YbPatType { get; set; }
     }
 }

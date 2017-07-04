@@ -46,18 +46,6 @@ namespace HisPlus.Contract.Messages
         public bool IsExecuted { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public int? PatId { get; set; }
 
         [DataMember]
@@ -68,5 +56,8 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public System.DateTime? DosageTime { get; set; }
+
+        [DataMember]
+        public int? HospitalId { get; set; }
     }
 }

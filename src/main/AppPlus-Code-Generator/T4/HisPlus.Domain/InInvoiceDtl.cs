@@ -45,10 +45,6 @@ namespace HisPlus.Domain
         public bool IsCancel { get; set; }
         public int? CancelId { get; set; }
         public bool IsManual { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public string HostName { get; set; }
         public int? ExecuteId { get; set; }
         public string RegDate { get; set; }
@@ -56,10 +52,6 @@ namespace HisPlus.Domain
         public int? XdRpId { get; set; }
         public string AdviceName { get; set; }
         public int? MainDoctorId { get; set; }
-        public string F5 { get; set; }
-        public string F6 { get; set; }
-        public string F7 { get; set; }
-        public string F8 { get; set; }
         public int? OuInvoId { get; set; }
         public string Urgent { get; set; }
         public string ReservedField { get; set; }
@@ -69,5 +61,6 @@ namespace HisPlus.Domain
         public int? LsPriceState { get; set; }
         public int? DocLocId { get; set; }
         public int? ExecDoctorId { get; set; }
+        public bool? IsYbxj { get; set; }
     }
 }

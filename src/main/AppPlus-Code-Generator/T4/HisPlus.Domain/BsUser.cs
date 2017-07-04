@@ -15,10 +15,6 @@ namespace HisPlus.Domain
         public bool IsActive { get; set; }
         public string Reason { get; set; }
         public short LsInputWay { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public short IconIndex { get; set; }
         public bool? IsUserInputWb { get; set; }
         public bool? IsUserInputPy { get; set; }
@@ -35,7 +31,6 @@ namespace HisPlus.Domain
         public int? HospitalId { get; set; }
         public int? CareGroupId { get; set; }
         public int? CareGroupId1 { get; set; }
-        public string F5 { get; set; }
         public string CertIdNo { get; set; }
         public string PyCode { get; set; }
         public string WbCode { get; set; }

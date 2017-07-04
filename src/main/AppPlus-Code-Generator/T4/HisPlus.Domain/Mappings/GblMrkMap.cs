@@ -18,10 +18,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.MrkFile).HasColumnName(@"MrkFile").IsRequired().HasColumnType("nvarchar").HasMaxLength(200);
             Property(x => x.MrkContent).HasColumnName(@"MrkContent").IsOptional().IsUnicode(false).HasColumnType("text").HasMaxLength(2147483647);
             Property(x => x.IsActive).HasColumnName(@"IsActive").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
         }
     }
 }

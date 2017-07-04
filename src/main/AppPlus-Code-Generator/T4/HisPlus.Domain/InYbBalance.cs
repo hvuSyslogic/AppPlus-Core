@@ -34,10 +34,6 @@ namespace HisPlus.Domain
         public int? Canceloperid { get; set; }
         public string Cancelmemo { get; set; }
         public int? Involastid { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? Hospitalid { get; set; }
         public string Name { get; set; }
         public string Inpatno { get; set; }

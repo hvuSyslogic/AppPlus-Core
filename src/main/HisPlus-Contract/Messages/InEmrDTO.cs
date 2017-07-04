@@ -49,18 +49,6 @@ namespace HisPlus.Contract.Messages
         public int? AuthOperId { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public byte[] XmlContent { get; set; }
 
         [DataMember]
@@ -97,21 +85,21 @@ namespace HisPlus.Contract.Messages
         public int? LocationId { get; set; }
 
         [DataMember]
-        public string F5 { get; set; }
-
-        [DataMember]
         public bool? IsDelete { get; set; }
 
         [DataMember]
         public System.DateTime? OperTime2 { get; set; }
 
         [DataMember]
-        public string F6 { get; set; }
+        public short? NodeOrderBy { get; set; }
 
         [DataMember]
-        public string F7 { get; set; }
+        public string DeptName { get; set; }
 
         [DataMember]
-        public string F8 { get; set; }
+        public string BedName { get; set; }
+
+        [DataMember]
+        public string EmrTypeName { get; set; }
     }
 }

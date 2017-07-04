@@ -25,10 +25,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.UsageId).HasColumnName(@"UsageId").IsOptional().HasColumnType("int");
             Property(x => x.IsLocDrug).HasColumnName(@"IsLocDrug").IsRequired().HasColumnType("bit");
             Property(x => x.OrderBy).HasColumnName(@"OrderBy").IsRequired().HasColumnType("int");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IconIndex).HasColumnName(@"IconIndex").IsRequired().HasColumnType("smallint");
             Property(x => x.ExecLocId).HasColumnName(@"ExecLocId").IsOptional().HasColumnType("int");
             Property(x => x.IsLocUse).HasColumnName(@"IsLocUse").IsOptional().HasColumnType("bit");

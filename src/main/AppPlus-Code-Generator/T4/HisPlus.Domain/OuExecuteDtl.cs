@@ -18,10 +18,6 @@ namespace HisPlus.Domain
         public int UsageId { get; set; }
         public int FrequencyId { get; set; }
         public short Days { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public decimal? Totality { get; set; }
         public int? UnitDiagId { get; set; }
         public System.DateTime? IssueTime { get; set; }

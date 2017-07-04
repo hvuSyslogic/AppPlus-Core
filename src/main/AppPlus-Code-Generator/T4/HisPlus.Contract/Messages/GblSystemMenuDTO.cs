@@ -46,15 +46,15 @@ namespace HisPlus.Contract.Messages
         public bool? IsActive { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
+        public string DocPath { get; set; }
 
         [DataMember]
-        public string F2 { get; set; }
+        public string VideoPath { get; set; }
 
         [DataMember]
-        public string F3 { get; set; }
+        public string ReportType { get; set; }
 
         [DataMember]
-        public string F4 { get; set; }
+        public bool? IsSelect { get; set; }
     }
 }

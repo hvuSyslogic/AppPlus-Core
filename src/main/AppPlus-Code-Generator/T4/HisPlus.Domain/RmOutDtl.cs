@@ -17,9 +17,7 @@ namespace HisPlus.Domain
         public decimal RetailPrice { get; set; }
         public decimal StockPrice { get; set; }
         public int? RecipeItemId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
+        public decimal? BeforeStockNum { get; set; }
+        public decimal? AfterStockNum { get; set; }
     }
 }

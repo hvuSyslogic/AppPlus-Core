@@ -25,15 +25,15 @@ namespace HisPlus.Contract.Messages
         public int UnitId { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
+        public decimal? HuStockNum { get; set; }
 
         [DataMember]
-        public string F2 { get; set; }
+        public int? UnitKc { get; set; }
 
         [DataMember]
-        public string F3 { get; set; }
+        public string Pno { get; set; }
 
         [DataMember]
-        public string F4 { get; set; }
+        public System.DateTime? LimitDate { get; set; }
     }
 }

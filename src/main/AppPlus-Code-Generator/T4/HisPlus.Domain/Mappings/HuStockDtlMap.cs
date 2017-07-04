@@ -27,10 +27,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.LimitDate).HasColumnName(@"LimitDate").IsOptional().HasColumnType("datetime");
             Property(x => x.IsBid).HasColumnName(@"IsBid").IsRequired().HasColumnType("bit");
             Property(x => x.VoucherNo).HasColumnName(@"VoucherNo").IsRequired().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.ProAreaId).HasColumnName(@"ProAreaId").IsOptional().HasColumnType("int");
             Property(x => x.ManuId).HasColumnName(@"ManuId").IsOptional().HasColumnType("int");
             Property(x => x.PassNo).HasColumnName(@"PassNo").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);

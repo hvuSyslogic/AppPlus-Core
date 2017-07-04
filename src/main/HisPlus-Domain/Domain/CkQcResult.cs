@@ -19,9 +19,5 @@ namespace HisPlus.Domain
         public int CtrlId { get; set; }
         public bool? IsShowQc { get; set; }
         public string RejectMemo { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
     }
 }

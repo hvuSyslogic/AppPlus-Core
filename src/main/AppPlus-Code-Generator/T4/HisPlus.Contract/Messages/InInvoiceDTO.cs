@@ -88,18 +88,6 @@ namespace HisPlus.Contract.Messages
         public int? InvoLastId { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public int? YbIllId { get; set; }
 
         [DataMember]
@@ -119,5 +107,11 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public string ReAmountMemo { get; set; }
+
+        [DataMember]
+        public string DepositBillNo { get; set; }
+
+        [DataMember]
+        public int? CancelHospital { get; set; }
     }
 }

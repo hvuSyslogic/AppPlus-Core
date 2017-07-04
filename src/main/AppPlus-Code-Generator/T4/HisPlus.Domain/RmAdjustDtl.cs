@@ -17,9 +17,5 @@ namespace HisPlus.Domain
         public decimal NewPrice { get; set; }
         public decimal OldPrice { get; set; }
         public decimal ProfLoss { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
     }
 }

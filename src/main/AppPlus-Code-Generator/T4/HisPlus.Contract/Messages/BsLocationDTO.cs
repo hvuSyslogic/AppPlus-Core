@@ -40,18 +40,6 @@ namespace HisPlus.Contract.Messages
         public bool IsActive { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public short IconIndex { get; set; }
 
         [DataMember]
@@ -85,18 +73,6 @@ namespace HisPlus.Contract.Messages
         public int? Area { get; set; }
 
         [DataMember]
-        public string F5 { get; set; }
-
-        [DataMember]
-        public string F6 { get; set; }
-
-        [DataMember]
-        public string F7 { get; set; }
-
-        [DataMember]
-        public string F8 { get; set; }
-
-        [DataMember]
         public int? OuRoomId { get; set; }
 
         [DataMember]
@@ -104,5 +80,11 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public bool? IsPriceSub { get; set; }
+
+        [DataMember]
+        public bool? IsClinical { get; set; }
+
+        [DataMember]
+        public bool? IsChinLocation { get; set; }
     }
 }

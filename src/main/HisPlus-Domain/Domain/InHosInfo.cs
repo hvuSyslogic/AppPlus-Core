@@ -70,10 +70,6 @@ namespace HisPlus.Domain
         public bool IsEndChg { get; set; }
         public int? EndChgOperId { get; set; }
         public System.DateTime? EndchgoperTime { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public string Memo { get; set; }
         public int? MotherHospId { get; set; }
         public int? FromHospitalId { get; set; }
@@ -91,12 +87,10 @@ namespace HisPlus.Domain
         public int? Number2 { get; set; }
         public int? Number3 { get; set; }
         public int? Number4 { get; set; }
-        public string F5 { get; set; }
-        public string F6 { get; set; }
-        public string F7 { get; set; }
-        public string F8 { get; set; }
         public string YbbzCode { get; set; }
         public bool? AmountAuth { get; set; }
         public string Author { get; set; }
+        public string AgeStr { get; set; }
+        public short? Age { get; set; }
     }
 }

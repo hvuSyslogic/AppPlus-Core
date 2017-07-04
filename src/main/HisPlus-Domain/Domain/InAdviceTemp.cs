@@ -47,10 +47,6 @@ namespace HisPlus.Domain
         public System.DateTime? CancelOperTime { get; set; }
         public int? CancelOperId { get; set; }
         public string Memo { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public short? Sn { get; set; }
         public string F5 { get; set; }
         public string F6 { get; set; }
@@ -58,8 +54,7 @@ namespace HisPlus.Domain
         public int ExecLocId { get; set; }
         public string F8 { get; set; }
         public int? ExecDoctorId { get; set; }
-        public string BpReason { get; set; }
-        public bool? IsBp { get; set; }
-        public int? CureDtlId { get; set; }
+        public bool? IsYbxj { get; set; }
+        public string YbType { get; set; }
     }
 }

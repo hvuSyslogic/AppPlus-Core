@@ -31,10 +31,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.PicturePath).HasColumnName(@"PicturePath").IsRequired().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.LsStatus).HasColumnName(@"LsStatus").IsRequired().HasColumnType("smallint");
             Property(x => x.OrderBy).HasColumnName(@"OrderBy").IsRequired().HasColumnType("smallint");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IconIndex).HasColumnName(@"IconIndex").IsRequired().HasColumnType("smallint");
             Property(x => x.UserId).HasColumnName(@"UserId").IsOptional().HasColumnType("int");
             Property(x => x.PyCode).HasColumnName(@"PyCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(6);
@@ -42,6 +38,10 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.SupDoctorId).HasColumnName(@"SupDoctorId").IsOptional().HasColumnType("int");
             Property(x => x.DiagRoomId).HasColumnName(@"DiagRoomID").IsOptional().HasColumnType("int");
             Property(x => x.OperTime).HasColumnName(@"OperTime").IsOptional().HasColumnType("datetime");
+            Property(x => x.IsPoisonMa).HasColumnName(@"IsPoisonMa").IsOptional().HasColumnType("bit");
+            Property(x => x.IsRecipe).HasColumnName(@"IsRecipe").IsOptional().HasColumnType("bit");
+            Property(x => x.Grade).HasColumnName(@"Grade").IsOptional().HasColumnType("smallint");
+            Property(x => x.IsConsult).HasColumnName(@"IsConsult").IsOptional().HasColumnType("bit");
         }
     }
 }

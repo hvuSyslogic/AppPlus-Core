@@ -15,10 +15,6 @@ namespace HisPlus.Domain
         public short? LsMarkType { get; set; }
         public int? MaxFrequency { get; set; }
         public string Memo { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? LocationId { get; set; }
     }
 }

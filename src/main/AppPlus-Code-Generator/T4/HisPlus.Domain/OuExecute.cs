@@ -17,10 +17,6 @@ namespace HisPlus.Domain
         public short NDay { get; set; }
         public short NTime { get; set; }
         public int UsageId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public bool? IsExecuted { get; set; }
     }
 }

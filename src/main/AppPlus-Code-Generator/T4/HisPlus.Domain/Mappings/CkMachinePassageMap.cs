@@ -20,10 +20,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.PassAgeNum).HasColumnName(@"PassAgeNum").IsRequired().HasColumnType("nvarchar").HasMaxLength(20);
             Property(x => x.Modulus).HasColumnName(@"Modulus").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.IsQc).HasColumnName(@"IsQc").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
         }
     }
 }

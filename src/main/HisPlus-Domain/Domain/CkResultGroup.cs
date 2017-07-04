@@ -15,10 +15,6 @@ namespace HisPlus.Domain
         public string Summary { get; set; }
         public string DoctorAdvice { get; set; }
         public short? LsStatus { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public System.DateTime? ResultTime { get; set; }
         public int? ResultOperId { get; set; }
         public System.DateTime? AuthTime { get; set; }

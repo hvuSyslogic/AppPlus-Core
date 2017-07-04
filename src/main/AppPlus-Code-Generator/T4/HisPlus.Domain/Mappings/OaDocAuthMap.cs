@@ -22,10 +22,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.AuthOperTime).HasColumnName(@"AuthOperTime").IsOptional().HasColumnType("smalldatetime");
             Property(x => x.IsReject).HasColumnName(@"IsReject").IsOptional().HasColumnType("bit");
             Property(x => x.RejectReason).HasColumnName(@"RejectReason").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.LsReadClass).HasColumnName(@"LsReadClass").IsOptional().HasColumnType("smallint");
         }
     }

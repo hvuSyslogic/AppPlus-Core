@@ -23,10 +23,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.OtherFee2).HasColumnName(@"OtherFee2").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.PaySel).HasColumnName(@"PaySel").IsRequired().HasColumnType("decimal").HasPrecision(8,2);
             Property(x => x.TallyFee).HasColumnName(@"TallyFee").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IconIndex).HasColumnName(@"IconIndex").IsRequired().HasColumnType("smallint");
         }
     }

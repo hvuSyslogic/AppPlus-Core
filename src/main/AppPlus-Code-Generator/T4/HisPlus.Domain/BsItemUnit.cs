@@ -14,10 +14,6 @@ namespace HisPlus.Domain
         public bool IsForYk { get; set; }
         public bool IsForYf { get; set; }
         public bool IsForRecipe { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public short IconIndex { get; set; }
     }
 }

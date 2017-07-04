@@ -106,18 +106,6 @@ namespace HisPlus.Contract.Messages
         public bool IsAbNormal { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public string Summary { get; set; }
 
         [DataMember]
@@ -128,5 +116,8 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public int? ExecuteId { get; set; }
+
+        [DataMember]
+        public string CallGroup { get; set; }
     }
 }

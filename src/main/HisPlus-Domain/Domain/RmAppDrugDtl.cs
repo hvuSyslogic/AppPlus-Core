@@ -13,9 +13,9 @@ namespace HisPlus.Domain
         public int ItemId { get; set; }
         public decimal DrugNum { get; set; }
         public int UnitId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
+        public decimal? HuStockNum { get; set; }
+        public int? UnitKc { get; set; }
+        public string Pno { get; set; }
+        public System.DateTime? LimitDate { get; set; }
     }
 }

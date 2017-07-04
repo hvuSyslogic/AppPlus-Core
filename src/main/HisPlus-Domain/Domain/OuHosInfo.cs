@@ -47,10 +47,6 @@ namespace HisPlus.Domain
         public System.DateTime? CancelTime { get; set; }
         public int? CancelOperId { get; set; }
         public string CancelMemo { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? TimeSpanId { get; set; }
         public string RegDate { get; set; }
         public byte? Age { get; set; }
@@ -59,10 +55,7 @@ namespace HisPlus.Domain
         public string LinkmanName { get; set; }
         public System.DateTime? TallyTime { get; set; }
         public System.DateTime? CancelTallyTime { get; set; }
-        public string F5 { get; set; }
         public string F6 { get; set; }
-        public string F7 { get; set; }
-        public string F8 { get; set; }
         public int? TimeSpanSubId { get; set; }
         public int? DiagRoomId { get; set; }
         public int? CallDoctorId { get; set; }
@@ -71,5 +64,8 @@ namespace HisPlus.Domain
         public bool? IsGoodRecipe { get; set; }
         public string GoodRecipe { get; set; }
         public bool? IsRegist { get; set; }
+        public string Diagnose { get; set; }
+        public string PreRegRegWay { get; set; }
+        public bool? IsRegister { get; set; }
     }
 }

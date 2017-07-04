@@ -6,7 +6,8 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AppPlus-Client")]
-[assembly: AssemblyDescription("App Plus Client Library")]
+[assembly: AssemblyDescription("AppPlus client library to invoke service layer")]
+[assembly: AssemblyProduct("AppPlus-Client")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

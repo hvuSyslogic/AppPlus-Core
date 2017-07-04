@@ -26,13 +26,13 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.OperTime).HasColumnName(@"OperTime").IsRequired().HasColumnType("smalldatetime");
             Property(x => x.OrderBy).HasColumnName(@"OrderBy").IsRequired().HasColumnType("smallint");
             Property(x => x.IsActive).HasColumnName(@"IsActive").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IconIndex).HasColumnName(@"IconIndex").IsRequired().HasColumnType("smallint");
             Property(x => x.LsClass).HasColumnName(@"LsClass").IsRequired().HasColumnType("smallint");
             Property(x => x.IsAddBed).HasColumnName(@"IsAddBed").IsOptional().HasColumnType("bit");
+            Property(x => x.BedGroup).HasColumnName(@"BedGroup").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
+            Property(x => x.ItemId1).HasColumnName(@"ItemId1").IsOptional().HasColumnType("int");
+            Property(x => x.ItemId2).HasColumnName(@"ItemId2").IsOptional().HasColumnType("int");
+            Property(x => x.AddItemId).HasColumnName(@"AddItemId").IsOptional().HasColumnType("int");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AppPlus.Infrastructure.Contract.Services;
+using HisPlus.Contract.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,10 @@ namespace HisPlus.Contract.Services
     [ServiceContract]
     public interface ISampleService : IServiceRoot
     {
-        void test();
+        [OperationContract]        
+        IEnumerable<GblRoleDTO> L1CacheTest();
+
+        [OperationContract]
+        bool TransactionTest();
     }
 }

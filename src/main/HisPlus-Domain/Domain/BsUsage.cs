@@ -32,15 +32,8 @@ namespace HisPlus.Domain
         public bool IsMzCure { get; set; }
         public short OrderBy { get; set; }
         public bool IsActive { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public short IconIndex { get; set; }
         public bool? IsPrintAtomization { get; set; }
-        public string F5 { get; set; }
-        public string F6 { get; set; }
-        public string F7 { get; set; }
         public int? LsInOutType { get; set; }
         public bool? IsDrugTwoDay { get; set; }
     }

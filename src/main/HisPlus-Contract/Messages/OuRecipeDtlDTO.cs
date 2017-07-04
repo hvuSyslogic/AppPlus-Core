@@ -103,18 +103,6 @@ namespace HisPlus.Contract.Messages
         public bool IsBack { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public bool? IsDoctorInput { get; set; }
 
         [DataMember]
@@ -130,18 +118,6 @@ namespace HisPlus.Contract.Messages
         public int? DoctorId { get; set; }
 
         [DataMember]
-        public string F5 { get; set; }
-
-        [DataMember]
-        public string F6 { get; set; }
-
-        [DataMember]
-        public string F7 { get; set; }
-
-        [DataMember]
-        public string F8 { get; set; }
-
-        [DataMember]
         public int? AllPageNo { get; set; }
 
         [DataMember]
@@ -155,5 +131,11 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public string BpReason { get; set; }
+
+        [DataMember]
+        public string YbType { get; set; }
+
+        [DataMember]
+        public string InvoNo { get; set; }
     }
 }

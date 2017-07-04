@@ -40,13 +40,10 @@ namespace HisPlus.Domain
         public string CheckResult { get; set; }
         public string CheckAdvice { get; set; }
         public bool IsAbNormal { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public string Summary { get; set; }
         public string Diagnose { get; set; }
         public int? CheckId { get; set; }
         public int? ExecuteId { get; set; }
+        public string CallGroup { get; set; }
     }
 }

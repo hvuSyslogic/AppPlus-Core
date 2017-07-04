@@ -22,10 +22,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.OperTime).HasColumnName(@"OperTime").IsRequired().HasColumnType("smalldatetime");
             Property(x => x.OperId).HasColumnName(@"OperId").IsRequired().HasColumnType("int");
             Property(x => x.IsBack).HasColumnName(@"IsBack").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.DetailId).HasColumnName(@"DetailId").IsOptional().HasColumnType("int");
             Property(x => x.BackTime).HasColumnName(@"BackTime").IsOptional().HasColumnType("smalldatetime");
             Property(x => x.AdviceId).HasColumnName(@"AdviceId").IsOptional().HasColumnType("int");
@@ -33,6 +29,8 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsPrint).HasColumnName(@"IsPrint").IsOptional().HasColumnType("bit");
             Property(x => x.HospId).HasColumnName(@"HospId").IsOptional().HasColumnType("int");
             Property(x => x.RequestId).HasColumnName(@"RequestId").IsOptional().HasColumnType("int");
+            Property(x => x.Memo).HasColumnName(@"memo").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
+            Property(x => x.BackOperId).HasColumnName(@"BackOperId").IsOptional().HasColumnType("int");
         }
     }
 }

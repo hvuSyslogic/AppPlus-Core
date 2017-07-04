@@ -18,11 +18,8 @@ namespace HisPlus.Domain
         public System.DateTime OperTime { get; set; }
         public int OperId { get; set; }
         public string DownLoadHostNames { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public string HospitalIds { get; set; }
         public bool? IsChoose { get; set; }
+        public string FileSize { get; set; }
     }
 }

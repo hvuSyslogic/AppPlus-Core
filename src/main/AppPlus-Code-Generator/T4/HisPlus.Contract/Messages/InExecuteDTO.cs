@@ -40,18 +40,6 @@ namespace HisPlus.Contract.Messages
         public int? PrintOperId { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public System.DateTime? AdviceTime { get; set; }
 
         [DataMember]
@@ -149,5 +137,8 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public bool? IsArrearage { get; set; }
+
+        [DataMember]
+        public string YbType { get; set; }
     }
 }

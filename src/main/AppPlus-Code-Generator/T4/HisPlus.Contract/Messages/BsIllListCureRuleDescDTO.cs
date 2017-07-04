@@ -15,22 +15,22 @@ namespace HisPlus.Contract.Messages
         }
 
         [DataMember]
-        public string 疾病 { get; set; }
+        public string IllName { get; set; }
 
         [DataMember]
-        public string 患者分组 { get; set; }
+        public string PatGroup { get; set; }
 
         [DataMember]
-        public string 治疗原则 { get; set; }
+        public string CureTenet { get; set; }
 
         [DataMember]
-        public string 小字说明 { get; set; }
+        public string Memo { get; set; }
 
         [DataMember]
-        public int? 排序 { get; set; }
+        public int? OrderBy { get; set; }
 
         [DataMember]
-        public int? 分组排序 { get; set; }
+        public int? GroupOrderBy { get; set; }
 
         [DataMember]
         public System.DateTime? ImpTime { get; set; }

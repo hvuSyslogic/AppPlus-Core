@@ -61,18 +61,6 @@ namespace HisPlus.Contract.Messages
         public short OrderBy { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public short IconIndex { get; set; }
 
         [DataMember]
@@ -92,5 +80,17 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public System.DateTime? OperTime { get; set; }
+
+        [DataMember]
+        public bool? IsPoisonMa { get; set; }
+
+        [DataMember]
+        public bool? IsRecipe { get; set; }
+
+        [DataMember]
+        public short? Grade { get; set; }
+
+        [DataMember]
+        public bool? IsConsult { get; set; }
     }
 }

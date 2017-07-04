@@ -25,10 +25,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.CtrlId).HasColumnName(@"CtrlId").IsRequired().HasColumnType("int");
             Property(x => x.IsShowQc).HasColumnName(@"IsShowQc").IsOptional().HasColumnType("bit");
             Property(x => x.RejectMemo).HasColumnName(@"RejectMemo").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
         }
     }
 }

@@ -19,10 +19,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsDayBegin).HasColumnName(@"IsDayBegin").IsRequired().HasColumnType("bit");
             Property(x => x.GetdateStr).HasColumnName(@"GetdateStr").IsOptional().HasColumnType("nvarchar").HasMaxLength(8).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Computed);
             Property(x => x.NextSequenceStr).HasColumnName(@"NextSequenceStr").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(16).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Computed);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
         }
     }
 }

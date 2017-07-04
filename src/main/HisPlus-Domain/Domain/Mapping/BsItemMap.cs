@@ -60,10 +60,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.MemoPicture).HasColumnName(@"MemoPicture").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(200);
             Property(x => x.Memo).HasColumnName(@"Memo").IsOptional().HasColumnType("nvarchar").HasMaxLength(3000);
             Property(x => x.IsActive).HasColumnName(@"IsActive").IsOptional().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IconIndex).HasColumnName(@"IconIndex").IsOptional().HasColumnType("smallint");
             Property(x => x.IsInoculate).HasColumnName(@"IsInoculate").IsOptional().HasColumnType("bit");
             Property(x => x.PriceHighLine).HasColumnName(@"PriceHighLine").IsOptional().HasColumnType("decimal").HasPrecision(12,4);
@@ -82,8 +78,8 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.PackageSpec).HasColumnName(@"PackageSpec").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IsCitySum).HasColumnName(@"IsCitySum").IsOptional().HasColumnType("bit");
             Property(x => x.YbAvgPrice).HasColumnName(@"YBAvgPrice").IsOptional().HasColumnType("decimal").HasPrecision(12,4);
-            Property(x => x.TyxmCode).HasColumnName(@"TYXMCode").IsOptional().HasColumnType("int");
-            Property(x => x.TyxmName).HasColumnName(@"TYXMName").IsOptional().HasColumnType("nvarchar").HasMaxLength(200);
+            Property(x => x.ProvinceCode).HasColumnName(@"ProvinceCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(30);
+            Property(x => x.OperName).HasColumnName(@"OperName").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
         }
     }
 }

@@ -27,10 +27,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsAuth).HasColumnName(@"IsAuth").IsRequired().HasColumnType("bit");
             Property(x => x.AuthOperTime).HasColumnName(@"AuthOperTime").IsOptional().HasColumnType("smalldatetime");
             Property(x => x.AuthOperId).HasColumnName(@"AuthOperId").IsOptional().HasColumnType("int");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.XmlContent).HasColumnName(@"XMLContent").IsOptional().HasColumnType("image").HasMaxLength(2147483647);
             Property(x => x.IsRealease).HasColumnName(@"IsRealease").IsOptional().HasColumnType("bit");
             Property(x => x.RealeaseTime).HasColumnName(@"RealeaseTime").IsOptional().HasColumnType("smalldatetime");
@@ -43,12 +39,12 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.ClosedOperId).HasColumnName(@"ClosedOperId").IsOptional().HasColumnType("int");
             Property(x => x.IsCheck).HasColumnName(@"IsCheck").IsOptional().HasColumnType("bit");
             Property(x => x.LocationId).HasColumnName(@"LocationId").IsOptional().HasColumnType("int");
-            Property(x => x.F5).HasColumnName(@"F5").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IsDelete).HasColumnName(@"IsDelete").IsOptional().HasColumnType("bit");
             Property(x => x.OperTime2).HasColumnName(@"OperTime2").IsOptional().HasColumnType("smalldatetime");
-            Property(x => x.F6).HasColumnName(@"F6").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
-            Property(x => x.F7).HasColumnName(@"F7").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
-            Property(x => x.F8).HasColumnName(@"F8").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
+            Property(x => x.NodeOrderBy).HasColumnName(@"NodeOrderBy").IsOptional().HasColumnType("smallint");
+            Property(x => x.DeptName).HasColumnName(@"DeptName").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
+            Property(x => x.BedName).HasColumnName(@"BedName").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
+            Property(x => x.EmrTypeName).HasColumnName(@"EmrTypeName").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
         }
     }
 }

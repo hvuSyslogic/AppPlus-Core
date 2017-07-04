@@ -25,9 +25,5 @@ namespace HisPlus.Domain
         public int? DoctorId { get; set; }
         public string IdCardNo { get; set; }
         public short? LsMarriage { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
     }
 }

@@ -51,10 +51,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsCancel).HasColumnName(@"IsCancel").IsRequired().HasColumnType("bit");
             Property(x => x.CancelId).HasColumnName(@"CancelId").IsOptional().HasColumnType("int");
             Property(x => x.IsManual).HasColumnName(@"IsManual").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.HostName).HasColumnName(@"HostName").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.ExecuteId).HasColumnName(@"ExecuteId").IsOptional().HasColumnType("int");
             Property(x => x.RegDate).HasColumnName(@"RegDate").IsOptional().IsFixedLength().IsUnicode(false).HasColumnType("char").HasMaxLength(10);
@@ -62,10 +58,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.XdRpId).HasColumnName(@"XDRpId").IsOptional().HasColumnType("int");
             Property(x => x.AdviceName).HasColumnName(@"AdviceName").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.MainDoctorId).HasColumnName(@"MainDoctorId").IsOptional().HasColumnType("int");
-            Property(x => x.F5).HasColumnName(@"F5").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F6).HasColumnName(@"F6").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F7).HasColumnName(@"F7").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F8).HasColumnName(@"F8").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.OuInvoId).HasColumnName(@"OuInvoId").IsOptional().HasColumnType("int");
             Property(x => x.Urgent).HasColumnName(@"Urgent").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(20);
             Property(x => x.ReservedField).HasColumnName(@"ReservedField").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(50);
@@ -75,6 +67,7 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.LsPriceState).HasColumnName(@"LsPriceState").IsOptional().HasColumnType("int");
             Property(x => x.DocLocId).HasColumnName(@"DocLocId").IsOptional().HasColumnType("int");
             Property(x => x.ExecDoctorId).HasColumnName(@"ExecDoctorId").IsOptional().HasColumnType("int");
+            Property(x => x.IsYbxj).HasColumnName(@"IsYbxj").IsOptional().HasColumnType("bit");
         }
     }
 }

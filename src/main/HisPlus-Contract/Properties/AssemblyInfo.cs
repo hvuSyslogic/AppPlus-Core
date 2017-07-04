@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("HisPlus-Contract")]
-[assembly: AssemblyDescription("HISPlus Contract")]
-
+[assembly: AssemblyDescription("HisPlus application contract library")]
+[assembly: AssemblyProduct("HisPlus-Contract")]
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.

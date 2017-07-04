@@ -19,22 +19,23 @@ using Serialize.Linq.Extensions;
 using Serialize.Linq.Serializers;
 using AppPlus.Infrastructure.Contract.Messages;
 using AppPlus.Infrastructure.Contract.Services;
-using AppPlus.Core.Common.CodeContracts;
 using AppPlus.Infrastructure.Configuration;
 using AppPlus.Core.EntityFramework;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
+using System.Data.Entity.Core.EntityClient;
+using AppPlus.Core.Infrastructure.CodeContracts;
 
 namespace AppPlus.Core.Service
 {
-    [GlobalExceptionHandlerBehaviourAttribute(typeof(GlobalExceptionHandler))]
-    [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
+    [GlobalErrorBehaviorAttribute(typeof(GlobalErrorHandler))]
+    //[ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public abstract class AbstractService<TEntity, TDTO, TKey> : ServiceRoot, IGenericService<TDTO, TKey>
         where TEntity : EntityBase<TKey>, new()
         where TDTO : DtoBase<TKey>, new()
         where TKey : struct
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
-        private bool _disposed = false;
 
         #region Automapper configuration        
         protected override void ConfigureMap()
@@ -50,15 +51,10 @@ namespace AppPlus.Core.Service
 
             var entity = dto.MapTo<TEntity>();
 
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow => 
             {
-                command.Execute(uow =>
-                {
-                    uow.Create<TEntity>(entity);
-                });
-
-                return entity.MapTo<TDTO>();
-            }
+                return uow.Repo<TEntity>().Create(entity).MapTo<TDTO>();
+            });
         }
 
         public virtual IEnumerable<TDTO> Create(IEnumerable<TDTO> dtos)
@@ -67,52 +63,12 @@ namespace AppPlus.Core.Service
 
             var entities = dtos.MapTo<TEntity>();
 
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow => 
             {
-                command.Execute(uow =>
-                {
-                    uow.Create(entities);
-                });
-            }
-
-            return entities.MapTo<TDTO>();
+                return uow.Repo<TEntity>().Create(entities).MapTo<TDTO>();
+            });
         }
-        #endregion
-        
-        #region how to determine whether a Type is a number
-        // Taking Guillaume's solution a little further
-        // https://stackoverflow.com/questions/1749966/c-sharp-how-to-determine-whether-a-type-is-a-number
-        // https://stackoverflow.com/questions/1749966/c-sharp-how-to-determine-whether-a-type-is-a-number/1750093#1750093
-        //public static bool IsNumeric(object expression)
-        //{
-        //    if (expression == null)
-        //        return false;
-
-        //    double number;
-        //    return Double.TryParse(Convert.ToString(expression, CultureInfo.InvariantCulture), System.Globalization.NumberStyles.Any, NumberFormatInfo.InvariantInfo, out number);
-        //}
-
-        //public static bool IsNumericType(this object o)
-        //{
-        //    switch (Type.GetTypeCode(o.GetType()))
-        //    {
-        //        case TypeCode.Byte:
-        //        case TypeCode.SByte:
-        //        case TypeCode.UInt16:
-        //        case TypeCode.UInt32:
-        //        case TypeCode.UInt64:
-        //        case TypeCode.Int16:
-        //        case TypeCode.Int32:
-        //        case TypeCode.Int64:
-        //        case TypeCode.Decimal:
-        //        case TypeCode.Double:
-        //        case TypeCode.Single:
-        //            return true;
-        //        default:
-        //            return false;
-        //    }
-        //}
-        #endregion
+        #endregion              
 
         #region Retrieve
         public virtual TDTO RetrieveById(TKey id)
@@ -120,16 +76,11 @@ namespace AppPlus.Core.Service
             long result;
             long.TryParse(id.ToString(), out result);
             Requires.InRange(result > 0, "id");
-            
-            using (var command = CommandWrapper)
-            {
-                return command.Execute(uow =>
-                {
-                    var entity = uow.Retrieve<TEntity>(id);
 
-                    return entity.MapTo<TDTO>();
-                });
-            }
+            return UnitOfWork.Do(uow =>
+            {
+                return uow.Repo<TEntity>().Retrieve(id).MapTo<TDTO>();
+            });
         }
 
         public virtual IEnumerable<TDTO> Retrieve(ExpressionNode predicateExpressionNode)
@@ -140,28 +91,18 @@ namespace AppPlus.Core.Service
 
             var predicateExpression = Mapper.Map<Expression<Func<TEntity, bool>>>(expression);
 
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow =>
             {
-                return command.Execute(uow =>
-                {
-                    var entities = uow.Retrieve<TEntity>(predicateExpression);
-
-                    return entities.MapTo<TDTO>();
-                });
-            }
+                return uow.Repo<TEntity>().Retrieve(predicateExpression).MapTo<TDTO>();
+            });
         }
 
         public virtual IEnumerable<TDTO> RetrieveAll()
         {
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow =>
             {
-                return command.Execute(uow =>
-                {
-                    var entities = uow.Retrieve<TEntity>();
-
-                    return entities.MapTo<TDTO>();
-                });
-            }
+                return uow.Repo<TEntity>().Retrieve().MapTo<TDTO>();
+            });
         }
         #endregion
 
@@ -170,15 +111,12 @@ namespace AppPlus.Core.Service
         {
             Requires.NotNull(dto, "dto");
 
-            var entity = dto.MapTo<TEntity>();
+            var entity = dto.MapTo<TEntity>();           
 
-            using (var command = CommandWrapper)
+            UnitOfWork.Do(uow => 
             {
-                command.Execute(uow =>
-                {
-                    uow.Update<TEntity>(entity);
-                });
-            }
+                uow.Repo<TEntity>().Update(entity);
+            });
         }
 
         public virtual void Update(IEnumerable<TDTO> dtos)
@@ -187,13 +125,10 @@ namespace AppPlus.Core.Service
 
             var entities = dtos.MapTo<TEntity>();
 
-            using (var command = CommandWrapper)
+            UnitOfWork.Do(uow => 
             {
-                command.Execute(uow =>
-                {
-                    uow.Update(entities);
-                });
-            }
+                uow.Repo<TEntity>().Update(entities);
+            });
         }
 
         //public int Update<TEntity>(Expression<Func<TEntity, TEntity>> updateExpression,
@@ -211,28 +146,22 @@ namespace AppPlus.Core.Service
             long.TryParse(id.ToString(), out result);
             Requires.InRange(result > 0, "id");
 
-            using (var command = CommandWrapper)
+            UnitOfWork.Do(uow => 
             {
-                command.Execute(uow =>
-                {
-                    uow.Delete<TEntity>(id);
-                });
-            }
+                uow.Repo<TEntity>().Delete(id);
+            });
         }
 
         public virtual void Delete(TDTO dto)
         {
             Requires.NotNull(dto, "dto");
 
-            var entity = dto.MapTo<TEntity>();
+            var entity = dto.MapTo<TEntity>();         
 
-            using (var command = CommandWrapper)
+            UnitOfWork.Do(uow => 
             {
-                command.Execute(uow =>
-                {
-                    uow.Delete<TEntity>(entity);
-                });
-            }
+                uow.Repo<TEntity>().Delete(entity);
+            });
         }
 
         public virtual void Delete(IEnumerable<TDTO> dtos)
@@ -240,14 +169,11 @@ namespace AppPlus.Core.Service
             Requires.NotNullOrEmpty(dtos, "dtos");
 
             var entities = dtos.MapTo<TEntity>();
-
-            using (var command = CommandWrapper)
+            
+            UnitOfWork.Do(uow => 
             {
-                command.Execute(uow =>
-                {
-                    uow.Delete(entities);
-                });
-            }
+                uow.Repo<TEntity>().Delete(entities);
+            });
         }
 
         public virtual int Delete(ExpressionNode predicateExpressionNode)
@@ -257,24 +183,18 @@ namespace AppPlus.Core.Service
             var predicateExpression = (predicateExpressionNode == null)
                 ? null : Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());
 
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow => 
             {
-                return command.Execute(uow =>
-                {
-                    return uow.Delete<TEntity>(predicateExpression);
-                });
-            }
+                return uow.Repo<TEntity>().Delete(predicateExpression);
+            });
         }
 
         public virtual int DeleteAll()
         {
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow => 
             {
-                return command.Execute(uow =>
-                {
-                    return uow.Delete<TEntity>();
-                });
-            }
+                return uow.Repo<TEntity>().Delete();
+            });
         }
         #endregion
 
@@ -282,13 +202,10 @@ namespace AppPlus.Core.Service
 
         public virtual int Count()
         {
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow => 
             {
-                return command.Execute(uow =>
-                {
-                    return uow.Count<TEntity>();
-                });
-            }
+                return uow.Repo<TEntity>().Count();
+            });
         }
 
         public virtual int Count(ExpressionNode predicateExpressionNode)
@@ -296,14 +213,11 @@ namespace AppPlus.Core.Service
             Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
 
             var predicate = Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());
-
-            using (var command = CommandWrapper)
+            
+            return UnitOfWork.Do(uow =>
             {
-                return command.Execute(uow =>
-                {
-                    return uow.Count<TEntity>(predicate);
-                });
-            }
+                return uow.Repo<TEntity>().Count(predicate);
+            });
         }
         #endregion
 
@@ -313,13 +227,12 @@ namespace AppPlus.Core.Service
         {
             Requires.NotNull(dto, "dto");
 
-            using (var command = CommandWrapper)
+            TKey id = dto.Id;
+
+            return UnitOfWork.Do(uow => 
             {
-                return command.Execute(uow =>
-                {
-                    return uow.Retrieve<TEntity>(dto.Id) != null;
-                });
-            }
+                return uow.Repo<TEntity>().Retrieve(id) != null;
+            });
         }
 
         public virtual bool Contains(ExpressionNode predicateExpressionNode)
@@ -327,14 +240,11 @@ namespace AppPlus.Core.Service
             Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
 
             var predicate = Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());
-
-            using (var command = CommandWrapper)
+            
+            return UnitOfWork.Do(uow => 
             {
-                return command.Execute(uow =>
-                {
-                    return uow.Contains(predicate);
-                });
-            }
+                return uow.Repo<TEntity>().Contains(predicate);
+            });
         }
 
         #endregion
@@ -347,93 +257,108 @@ namespace AppPlus.Core.Service
 
             var predicate = (predicateExpressionNode == null)
                    ? null : Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());
+  
+            int total = 0;
 
-            using (var command = CommandWrapper)
+            return UnitOfWork.Do(uow =>
             {
-                return command.Execute(uow =>
-                {
-                    return uow.Filter(predicate, pageNumber, pageSize).Item1.MapTo<TDTO>();
-                });
-            }
+                return uow.Repo<TEntity>().Filter(predicate, out total, pageNumber, pageSize).MapTo<TDTO>();
+            }, new UnitOfWorkSettings() { EnableCommit = false });
         }
 
         #endregion
 
-        #region CreateOrUpdate
+        //#region CreateOrUpdate
 
-        public virtual Tuple<Int32, Int32> CreateOrUpdate(IEnumerable<TDTO> dtos)
+        //public virtual Tuple<Int32, Int32> CreateOrUpdate(IEnumerable<TDTO> dtos)
+        //{
+        //    Requires.NotNullOrEmpty(dtos, "dtos");
+
+        //    var addedEntityCollection = dtos.Where(x => x.Id.Equals(0)).MapTo<TEntity>();
+        //    var modifiedEntityCollection = dtos.Where(x => !x.Id.Equals(0)).MapTo<TEntity>();
+
+        //    return UnitOfWork.Do(uow => 
+        //    {
+        //        uow.Repo<TEntity>().Create(addedEntityCollection);
+        //        uow.Repo<TEntity>().Update(modifiedEntityCollection);
+
+        //        return new Tuple<int, int>(addedEntityCollection.Count(), modifiedEntityCollection.Count());
+        //    });
+        //}
+
+        //#endregion
+
+        #region ExecuteDataTable      
+
+        #endregion
+
+        #region ExecuteDataSet
+        protected virtual DataTable GetDataTableByStoredProc(string commandText, DbParameter[] parameters, string tableName = "")
         {
-            Requires.NotNullOrEmpty(dtos, "dtos");
+            DataSet ds = this.GetDataSet(commandText, CommandType.StoredProcedure, parameters);
+            DataTable dt = ds.Tables[0];
 
-            var addedEntityCollection = dtos.Where(x => x.Id.Equals(0)).MapTo<TEntity>();
-            var modifiedEntityCollection = dtos.Where(x => !x.Id.Equals(0)).MapTo<TEntity>();
-
-            using (var command = CommandWrapper)
+            if (string.IsNullOrWhiteSpace(tableName))
             {
-                command.Execute(uow =>
-                {
-                    uow.Create(addedEntityCollection);
-                    uow.Update(modifiedEntityCollection);
-                }, new UnitOfWorkSettings() { TransactionScope = TransactionOption.DBTransaction });
-
-                return new Tuple<int, int>(addedEntityCollection.Count(), modifiedEntityCollection.Count());
+                dt.TableName = tableName;
             }
+
+            return dt;
+        }
+
+        protected virtual DataTable GetDataTableBySql(string commandText, DbParameter[] parameters, string tableName)
+        {
+            DataSet ds = this.GetDataSet(commandText, CommandType.Text, parameters);
+            DataTable dt = ds.Tables[0];
+            if (string.IsNullOrWhiteSpace(tableName))
+            {
+                dt.TableName = tableName;
+            }
+            
+            return dt;
+        }
+
+        private DataSet GetDataSet(string commandText, CommandType commandType, DbParameter[] parameters)
+        {
+            DataSet ds = new DataSet();
+
+            return UnitOfWork.Do(uow => 
+            {
+                EntityConnection entityConnection = (EntityConnection)uow.Session.Database.Connection;
+
+                SqlConnection connection = (SqlConnection)entityConnection.StoreConnection;
+                SqlCommand command = new SqlCommand(commandText, connection);
+
+                using (command)
+                {
+                    command.CommandType = commandType;
+                 
+                    if (parameters != null)
+                    {
+                        foreach (SqlParameter parameter in parameters)
+                        {
+                            if (parameter != null)
+                            {
+                                if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &&
+                                    (parameter.Value == null))
+                                {
+                                    parameter.Value = DBNull.Value;
+                                }
+
+                                command.Parameters.Add(parameter);
+                            }
+                        }
+                    }
+
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
+
+                    sqlDataAdapter.Fill(ds);
+
+                    return ds;
+                }
+            }, new UnitOfWorkSettings() { EnableCommit = false });            
         }
 
         #endregion
-
-        //#region ExecuteDataSet
-
-        //protected virtual DataSet ExecuteDataSet(string cmdText, DbParameter[] parameters, CommandType commandType)
-        //{
-        //    using (var command = CommandWrapper)
-        //    {
-        //        return command.Execute(uow =>
-        //        {
-        //            return uow.ExecuteDataSet(cmdText, parameters, commandType);
-        //        });
-        //    }
-        //}
-
-        //protected virtual DataTable ExecuteDataTable(string cmdText, DbParameter[] parameters, CommandType commandType)
-        //{
-        //    using (var command = CommandWrapper)
-        //    {
-        //        return command.Execute(uow =>
-        //        {
-        //            return uow.ExecuteDataTable(cmdText, parameters, commandType);
-        //        });
-        //    }
-        //}
-
-        //#endregion
-
-        //#region Dispose
-
-        //public void Dispose()
-        //{
-        //    Log.Error("abstract service Dispose()");
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
-
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    Log.Error("abstract service Dispose(bool)");
-        //    if (!this._disposed)
-        //    {
-        //        if (disposing)
-        //        {
-        //            if (CommandWrapper != null)
-        //            {
-        //                CommandWrapper.Dispose();
-        //            }
-        //        }
-        //    }
-
-        //    this._disposed = true;
-        //}
-
-        //#endregion
     }
 }

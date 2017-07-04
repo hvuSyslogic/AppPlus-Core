@@ -40,21 +40,12 @@ namespace HisPlus.Contract.Messages
         public string DownLoadHostNames { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public string HospitalIds { get; set; }
 
         [DataMember]
         public bool? IsChoose { get; set; }
+
+        [DataMember]
+        public string FileSize { get; set; }
     }
 }

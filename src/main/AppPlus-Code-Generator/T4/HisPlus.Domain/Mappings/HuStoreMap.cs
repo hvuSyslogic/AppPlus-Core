@@ -31,10 +31,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsBalance).HasColumnName(@"IsBalance").IsRequired().HasColumnType("bit");
             Property(x => x.IsNewin).HasColumnName(@"IsNewin").IsRequired().HasColumnType("bit");
             Property(x => x.IsBid).HasColumnName(@"IsBid").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
         }
     }
 }

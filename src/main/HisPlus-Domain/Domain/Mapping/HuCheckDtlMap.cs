@@ -38,10 +38,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.LoseOut).HasColumnName(@"LoseOut").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.AdjustAmouUp).HasColumnName(@"AdjustAmouUp").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.AdjustAmouDn).HasColumnName(@"AdjustAmouDn").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
         }
     }
 }

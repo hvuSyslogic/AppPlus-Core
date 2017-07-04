@@ -9,6 +9,8 @@ using AppPlus.Infrastructure.Configuration;
 using AppPlus.Infrastructure.Contract.Services;
 using log4net;
 using System.Reflection;
+using AppPlus.Core.EntityFramework;
+using System.Data.Entity.Infrastructure;
 
 namespace AppPlus.Core.Service
 {    
@@ -16,14 +18,7 @@ namespace AppPlus.Core.Service
     {
         private bool _disposed = false;
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-                
-        [Dependency]
-        protected ICommandWrapper CommandWrapper
-        {
-            get;
-            set;
-        }
-
+          
         [Obsolete]
         protected override void Configure()
         {
@@ -34,28 +29,32 @@ namespace AppPlus.Core.Service
 
         public void Dispose()
         {
-            Log.Debug("ServiceRoot Dispose() .......");
-
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            Log.Debug("ServiceRoot Dispose(bool) .........");
-
             if (!this._disposed)
             {
                 if (disposing)
                 {
-                    if (CommandWrapper != null)
-                    {
-                        CommandWrapper.Dispose();
-                    }
+                    // TODO:
                 }
             }
 
             this._disposed = true;
+        }
+
+        public DateTime GetCurrentDateTime()
+        {
+            return UnitOfWork.Do(uow =>
+            {
+                return (uow.Session as IObjectContextAdapter).ObjectContext
+                    .CreateQuery<DateTime>("CurrentDateTime()")
+                    .AsEnumerable()
+                    .First();
+            }, new UnitOfWorkSettings() { EnableCommit = false });
         }
     }
 }

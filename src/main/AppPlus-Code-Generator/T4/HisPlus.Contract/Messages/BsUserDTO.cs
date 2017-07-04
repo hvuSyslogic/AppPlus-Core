@@ -31,18 +31,6 @@ namespace HisPlus.Contract.Messages
         public short LsInputWay { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public short IconIndex { get; set; }
 
         [DataMember]
@@ -89,9 +77,6 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public int? CareGroupId1 { get; set; }
-
-        [DataMember]
-        public string F5 { get; set; }
 
         [DataMember]
         public string CertIdNo { get; set; }

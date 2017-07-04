@@ -23,10 +23,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.Pycode).HasColumnName(@"PYCODE").IsRequired().HasColumnType("nvarchar").HasMaxLength(20);
             Property(x => x.Orderby).HasColumnName(@"ORDERBY").IsRequired().HasColumnType("int");
             Property(x => x.Isactive).HasColumnName(@"ISACTIVE").IsRequired().HasColumnType("int");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.Iconindex).HasColumnName(@"ICONINDEX").IsRequired().HasColumnType("int");
         }
     }

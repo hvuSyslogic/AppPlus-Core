@@ -21,10 +21,6 @@ namespace HisPlus.Domain
         public System.DateTime? LimitDate { get; set; }
         public bool IsBid { get; set; }
         public string VoucherNo { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? ProAreaId { get; set; }
         public int? ManuId { get; set; }
         public string PassNo { get; set; }

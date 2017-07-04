@@ -54,10 +54,6 @@ namespace HisPlus.Domain
         public string MemoPicture { get; set; }
         public string Memo { get; set; }
         public bool? IsActive { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public short? IconIndex { get; set; }
         public bool? IsInoculate { get; set; }
         public decimal? PriceHighLine { get; set; }
@@ -76,7 +72,7 @@ namespace HisPlus.Domain
         public string PackageSpec { get; set; }
         public bool? IsCitySum { get; set; }
         public decimal? YbAvgPrice { get; set; }
-        public int? TyxmCode { get; set; }
-        public string TyxmName { get; set; }
+        public string ProvinceCode { get; set; }
+        public string OperName { get; set; }
     }
 }

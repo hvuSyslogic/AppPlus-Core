@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AppPlus.Infrastructure")]
-[assembly: AssemblyDescription("App Plus Infrastructure Library")]
-
+[assembly: AssemblyTitle("AppPlus-Infrastructure")]
+[assembly: AssemblyDescription("AppPlus infrastructure classes")]
+[assembly: AssemblyProduct("AppPlus-Infrastructure")]
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.

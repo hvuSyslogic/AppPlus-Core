@@ -35,10 +35,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.ConfirmOperId).HasColumnName(@"ConfirmOperId").IsOptional().HasColumnType("int");
             Property(x => x.ConfirmOperTime).HasColumnName(@"ConfirmOperTime").IsOptional().HasColumnType("datetime");
             Property(x => x.DetailId).HasColumnName(@"DetailId").IsOptional().HasColumnType("int");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.ExecuteId).HasColumnName(@"ExecuteId").IsOptional().HasColumnType("int");
             Property(x => x.RegDate).HasColumnName(@"RegDate").IsOptional().IsFixedLength().IsUnicode(false).HasColumnType("char").HasMaxLength(10);
             Property(x => x.LsSecMarkType).HasColumnName(@"LsSecMarkType").IsOptional().HasColumnType("int");
@@ -49,6 +45,10 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.OperId).HasColumnName(@"OperId").IsOptional().HasColumnType("int");
             Property(x => x.PriceIn).HasColumnName(@"PriceIn").IsOptional().HasColumnType("decimal").HasPrecision(10,2);
             Property(x => x.LsArrearage).HasColumnName(@"LsArrearage").IsOptional().HasColumnType("bit");
+            Property(x => x.DoctorName).HasColumnName(@"DoctorName").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
+            Property(x => x.IsOutDrug).HasColumnName(@"IsOutDrug").IsOptional().HasColumnType("bit");
+            Property(x => x.UsageMemo).HasColumnName(@"UsageMemo").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
+            Property(x => x.UseTime).HasColumnName(@"UseTime").IsOptional().HasColumnType("smalldatetime");
         }
     }
 }

@@ -148,18 +148,6 @@ namespace HisPlus.Contract.Messages
         public bool? IsActive { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public short? IconIndex { get; set; }
 
         [DataMember]
@@ -214,9 +202,9 @@ namespace HisPlus.Contract.Messages
         public decimal? YbAvgPrice { get; set; }
 
         [DataMember]
-        public int? TyxmCode { get; set; }
+        public string ProvinceCode { get; set; }
 
         [DataMember]
-        public string TyxmName { get; set; }
+        public string OperName { get; set; }
     }
 }

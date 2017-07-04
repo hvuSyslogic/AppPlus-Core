@@ -15,8 +15,5 @@ namespace HisPlus.Domain
         public int? RelationCode { get; set; }
         public string WayCode { get; set; }
         public string Remark { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
     }
 }

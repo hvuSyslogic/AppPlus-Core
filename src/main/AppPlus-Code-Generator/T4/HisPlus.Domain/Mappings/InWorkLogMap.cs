@@ -32,14 +32,17 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.OverNum).HasColumnName(@"OverNum").IsOptional().HasColumnType("smallint");
             Property(x => x.CompanyNum).HasColumnName(@"CompanyNum").IsOptional().HasColumnType("smallint");
             Property(x => x.Memo).HasColumnName(@"Memo").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.Days).HasColumnName(@"Days").IsOptional().HasColumnType("int");
             Property(x => x.Danger).HasColumnName(@"Danger").IsOptional().HasColumnType("int");
             Property(x => x.Heavy).HasColumnName(@"Heavy").IsOptional().HasColumnType("int");
             Property(x => x.Acute).HasColumnName(@"Acute").IsOptional().HasColumnType("int");
+            Property(x => x.Second).HasColumnName(@"Second").IsOptional().HasColumnType("smallint");
+            Property(x => x.Ops).HasColumnName(@"Ops").IsOptional().HasColumnType("smallint");
+            Property(x => x.ChildBirth).HasColumnName(@"ChildBirth").IsOptional().HasColumnType("smallint");
+            Property(x => x.FirstNurse).HasColumnName(@"FirstNurse").IsOptional().HasColumnType("smallint");
+            Property(x => x.Third).HasColumnName(@"Third").IsOptional().HasColumnType("smallint");
+            Property(x => x.Diff).HasColumnName(@"Diff").IsOptional().HasColumnType("smallint");
+            Property(x => x.Other).HasColumnName(@"Other").IsOptional().HasColumnType("smallint");
         }
     }
 }

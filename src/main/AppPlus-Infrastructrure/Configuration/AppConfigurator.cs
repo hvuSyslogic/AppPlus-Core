@@ -40,18 +40,14 @@ namespace AppPlus.Infrastructure.Configuration
 
             return Container;
         }
-    }
-
-    public enum ServiceMode
-    {
-        Local = 0,
-        Remote = 1,        
-    }
+    }    
 
     public class ServiceConfiguration
     {
         public ServiceMode ServiceMode { get; internal set; }
+
         public string Host { get; internal set; }
+
         public int Port { get; internal set; }
     }
 }

@@ -25,10 +25,6 @@ namespace HisPlus.Domain
         public string PicturePath { get; set; }
         public short LsStatus { get; set; }
         public short OrderBy { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public short IconIndex { get; set; }
         public int? UserId { get; set; }
         public string PyCode { get; set; }
@@ -36,5 +32,9 @@ namespace HisPlus.Domain
         public int? SupDoctorId { get; set; }
         public int? DiagRoomId { get; set; }
         public System.DateTime? OperTime { get; set; }
+        public bool? IsPoisonMa { get; set; }
+        public bool? IsRecipe { get; set; }
+        public short? Grade { get; set; }
+        public bool? IsConsult { get; set; }
     }
 }

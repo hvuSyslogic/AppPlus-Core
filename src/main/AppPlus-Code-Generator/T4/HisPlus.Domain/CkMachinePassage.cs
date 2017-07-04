@@ -14,9 +14,5 @@ namespace HisPlus.Domain
         public string PassAgeNum { get; set; }
         public decimal Modulus { get; set; }
         public bool IsQc { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
     }
 }

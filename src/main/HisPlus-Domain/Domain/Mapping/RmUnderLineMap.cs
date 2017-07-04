@@ -20,12 +20,9 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.UnderLine).HasColumnName(@"UnderLine").IsRequired().HasColumnType("decimal").HasPrecision(10,2);
             Property(x => x.UperLine).HasColumnName(@"UperLine").IsRequired().HasColumnType("decimal").HasPrecision(10,2);
             Property(x => x.Normal).HasColumnName(@"Normal").IsRequired().HasColumnType("decimal").HasPrecision(10,2);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IsActive).HasColumnName(@"IsActive").IsOptional().HasColumnType("bit");
             Property(x => x.OrderBy).HasColumnName(@"OrderBy").IsOptional().HasColumnType("smallint");
+            Property(x => x.IsStop).HasColumnName(@"IsStop").IsOptional().HasColumnType("bit");
         }
     }
 }

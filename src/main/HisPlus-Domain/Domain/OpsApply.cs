@@ -45,10 +45,6 @@ namespace HisPlus.Domain
         public string BloodSum { get; set; }
         public short? LsCutClass { get; set; }
         public short? LsCure { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public string BloodRpt { get; set; }
         public string Sensitive { get; set; }
         public int? OpsRoomId { get; set; }

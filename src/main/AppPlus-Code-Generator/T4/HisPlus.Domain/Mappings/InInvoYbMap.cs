@@ -34,10 +34,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.SelfPayB3).HasColumnName(@"SelfPayB3").IsOptional().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.OutTopSelfFee).HasColumnName(@"OutTopSelfFee").IsOptional().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.SelfFee).HasColumnName(@"SelfFee").IsOptional().HasColumnType("decimal").HasPrecision(18,2);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(50);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.BchzylbxAmount).HasColumnName(@"BchzylbxAmount").IsOptional().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.AccountAttribute).HasColumnName(@"AccountAttribute").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.BcProportion).HasColumnName(@"BcProportion").IsOptional().HasColumnType("decimal").HasPrecision(18,2);
@@ -90,11 +86,8 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.OriginalA19).HasColumnName(@"OriginalA19").IsOptional().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.OriginalA20).HasColumnName(@"OriginalA20").IsOptional().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.HospId).HasColumnName(@"HospId").IsOptional().HasColumnType("int");
-            Property(x => x.F5).HasColumnName(@"F5").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F6).HasColumnName(@"F6").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
-            Property(x => x.F7).HasColumnName(@"F7").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
-            Property(x => x.F8).HasColumnName(@"F8").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
             Property(x => x.InvoYbTime).HasColumnName(@"InvoYBTime").IsOptional().HasColumnType("datetime");
+            Property(x => x.YbPatType).HasColumnName(@"YbPatType").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
         }
     }
 }

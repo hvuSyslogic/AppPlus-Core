@@ -24,10 +24,9 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.Memo).HasColumnName(@"Memo").IsOptional().HasColumnType("nvarchar").HasMaxLength(200);
             Property(x => x.OperTime).HasColumnName(@"OperTime").IsOptional().HasColumnType("smalldatetime");
             Property(x => x.OperId).HasColumnName(@"OperId").IsOptional().HasColumnType("int");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
+            Property(x => x.BloodDonor).HasColumnName(@"BloodDonor").IsOptional().HasColumnType("nvarchar").HasMaxLength(30);
+            Property(x => x.MzRegId).HasColumnName(@"MzRegId").IsOptional().HasColumnType("int");
+            Property(x => x.Receptor).HasColumnName(@"Receptor").IsOptional().HasColumnType("nvarchar").HasMaxLength(30);
         }
     }
 }

@@ -23,10 +23,6 @@ namespace HisPlus.Domain
         public System.DateTime? CancelTime { get; set; }
         public int? CancelOperId { get; set; }
         public int? InvoLastId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? HospitalId { get; set; }
         public int? RegTypeId { get; set; }
         public int? DoctorId { get; set; }
@@ -36,5 +32,6 @@ namespace HisPlus.Domain
         public System.DateTime? CancelCheckTime { get; set; }
         public int? DocLocId { get; set; }
         public string OrderWxid { get; set; }
+        public bool? IsRegDoctorTemp { get; set; }
     }
 }

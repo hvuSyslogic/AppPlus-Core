@@ -23,10 +23,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.ApplyHander).HasColumnName(@"ApplyHander").IsRequired().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.OperId).HasColumnName(@"OperId").IsRequired().HasColumnType("int");
             Property(x => x.OperTime).HasColumnName(@"OperTime").IsRequired().HasColumnType("smalldatetime");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.CompId).HasColumnName(@"CompId").IsOptional().HasColumnType("int");
         }
     }

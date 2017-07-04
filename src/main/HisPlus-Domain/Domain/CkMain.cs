@@ -29,10 +29,6 @@ namespace HisPlus.Domain
         public string ReportMemo { get; set; }
         public string TechMemo { get; set; }
         public string OtherMemo { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? CompanyId { get; set; }
         public int? CompanyGroupId { get; set; }
         public string RptFileName { get; set; }

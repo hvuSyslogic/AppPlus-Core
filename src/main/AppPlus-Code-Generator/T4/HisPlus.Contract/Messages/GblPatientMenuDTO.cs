@@ -49,18 +49,6 @@ namespace HisPlus.Contract.Messages
         public bool IsActive { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public short IconIndex { get; set; }
 
         [DataMember]
@@ -71,5 +59,8 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public string SearchConfig { get; set; }
+
+        [DataMember]
+        public string FileEmt { get; set; }
     }
 }

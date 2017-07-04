@@ -33,10 +33,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.BackDate).HasColumnName(@"BackDate").IsOptional().HasColumnType("smalldatetime");
             Property(x => x.BackOperId).HasColumnName(@"BackOperId").IsOptional().HasColumnType("int");
             Property(x => x.BackMemo).HasColumnName(@"BackMemo").IsOptional().HasColumnType("nvarchar").HasMaxLength(200);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.Unit).HasColumnName(@"Unit").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.DiscardReason).HasColumnName(@"DiscardReason").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.DiscardTime).HasColumnName(@"DiscardTime").IsOptional().HasColumnType("smalldatetime");

@@ -72,8 +72,9 @@ namespace AppPlus.Core
         {
             container.RegisterType<DbContext, TDbContext>(new InjectionConstructor(connectionString))
                 .RegisterType<DbContext, TDbContext>()
-                .RegisterType<IUnitOfWork, UnitOfWork<TDbContext>>()
-                .RegisterType<ICommandWrapper, CommandWrapper>()
+                .RegisterType<IUnitOfWork, UnitOfWork>()
+                .RegisterType(typeof(IRepository<>), typeof(Repository<>))
+                .RegisterType<ICommonService, CommonService>()
                 ;
 
             return container;      

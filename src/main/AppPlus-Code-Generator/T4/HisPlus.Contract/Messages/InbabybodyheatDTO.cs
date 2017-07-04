@@ -106,18 +106,6 @@ namespace HisPlus.Contract.Messages
         public int? Locationid { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public decimal? Bg { get; set; }
 
         [DataMember]
@@ -142,9 +130,12 @@ namespace HisPlus.Contract.Messages
         public int? Umbilical { get; set; }
 
         [DataMember]
-        public string F5 { get; set; }
+        public string TimeQuantum { get; set; }
 
         [DataMember]
-        public string F6 { get; set; }
+        public string UmbilicalExplain { get; set; }
+
+        [DataMember]
+        public string FecesExplain { get; set; }
     }
 }

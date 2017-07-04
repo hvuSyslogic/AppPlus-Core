@@ -20,13 +20,10 @@ namespace HisPlus.Domain
         public string Memo { get; set; }
         public bool IsPend { get; set; }
         public bool IsExecuted { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? PatId { get; set; }
         public bool? IsDosage { get; set; }
         public int? DosageOperId { get; set; }
         public System.DateTime? DosageTime { get; set; }
+        public int? HospitalId { get; set; }
     }
 }

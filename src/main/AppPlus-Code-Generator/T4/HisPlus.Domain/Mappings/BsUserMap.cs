@@ -21,10 +21,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsActive).HasColumnName(@"IsActive").IsRequired().HasColumnType("bit");
             Property(x => x.Reason).HasColumnName(@"Reason").IsOptional().HasColumnType("nvarchar").HasMaxLength(12);
             Property(x => x.LsInputWay).HasColumnName(@"LsInputWay").IsRequired().HasColumnType("smallint");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IconIndex).HasColumnName(@"IconIndex").IsRequired().HasColumnType("smallint");
             Property(x => x.IsUserInputWb).HasColumnName(@"IsUserInputWB").IsOptional().HasColumnType("bit");
             Property(x => x.IsUserInputPy).HasColumnName(@"IsUserInputPY").IsOptional().HasColumnType("bit");
@@ -41,7 +37,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.HospitalId).HasColumnName(@"HospitalId").IsOptional().HasColumnType("int");
             Property(x => x.CareGroupId).HasColumnName(@"CareGroupId").IsOptional().HasColumnType("int");
             Property(x => x.CareGroupId1).HasColumnName(@"CareGroupId1").IsOptional().HasColumnType("int");
-            Property(x => x.F5).HasColumnName(@"F5").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.CertIdNo).HasColumnName(@"CertIdNo").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.PyCode).HasColumnName(@"PyCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(30);
             Property(x => x.WbCode).HasColumnName(@"WbCode").IsOptional().HasColumnType("nvarchar").HasMaxLength(30);

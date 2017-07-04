@@ -45,15 +45,12 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.CheckResult).HasColumnName(@"CheckResult").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
             Property(x => x.CheckAdvice).HasColumnName(@"CheckAdvice").IsOptional().HasColumnType("nvarchar").HasMaxLength(200);
             Property(x => x.IsAbNormal).HasColumnName(@"IsAbNormal").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.Summary).HasColumnName(@"Summary").IsOptional().HasColumnType("nvarchar").HasMaxLength(1000);
             Property(x => x.Diagnose).HasColumnName(@"Diagnose").IsOptional().HasColumnType("nvarchar").HasMaxLength(1000);
             Property(x => x.CheckId).HasColumnName(@"CheckId").IsOptional().HasColumnType("int");
             Property(x => x.Id).HasColumnName(@"ID").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.ExecuteId).HasColumnName(@"ExecuteId").IsOptional().HasColumnType("int");
+            Property(x => x.CallGroup).HasColumnName(@"CallGroup").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
         }
     }
 }

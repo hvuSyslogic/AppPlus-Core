@@ -11,7 +11,7 @@ using HisPlus.Domain;
 
 namespace HisPlus.Services
 {
-	[GlobalExceptionHandlerBehaviourAttribute(typeof(GlobalExceptionHandler))]
+	[GlobalErrorBehaviorAttribute(typeof(GlobalErrorHandler))]
     public class OuInvoiceFeetySumService : AbstractService<OuInvoiceFeetySum, OuInvoiceFeetySumDTO, int>, IOuInvoiceFeetySumService
     {
     }

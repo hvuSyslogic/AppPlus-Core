@@ -73,18 +73,6 @@ namespace HisPlus.Contract.Messages
         public int? DetailId { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public int? ExecuteId { get; set; }
 
         [DataMember]
@@ -113,5 +101,17 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public bool? LsArrearage { get; set; }
+
+        [DataMember]
+        public string DoctorName { get; set; }
+
+        [DataMember]
+        public bool? IsOutDrug { get; set; }
+
+        [DataMember]
+        public string UsageMemo { get; set; }
+
+        [DataMember]
+        public System.DateTime? UseTime { get; set; }
     }
 }

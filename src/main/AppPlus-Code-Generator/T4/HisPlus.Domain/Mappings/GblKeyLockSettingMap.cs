@@ -24,10 +24,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.LockTime).HasColumnName(@"LockTime").IsRequired().HasColumnType("smalldatetime");
             Property(x => x.Spid).HasColumnName(@"SPID").IsRequired().HasColumnType("int");
             Property(x => x.LoginTime).HasColumnName(@"LoginTime").IsRequired().HasColumnType("datetime");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
         }
     }
 }

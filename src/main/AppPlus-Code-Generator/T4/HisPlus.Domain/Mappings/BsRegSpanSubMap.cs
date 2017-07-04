@@ -20,12 +20,9 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.TimeBegin).HasColumnName(@"TimeBegin").IsOptional().IsFixedLength().IsUnicode(false).HasColumnType("char").HasMaxLength(5);
             Property(x => x.TimeEnd).HasColumnName(@"TimeEnd").IsOptional().IsFixedLength().IsUnicode(false).HasColumnType("char").HasMaxLength(5);
             Property(x => x.IsActive).HasColumnName(@"IsActive").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IconIndex).HasColumnName(@"IconIndex").IsRequired().HasColumnType("smallint");
             Property(x => x.TimeSpanId).HasColumnName(@"TimeSpanId").IsOptional().HasColumnType("int");
+            Property(x => x.NoSource).HasColumnName(@"NoSource").IsOptional().HasColumnType("smallint");
         }
     }
 }

@@ -24,10 +24,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.SignTime).HasColumnName(@"SignTime").IsOptional().HasColumnType("datetime");
             Property(x => x.SignOperId).HasColumnName(@"SignOperId").IsOptional().HasColumnType("int");
             Property(x => x.IsBack).HasColumnName(@"IsBack").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.Memo).HasColumnName(@"Memo").IsOptional().HasColumnType("nvarchar").HasMaxLength(200);
             Property(x => x.BuyId).HasColumnName(@"BuyId").IsOptional().HasColumnType("int");
             Property(x => x.BuyWayId).HasColumnName(@"BuyWayId").IsOptional().HasColumnType("int");

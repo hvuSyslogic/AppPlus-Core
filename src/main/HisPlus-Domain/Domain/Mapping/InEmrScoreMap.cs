@@ -20,10 +20,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.Emritemscore).HasColumnName(@"EMRITEMSCORE").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.Emrscore).HasColumnName(@"EMRSCORE").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.Isscore).HasColumnName(@"ISSCORE").IsOptional().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(400);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(400);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(400);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(400);
             Property(x => x.Partscore).HasColumnName(@"PARTSCORE").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
         }
     }

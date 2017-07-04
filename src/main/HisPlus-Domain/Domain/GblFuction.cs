@@ -16,10 +16,6 @@ namespace HisPlus.Domain
         public bool? IsTest { get; set; }
         public short? LsClass { get; set; }
         public int OrderBy { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public string Code { get; set; }
     }
 }

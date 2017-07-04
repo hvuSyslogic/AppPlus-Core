@@ -13,9 +13,5 @@ namespace HisPlus.Domain
         public int BillId { get; set; }
         public decimal? Amount { get; set; }
         public decimal? HasPay { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
     }
 }

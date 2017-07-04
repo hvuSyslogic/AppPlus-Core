@@ -10,5 +10,6 @@ namespace AppPlus.Infrastructure.Contract.Services
     [ServiceContract]
     public interface IServiceRoot : IDisposable
     {
+        DateTime GetCurrentDateTime();
     }
 }

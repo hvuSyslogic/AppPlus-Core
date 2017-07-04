@@ -81,12 +81,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BS\BSLocationServiceTests.cs" />
-    <Compile Include="Common\Fixture\CommonServiceTestsFixture.cs" />
-    <Compile Include="BS\BSGfxeServiceUnitTests.cs" />
+    <Compile Include="Common\BsGfxeServiceTestsFixture.cs" />
+    <Compile Include="BS\BsGfxeServiceUnitTests.cs" />
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\GblRoleServiceTestsFixture.cs" />
+    <Compile Include="Common\TestsFixtureBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\TestBase.cs" />
+    <Compile Include="Sample\SampleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

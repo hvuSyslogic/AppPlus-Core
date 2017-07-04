@@ -16,10 +16,6 @@ namespace HisPlus.Domain
         public System.DateTime OperTime { get; set; }
         public int OperId { get; set; }
         public bool IsBack { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? DetailId { get; set; }
         public System.DateTime? BackTime { get; set; }
         public int? AdviceId { get; set; }
@@ -27,5 +23,7 @@ namespace HisPlus.Domain
         public bool? IsPrint { get; set; }
         public int? HospId { get; set; }
         public int? RequestId { get; set; }
+        public string Memo { get; set; }
+        public int? BackOperId { get; set; }
     }
 }

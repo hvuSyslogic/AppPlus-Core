@@ -20,10 +20,6 @@ namespace HisPlus.Domain
         public string CheckUp { get; set; }
         public string CheckCt { get; set; }
         public string Disposal { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public string Impression { get; set; }
         public string Analys { get; set; }
         public string Others { get; set; }

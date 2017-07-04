@@ -51,10 +51,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.BloodSum).HasColumnName(@"BloodSum").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.LsCutClass).HasColumnName(@"LsCutClass").IsOptional().HasColumnType("smallint");
             Property(x => x.LsCure).HasColumnName(@"LsCure").IsOptional().HasColumnType("smallint");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.BloodRpt).HasColumnName(@"BloodRpt").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
             Property(x => x.Sensitive).HasColumnName(@"Sensitive").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
             Property(x => x.OpsRoomId).HasColumnName(@"OpsRoomId").IsOptional().HasColumnType("int");

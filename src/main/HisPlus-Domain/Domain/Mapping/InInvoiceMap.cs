@@ -40,10 +40,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.CancelOperId).HasColumnName(@"CancelOperID").IsOptional().HasColumnType("int");
             Property(x => x.CancelMemo).HasColumnName(@"CancelMemo").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
             Property(x => x.InvoLastId).HasColumnName(@"InvoLastId").IsOptional().HasColumnType("int");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.YbIllId).HasColumnName(@"YbIllId").IsOptional().HasColumnType("int");
             Property(x => x.HospitalId).HasColumnName(@"HospitalId").IsOptional().HasColumnType("int");
             Property(x => x.CheckTime).HasColumnName(@"CheckTime").IsOptional().HasColumnType("datetime");
@@ -51,6 +47,8 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.ReAmount).HasColumnName(@"ReAmount").IsOptional().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.ReAmountDate).HasColumnName(@"ReAmountDate").IsOptional().HasColumnType("datetime");
             Property(x => x.ReAmountMemo).HasColumnName(@"ReAmountMemo").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
+            Property(x => x.DepositBillNo).HasColumnName(@"DepositBillNo").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
+            Property(x => x.CancelHospital).HasColumnName(@"CancelHospital").IsOptional().HasColumnType("int");
         }
     }
 }

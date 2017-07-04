@@ -18,9 +18,9 @@ namespace HisPlus.Contract.Messages
         public string EvaluateName { get; set; }
 
         [DataMember]
-        public string Py { get; set; }
+        public string Name { get; set; }
 
         [DataMember]
-        public string Name { get; set; }
+        public string PyCode { get; set; }
     }
 }

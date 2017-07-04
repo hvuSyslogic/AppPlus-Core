@@ -18,10 +18,6 @@ namespace HisPlus.Domain
         public bool IsPrint { get; set; }
         public System.DateTime? PrintOperTime { get; set; }
         public int? PrintOperId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public System.DateTime? AdviceTime { get; set; }
         public int? DoctorId { get; set; }
         public int? HospId { get; set; }
@@ -55,5 +51,6 @@ namespace HisPlus.Domain
         public short? LastDay { get; set; }
         public bool? IsLastLong { get; set; }
         public bool? IsArrearage { get; set; }
+        public string YbType { get; set; }
     }
 }

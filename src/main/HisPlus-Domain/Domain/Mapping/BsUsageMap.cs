@@ -38,15 +38,8 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsMzCure).HasColumnName(@"IsMzCure").IsRequired().HasColumnType("bit");
             Property(x => x.OrderBy).HasColumnName(@"OrderBy").IsRequired().HasColumnType("smallint");
             Property(x => x.IsActive).HasColumnName(@"IsActive").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.IconIndex).HasColumnName(@"IconIndex").IsRequired().HasColumnType("smallint");
             Property(x => x.IsPrintAtomization).HasColumnName(@"IsPrintAtomization").IsOptional().HasColumnType("bit");
-            Property(x => x.F5).HasColumnName(@"F5").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F6).HasColumnName(@"F6").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F7).HasColumnName(@"F7").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.LsInOutType).HasColumnName(@"LsInOutType").IsOptional().HasColumnType("int");
             Property(x => x.IsDrugTwoDay).HasColumnName(@"IsDrugTwoDay").IsOptional().HasColumnType("bit");
         }

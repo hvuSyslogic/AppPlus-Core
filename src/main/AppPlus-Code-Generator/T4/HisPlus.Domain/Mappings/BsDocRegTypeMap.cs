@@ -22,10 +22,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.LastLimitDate).HasColumnName(@"LastLimitDate").IsOptional().HasColumnType("smalldatetime");
             Property(x => x.LastLimitNum).HasColumnName(@"LastLimitNum").IsOptional().HasColumnType("smallint");
             Property(x => x.IsActive).HasColumnName(@"IsActive").IsOptional().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.WeekDay).HasColumnName(@"WeekDay").IsRequired().HasColumnType("smallint");
             Property(x => x.TimeSpanId).HasColumnName(@"TimeSpanId").IsRequired().HasColumnType("int");
             Property(x => x.RoomNo).HasColumnName(@"RoomNo").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);

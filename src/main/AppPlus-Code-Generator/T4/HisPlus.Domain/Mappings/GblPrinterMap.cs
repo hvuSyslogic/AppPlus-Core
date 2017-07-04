@@ -18,10 +18,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.Hostname).HasColumnName(@"Hostname").IsRequired().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.ReportName).HasColumnName(@"ReportName").IsRequired().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.PrinterName).HasColumnName(@"PrinterName").IsRequired().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
         }
     }
 }

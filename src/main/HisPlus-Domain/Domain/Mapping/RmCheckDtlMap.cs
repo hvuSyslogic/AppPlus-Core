@@ -46,13 +46,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.RecipeOut).HasColumnName(@"RecipeOut").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.KsBackIn).HasColumnName(@"KsBackIn").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.KsOut).HasColumnName(@"KsOut").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F5).HasColumnName(@"F5").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F6).HasColumnName(@"F6").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F7).HasColumnName(@"F7").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
         }
     }
 }

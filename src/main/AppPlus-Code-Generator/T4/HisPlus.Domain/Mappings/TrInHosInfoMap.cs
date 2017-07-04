@@ -31,10 +31,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.DoctorId).HasColumnName(@"DoctorId").IsOptional().HasColumnType("int");
             Property(x => x.IdCardNo).HasColumnName(@"IdCardNo").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.LsMarriage).HasColumnName(@"LsMarriage").IsOptional().HasColumnType("smallint");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
         }
     }
 }

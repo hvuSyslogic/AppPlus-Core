@@ -51,18 +51,12 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsIssue).HasColumnName(@"IsIssue").IsRequired().HasColumnType("bit");
             Property(x => x.IsBack).HasColumnName(@"IsBack").IsRequired().HasColumnType("bit");
             Property(x => x.RoomWindowName).HasColumnName(@"RoomWindowName").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.OperTime).HasColumnName(@"OperTime").IsOptional().HasColumnType("smalldatetime");
             Property(x => x.LsReportType).HasColumnName(@"LsReportType").IsOptional().HasColumnType("int");
             Property(x => x.DosageOperId).HasColumnName(@"DosageOperId").IsOptional().HasColumnType("int");
             Property(x => x.DosageTime).HasColumnName(@"DosageTime").IsOptional().HasColumnType("smalldatetime");
-            Property(x => x.F5).HasColumnName(@"F5").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F6).HasColumnName(@"F6").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F7).HasColumnName(@"F7").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F8).HasColumnName(@"F8").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
+            Property(x => x.PatTypeId).HasColumnName(@"PatTypeId").IsOptional().HasColumnType("int");
+            Property(x => x.PatId).HasColumnName(@"PatId").IsOptional().HasColumnType("int");
         }
     }
 }

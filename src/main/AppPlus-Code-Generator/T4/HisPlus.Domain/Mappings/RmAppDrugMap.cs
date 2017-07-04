@@ -23,10 +23,7 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsAffirm).HasColumnName(@"IsAffirm").IsRequired().HasColumnType("bit");
             Property(x => x.AffirmTime).HasColumnName(@"AffirmTime").IsOptional().HasColumnType("smalldatetime");
             Property(x => x.AffirmOperid).HasColumnName(@"AffirmOperid").IsOptional().HasColumnType("int");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
+            Property(x => x.IsAuth).HasColumnName(@"IsAuth").IsOptional().HasColumnType("bit");
         }
     }
 }

@@ -27,10 +27,6 @@ namespace HisPlus.Domain
         public System.DateTime? BackDate { get; set; }
         public int? BackOperId { get; set; }
         public string BackMemo { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public string Unit { get; set; }
         public string DiscardReason { get; set; }
         public System.DateTime? DiscardTime { get; set; }

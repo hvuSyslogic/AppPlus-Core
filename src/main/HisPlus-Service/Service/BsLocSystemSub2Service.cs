@@ -11,7 +11,7 @@ using HisPlus.Domain;
 
 namespace HisPlus.Services
 {
-	[GlobalExceptionHandlerBehaviourAttribute(typeof(GlobalExceptionHandler))]
+	[GlobalErrorBehaviorAttribute(typeof(GlobalErrorHandler))]
     public class BsLocSystemSub2Service : AbstractService<BsLocSystemSub2, BsLocSystemSub2DTO, int>, IBsLocSystemSub2Service
     {
     }

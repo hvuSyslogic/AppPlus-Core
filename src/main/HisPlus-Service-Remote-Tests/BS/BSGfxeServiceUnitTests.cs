@@ -14,7 +14,7 @@ using HisPlus.Service.Remote.Tests.Common;
 
 namespace HisPlus.Service.Remote.Tests.BS
 {
-    public class BSGfxeServiceUnitTests : TestBase, IClassFixture<CommonServiceTestsFixture>
+    public class BsGfxeServiceUnitTests : TestBase, IClassFixture<BsGfxeServiceTestsFixture>
     {
         private const string TraitName = "BSGfxeServiceUnitTests";
 
@@ -55,10 +55,10 @@ namespace HisPlus.Service.Remote.Tests.BS
         {
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => !x.IsActive);
             var expressionNode = expression.ToExpressionNode();
-            
+
             var result = CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
             Assert.NotNull(result);
-            Assert.True(result.Count() > 0); 
+            Assert.True(result.Count() > 0);
         }
 
         [Fact(DisplayName = "005_RetrieveByExpression_NOK")]
@@ -181,7 +181,7 @@ namespace HisPlus.Service.Remote.Tests.BS
             newItem.PyCode = "CSFYXE";
             newItem.WbCode = "CCCCCC";
             newItem.IsActive = false;
-            newItem.F4 = Constants.FLAG_TO_TEST;
+            newItem.IconIndex = Constants.FLAG_TO_DELETE;
             newItem = CallService((IBsGfxeService x) => x.Create(newItem));
             
             Assert.NotNull(newItem);
@@ -194,7 +194,7 @@ namespace HisPlus.Service.Remote.Tests.BS
         [Trait(TraitName, "Update")]
         public void Update_TestMethod()
         {
-            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.F4 == Constants.FLAG_TO_TEST);
+            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IconIndex == Constants.FLAG_TO_DELETE);
             var expressionNode = expression.ToExpressionNode();
             var result = CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
             Assert.NotNull(result);
@@ -220,23 +220,23 @@ namespace HisPlus.Service.Remote.Tests.BS
         [Trait(TraitName, "Update")]
         public void UpdateAll_TestMethod()
         {
-            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.F4 == Constants.FLAG_TO_TEST);
+            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IconIndex == Constants.FLAG_TO_DELETE);
             var expressionNode = expression.ToExpressionNode();
             var result = CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
             Assert.NotNull(result);
             Assert.NotEmpty(result);
-            string F1 = "TESTING DATA";
+            string name = "TESTING DATA";
 
             foreach (var item in result)
             {
-                item.F1 = F1;
+                item.Name = name;
             }
 
             CallService((IBsGfxeService x) => x.Update(result));
             result = CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
             foreach (var item in result)
             {
-                Assert.Equal(F1, item.F1);
+                Assert.Equal(name, item.Name);
             }
         }
         #endregion        

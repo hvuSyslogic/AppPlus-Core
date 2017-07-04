@@ -64,18 +64,6 @@ namespace HisPlus.Contract.Messages
         public string Memo { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public int? Days { get; set; }
 
         [DataMember]
@@ -86,5 +74,26 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public int? Acute { get; set; }
+
+        [DataMember]
+        public short? Second { get; set; }
+
+        [DataMember]
+        public short? Ops { get; set; }
+
+        [DataMember]
+        public short? ChildBirth { get; set; }
+
+        [DataMember]
+        public short? FirstNurse { get; set; }
+
+        [DataMember]
+        public short? Third { get; set; }
+
+        [DataMember]
+        public short? Diff { get; set; }
+
+        [DataMember]
+        public short? Other { get; set; }
     }
 }

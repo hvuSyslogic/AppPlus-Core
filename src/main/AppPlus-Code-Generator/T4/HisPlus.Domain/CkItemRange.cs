@@ -18,10 +18,6 @@ namespace HisPlus.Domain
         public decimal PanicLow { get; set; }
         public decimal PanicHigh { get; set; }
         public string PrintResult { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public string TextRange { get; set; }
         public short? LsAgeUnit { get; set; }
         public int? MachineId { get; set; }

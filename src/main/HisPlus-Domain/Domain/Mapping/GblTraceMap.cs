@@ -19,10 +19,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.WhereCondition).HasColumnName(@"WhereCondition").IsRequired().HasColumnType("nvarchar").HasMaxLength(600);
             Property(x => x.OrderByExpression).HasColumnName(@"OrderByExpression").IsRequired().HasColumnType("nvarchar").HasMaxLength(600);
             Property(x => x.IsActive).HasColumnName(@"IsActive").IsRequired().HasColumnType("bit");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
         }
     }
 }

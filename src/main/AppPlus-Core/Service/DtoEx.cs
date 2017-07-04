@@ -21,6 +21,6 @@ namespace AppPlus.Core.Service
             where TDestination : EntityRoot
         {
             return (source == null) ? new List<TDestination>() : Mapper.Map<IEnumerable<TDestination>>(source);
-        }       
+        }
     }
 }

@@ -8,15 +8,20 @@ namespace AppPlus.Core.EntityFramework
 {
     public class UnitOfWorkSettings
     {
-        private static UnitOfWorkSettings _default = new UnitOfWorkSettings();
+        public string StorageName { get; set; }
+        public bool EnableCommit { get; set; }
+        public bool RollbackOnDispose { get; set; }
+        public bool ThrowIfNestedUnitOfWork { get; set; }
 
-        public UnitOfWorkSettings() 
+        public UnitOfWorkSettings()
         {
-            TransactionScope = TransactionOption.Default;
+            StorageName = "Default";
+            EnableCommit = false;
+            RollbackOnDispose = false;
+            ThrowIfNestedUnitOfWork = false;
         }
 
-        public TransactionOption TransactionScope { get; set; }
-        
+        private static UnitOfWorkSettings _default = new UnitOfWorkSettings();
         public static UnitOfWorkSettings Default
         {
             get { return _default; }

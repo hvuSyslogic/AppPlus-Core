@@ -22,10 +22,6 @@ namespace HisPlus.Domain
         public int? DoctorId { get; set; }
         public string DoctorName { get; set; }
         public int? ExecLocId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public string F5 { get; set; }
         public int? FeeHsId { get; set; }
         public string FeeHsMzName { get; set; }

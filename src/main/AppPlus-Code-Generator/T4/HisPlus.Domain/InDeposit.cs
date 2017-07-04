@@ -22,12 +22,9 @@ namespace HisPlus.Domain
         public System.DateTime? CancelOperTime { get; set; }
         public int? CancelOperId { get; set; }
         public int? InvoId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? HospitalId { get; set; }
         public System.DateTime? CheckTime { get; set; }
         public System.DateTime? CancelCheckTime { get; set; }
+        public string PayWayName { get; set; }
     }
 }

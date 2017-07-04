@@ -537,7 +537,7 @@ if(!tbl.HasPrimaryKey) { #>
 <# } #>
 <#if(IncludeComments != CommentsStyle.None){#>    // <#=tbl.Name#>
 <# } #>
-	<# if(AddWcfDataAttributes) { #>[GlobalExceptionHandlerBehaviourAttribute(typeof(GlobalExceptionHandler))]
+	<# if(AddWcfDataAttributes) { #>[GlobalErrorBehaviorAttribute(typeof(GlobalErrorHandler))]
 <# }#>
     public <# if(MakeClassesPartial) { #>partial <# } #>class <#=tbl.NameHumanCase#>Service<#=WriteServiceBaseClasses != null ? WriteServiceBaseClasses(tbl) : "" #>
     {

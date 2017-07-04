@@ -16,9 +16,5 @@ namespace HisPlus.Domain
         public string Type { get; set; }
         public string OperateType { get; set; }
         public int? RecordId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
     }
 }

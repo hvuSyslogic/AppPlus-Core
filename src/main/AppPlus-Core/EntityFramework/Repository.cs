@@ -11,6 +11,8 @@ using log4net;
 using Microsoft.Practices.Unity;
 using Z.EntityFramework.Plus;
 using AppPlus.Infrastructure.Contract.Messages;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 
 namespace AppPlus.Core.EntityFramework
 {
@@ -24,11 +26,11 @@ namespace AppPlus.Core.EntityFramework
         [InjectionConstructor]
         public Repository(IUnitOfWork unitOfWork)
         {
-            this.EFContext = unitOfWork.EFContext;
+            this.Session = unitOfWork.Session;
 
-            this.EFContext.Database.CommandTimeout = 3*60*1000;
+            this.Session.Database.CommandTimeout = 3*60*1000;
 
-            this.EFSet = this.EFContext.Set<TEntity>();
+            this.EFSet = this.Session.Set<TEntity>();
         }
 
         #endregion
@@ -37,9 +39,14 @@ namespace AppPlus.Core.EntityFramework
 
         protected virtual DbSet<TEntity> EFSet { get; set; }
 
-        protected virtual DbContext EFContext { get; set; }
+        protected virtual DbContext Session { get; set; }
         
         #endregion
+
+        private ObjectContext ObjectContext()
+        {
+            return (Session as IObjectContextAdapter).ObjectContext;
+        }        
 
         #region Create
         public virtual TEntity Create(TEntity entity)
@@ -92,16 +99,16 @@ namespace AppPlus.Core.EntityFramework
         #region Update
         public virtual void Update(TEntity entity)
         {
-            if (this.EFContext.Entry<TEntity>(entity).State == EntityState.Detached)
+            if (this.Session.Entry<TEntity>(entity).State == EntityState.Detached)
             {
                 this.EFSet.Attach(entity);
             }
             else
             {
-                this.EFContext.Entry<TEntity>(entity).CurrentValues.SetValues(entity);
+                this.Session.Entry<TEntity>(entity).CurrentValues.SetValues(entity);
             }
 
-            this.EFContext.Entry<TEntity>(entity).State = EntityState.Modified;
+            this.Session.Entry<TEntity>(entity).State = EntityState.Modified;
         }        
 
         public virtual void Update(IEnumerable<TEntity> entities)
@@ -120,14 +127,13 @@ namespace AppPlus.Core.EntityFramework
 
         #region Delete
         public virtual void Delete(object id)
-        {
-            //var entity = EFSet.Local.FirstOrDefault(ent => EqualityComparer<object>.Default.Equals(ent.Id, id));
+        {            
             this.EFSet.Remove(this.Retrieve(id));
         }
 
         public virtual void Delete(TEntity entity)
         {
-            if (this.EFContext.Entry<TEntity>(entity).State == EntityState.Detached)
+            if (this.Session.Entry<TEntity>(entity).State == EntityState.Detached)
             {
                 this.EFSet.Attach(entity);
             }
@@ -161,10 +167,12 @@ namespace AppPlus.Core.EntityFramework
         #endregion
 
         #region Contains
+
         public virtual bool Contains(Expression<Func<TEntity, bool>> predicate)
         {
             return Count(predicate) > 0;
         }
+        
         #endregion
 
         #region Filter

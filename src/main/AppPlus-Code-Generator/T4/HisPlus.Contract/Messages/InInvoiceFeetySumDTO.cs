@@ -34,18 +34,9 @@ namespace HisPlus.Contract.Messages
         public decimal AmountPay { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public decimal? MzAmount { get; set; }
+
+        [DataMember]
+        public decimal? Insurance { get; set; }
     }
 }

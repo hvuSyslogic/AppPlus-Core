@@ -11,7 +11,12 @@ namespace AppPlus.Infrastructure.Contract.Services
     [ServiceContract]
     public interface ICommonService : IServiceRoot
     {
-        [OperationContract, FaultContract(typeof(ServiceFault))]
-        byte[] Process(string serviceName, string methodName, params byte[] arguments);
+        //[OperationContract, FaultContract(typeof(ServiceFault))]
+        //byte[] Process(string serviceName, string methodName, params byte[] arguments);
+
+        #region GetDateTime
+        [OperationContract(Name = "GetDateTime")]
+        DateTime GetCurrentDateTime();
+        #endregion
     }
 }

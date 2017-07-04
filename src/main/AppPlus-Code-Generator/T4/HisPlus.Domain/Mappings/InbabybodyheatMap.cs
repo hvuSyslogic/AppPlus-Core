@@ -46,10 +46,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.Isreject).HasColumnName(@"isreject").IsRequired().HasColumnType("bit");
             Property(x => x.Deadtime).HasColumnName(@"deadtime").IsOptional().HasColumnType("smalldatetime");
             Property(x => x.Locationid).HasColumnName(@"locationid").IsOptional().HasColumnType("int");
-            Property(x => x.F1).HasColumnName(@"f1").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F2).HasColumnName(@"f2").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F3).HasColumnName(@"f3").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F4).HasColumnName(@"f4").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.Bg).HasColumnName(@"bg").IsOptional().HasColumnType("decimal").HasPrecision(12,4);
             Property(x => x.Cwinject).HasColumnName(@"cwinject").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.Jminject).HasColumnName(@"jminject").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
@@ -58,8 +54,9 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.Ishumanfeed).HasColumnName(@"ishumanfeed").IsOptional().HasColumnType("bit");
             Property(x => x.Ubsstool).HasColumnName(@"ubsstool").IsOptional().HasColumnType("int");
             Property(x => x.Umbilical).HasColumnName(@"umbilical").IsOptional().HasColumnType("int");
-            Property(x => x.F5).HasColumnName(@"f5").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
-            Property(x => x.F6).HasColumnName(@"f6").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
+            Property(x => x.TimeQuantum).HasColumnName(@"TimeQuantum").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
+            Property(x => x.UmbilicalExplain).HasColumnName(@"UmbilicalExplain").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
+            Property(x => x.FecesExplain).HasColumnName(@"FecesExplain").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
         }
     }
 }

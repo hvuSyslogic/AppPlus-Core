@@ -20,10 +20,6 @@ namespace HisPlus.Domain
         public bool IsActive { get; set; }
         public int? RoleId { get; set; }
         public string OrderField { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public bool? IsToWmr { get; set; }
     }
 }

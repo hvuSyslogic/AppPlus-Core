@@ -19,18 +19,12 @@ namespace HisPlus.Contract.Messages
         public int TestId { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public int? ItemId { get; set; }
+
+        [DataMember]
+        public int? SourceId { get; set; }
+
+        [DataMember]
+        public int? TubeTypeId { get; set; }
     }
 }

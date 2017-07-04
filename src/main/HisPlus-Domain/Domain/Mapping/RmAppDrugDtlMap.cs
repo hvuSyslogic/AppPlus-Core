@@ -19,10 +19,10 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.ItemId).HasColumnName(@"ItemId").IsRequired().HasColumnType("int");
             Property(x => x.DrugNum).HasColumnName(@"DrugNum").IsRequired().HasColumnType("decimal").HasPrecision(10,2);
             Property(x => x.UnitId).HasColumnName(@"UnitId").IsRequired().HasColumnType("int");
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
+            Property(x => x.HuStockNum).HasColumnName(@"HuStockNum").IsOptional().HasColumnType("decimal").HasPrecision(10,2);
+            Property(x => x.UnitKc).HasColumnName(@"UnitKc").IsOptional().HasColumnType("int");
+            Property(x => x.Pno).HasColumnName(@"Pno").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
+            Property(x => x.LimitDate).HasColumnName(@"LimitDate").IsOptional().HasColumnType("smalldatetime");
         }
     }
 }

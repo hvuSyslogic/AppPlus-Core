@@ -54,7 +54,7 @@ namespace AppPlus.Infrastructure.Contract.Services
         void DeleteById(TKey id);
 
         [OperationContract(Name = "DeleteByEntity")]
-        void Delete(TDTO dto);        
+        void Delete(TDTO dto);
 
         [OperationContract(Name = "BatchDelete")]
         void Delete(IEnumerable<TDTO> dtos);
@@ -66,10 +66,10 @@ namespace AppPlus.Infrastructure.Contract.Services
         int DeleteAll();
         #endregion
 
-        #region CreateOrUpdate
-        [OperationContract(Name = "CreateOrUpdate")]
-        Tuple<int, int> CreateOrUpdate(IEnumerable<TDTO> dtos);
-        #endregion
+        //#region CreateOrUpdate
+        //[OperationContract(Name = "CreateOrUpdate")]
+        //Tuple<int, int> CreateOrUpdate(IEnumerable<TDTO> dtos);
+        //#endregion
 
         #region Count
         [OperationContract(Name = "Count")]
@@ -90,6 +90,6 @@ namespace AppPlus.Infrastructure.Contract.Services
         #region Filter
         [OperationContract(Name = "Filter")]
         IEnumerable<TDTO> Filter(ExpressionNode predicateExpressionNode, int pageNumber = 0, int pageSize = 50);
-        #endregion
+        #endregion        
     }
 }
