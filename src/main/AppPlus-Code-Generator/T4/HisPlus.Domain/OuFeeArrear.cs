@@ -15,9 +15,5 @@ namespace HisPlus.Domain
         public decimal? Amount { get; set; }
         public bool? IsPay { get; set; }
         public System.DateTime? PayTime { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
     }
 }

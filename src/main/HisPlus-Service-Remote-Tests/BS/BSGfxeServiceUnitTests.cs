@@ -185,7 +185,9 @@ namespace HisPlus.Service.Remote.Tests.BS
             newItem = CallService((IBsGfxeService x) => x.Create(newItem));
             
             Assert.NotNull(newItem);
-            Assert.True(newItem.Id > 0);            
+            Assert.True(newItem.Id > 0);
+
+            CallService((IBsGfxeService x) => x.RetrieveById(newItem.Id));
         }
         #endregion
 

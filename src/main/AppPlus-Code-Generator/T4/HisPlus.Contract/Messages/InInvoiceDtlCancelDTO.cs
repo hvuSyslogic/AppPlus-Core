@@ -146,5 +146,17 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public int? ExecDoctorId { get; set; }
+
+        [DataMember]
+        public string Usagememo { get; set; }
+
+        [DataMember]
+        public int? Usageid { get; set; }
+
+        [DataMember]
+        public int? Formid { get; set; }
+
+        [DataMember]
+        public int? Frequencyid { get; set; }
     }
 }

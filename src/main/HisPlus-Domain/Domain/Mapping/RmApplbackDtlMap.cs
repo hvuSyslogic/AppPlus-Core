@@ -25,6 +25,7 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.Memo).HasColumnName(@"Memo").IsRequired().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.BeforeStockNum).HasColumnName(@"BeforeStockNum").IsOptional().HasColumnType("decimal").HasPrecision(10,2);
             Property(x => x.AfterStockNum).HasColumnName(@"AfterStockNum").IsOptional().HasColumnType("decimal").HasPrecision(10,2);
+            Property(x => x.CkDtlId).HasColumnName(@"CkDtlID").IsOptional().HasColumnType("int");
         }
     }
 }

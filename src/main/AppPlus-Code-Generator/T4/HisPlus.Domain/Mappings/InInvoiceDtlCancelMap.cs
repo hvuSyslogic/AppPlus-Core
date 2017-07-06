@@ -60,6 +60,10 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.MainDoctorId).HasColumnName(@"MainDoctorId").IsOptional().HasColumnType("int");
             Property(x => x.DocLocId).HasColumnName(@"DocLocId").IsOptional().HasColumnType("int");
             Property(x => x.ExecDoctorId).HasColumnName(@"ExecDoctorId").IsOptional().HasColumnType("int");
+            Property(x => x.Usagememo).HasColumnName(@"Usagememo").IsOptional().HasColumnType("nvarchar").HasMaxLength(200);
+            Property(x => x.Usageid).HasColumnName(@"Usageid").IsOptional().HasColumnType("int");
+            Property(x => x.Formid).HasColumnName(@"Formid").IsOptional().HasColumnType("int");
+            Property(x => x.Frequencyid).HasColumnName(@"Frequencyid").IsOptional().HasColumnType("int");
         }
     }
 }

@@ -41,5 +41,8 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public decimal? AfterStockNum { get; set; }
+
+        [DataMember]
+        public int? CkDtlId { get; set; }
     }
 }

@@ -45,5 +45,9 @@ namespace HisPlus.Domain
         public bool IsCancel { get; set; }
         public int? CancelId { get; set; }
         public bool IsManual { get; set; }
+        public string Usagememo { get; set; }
+        public int? Usageid { get; set; }
+        public int? Formid { get; set; }
+        public int? Frequencyid { get; set; }
     }
 }

@@ -13,6 +13,7 @@ using Z.EntityFramework.Plus;
 using AppPlus.Infrastructure.Contract.Messages;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
+using AppPlus.Core.Redis;
 
 namespace AppPlus.Core.EntityFramework
 {
@@ -20,7 +21,7 @@ namespace AppPlus.Core.EntityFramework
         where TEntity : EntityRoot, new()
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
+        
         #region Constructor(s)
 
         [InjectionConstructor]
@@ -37,6 +38,9 @@ namespace AppPlus.Core.EntityFramework
 
         #region Properties
 
+        [Dependency]
+        public virtual IRedisRepository RedisRepository { get; set; }
+
         protected virtual DbSet<TEntity> EFSet { get; set; }
 
         protected virtual DbContext Session { get; set; }
@@ -49,8 +53,9 @@ namespace AppPlus.Core.EntityFramework
         }        
 
         #region Create
+
         public virtual TEntity Create(TEntity entity)
-        {
+        {            
             return this.EFSet.Add(entity);
         }
 
@@ -60,9 +65,11 @@ namespace AppPlus.Core.EntityFramework
 
             return entities;
         }
+        
         #endregion
 
         #region Retrieve
+
         public virtual TEntity Retrieve(params object[] keyValues)
         {
             return this.EFSet.Find(keyValues);
@@ -94,9 +101,11 @@ namespace AppPlus.Core.EntityFramework
         //{
         //    return this.EFSet.SqlQuery(sql, parameters).AsNoTracking().AsQueryable();
         //}
+
         #endregion
 
         #region Update
+
         public virtual void Update(TEntity entity)
         {
             if (this.Session.Entry<TEntity>(entity).State == EntityState.Detached)
@@ -123,9 +132,11 @@ namespace AppPlus.Core.EntityFramework
         {
             return (predicate == null) ? this.EFSet.Update(updateExpression) : this.EFSet.Where(predicate).Update(updateExpression);            
         }
+
         #endregion
 
         #region Delete
+
         public virtual void Delete(object id)
         {            
             this.EFSet.Remove(this.Retrieve(id));
@@ -150,20 +161,25 @@ namespace AppPlus.Core.EntityFramework
         {
             return (predicate == null) ? this.EFSet.Delete() : this.EFSet.Where(predicate).Delete();
         }
+
         #endregion        
 
         #region Count
+        
         public virtual int Count(Expression<Func<TEntity, bool>> predicate)
         {         
             return (predicate == null) ? this.EFSet.Count() : this.EFSet.Where(predicate).Count();
         }
+
         #endregion
 
         #region LongCount
+        
         public virtual long LongCount(Expression<Func<TEntity, bool>> predicate = null)
         {
             return (predicate == null) ? this.EFSet.LongCount() : this.EFSet.Where(predicate).LongCount();
         }
+
         #endregion
 
         #region Contains
@@ -176,20 +192,33 @@ namespace AppPlus.Core.EntityFramework
         #endregion
 
         #region Filter
-        public virtual IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate, out int total, int pageNumber = 0, int pageSize = 50)
+
+        public virtual IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, 
+            IOrderedQueryable<TEntity>> orderBy, out int total, int pageNumber = 0, int pageSize = 50)
         {
-            int skipCount = pageNumber * pageSize;
+            int skipCount = (pageNumber - 1) * pageSize;
 
-            IQueryable<TEntity> query = (predicate == null) ? this.EFSet : this.EFSet.Where(predicate);
+            IQueryable<TEntity> queryable = (predicate == null) ? this.EFSet : this.EFSet.Where(predicate);
 
-            query = query.AsNoTracking();
+            queryable = queryable.AsNoTracking();
+            if (orderBy == null)
+            {
+                queryable = queryable.OrderBy("Id");
+            }
+            else
+            {
+                queryable = orderBy(queryable);
+            }
+            
+            queryable = (skipCount == 0) ? queryable.Take(pageSize) : queryable.Skip(skipCount).Take(pageSize);
 
-            query = (skipCount == 0) ? query.Take(pageSize) : query.Skip(skipCount).Take(pageSize);
+            total = queryable.Count();
 
-            total = query.Count();
-
-            return query;
+            return queryable;        
         }
+
         #endregion
+
+        public IQueryable<TEntity> Queryable { get { return EFSet.AsQueryable<TEntity>(); } }
     }
 }

@@ -18,5 +18,8 @@ namespace HisPlus.Domain
         public System.DateTime? AffirmTime { get; set; }
         public int? AffirmOperid { get; set; }
         public bool? IsAuth { get; set; }
+        public int? AuthOperId { get; set; }
+        public System.DateTime? AuthOperTime { get; set; }
+        public string Memo { get; set; }
     }
 }

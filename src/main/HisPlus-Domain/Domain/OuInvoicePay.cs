@@ -13,5 +13,6 @@ namespace HisPlus.Domain
         public int PaywayId { get; set; }
         public decimal Amount { get; set; }
         public int? CancelPaywayId { get; set; }
+        public int? BankId { get; set; }
     }
 }

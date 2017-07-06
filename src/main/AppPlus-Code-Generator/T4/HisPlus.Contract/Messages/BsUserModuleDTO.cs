@@ -19,18 +19,6 @@ namespace HisPlus.Contract.Messages
         public int ModuleId { get; set; }
 
         [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
-
-        [DataMember]
         public short IconIndex { get; set; }
     }
 }

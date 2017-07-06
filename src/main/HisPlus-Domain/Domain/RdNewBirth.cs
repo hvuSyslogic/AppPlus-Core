@@ -13,10 +13,6 @@ namespace HisPlus.Domain
         public System.DateTime OperTime { get; set; }
         public int OperId { get; set; }
         public string Code { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
         public int? ProvinceId { get; set; }
         public int? RegionId { get; set; }
         public int? AreaId { get; set; }

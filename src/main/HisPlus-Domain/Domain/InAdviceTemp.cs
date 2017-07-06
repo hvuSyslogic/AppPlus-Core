@@ -48,11 +48,7 @@ namespace HisPlus.Domain
         public int? CancelOperId { get; set; }
         public string Memo { get; set; }
         public short? Sn { get; set; }
-        public string F5 { get; set; }
-        public string F6 { get; set; }
-        public string F7 { get; set; }
         public int ExecLocId { get; set; }
-        public string F8 { get; set; }
         public int? ExecDoctorId { get; set; }
         public bool? IsYbxj { get; set; }
         public string YbType { get; set; }

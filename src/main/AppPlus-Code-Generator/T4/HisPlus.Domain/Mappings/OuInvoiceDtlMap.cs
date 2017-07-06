@@ -42,6 +42,10 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.RecipeItemId).HasColumnName(@"RecipeItemId").IsOptional().HasColumnType("int");
             Property(x => x.RecipeGroupId).HasColumnName(@"RecipeGroupId").IsOptional().HasColumnType("int");
             Property(x => x.DocLocId).HasColumnName(@"DocLocID").IsOptional().HasColumnType("int");
+            Property(x => x.Usagememo).HasColumnName(@"Usagememo").IsOptional().HasColumnType("nvarchar").HasMaxLength(200);
+            Property(x => x.Usageid).HasColumnName(@"Usageid").IsOptional().HasColumnType("int");
+            Property(x => x.Formid).HasColumnName(@"Formid").IsOptional().HasColumnType("int");
+            Property(x => x.Frequencyid).HasColumnName(@"Frequencyid").IsOptional().HasColumnType("int");
         }
     }
 }

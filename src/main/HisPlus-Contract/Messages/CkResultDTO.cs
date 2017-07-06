@@ -80,17 +80,5 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public int? TestGroupId { get; set; }
-
-        [DataMember]
-        public string F5 { get; set; }
-
-        [DataMember]
-        public string F6 { get; set; }
-
-        [DataMember]
-        public string F7 { get; set; }
-
-        [DataMember]
-        public string F8 { get; set; }
     }
 }

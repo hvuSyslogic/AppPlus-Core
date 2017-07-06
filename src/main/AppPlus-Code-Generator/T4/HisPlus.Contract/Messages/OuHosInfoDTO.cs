@@ -151,9 +151,6 @@ namespace HisPlus.Contract.Messages
         public System.DateTime? CancelTallyTime { get; set; }
 
         [DataMember]
-        public string F6 { get; set; }
-
-        [DataMember]
         public int? TimeSpanSubId { get; set; }
 
         [DataMember]

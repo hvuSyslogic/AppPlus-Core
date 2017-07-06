@@ -22,7 +22,6 @@ namespace HisPlus.Domain
         public int? DoctorId { get; set; }
         public string DoctorName { get; set; }
         public int? ExecLocId { get; set; }
-        public string F5 { get; set; }
         public int? FeeHsId { get; set; }
         public string FeeHsMzName { get; set; }
         public int? FeeId { get; set; }
@@ -68,5 +67,9 @@ namespace HisPlus.Domain
         public int? XdRpId { get; set; }
         public int Mzregid { get; set; }
         public System.DateTime OperTime { get; set; }
+        public string Usagememo { get; set; }
+        public int? Usageid { get; set; }
+        public int? Formid { get; set; }
+        public int? Frequencyid { get; set; }
     }
 }

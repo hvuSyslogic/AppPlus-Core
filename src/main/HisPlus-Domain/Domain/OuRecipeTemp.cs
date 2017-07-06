@@ -51,5 +51,6 @@ namespace HisPlus.Domain
         public System.DateTime? DosageTime { get; set; }
         public int? PatTypeId { get; set; }
         public int? PatId { get; set; }
+        public string InvoNo { get; set; }
     }
 }

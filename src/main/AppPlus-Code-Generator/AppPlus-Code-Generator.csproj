@@ -264,9 +264,6 @@
     <Compile Include="T4\HisPlus.Contract\Messages\BsHsFeetyDTO.cs">
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
-    <Compile Include="T4\HisPlus.Contract\Messages\BsIllListCureRuleDescDTO.cs">
-      <DependentUpon>MessageContract.tt</DependentUpon>
-    </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\BsIllListDTO.cs">
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
@@ -301,6 +298,9 @@
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\BsItemIllTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\BsItemItemDTO.cs">
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\BsItemListDTO.cs">
@@ -349,6 +349,9 @@
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\BsManufacturerDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\BsMessageTemplateDTO.cs">
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\BsMzFeetyDTO.cs">
@@ -480,6 +483,12 @@
     <Compile Include="T4\HisPlus.Contract\Messages\BsUserWordDTO.cs">
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\BsVipLevelDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\BsVipTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\BsWorkTypeDTO.cs">
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
@@ -505,6 +514,9 @@
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\CkBldDonateDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\CkBldReactionDTO.cs">
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\CkBloodBackDTO.cs">
@@ -553,6 +565,9 @@
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\CkItemResultDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\CkLabBoodDTO.cs">
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\CkLabDtlDTO.cs">
@@ -631,6 +646,9 @@
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\CkTestTypeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\CkTogetherDTO.cs">
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\DtpropertyDTO.cs">
@@ -712,6 +730,9 @@
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\GblPatientMenuDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\GblPhoneMsgDTO.cs">
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\GblPrinterDTO.cs">
@@ -1283,6 +1304,42 @@
     <Compile Include="T4\HisPlus.Contract\Messages\TrScheLineDTO.cs">
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\VipBindingDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\VipCardDiscountDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\VipCardDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\VipCardLogDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\VipChargeConfigDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\VipChargeItemDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\VipIntegralDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\VipReChargeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\VipReckoningChargeDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\VisitMessageLogDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\VisitRecordDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Messages\VisitRecordUserDTO.cs">
+      <DependentUpon>MessageContract.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Contract\Messages\YbChargeLogDTO.cs">
       <DependentUpon>MessageContract.tt</DependentUpon>
     </Compile>
@@ -1490,6 +1547,9 @@
     <Compile Include="T4\HisPlus.Contract\Services\IBsItemIllTypeService.cs">
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IBsItemItemService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Contract\Services\IBsItemListService.cs">
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
@@ -1541,6 +1601,9 @@
     <Compile Include="T4\HisPlus.Contract\Services\IBsManufacturerService.cs">
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IBsMessageTemplateService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Contract\Services\IBsMzFeetyService.cs">
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
@@ -1590,6 +1653,9 @@
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Services\IBsRelationService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IBsReportNurseItemService.cs">
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Services\IBsRoomService.cs">
@@ -1664,6 +1730,12 @@
     <Compile Include="T4\HisPlus.Contract\Services\IBsUserWordService.cs">
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IBsVipLevelService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IBsVipTypeService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Contract\Services\IBsWorkTypeService.cs">
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
@@ -1689,6 +1761,9 @@
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Services\ICkBldDonateService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\ICkBldReactionService.cs">
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Services\ICkBloodBackService.cs">
@@ -1737,6 +1812,9 @@
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Services\ICkItemService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\ICkLabBoodService.cs">
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Services\ICkLabDtlService.cs">
@@ -1817,6 +1895,9 @@
     <Compile Include="T4\HisPlus.Contract\Services\ICkTestTypeService.cs">
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\ICkTogetherService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Contract\Services\IGblAutoUpdateOldService.cs">
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
@@ -1893,6 +1974,9 @@
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Services\IGblPatientMenuService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IGblPhoneMsgService.cs">
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Contract\Services\IGblPrinterService.cs">
@@ -2423,6 +2507,42 @@
     <Compile Include="T4\HisPlus.Contract\Services\ITrScheLineService.cs">
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IVipBindingService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IVipCardDiscountService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IVipCardLogService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IVipCardService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IVipChargeConfigService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IVipChargeItemService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IVipIntegralService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IVipReChargeService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IVipReckoningChargeService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IVisitMessageLogService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IVisitRecordService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Contract\Services\IVisitRecordUserService.cs">
+      <DependentUpon>ServiceContract.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Contract\Services\IYbChargeLogService.cs">
       <DependentUpon>ServiceContract.tt</DependentUpon>
     </Compile>
@@ -2632,6 +2752,9 @@
     <Compile Include="T4\HisPlus.Domain\BsItemIllType.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsItemItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Domain\BsItemList.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -2678,6 +2801,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\BsManufacturer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsMessageTemplate.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\BsMzFeety.cs">
@@ -2729,6 +2855,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\BsRelation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsReportNurseItem.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\BsRoom.cs">
@@ -2803,6 +2932,12 @@
     <Compile Include="T4\HisPlus.Domain\BsUserWord.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsVipLevel.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\BsVipType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Domain\BsWorkType.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -2828,6 +2963,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\CkBldDonate.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\CkBldReaction.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\CkBloodBack.cs">
@@ -2879,6 +3017,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\CkLab.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\CkLabBood.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\CkLabDtl.cs">
@@ -2954,6 +3095,12 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\CkTestType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\CkTogether.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\EmrReCord.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\GblAutoUpdate.cs">
@@ -3032,6 +3179,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\GblPatientMenu.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\GblPhoneMsg.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\GblPrinter.cs">
@@ -3496,6 +3646,9 @@
     <Compile Include="T4\HisPlus.Domain\Mappings\BsItemIllTypeMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsItemItemMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Domain\Mappings\BsItemListMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
@@ -3547,6 +3700,9 @@
     <Compile Include="T4\HisPlus.Domain\Mappings\BsManufacturerMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsMessageTemplateMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Domain\Mappings\BsMzFeetyMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
@@ -3596,6 +3752,9 @@
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\Mappings\BsRelationMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsReportNurseItemMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\Mappings\BsRoomMap.cs">
@@ -3670,6 +3829,12 @@
     <Compile Include="T4\HisPlus.Domain\Mappings\BsUserWordMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsVipLevelMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\BsVipTypeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Domain\Mappings\BsWorkTypeMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
@@ -3695,6 +3860,9 @@
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\Mappings\CkBldDonateMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\CkBldReactionMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\Mappings\CkBloodBackMap.cs">
@@ -3743,6 +3911,9 @@
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\Mappings\CkItemResultMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\CkLabBoodMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\Mappings\CkLabDtlMap.cs">
@@ -3823,6 +3994,12 @@
     <Compile Include="T4\HisPlus.Domain\Mappings\CkTestTypeMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\CkTogetherMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\EmrReCordMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Domain\Mappings\GblAutoUpdateMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
@@ -3899,6 +4076,9 @@
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\Mappings\GblPatientMenuMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\GblPhoneMsgMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Domain\Mappings\GblPrinterMap.cs">
@@ -4434,6 +4614,42 @@
     <Compile Include="T4\HisPlus.Domain\Mappings\TrScheLineMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\VipBindingMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\VipCardDiscountMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\VipCardLogMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\VipCardMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\VipChargeConfigMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\VipChargeItemMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\VipIntegralMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\VipReChargeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\VipReckoningChargeMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\VisitMessageLogMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\VisitRecordMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\VisitRecordUserMap.cs">
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Domain\Mappings\YbChargeLogMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
@@ -4706,6 +4922,42 @@
     <Compile Include="T4\HisPlus.Domain\TrScheLine.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Domain\VipBinding.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\VipCard.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\VipCardDiscount.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\VipCardLog.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\VipChargeConfig.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\VipChargeItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\VipIntegral.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\VipReCharge.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\VipReckoningCharge.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\VisitMessageLog.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\VisitRecord.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Domain\VisitRecordUser.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Domain\YbChargeLog.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -4907,6 +5159,9 @@
     <Compile Include="T4\HisPlus.Services\BsItemIllTypeService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Services\BsItemListService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
@@ -4958,6 +5213,9 @@
     <Compile Include="T4\HisPlus.Services\BsManufacturerService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Services\BsMessageTemplateService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Services\BsMzFeetyService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
@@ -5007,6 +5265,9 @@
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Services\BsRelationService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsReportNurseItemService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Services\BsRoomService.cs">
@@ -5081,6 +5342,12 @@
     <Compile Include="T4\HisPlus.Services\BsUserWordService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Services\BsVipLevelService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsVipTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Services\BsWorkTypeService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
@@ -5106,6 +5373,9 @@
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Services\CkBldDonateService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkBldReactionService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Services\CkBloodBackService.cs">
@@ -5154,6 +5424,9 @@
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Services\CkItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkLabBoodService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Services\CkLabDtlService.cs">
@@ -5234,6 +5507,9 @@
     <Compile Include="T4\HisPlus.Services\CkTestTypeService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Services\CkTogetherService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Services\GblAutoUpdateOldService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
@@ -5310,6 +5586,9 @@
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Services\GblPatientMenuService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblPhoneMsgService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Services\GblPrinterService.cs">
@@ -5843,6 +6122,42 @@
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Services\TrScheLineService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipBindingService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipCardDiscountService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipCardLogService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipCardService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipChargeConfigService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipChargeItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipIntegralService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipReChargeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipReckoningChargeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VisitMessageLogService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VisitRecordService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VisitRecordUserService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Services\YbChargeLogService.cs">

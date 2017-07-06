@@ -14,7 +14,7 @@ namespace Xy.Pis.Domain
         }
 
         public XyDbContext()
-            : base("Name=AppPlus.His")
+            : base("Name=HisPlus")
         {
             InitializePartial();
         }

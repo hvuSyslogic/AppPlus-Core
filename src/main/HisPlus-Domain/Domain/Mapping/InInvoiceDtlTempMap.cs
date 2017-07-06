@@ -51,6 +51,10 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsCancel).HasColumnName(@"IsCancel").IsRequired().HasColumnType("bit");
             Property(x => x.CancelId).HasColumnName(@"CancelId").IsOptional().HasColumnType("int");
             Property(x => x.IsManual).HasColumnName(@"IsManual").IsRequired().HasColumnType("bit");
+            Property(x => x.Usagememo).HasColumnName(@"Usagememo").IsOptional().HasColumnType("nvarchar").HasMaxLength(200);
+            Property(x => x.Usageid).HasColumnName(@"Usageid").IsOptional().HasColumnType("int");
+            Property(x => x.Formid).HasColumnName(@"Formid").IsOptional().HasColumnType("int");
+            Property(x => x.Frequencyid).HasColumnName(@"Frequencyid").IsOptional().HasColumnType("int");
         }
     }
 }

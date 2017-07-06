@@ -137,5 +137,8 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public string InvoNo { get; set; }
+
+        [DataMember]
+        public bool? IsAutoCharged { get; set; }
     }
 }

@@ -50,17 +50,5 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public short? IconIndex { get; set; }
-
-        [DataMember]
-        public string F1 { get; set; }
-
-        [DataMember]
-        public string F2 { get; set; }
-
-        [DataMember]
-        public string F3 { get; set; }
-
-        [DataMember]
-        public string F4 { get; set; }
     }
 }

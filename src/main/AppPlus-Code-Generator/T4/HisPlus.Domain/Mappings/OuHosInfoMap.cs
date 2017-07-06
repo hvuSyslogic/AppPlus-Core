@@ -61,7 +61,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.LinkmanName).HasColumnName(@"LinkmanName").IsOptional().HasColumnType("nvarchar").HasMaxLength(150);
             Property(x => x.TallyTime).HasColumnName(@"TallyTime").IsOptional().HasColumnType("datetime");
             Property(x => x.CancelTallyTime).HasColumnName(@"CancelTallyTime").IsOptional().HasColumnType("datetime");
-            Property(x => x.F6).HasColumnName(@"F6").IsOptional().HasColumnType("nvarchar").HasMaxLength(1000);
             Property(x => x.TimeSpanSubId).HasColumnName(@"TimeSpanSubId").IsOptional().HasColumnType("int");
             Property(x => x.DiagRoomId).HasColumnName(@"DiagRoomId").IsOptional().HasColumnType("int");
             Property(x => x.CallDoctorId).HasColumnName(@"CallDoctorId").IsOptional().HasColumnType("int");

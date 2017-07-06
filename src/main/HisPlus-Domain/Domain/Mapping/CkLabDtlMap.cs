@@ -25,10 +25,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.PrintOperId).HasColumnName(@"PrintOperId").IsOptional().HasColumnType("int");
             Property(x => x.IsBilled).HasColumnName(@"IsBilled").IsRequired().HasColumnType("bit");
             Property(x => x.Memo).HasColumnName(@"Memo").IsRequired().HasColumnType("nvarchar").HasMaxLength(500);
-            Property(x => x.F1).HasColumnName(@"F1").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F2).HasColumnName(@"F2").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F3).HasColumnName(@"F3").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
-            Property(x => x.F4).HasColumnName(@"F4").IsOptional().HasColumnType("nvarchar").HasMaxLength(100);
             Property(x => x.ParentId).HasColumnName(@"ParentID").IsOptional().HasColumnType("int");
             Property(x => x.RecipeDtlId).HasColumnName(@"RecipeDtlId").IsOptional().HasColumnType("int");
             Property(x => x.DetailId).HasColumnName(@"DetailId").IsOptional().HasColumnType("int");

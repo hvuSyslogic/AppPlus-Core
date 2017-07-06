@@ -24,5 +24,9 @@ namespace HisPlus.Domain
         public decimal AfterStockNum { get; set; }
         public decimal? BeforeStockTotalNum { get; set; }
         public decimal? AfterStockTotalNum { get; set; }
+        public int? LocationId { get; set; }
+        public int? InOuPatId { get; set; }
+        public int? OutDtlId { get; set; }
+        public decimal? Price { get; set; }
     }
 }

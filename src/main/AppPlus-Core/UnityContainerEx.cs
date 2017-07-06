@@ -13,6 +13,7 @@ using System.Data.Entity;
 using AppPlus.Core.EntityFramework;
 using AutoMapper;
 using AppPlus.Infrastructure.Configuration;
+using AppPlus.Core.Redis;
 
 namespace AppPlus.Core
 {
@@ -75,6 +76,7 @@ namespace AppPlus.Core
                 .RegisterType<IUnitOfWork, UnitOfWork>()
                 .RegisterType(typeof(IRepository<>), typeof(Repository<>))
                 .RegisterType<ICommonService, CommonService>()
+                .RegisterType<IRedisRepository, RedisRepository>(new InjectionConstructor(0))
                 ;
 
             return container;      

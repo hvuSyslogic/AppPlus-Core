@@ -19,6 +19,7 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.PaywayId).HasColumnName(@"PaywayId").IsRequired().HasColumnType("int");
             Property(x => x.Amount).HasColumnName(@"Amount").IsRequired().HasColumnType("decimal").HasPrecision(18,2);
             Property(x => x.CancelPaywayId).HasColumnName(@"cancelPaywayId").IsOptional().HasColumnType("int");
+            Property(x => x.BankId).HasColumnName(@"BankId").IsOptional().HasColumnType("int");
         }
     }
 }

@@ -13,10 +13,5 @@ namespace AppPlus.Infrastructure.Contract.Services
     {
         //[OperationContract, FaultContract(typeof(ServiceFault))]
         //byte[] Process(string serviceName, string methodName, params byte[] arguments);
-
-        #region GetDateTime
-        [OperationContract(Name = "GetDateTime")]
-        DateTime GetCurrentDateTime();
-        #endregion
     }
 }

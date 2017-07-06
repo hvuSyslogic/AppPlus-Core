@@ -38,5 +38,14 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public bool? IsAuth { get; set; }
+
+        [DataMember]
+        public int? AuthOperId { get; set; }
+
+        [DataMember]
+        public System.DateTime? AuthOperTime { get; set; }
+
+        [DataMember]
+        public string Memo { get; set; }
     }
 }

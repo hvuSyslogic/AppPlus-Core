@@ -124,6 +124,7 @@
     <Compile Include="Domain\BsItemFirstPage.cs" />
     <Compile Include="Domain\BsItemFrequency.cs" />
     <Compile Include="Domain\BsItemIllType.cs" />
+    <Compile Include="Domain\BsItemItem.cs" />
     <Compile Include="Domain\BsItemList.cs" />
     <Compile Include="Domain\BsItemLocation.cs" />
     <Compile Include="Domain\BsItemPac.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Domain\BsLocSystemSub.cs" />
     <Compile Include="Domain\BsLocSystemSub2.cs" />
     <Compile Include="Domain\BsManufacturer.cs" />
+    <Compile Include="Domain\BsMessageTemplate.cs" />
     <Compile Include="Domain\BsMzFeety.cs" />
     <Compile Include="Domain\BsNation.cs" />
     <Compile Include="Domain\BsNew.cs" />
@@ -157,6 +159,7 @@
     <Compile Include="Domain\BsRegTimeSpan.cs" />
     <Compile Include="Domain\BsRegType.cs" />
     <Compile Include="Domain\BsRelation.cs" />
+    <Compile Include="Domain\BsReportNurseItem.cs" />
     <Compile Include="Domain\BsRoom.cs" />
     <Compile Include="Domain\BsRoomWindow.cs" />
     <Compile Include="Domain\BsScore.cs" />
@@ -181,6 +184,8 @@
     <Compile Include="Domain\BsUserRoom.cs" />
     <Compile Include="Domain\BsUserWindow.cs" />
     <Compile Include="Domain\BsUserWord.cs" />
+    <Compile Include="Domain\BsVipLevel.cs" />
+    <Compile Include="Domain\BsVipType.cs" />
     <Compile Include="Domain\BsWorkType.cs" />
     <Compile Include="Domain\BsXdGroup.cs" />
     <Compile Include="Domain\BsXdGroupDtl.cs" />
@@ -190,6 +195,7 @@
     <Compile Include="Domain\CkBdBank.cs" />
     <Compile Include="Domain\CkBldApply.cs" />
     <Compile Include="Domain\CkBldDonate.cs" />
+    <Compile Include="Domain\CkBldReaction.cs" />
     <Compile Include="Domain\CkBloodBack.cs" />
     <Compile Include="Domain\CkBloodSend.cs" />
     <Compile Include="Domain\CkBloodType.cs" />
@@ -207,6 +213,7 @@
     <Compile Include="Domain\CkItemRange.cs" />
     <Compile Include="Domain\CkItemResult.cs" />
     <Compile Include="Domain\CkLab.cs" />
+    <Compile Include="Domain\CkLabBood.cs" />
     <Compile Include="Domain\CkLabDtl.cs" />
     <Compile Include="Domain\CkLabMic.cs" />
     <Compile Include="Domain\CkLabMicDtl.cs" />
@@ -232,6 +239,8 @@
     <Compile Include="Domain\CkResultGroup.cs" />
     <Compile Include="Domain\CkTestGroup.cs" />
     <Compile Include="Domain\CkTestType.cs" />
+    <Compile Include="Domain\CkTogether.cs" />
+    <Compile Include="Domain\EmrReCord.cs" />
     <Compile Include="Domain\GblAutoUpdate.cs" />
     <Compile Include="Domain\GblAutoUpdateOld.cs" />
     <Compile Include="Domain\GblBaseTableItem.cs" />
@@ -258,6 +267,7 @@
     <Compile Include="Domain\GblMrk.cs" />
     <Compile Include="Domain\GblOnliner.cs" />
     <Compile Include="Domain\GblPatientMenu.cs" />
+    <Compile Include="Domain\GblPhoneMsg.cs" />
     <Compile Include="Domain\GblPrinter.cs" />
     <Compile Include="Domain\GblQuestion.cs" />
     <Compile Include="Domain\GblReport.cs" />
@@ -412,6 +422,7 @@
     <Compile Include="Domain\Mapping\BsItemFirstPageMap.cs" />
     <Compile Include="Domain\Mapping\BsItemFrequencyMap.cs" />
     <Compile Include="Domain\Mapping\BsItemIllTypeMap.cs" />
+    <Compile Include="Domain\Mapping\BsItemItemMap.cs" />
     <Compile Include="Domain\Mapping\BsItemListMap.cs" />
     <Compile Include="Domain\Mapping\BsItemLocationMap.cs" />
     <Compile Include="Domain\Mapping\BsItemMap.cs" />
@@ -429,6 +440,7 @@
     <Compile Include="Domain\Mapping\BsLocSystemSub2Map.cs" />
     <Compile Include="Domain\Mapping\BsLocSystemSubMap.cs" />
     <Compile Include="Domain\Mapping\BsManufacturerMap.cs" />
+    <Compile Include="Domain\Mapping\BsMessageTemplateMap.cs" />
     <Compile Include="Domain\Mapping\BsMzFeetyMap.cs" />
     <Compile Include="Domain\Mapping\BsNationMap.cs" />
     <Compile Include="Domain\Mapping\BsNewMap.cs" />
@@ -446,6 +458,7 @@
     <Compile Include="Domain\Mapping\BsRegTimeSpanMap.cs" />
     <Compile Include="Domain\Mapping\BsRegTypeMap.cs" />
     <Compile Include="Domain\Mapping\BsRelationMap.cs" />
+    <Compile Include="Domain\Mapping\BsReportNurseItemMap.cs" />
     <Compile Include="Domain\Mapping\BsRoomMap.cs" />
     <Compile Include="Domain\Mapping\BsRoomWindowMap.cs" />
     <Compile Include="Domain\Mapping\BsScoreMap.cs" />
@@ -470,6 +483,8 @@
     <Compile Include="Domain\Mapping\BsUserRoomMap.cs" />
     <Compile Include="Domain\Mapping\BsUserWindowMap.cs" />
     <Compile Include="Domain\Mapping\BsUserWordMap.cs" />
+    <Compile Include="Domain\Mapping\BsVipLevelMap.cs" />
+    <Compile Include="Domain\Mapping\BsVipTypeMap.cs" />
     <Compile Include="Domain\Mapping\BsWorkTypeMap.cs" />
     <Compile Include="Domain\Mapping\BsXdGroupDtlMap.cs" />
     <Compile Include="Domain\Mapping\BsXdGroupMap.cs" />
@@ -479,6 +494,7 @@
     <Compile Include="Domain\Mapping\CkBdBankMap.cs" />
     <Compile Include="Domain\Mapping\CkBldApplyMap.cs" />
     <Compile Include="Domain\Mapping\CkBldDonateMap.cs" />
+    <Compile Include="Domain\Mapping\CkBldReactionMap.cs" />
     <Compile Include="Domain\Mapping\CkBloodBackMap.cs" />
     <Compile Include="Domain\Mapping\CkBloodSendMap.cs" />
     <Compile Include="Domain\Mapping\CkBloodTypeMap.cs" />
@@ -495,6 +511,7 @@
     <Compile Include="Domain\Mapping\CkItemQcMap.cs" />
     <Compile Include="Domain\Mapping\CkItemRangeMap.cs" />
     <Compile Include="Domain\Mapping\CkItemResultMap.cs" />
+    <Compile Include="Domain\Mapping\CkLabBoodMap.cs" />
     <Compile Include="Domain\Mapping\CkLabDtlMap.cs" />
     <Compile Include="Domain\Mapping\CkLabMap.cs" />
     <Compile Include="Domain\Mapping\CkLabMicDtlMap.cs" />
@@ -521,6 +538,8 @@
     <Compile Include="Domain\Mapping\CkResultMap.cs" />
     <Compile Include="Domain\Mapping\CkTestGroupMap.cs" />
     <Compile Include="Domain\Mapping\CkTestTypeMap.cs" />
+    <Compile Include="Domain\Mapping\CkTogetherMap.cs" />
+    <Compile Include="Domain\Mapping\EmrReCordMap.cs" />
     <Compile Include="Domain\Mapping\GblAutoUpdateMap.cs" />
     <Compile Include="Domain\Mapping\GblAutoUpdateOldMap.cs" />
     <Compile Include="Domain\Mapping\GblBaseTableItemMap.cs" />
@@ -547,6 +566,7 @@
     <Compile Include="Domain\Mapping\GblMrkMap.cs" />
     <Compile Include="Domain\Mapping\GblOnlinerMap.cs" />
     <Compile Include="Domain\Mapping\GblPatientMenuMap.cs" />
+    <Compile Include="Domain\Mapping\GblPhoneMsgMap.cs" />
     <Compile Include="Domain\Mapping\GblPrinterMap.cs" />
     <Compile Include="Domain\Mapping\GblQuestionMap.cs" />
     <Compile Include="Domain\Mapping\GblReportDetailMap.cs" />
@@ -723,6 +743,18 @@
     <Compile Include="Domain\Mapping\TrPractiseMap.cs" />
     <Compile Include="Domain\Mapping\TrSchedulerMap.cs" />
     <Compile Include="Domain\Mapping\TrScheLineMap.cs" />
+    <Compile Include="Domain\Mapping\VipBindingMap.cs" />
+    <Compile Include="Domain\Mapping\VipCardDiscountMap.cs" />
+    <Compile Include="Domain\Mapping\VipCardLogMap.cs" />
+    <Compile Include="Domain\Mapping\VipCardMap.cs" />
+    <Compile Include="Domain\Mapping\VipChargeConfigMap.cs" />
+    <Compile Include="Domain\Mapping\VipChargeItemMap.cs" />
+    <Compile Include="Domain\Mapping\VipIntegralMap.cs" />
+    <Compile Include="Domain\Mapping\VipReChargeMap.cs" />
+    <Compile Include="Domain\Mapping\VipReckoningChargeMap.cs" />
+    <Compile Include="Domain\Mapping\VisitMessageLogMap.cs" />
+    <Compile Include="Domain\Mapping\VisitRecordMap.cs" />
+    <Compile Include="Domain\Mapping\VisitRecordUserMap.cs" />
     <Compile Include="Domain\Mapping\YbChargeLogMap.cs" />
     <Compile Include="Domain\Mapping\YbPatSeqMap.cs" />
     <Compile Include="Domain\OaDocAuth.cs" />
@@ -812,6 +844,18 @@
     <Compile Include="Domain\TrPractise.cs" />
     <Compile Include="Domain\TrScheduler.cs" />
     <Compile Include="Domain\TrScheLine.cs" />
+    <Compile Include="Domain\VipBinding.cs" />
+    <Compile Include="Domain\VipCard.cs" />
+    <Compile Include="Domain\VipCardDiscount.cs" />
+    <Compile Include="Domain\VipCardLog.cs" />
+    <Compile Include="Domain\VipChargeConfig.cs" />
+    <Compile Include="Domain\VipChargeItem.cs" />
+    <Compile Include="Domain\VipIntegral.cs" />
+    <Compile Include="Domain\VipReCharge.cs" />
+    <Compile Include="Domain\VipReckoningCharge.cs" />
+    <Compile Include="Domain\VisitMessageLog.cs" />
+    <Compile Include="Domain\VisitRecord.cs" />
+    <Compile Include="Domain\VisitRecordUser.cs" />
     <Compile Include="Domain\YbChargeLog.cs" />
     <Compile Include="Domain\YbPatSeq.cs" />
     <Compile Include="HisDbContext.cs" />

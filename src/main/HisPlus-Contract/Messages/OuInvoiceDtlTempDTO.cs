@@ -52,9 +52,6 @@ namespace HisPlus.Contract.Messages
         public int? ExecLocId { get; set; }
 
         [DataMember]
-        public string F5 { get; set; }
-
-        [DataMember]
         public int? FeeHsId { get; set; }
 
         [DataMember]
@@ -188,5 +185,17 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public System.DateTime OperTime { get; set; }
+
+        [DataMember]
+        public string Usagememo { get; set; }
+
+        [DataMember]
+        public int? Usageid { get; set; }
+
+        [DataMember]
+        public int? Formid { get; set; }
+
+        [DataMember]
+        public int? Frequencyid { get; set; }
     }
 }

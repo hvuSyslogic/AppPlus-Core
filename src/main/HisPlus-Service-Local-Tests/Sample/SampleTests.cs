@@ -36,5 +36,27 @@ namespace HisPlus.Service.Local.Tests.Sample
         {
             var result = CallService((ISampleService x) => x.TransactionTest());
         }
+
+        [Fact]
+        public void LargeDataTest()
+        {
+            int pageNumber = 1;
+            int pageSize = 1000000;
+            //var recordCount = CallService((IBsItemUnitService x) => x.Count());
+            int totalPage = 0;
+
+            do
+            {
+                var result = CallService((IBsItemUnitService x) => x.Filter(out totalPage, pageNumber, pageSize));
+                //recordCount -= pageSize;
+                pageNumber++;
+            } while (totalPage > pageNumber);
+
+            //var result1 = CallService((IBsItemUnitService x) => x.Filter(1, 1000000));
+            //var result2 = CallService((IBsItemUnitService x) => x.Filter(2, 1000000));
+            //var result3 = CallService((IBsItemUnitService x) => x.Filter(3, 1000000));
+            //var result4 = CallService((IBsItemUnitService x) => x.Filter(4, 1000000));
+            //var result5 = CallService((IBsItemUnitService x) => x.Filter(5, 1000000));
+        }
     }
 }

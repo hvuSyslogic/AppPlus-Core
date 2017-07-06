@@ -4,11 +4,9 @@ using AppPlus.Infrastructure.Contract.Messages;
 
 namespace HisPlus.Contract.Messages
 {
-    // The table 'BsReportNurseItem' is not usable by entity framework because it
-    // does not have a primary key. It is listed here for completeness.
     [Serializable]
     [DataContract]
-    public class BsReportNurseItemDTO
+    public class BsReportNurseItemDTO : DtoBase<int>
     {
         public BsReportNurseItemDTO()
         {

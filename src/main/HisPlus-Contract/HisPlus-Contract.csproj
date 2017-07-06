@@ -109,7 +109,6 @@
     <Compile Include="Messages\BsHospitalDTO.cs" />
     <Compile Include="Messages\BsHouseDTO.cs" />
     <Compile Include="Messages\BsHsFeetyDTO.cs" />
-    <Compile Include="Messages\BsIllListCureRuleDescDTO.cs" />
     <Compile Include="Messages\BsIllListDTO.cs" />
     <Compile Include="Messages\BsIllnessDTO.cs" />
     <Compile Include="Messages\BsInvInItemDTO.cs" />
@@ -122,6 +121,7 @@
     <Compile Include="Messages\BsItemFirstPageTypeDTO.cs" />
     <Compile Include="Messages\BsItemFrequencyDTO.cs" />
     <Compile Include="Messages\BsItemIllTypeDTO.cs" />
+    <Compile Include="Messages\BsItemItemDTO.cs" />
     <Compile Include="Messages\BsItemListDTO.cs" />
     <Compile Include="Messages\BsItemLocationDTO.cs" />
     <Compile Include="Messages\BsItemPacDTO.cs" />
@@ -138,6 +138,7 @@
     <Compile Include="Messages\BsLocSystemSub2DTO.cs" />
     <Compile Include="Messages\BsLocSystemSubDTO.cs" />
     <Compile Include="Messages\BsManufacturerDTO.cs" />
+    <Compile Include="Messages\BsMessageTemplateDTO.cs" />
     <Compile Include="Messages\BsMzFeetyDTO.cs" />
     <Compile Include="Messages\BsNationDTO.cs" />
     <Compile Include="Messages\BsNewDTO.cs" />
@@ -181,6 +182,8 @@
     <Compile Include="Messages\BsUserRoomDTO.cs" />
     <Compile Include="Messages\BsUserWindowDTO.cs" />
     <Compile Include="Messages\BsUserWordDTO.cs" />
+    <Compile Include="Messages\BsVipLevelDTO.cs" />
+    <Compile Include="Messages\BsVipTypeDTO.cs" />
     <Compile Include="Messages\BsWorkTypeDTO.cs" />
     <Compile Include="Messages\BsXdGroupDtlDTO.cs" />
     <Compile Include="Messages\BsXdGroupDTO.cs" />
@@ -190,6 +193,7 @@
     <Compile Include="Messages\CkBdBankDTO.cs" />
     <Compile Include="Messages\CkBldApplyDTO.cs" />
     <Compile Include="Messages\CkBldDonateDTO.cs" />
+    <Compile Include="Messages\CkBldReactionDTO.cs" />
     <Compile Include="Messages\CkBloodBackDTO.cs" />
     <Compile Include="Messages\CkBloodSendDTO.cs" />
     <Compile Include="Messages\CkBloodTypeDTO.cs" />
@@ -206,6 +210,7 @@
     <Compile Include="Messages\CkItemQcDTO.cs" />
     <Compile Include="Messages\CkItemRangeDTO.cs" />
     <Compile Include="Messages\CkItemResultDTO.cs" />
+    <Compile Include="Messages\CkLabBoodDTO.cs" />
     <Compile Include="Messages\CkLabDtlDTO.cs" />
     <Compile Include="Messages\CkLabDTO.cs" />
     <Compile Include="Messages\CkLabMicDtlDTO.cs" />
@@ -232,6 +237,7 @@
     <Compile Include="Messages\CkResultGroupDTO.cs" />
     <Compile Include="Messages\CkTestGroupDTO.cs" />
     <Compile Include="Messages\CkTestTypeDTO.cs" />
+    <Compile Include="Messages\CkTogetherDTO.cs" />
     <Compile Include="Messages\DtpropertyDTO.cs" />
     <Compile Include="Messages\GblAutoUpdateDTO.cs" />
     <Compile Include="Messages\GblAutoUpdateOldDTO.cs" />
@@ -259,6 +265,7 @@
     <Compile Include="Messages\GblMrkDTO.cs" />
     <Compile Include="Messages\GblOnlinerDTO.cs" />
     <Compile Include="Messages\GblPatientMenuDTO.cs" />
+    <Compile Include="Messages\GblPhoneMsgDTO.cs" />
     <Compile Include="Messages\GblPrinterDTO.cs" />
     <Compile Include="Messages\GblQuestionDTO.cs" />
     <Compile Include="Messages\GblReportDetailDTO.cs" />
@@ -447,6 +454,18 @@
     <Compile Include="Messages\TrPractiseDTO.cs" />
     <Compile Include="Messages\TrSchedulerDTO.cs" />
     <Compile Include="Messages\TrScheLineDTO.cs" />
+    <Compile Include="Messages\VipBindingDTO.cs" />
+    <Compile Include="Messages\VipCardDiscountDTO.cs" />
+    <Compile Include="Messages\VipCardDTO.cs" />
+    <Compile Include="Messages\VipCardLogDTO.cs" />
+    <Compile Include="Messages\VipChargeConfigDTO.cs" />
+    <Compile Include="Messages\VipChargeItemDTO.cs" />
+    <Compile Include="Messages\VipIntegralDTO.cs" />
+    <Compile Include="Messages\VipReChargeDTO.cs" />
+    <Compile Include="Messages\VipReckoningChargeDTO.cs" />
+    <Compile Include="Messages\VisitMessageLogDTO.cs" />
+    <Compile Include="Messages\VisitRecordDTO.cs" />
+    <Compile Include="Messages\VisitRecordUserDTO.cs" />
     <Compile Include="Messages\YbChargeLogDTO.cs" />
     <Compile Include="Messages\YbPatSeqDTO.cs" />
     <Compile Include="Messages\ZxybmxdtlDTO.cs" />
@@ -518,6 +537,7 @@
     <Compile Include="Services\IBsItemFirstPageService.cs" />
     <Compile Include="Services\IBsItemFrequencyService.cs" />
     <Compile Include="Services\IBsItemIllTypeService.cs" />
+    <Compile Include="Services\IBsItemItemService.cs" />
     <Compile Include="Services\IBsItemListService.cs" />
     <Compile Include="Services\IBsItemLocationService.cs" />
     <Compile Include="Services\IBsItemPacService.cs" />
@@ -535,6 +555,7 @@
     <Compile Include="Services\IBsLocSystemSub2Service.cs" />
     <Compile Include="Services\IBsLocSystemSubService.cs" />
     <Compile Include="Services\IBsManufacturerService.cs" />
+    <Compile Include="Services\IBsMessageTemplateService.cs" />
     <Compile Include="Services\IBsMzFeetyService.cs" />
     <Compile Include="Services\IBsNationService.cs" />
     <Compile Include="Services\IBsNewService.cs" />
@@ -552,6 +573,7 @@
     <Compile Include="Services\IBsRegTimeSpanService.cs" />
     <Compile Include="Services\IBsRegTypeService.cs" />
     <Compile Include="Services\IBsRelationService.cs" />
+    <Compile Include="Services\IBsReportNurseItemService.cs" />
     <Compile Include="Services\IBsRoomService.cs" />
     <Compile Include="Services\IBsRoomWindowService.cs" />
     <Compile Include="Services\IBsScoreService.cs" />
@@ -576,6 +598,8 @@
     <Compile Include="Services\IBsUserService.cs" />
     <Compile Include="Services\IBsUserWindowService.cs" />
     <Compile Include="Services\IBsUserWordService.cs" />
+    <Compile Include="Services\IBsVipLevelService.cs" />
+    <Compile Include="Services\IBsVipTypeService.cs" />
     <Compile Include="Services\IBsWorkTypeService.cs" />
     <Compile Include="Services\IBsXdGroupDtlService.cs" />
     <Compile Include="Services\IBsXdGroupService.cs" />
@@ -585,6 +609,7 @@
     <Compile Include="Services\ICkBdBankService.cs" />
     <Compile Include="Services\ICkBldApplyService.cs" />
     <Compile Include="Services\ICkBldDonateService.cs" />
+    <Compile Include="Services\ICkBldReactionService.cs" />
     <Compile Include="Services\ICkBloodBackService.cs" />
     <Compile Include="Services\ICkBloodSendService.cs" />
     <Compile Include="Services\ICkBloodTypeService.cs" />
@@ -601,6 +626,7 @@
     <Compile Include="Services\ICkItemRangeService.cs" />
     <Compile Include="Services\ICkItemResultService.cs" />
     <Compile Include="Services\ICkItemService.cs" />
+    <Compile Include="Services\ICkLabBoodService.cs" />
     <Compile Include="Services\ICkLabDtlService.cs" />
     <Compile Include="Services\ICkLabMicDtlService.cs" />
     <Compile Include="Services\ICkLabMicService.cs" />
@@ -627,6 +653,7 @@
     <Compile Include="Services\ICkResultService.cs" />
     <Compile Include="Services\ICkTestGroupService.cs" />
     <Compile Include="Services\ICkTestTypeService.cs" />
+    <Compile Include="Services\ICkTogetherService.cs" />
     <Compile Include="Services\IGblAutoUpdateOldService.cs" />
     <Compile Include="Services\IGblAutoUpdateService.cs" />
     <Compile Include="Services\IGblBaseTableItemService.cs" />
@@ -653,6 +680,7 @@
     <Compile Include="Services\IGblMrkService.cs" />
     <Compile Include="Services\IGblOnlinerService.cs" />
     <Compile Include="Services\IGblPatientMenuService.cs" />
+    <Compile Include="Services\IGblPhoneMsgService.cs" />
     <Compile Include="Services\IGblPrinterService.cs" />
     <Compile Include="Services\IGblQuestionService.cs" />
     <Compile Include="Services\IGblReportDetailService.cs" />
@@ -829,6 +857,18 @@
     <Compile Include="Services\ITrPractiseService.cs" />
     <Compile Include="Services\ITrSchedulerService.cs" />
     <Compile Include="Services\ITrScheLineService.cs" />
+    <Compile Include="Services\IVipBindingService.cs" />
+    <Compile Include="Services\IVipCardDiscountService.cs" />
+    <Compile Include="Services\IVipCardLogService.cs" />
+    <Compile Include="Services\IVipCardService.cs" />
+    <Compile Include="Services\IVipChargeConfigService.cs" />
+    <Compile Include="Services\IVipChargeItemService.cs" />
+    <Compile Include="Services\IVipIntegralService.cs" />
+    <Compile Include="Services\IVipReChargeService.cs" />
+    <Compile Include="Services\IVipReckoningChargeService.cs" />
+    <Compile Include="Services\IVisitMessageLogService.cs" />
+    <Compile Include="Services\IVisitRecordService.cs" />
+    <Compile Include="Services\IVisitRecordUserService.cs" />
     <Compile Include="Services\IYbChargeLogService.cs" />
     <Compile Include="Services\IYbPatSeqService.cs" />
   </ItemGroup>

@@ -251,19 +251,33 @@ namespace AppPlus.Core.Service
 
         #region Filter
 
-        public virtual IEnumerable<TDTO> Filter(ExpressionNode predicateExpressionNode, int pageNumber = 0, int pageSize = 50)
+        public virtual IEnumerable<TDTO> Filter(out int totalPage, int pageNumber = 0, int pageSize = 50)
         {
-            Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
+            return Filter(out totalPage, null, pageNumber, pageSize);
+        }
+
+        //public virtual IEnumerable<TDTO> Filter(Func<IQueryable<TDTO>,
+        //    IOrderedQueryable<TDTO>> orderBy, int pageNumber = 0, int pageSize = 50)
+        //{
+        //    return Filter(null, orderBy, pageNumber, pageSize);
+        //}
+
+        public virtual IEnumerable<TDTO> Filter(out int totalPage, ExpressionNode predicateExpressionNode, int pageNumber = 0, int pageSize = 50)
+        {
+            //Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
 
             var predicate = (predicateExpressionNode == null)
                    ? null : Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());
-  
-            int total = 0;
 
-            return UnitOfWork.Do(uow =>
+            int pages = 0;
+
+            var result = UnitOfWork.Do(uow =>
             {
-                return uow.Repo<TEntity>().Filter(predicate, out total, pageNumber, pageSize).MapTo<TDTO>();
-            }, new UnitOfWorkSettings() { EnableCommit = false });
+                return uow.Repo<TEntity>().Filter(predicate, null, out pages, pageNumber, pageSize).MapTo<TDTO>();
+            });
+            totalPage = pages;
+
+            return result;
         }
 
         #endregion
@@ -356,7 +370,7 @@ namespace AppPlus.Core.Service
 
                     return ds;
                 }
-            }, new UnitOfWorkSettings() { EnableCommit = false });            
+            });
         }
 
         #endregion

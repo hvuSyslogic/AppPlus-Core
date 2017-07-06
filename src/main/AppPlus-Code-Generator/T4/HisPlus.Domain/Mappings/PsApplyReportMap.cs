@@ -51,6 +51,7 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.Id).HasColumnName(@"ID").IsRequired().HasColumnType("int").HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.ExecuteId).HasColumnName(@"ExecuteId").IsOptional().HasColumnType("int");
             Property(x => x.CallGroup).HasColumnName(@"CallGroup").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
+            Property(x => x.LsStatus).HasColumnName(@"lsStatus").IsOptional().HasColumnType("smallint");
         }
     }
 }

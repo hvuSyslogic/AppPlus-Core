@@ -7,7 +7,7 @@
     <ProjectGuid>{3D36ED5F-8B85-48D8-B9E6-BDE34495967E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HisPlus.His.Services</RootNamespace>
+    <RootNamespace>HisPlus.Services</RootNamespace>
     <AssemblyName>HisPlus.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -154,6 +154,7 @@
     <Compile Include="Service\BsItemFirstPageService.cs" />
     <Compile Include="Service\BsItemFrequencyService.cs" />
     <Compile Include="Service\BsItemIllTypeService.cs" />
+    <Compile Include="Service\BsItemItemService.cs" />
     <Compile Include="Service\BsItemListService.cs" />
     <Compile Include="Service\BsItemLocationService.cs" />
     <Compile Include="Service\BsItemPacService.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Service\BsLocSystemSub2Service.cs" />
     <Compile Include="Service\BsLocSystemSubService.cs" />
     <Compile Include="Service\BsManufacturerService.cs" />
+    <Compile Include="Service\BsMessageTemplateService.cs" />
     <Compile Include="Service\BsMzFeetyService.cs" />
     <Compile Include="Service\BsNationService.cs" />
     <Compile Include="Service\BsNewService.cs" />
@@ -188,6 +190,7 @@
     <Compile Include="Service\BsRegTimeSpanService.cs" />
     <Compile Include="Service\BsRegTypeService.cs" />
     <Compile Include="Service\BsRelationService.cs" />
+    <Compile Include="Service\BsReportNurseItemService.cs" />
     <Compile Include="Service\BsRoomService.cs" />
     <Compile Include="Service\BsRoomWindowService.cs" />
     <Compile Include="Service\BsScoreService.cs" />
@@ -212,6 +215,8 @@
     <Compile Include="Service\BsUserService.cs" />
     <Compile Include="Service\BsUserWindowService.cs" />
     <Compile Include="Service\BsUserWordService.cs" />
+    <Compile Include="Service\BsVipLevelService.cs" />
+    <Compile Include="Service\BsVipTypeService.cs" />
     <Compile Include="Service\BsWorkTypeService.cs" />
     <Compile Include="Service\BsXdGroupDtlService.cs" />
     <Compile Include="Service\BsXdGroupService.cs" />
@@ -221,6 +226,7 @@
     <Compile Include="Service\CkBdBankService.cs" />
     <Compile Include="Service\CkBldApplyService.cs" />
     <Compile Include="Service\CkBldDonateService.cs" />
+    <Compile Include="Service\CkBldReactionService.cs" />
     <Compile Include="Service\CkBloodBackService.cs" />
     <Compile Include="Service\CkBloodSendService.cs" />
     <Compile Include="Service\CkBloodTypeService.cs" />
@@ -237,6 +243,7 @@
     <Compile Include="Service\CkItemRangeService.cs" />
     <Compile Include="Service\CkItemResultService.cs" />
     <Compile Include="Service\CkItemService.cs" />
+    <Compile Include="Service\CkLabBoodService.cs" />
     <Compile Include="Service\CkLabDtlService.cs" />
     <Compile Include="Service\CkLabMicDtlService.cs" />
     <Compile Include="Service\CkLabMicService.cs" />
@@ -263,6 +270,7 @@
     <Compile Include="Service\CkResultService.cs" />
     <Compile Include="Service\CkTestGroupService.cs" />
     <Compile Include="Service\CkTestTypeService.cs" />
+    <Compile Include="Service\CkTogetherService.cs" />
     <Compile Include="Service\GblAutoUpdateOldService.cs" />
     <Compile Include="Service\GblAutoUpdateService.cs" />
     <Compile Include="Service\GblBaseTableItemService.cs" />
@@ -289,6 +297,7 @@
     <Compile Include="Service\GblMrkService.cs" />
     <Compile Include="Service\GblOnlinerService.cs" />
     <Compile Include="Service\GblPatientMenuService.cs" />
+    <Compile Include="Service\GblPhoneMsgService.cs" />
     <Compile Include="Service\GblPrinterService.cs" />
     <Compile Include="Service\GblQuestionService.cs" />
     <Compile Include="Service\GblReportDetailService.cs" />
@@ -465,6 +474,18 @@
     <Compile Include="Service\TrPractiseService.cs" />
     <Compile Include="Service\TrSchedulerService.cs" />
     <Compile Include="Service\TrScheLineService.cs" />
+    <Compile Include="Service\VipBindingService.cs" />
+    <Compile Include="Service\VipCardDiscountService.cs" />
+    <Compile Include="Service\VipCardLogService.cs" />
+    <Compile Include="Service\VipCardService.cs" />
+    <Compile Include="Service\VipChargeConfigService.cs" />
+    <Compile Include="Service\VipChargeItemService.cs" />
+    <Compile Include="Service\VipIntegralService.cs" />
+    <Compile Include="Service\VipReChargeService.cs" />
+    <Compile Include="Service\VipReckoningChargeService.cs" />
+    <Compile Include="Service\VisitMessageLogService.cs" />
+    <Compile Include="Service\VisitRecordService.cs" />
+    <Compile Include="Service\VisitRecordUserService.cs" />
     <Compile Include="Service\YbChargeLogService.cs" />
     <Compile Include="Service\YbPatSeqService.cs" />
   </ItemGroup>

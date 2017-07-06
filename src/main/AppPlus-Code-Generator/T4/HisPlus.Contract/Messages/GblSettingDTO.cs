@@ -20,5 +20,23 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public string Explain { get; set; }
+
+        [DataMember]
+        public short? Piority { get; set; }
+
+        [DataMember]
+        public string Basetable { get; set; }
+
+        [DataMember]
+        public bool? IsMutiselect { get; set; }
+
+        [DataMember]
+        public int? SystemId { get; set; }
+
+        [DataMember]
+        public System.DateTime? ModiTime { get; set; }
+
+        [DataMember]
+        public int? ModiOperId { get; set; }
     }
 }

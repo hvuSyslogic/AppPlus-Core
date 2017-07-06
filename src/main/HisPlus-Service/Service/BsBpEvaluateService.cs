@@ -12,7 +12,7 @@ using HisPlus.Domain;
 namespace HisPlus.Services
 {
 	[GlobalErrorBehaviorAttribute(typeof(GlobalErrorHandler))]
-    public class BsBpEvaluateService : AbstractService<BsBpEvaluate, BsBpEvaluateDTO, int>, IBsBpEvaluateService
+    public partial class BsBpEvaluateService : AbstractService<BsBpEvaluate, BsBpEvaluateDTO, int>, IBsBpEvaluateService
     {
     }
 }

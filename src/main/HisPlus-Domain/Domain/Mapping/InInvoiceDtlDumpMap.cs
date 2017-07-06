@@ -75,6 +75,9 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.PriceIn2).HasColumnName(@"PriceIn2").IsOptional().HasColumnType("decimal").HasPrecision(8,4);
             Property(x => x.LsPriceState).HasColumnName(@"LsPriceState").IsOptional().HasColumnType("int");
             Property(x => x.Urgent).HasColumnName(@"Urgent").IsOptional().IsUnicode(false).HasColumnType("varchar").HasMaxLength(20);
+            Property(x => x.Usagememo).HasColumnName(@"Usagememo").IsOptional().HasColumnType("nvarchar").HasMaxLength(200);
+            Property(x => x.Usageid).HasColumnName(@"Usageid").IsOptional().HasColumnType("int");
+            Property(x => x.Formid).HasColumnName(@"Formid").IsOptional().HasColumnType("int");
         }
     }
 }

@@ -89,7 +89,9 @@ namespace AppPlus.Infrastructure.Contract.Services
 
         #region Filter
         [OperationContract(Name = "Filter")]
-        IEnumerable<TDTO> Filter(ExpressionNode predicateExpressionNode, int pageNumber = 0, int pageSize = 50);
+        IEnumerable<TDTO> Filter(out int totalPage, ExpressionNode predicateExpressionNode, int pageNumber = 0, int pageSize = 50);
+
+        IEnumerable<TDTO> Filter(out int totalPage, int pageNumber = 0, int pageSize = 50);
         #endregion        
     }
 }

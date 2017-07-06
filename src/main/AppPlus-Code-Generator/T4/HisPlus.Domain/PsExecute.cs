@@ -15,9 +15,5 @@ namespace HisPlus.Domain
         public System.DateTime? ExecutedTime { get; set; }
         public int? ExecutedOperId { get; set; }
         public int? ExecLocId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
     }
 }

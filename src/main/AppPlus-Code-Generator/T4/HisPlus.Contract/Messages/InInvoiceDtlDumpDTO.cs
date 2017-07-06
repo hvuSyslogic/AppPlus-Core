@@ -191,5 +191,14 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public string Urgent { get; set; }
+
+        [DataMember]
+        public string Usagememo { get; set; }
+
+        [DataMember]
+        public int? Usageid { get; set; }
+
+        [DataMember]
+        public int? Formid { get; set; }
     }
 }

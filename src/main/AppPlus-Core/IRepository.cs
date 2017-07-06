@@ -20,7 +20,9 @@ namespace AppPlus.Core
         //public virtual DbContext Session { get; set; }
 
         //ObjectContext ObjectContext();
-        
+
+        IQueryable<TEntity> Queryable { get; }
+
         #endregion
 
         #region Create
@@ -71,7 +73,8 @@ namespace AppPlus.Core
         #endregion
 
         #region Filter
-        IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate, out int total, int pageNumber = 0, int pageSize = 50);
+        IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, 
+            IOrderedQueryable<TEntity>> orderBy, out int total, int pageNumber = 0, int pageSize = 50);
         #endregion
     }
 }

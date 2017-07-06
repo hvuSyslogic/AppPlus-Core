@@ -12,5 +12,11 @@ namespace HisPlus.Domain
         public string KeyNum { get; set; }
         public string SetValue { get; set; }
         public string Explain { get; set; }
+        public short? Piority { get; set; }
+        public string Basetable { get; set; }
+        public bool? IsMutiselect { get; set; }
+        public int? SystemId { get; set; }
+        public System.DateTime? ModiTime { get; set; }
+        public int? ModiOperId { get; set; }
     }
 }

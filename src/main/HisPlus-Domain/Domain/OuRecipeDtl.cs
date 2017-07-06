@@ -51,5 +51,6 @@ namespace HisPlus.Domain
         public string BpReason { get; set; }
         public string YbType { get; set; }
         public string InvoNo { get; set; }
+        public bool? IsAutoCharged { get; set; }
     }
 }

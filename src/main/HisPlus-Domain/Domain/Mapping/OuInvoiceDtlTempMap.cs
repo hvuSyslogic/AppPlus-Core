@@ -28,7 +28,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.DoctorId).HasColumnName(@"DoctorId").IsOptional().HasColumnType("int");
             Property(x => x.DoctorName).HasColumnName(@"DoctorName").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.ExecLocId).HasColumnName(@"ExecLocId").IsOptional().HasColumnType("int");
-            Property(x => x.F5).HasColumnName(@"F5").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.FeeHsId).HasColumnName(@"FeeHsId").IsOptional().HasColumnType("int");
             Property(x => x.FeeHsMzName).HasColumnName(@"FeeHsMzName").IsOptional().HasColumnType("nvarchar").HasMaxLength(50);
             Property(x => x.FeeId).HasColumnName(@"FeeId").IsOptional().HasColumnType("int");
@@ -74,6 +73,10 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.XdRpId).HasColumnName(@"XDRpId").IsOptional().HasColumnType("int");
             Property(x => x.Mzregid).HasColumnName(@"Mzregid").IsRequired().HasColumnType("int");
             Property(x => x.OperTime).HasColumnName(@"OperTime").IsRequired().HasColumnType("datetime");
+            Property(x => x.Usagememo).HasColumnName(@"Usagememo").IsOptional().HasColumnType("nvarchar").HasMaxLength(200);
+            Property(x => x.Usageid).HasColumnName(@"Usageid").IsOptional().HasColumnType("int");
+            Property(x => x.Formid).HasColumnName(@"Formid").IsOptional().HasColumnType("int");
+            Property(x => x.Frequencyid).HasColumnName(@"Frequencyid").IsOptional().HasColumnType("int");
         }
     }
 }

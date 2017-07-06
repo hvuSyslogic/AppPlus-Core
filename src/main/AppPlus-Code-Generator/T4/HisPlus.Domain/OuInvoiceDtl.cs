@@ -36,5 +36,9 @@ namespace HisPlus.Domain
         public int? RecipeItemId { get; set; }
         public int? RecipeGroupId { get; set; }
         public int? DocLocId { get; set; }
+        public string Usagememo { get; set; }
+        public int? Usageid { get; set; }
+        public int? Formid { get; set; }
+        public int? Frequencyid { get; set; }
     }
 }

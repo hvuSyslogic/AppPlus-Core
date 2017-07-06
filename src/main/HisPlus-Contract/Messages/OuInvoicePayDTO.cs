@@ -23,5 +23,8 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public int? CancelPaywayId { get; set; }
+
+        [DataMember]
+        public int? BankId { get; set; }
     }
 }

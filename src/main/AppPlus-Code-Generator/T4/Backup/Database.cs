@@ -8,7 +8,7 @@
 //
 // The following connection settings were used to generate this file:
 //     Configuration file:     "main\HisPlus-Service-Local-Tests\App.config"
-//     Connection String Name: "AppPlus.His"
+//     Connection String Name: "HisPlus"
 //     Connection String:      "Data Source=localhost;Initial Catalog=HIS;Persist Security Info=True;User ID=sa;password=**zapped**;;MultipleActiveResultSets=True"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Enterprise Edition (64-bit)

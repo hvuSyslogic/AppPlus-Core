@@ -30,6 +30,10 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.AfterStockNum).HasColumnName(@"AfterStockNum").IsRequired().HasColumnType("decimal").HasPrecision(10,2);
             Property(x => x.BeforeStockTotalNum).HasColumnName(@"BeforeStockTotalNum").IsOptional().HasColumnType("decimal").HasPrecision(10,2);
             Property(x => x.AfterStockTotalNum).HasColumnName(@"AfterStockTotalNum").IsOptional().HasColumnType("decimal").HasPrecision(10,2);
+            Property(x => x.LocationId).HasColumnName(@"LocationId").IsOptional().HasColumnType("int");
+            Property(x => x.InOuPatId).HasColumnName(@"InOuPatId").IsOptional().HasColumnType("int");
+            Property(x => x.OutDtlId).HasColumnName(@"OutDtlId").IsOptional().HasColumnType("int");
+            Property(x => x.Price).HasColumnName(@"Price").IsOptional().HasColumnType("decimal").HasPrecision(12,4);
         }
     }
 }

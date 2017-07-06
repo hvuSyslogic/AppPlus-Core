@@ -57,6 +57,7 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.BpReason).HasColumnName(@"BPReason").IsOptional().HasColumnType("nvarchar").HasMaxLength(500);
             Property(x => x.YbType).HasColumnName(@"YbType").IsOptional().HasColumnType("nvarchar").HasMaxLength(10);
             Property(x => x.InvoNo).HasColumnName(@"InvoNo").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
+            Property(x => x.IsAutoCharged).HasColumnName(@"IsAutoCharged").IsOptional().HasColumnType("bit");
         }
     }
 }

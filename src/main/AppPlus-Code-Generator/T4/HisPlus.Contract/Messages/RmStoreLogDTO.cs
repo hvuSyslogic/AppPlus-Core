@@ -56,5 +56,17 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public decimal? AfterStockTotalNum { get; set; }
+
+        [DataMember]
+        public int? LocationId { get; set; }
+
+        [DataMember]
+        public int? InOuPatId { get; set; }
+
+        [DataMember]
+        public int? OutDtlId { get; set; }
+
+        [DataMember]
+        public decimal? Price { get; set; }
     }
 }

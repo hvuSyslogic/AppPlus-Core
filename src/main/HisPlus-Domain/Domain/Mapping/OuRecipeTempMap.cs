@@ -57,6 +57,7 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.DosageTime).HasColumnName(@"DosageTime").IsOptional().HasColumnType("smalldatetime");
             Property(x => x.PatTypeId).HasColumnName(@"PatTypeId").IsOptional().HasColumnType("int");
             Property(x => x.PatId).HasColumnName(@"PatId").IsOptional().HasColumnType("int");
+            Property(x => x.InvoNo).HasColumnName(@"InvoNo").IsOptional().HasColumnType("nvarchar").HasMaxLength(20);
         }
     }
 }

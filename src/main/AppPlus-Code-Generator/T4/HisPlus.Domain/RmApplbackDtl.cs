@@ -19,5 +19,6 @@ namespace HisPlus.Domain
         public string Memo { get; set; }
         public decimal? BeforeStockNum { get; set; }
         public decimal? AfterStockNum { get; set; }
+        public int? CkDtlId { get; set; }
     }
 }

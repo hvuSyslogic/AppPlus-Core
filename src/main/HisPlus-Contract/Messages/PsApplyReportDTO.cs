@@ -119,5 +119,8 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public string CallGroup { get; set; }
+
+        [DataMember]
+        public short? LsStatus { get; set; }
     }
 }

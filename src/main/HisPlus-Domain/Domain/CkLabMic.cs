@@ -17,9 +17,5 @@ namespace HisPlus.Domain
         public bool IsPrint { get; set; }
         public System.DateTime? PrintTime { get; set; }
         public int? PrintOperId { get; set; }
-        public string F1 { get; set; }
-        public string F2 { get; set; }
-        public string F3 { get; set; }
-        public string F4 { get; set; }
     }
 }

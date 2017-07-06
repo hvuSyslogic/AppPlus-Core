@@ -137,5 +137,8 @@ namespace HisPlus.Contract.Messages
 
         [DataMember]
         public int? PatId { get; set; }
+
+        [DataMember]
+        public string InvoNo { get; set; }
     }
 }

@@ -62,5 +62,9 @@ namespace HisPlus.Domain
         public int? DocLocId { get; set; }
         public int? ExecDoctorId { get; set; }
         public bool? IsYbxj { get; set; }
+        public string Usagememo { get; set; }
+        public int? Usageid { get; set; }
+        public int? Formid { get; set; }
+        public int? Frequencyid { get; set; }
     }
 }

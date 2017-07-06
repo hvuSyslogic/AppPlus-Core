@@ -45,5 +45,6 @@ namespace HisPlus.Domain
         public int? CheckId { get; set; }
         public int? ExecuteId { get; set; }
         public string CallGroup { get; set; }
+        public short? LsStatus { get; set; }
     }
 }

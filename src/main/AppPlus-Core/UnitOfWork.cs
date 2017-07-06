@@ -15,6 +15,7 @@ using AppPlus.Infrastructure.Contract.Messages;
 using AppPlus.Infrastructure.Configuration;
 using System.Runtime.InteropServices;
 using AppPlus.Core.Infrastructure.CodeContracts;
+using AppPlus.Core.Redis;
 
 namespace AppPlus.Core.EntityFramework
 {
@@ -119,7 +120,7 @@ namespace AppPlus.Core.EntityFramework
             }
         }
 
-        #endregion        
+        #endregion
 
         #region Dispose
 
@@ -134,9 +135,13 @@ namespace AppPlus.Core.EntityFramework
             if (Marshal.GetExceptionCode() == 0)
             {
                 if (Settings.RollbackOnDispose)
+                {
                     Rollback();
+                }
                 else
+                {
                     Commit();
+                }                    
             }
             else
             {
@@ -195,7 +200,7 @@ namespace AppPlus.Core.EntityFramework
             if ( Settings.EnableCommit && _transaction != null)
             {
                 _transaction.Dispose();
-            }            
+            }
             Session.Dispose();
             _current = null;
         }

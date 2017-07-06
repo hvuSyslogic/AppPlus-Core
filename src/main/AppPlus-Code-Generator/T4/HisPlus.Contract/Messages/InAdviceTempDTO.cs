@@ -130,19 +130,7 @@ namespace HisPlus.Contract.Messages
         public short? Sn { get; set; }
 
         [DataMember]
-        public string F5 { get; set; }
-
-        [DataMember]
-        public string F6 { get; set; }
-
-        [DataMember]
-        public string F7 { get; set; }
-
-        [DataMember]
         public int ExecLocId { get; set; }
-
-        [DataMember]
-        public string F8 { get; set; }
 
         [DataMember]
         public int? ExecDoctorId { get; set; }

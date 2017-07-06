@@ -69,5 +69,8 @@ namespace HisPlus.Domain
         public decimal? PriceIn2 { get; set; }
         public int? LsPriceState { get; set; }
         public string Urgent { get; set; }
+        public string Usagememo { get; set; }
+        public int? Usageid { get; set; }
+        public int? Formid { get; set; }
     }
 }

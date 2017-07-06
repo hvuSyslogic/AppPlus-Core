@@ -17,6 +17,7 @@ using AppPlus.Client;
 using HisPlus.Contract.Messages;
 using HisPlus.Service.Local.Tests.Common;
 using AppPlus.Infrastructure.Contract.Services;
+using HisPlus.Services;
 
 namespace HisPlus.Service.Local.Tests
 {
@@ -28,7 +29,7 @@ namespace HisPlus.Service.Local.Tests
         [Fact(DisplayName = "001_Call_Service_Inheritance_AutoMapperMappingException_NOK")]
         [Trait(TraitName, TraitValue)]
         public void TestMethod_Call_Service_Inheritance_AutoMapperMappingException_NOK()
-        {
+        {  
             Expression<Func<BsGfxeDTO, bool>> expression = (BsGfxeDTO x) => x.Id == 3;
 
             ExpressionNode predicateExpressionNode = expression.ToExpressionNode();

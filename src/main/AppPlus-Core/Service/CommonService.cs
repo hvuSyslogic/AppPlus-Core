@@ -13,18 +13,6 @@ namespace AppPlus.Core.Service
     [GlobalErrorBehaviorAttribute(typeof(GlobalErrorHandler))]
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class CommonService : ServiceRoot, ICommonService
-    {
-        #region GetCurrentDateTime
-        public DateTime GetCurrentDateTime()
-        {
-            return UnitOfWork.Do(uow =>
-            {
-                return (uow.Session as IObjectContextAdapter).ObjectContext
-                    .CreateQuery<DateTime>("CurrentDateTime()")
-                    .AsEnumerable()
-                    .First();
-            });
-        }
-        #endregion
+    {       
     }
 }

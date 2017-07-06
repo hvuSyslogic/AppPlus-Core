@@ -32,9 +32,5 @@ namespace HisPlus.Domain
         public decimal? Price { get; set; }
         public decimal? Discount { get; set; }
         public int? TestGroupId { get; set; }
-        public string F5 { get; set; }
-        public string F6 { get; set; }
-        public string F7 { get; set; }
-        public string F8 { get; set; }
     }
 }
