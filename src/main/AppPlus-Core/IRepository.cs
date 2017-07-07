@@ -74,7 +74,7 @@ namespace AppPlus.Core
 
         #region Filter
         IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, 
-            IOrderedQueryable<TEntity>> orderBy, out int total, int pageNumber = 0, int pageSize = 50);
+            IOrderedQueryable<TEntity>> orderBy, out int totalPages, int pageNumber = 0, int pageSize = 50);
         #endregion
     }
 }

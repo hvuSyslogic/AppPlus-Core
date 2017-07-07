@@ -30,6 +30,7 @@ namespace AppPlus.Infrastructure.Contract.Services
         IEnumerable<TDTO> Retrieve(ExpressionNode predicateExpressionNode);
 
         [OperationContract(Name = "RetrieveAll")]
+        //[WebGet(UriTemplate = "/RetrieveAll", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         IEnumerable<TDTO> RetrieveAll();
         #endregion
 
@@ -88,10 +89,11 @@ namespace AppPlus.Infrastructure.Contract.Services
         #endregion
 
         #region Filter
-        [OperationContract(Name = "Filter")]
-        IEnumerable<TDTO> Filter(out int totalPage, ExpressionNode predicateExpressionNode, int pageNumber = 0, int pageSize = 50);
+        [OperationContract(Name = "FilterByExpression")]
+        IEnumerable<TDTO> Filter(out int totalPages, ExpressionNode predicateExpressionNode, int pageNumber = 0, int pageSize = 50);
 
-        IEnumerable<TDTO> Filter(out int totalPage, int pageNumber = 0, int pageSize = 50);
+        [OperationContract(Name = "Filter")]
+        IEnumerable<TDTO> Filter(out int totalPages, int pageNumber = 0, int pageSize = 50);
         #endregion        
     }
 }

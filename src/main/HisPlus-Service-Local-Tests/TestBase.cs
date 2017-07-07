@@ -25,11 +25,11 @@ namespace HisPlus.Service.Local.Tests
 
         static TestBase()
         {
-            var Container = AppConfigurator.Container                
+            var Container = AppConfigurator.Container
                 .RegisterStorage<HisDbContext>(ConnectionString)
                 .RegisterMapProfiles(typeof(BsGfxeService).Assembly)
                 .RegisterServices(typeof(IBsGfxeService).Assembly, typeof(BsGfxeService).Assembly)
-            ;
+                ;
         }
 
         internal protected static void CallService<T>(Expression<Action<T>> expression)

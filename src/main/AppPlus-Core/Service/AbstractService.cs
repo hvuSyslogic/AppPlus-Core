@@ -25,6 +25,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Data.Entity.Core.EntityClient;
 using AppPlus.Core.Infrastructure.CodeContracts;
+using System.ServiceModel.Web;
 
 namespace AppPlus.Core.Service
 {
@@ -82,7 +83,7 @@ namespace AppPlus.Core.Service
                 return uow.Repo<TEntity>().Retrieve(id).MapTo<TDTO>();
             });
         }
-
+        
         public virtual IEnumerable<TDTO> Retrieve(ExpressionNode predicateExpressionNode)
         {
             Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
@@ -96,7 +97,7 @@ namespace AppPlus.Core.Service
                 return uow.Repo<TEntity>().Retrieve(predicateExpression).MapTo<TDTO>();
             });
         }
-
+        
         public virtual IEnumerable<TDTO> RetrieveAll()
         {
             return UnitOfWork.Do(uow =>
@@ -251,9 +252,9 @@ namespace AppPlus.Core.Service
 
         #region Filter
 
-        public virtual IEnumerable<TDTO> Filter(out int totalPage, int pageNumber = 0, int pageSize = 50)
+        public virtual IEnumerable<TDTO> Filter(out int totalPages, int pageNumber = 0, int pageSize = 50)
         {
-            return Filter(out totalPage, null, pageNumber, pageSize);
+            return Filter(out totalPages, null, pageNumber, pageSize);
         }
 
         //public virtual IEnumerable<TDTO> Filter(Func<IQueryable<TDTO>,
@@ -262,7 +263,7 @@ namespace AppPlus.Core.Service
         //    return Filter(null, orderBy, pageNumber, pageSize);
         //}
 
-        public virtual IEnumerable<TDTO> Filter(out int totalPage, ExpressionNode predicateExpressionNode, int pageNumber = 0, int pageSize = 50)
+        public virtual IEnumerable<TDTO> Filter(out int totalPages, ExpressionNode predicateExpressionNode, int pageNumber = 0, int pageSize = 50)
         {
             //Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
 
@@ -275,7 +276,8 @@ namespace AppPlus.Core.Service
             {
                 return uow.Repo<TEntity>().Filter(predicate, null, out pages, pageNumber, pageSize).MapTo<TDTO>();
             });
-            totalPage = pages;
+
+            totalPages = pages;
 
             return result;
         }

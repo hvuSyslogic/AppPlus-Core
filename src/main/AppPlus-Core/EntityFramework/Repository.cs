@@ -194,11 +194,13 @@ namespace AppPlus.Core.EntityFramework
         #region Filter
 
         public virtual IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, 
-            IOrderedQueryable<TEntity>> orderBy, out int total, int pageNumber = 0, int pageSize = 50)
+            IOrderedQueryable<TEntity>> orderBy, out int totalPages, int pageNumber = 0, int pageSize = 50)
         {
             int skipCount = (pageNumber - 1) * pageSize;
 
             IQueryable<TEntity> queryable = (predicate == null) ? this.EFSet : this.EFSet.Where(predicate);
+
+            totalPages = (int)Math.Ceiling((decimal)queryable.Count() / pageSize);
 
             queryable = queryable.AsNoTracking();
             if (orderBy == null)
@@ -211,9 +213,7 @@ namespace AppPlus.Core.EntityFramework
             }
             
             queryable = (skipCount == 0) ? queryable.Take(pageSize) : queryable.Skip(skipCount).Take(pageSize);
-
-            total = queryable.Count();
-
+            
             return queryable;        
         }
 

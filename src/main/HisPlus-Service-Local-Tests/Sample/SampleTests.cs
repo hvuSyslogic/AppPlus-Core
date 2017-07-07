@@ -1,8 +1,12 @@
-﻿using AppPlus.Infrastructure.Contract.Services;
+﻿using AppPlus.Core.Redis;
+using AppPlus.Infrastructure.Contract.Messages;
+using AppPlus.Infrastructure.Contract.Services;
+using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
 using HisPlus.Service.Local.Tests.Common;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,23 +44,39 @@ namespace HisPlus.Service.Local.Tests.Sample
         [Fact]
         public void LargeDataTest()
         {
-            int pageNumber = 1;
-            int pageSize = 1000000;
-            //var recordCount = CallService((IBsItemUnitService x) => x.Count());
-            int totalPage = 0;
+            //int currentPageNumber = 1;
+            int pageSize = 500000;
+            //int totalPages = 0;
 
+            //do
+            //{
+            //    var result = CallService((IBsItemUnitService x) => x.Filter(out totalPages, currentPageNumber, pageSize));                
+            //    currentPageNumber++;
+            //} while (totalPages > currentPageNumber);
+
+            var st = new Stopwatch();
+            st.Start();
+            var result = RetrieveByPage<IBsItemUnitService, BsItemUnitDTO, int>(pageSize);
+            st.Stop();
+
+            var elapsedTime = st.Elapsed;            
+        }
+
+        private List<TDTO> RetrieveByPage<T, TDTO, TKey>(int pageSize = 100000)
+            where T : IGenericService<TDTO, TKey>
+            where TDTO : DtoBase<TKey>, new()
+            where TKey : struct
+        {            
+            var pages = new List<TDTO>();
+            int nextPageNumber = 1;
+            int totalPages = 0;
             do
             {
-                var result = CallService((IBsItemUnitService x) => x.Filter(out totalPage, pageNumber, pageSize));
-                //recordCount -= pageSize;
-                pageNumber++;
-            } while (totalPage > pageNumber);
+                var page = CallService((T x) => x.Filter(out totalPages, nextPageNumber, pageSize));
+                pages.AddRange(page);
+            } while (nextPageNumber++ < totalPages);
 
-            //var result1 = CallService((IBsItemUnitService x) => x.Filter(1, 1000000));
-            //var result2 = CallService((IBsItemUnitService x) => x.Filter(2, 1000000));
-            //var result3 = CallService((IBsItemUnitService x) => x.Filter(3, 1000000));
-            //var result4 = CallService((IBsItemUnitService x) => x.Filter(4, 1000000));
-            //var result5 = CallService((IBsItemUnitService x) => x.Filter(5, 1000000));
+            return pages;
         }
     }
 }

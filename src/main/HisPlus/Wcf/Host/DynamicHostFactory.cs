@@ -74,25 +74,17 @@ namespace HisPlus.Wcf.Host
 
                     //host.AddServiceEndpoint(registeredType, tcpBinding, url);
                     //host.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexHttpBinding(), "mex");                    
-                }
-                //Uri httpBaseAddress = new Uri("http://localhost:8000");
-                //WebServiceHost mServiceHost = new WebServiceHost(typeof(SmartService), httpBaseAddress);
-                //Binding nWebHttpBinding = new WebHttpBinding();
-                //mServiceHost.AddServiceEndpoint(typeof(ISmartService), nWebHttpBinding, "SmartService");
-                //WebHttpBehavior helpBehavior = new WebHttpBehavior();
-                //helpBehavior.HelpEnabled = true;
-                //mServiceHost.Description.Endpoints[0].Behaviors.Add(helpBehavior);
-                //mServiceHost.Open(); 
+                }             
             }
 
             if (host.Description.Behaviors.Find<ServiceMetadataBehavior>() == null)
             {
                 ServiceMetadataBehavior metadata = new ServiceMetadataBehavior();
-                metadata.HttpGetEnabled = true;
+                metadata.HttpGetEnabled = true;                
                 metadata.HttpGetUrl = baseAddresses[0];
                 host.Description.Behaviors.Add(metadata);
             }
-            
+      
             return host;
         }
 
