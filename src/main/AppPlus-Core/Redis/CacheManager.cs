@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AppPlus.Core.Redis
 {
-    public class RedisManager
+    public class CacheManager
     {
         public static readonly string RedisKeyPrefix = "";
         private static readonly string RedisConnectionString = "";
@@ -21,7 +21,7 @@ namespace AppPlus.Core.Redis
         
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        static RedisManager()
+        static CacheManager()
         {
             var connectionStrings = ConfigurationManager.ConnectionStrings[Constants.RedisConnectionString];
             if (connectionStrings != null)

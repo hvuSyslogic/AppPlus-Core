@@ -1,7 +1,7 @@
 ﻿using System;
 namespace AppPlus.Core.Redis
 {
-    interface IRedisRepository
+    public interface ICacheProvider
     {
         void AddKeyPrefix(string customKey);
         StackExchange.Redis.ITransaction CreateTransaction();

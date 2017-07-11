@@ -17,7 +17,7 @@ namespace AppPlus
 {
     internal static class ProductInformation
     {
-        internal const string VersionString = "1.17.48";
+        internal const string VersionString = "1.17.49";
         internal const string Company = "Dragon Luo";
         //internal const string Name = "AppPlus";
         internal const string Copyright = "Copyright © 2017 - 2018 Dragon Luo. All Rights Reserved.";

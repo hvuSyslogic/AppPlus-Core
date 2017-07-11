@@ -76,7 +76,7 @@ namespace AppPlus.Core
                 .RegisterType<IUnitOfWork, UnitOfWork>()
                 .RegisterType(typeof(IRepository<>), typeof(Repository<>))
                 .RegisterType<ICommonService, CommonService>()
-                .RegisterType<IRedisRepository, RedisRepository>(new InjectionConstructor(0))
+                .RegisterType<ICacheProvider, CacheProvider>(new InjectionConstructor(0))
                 ;
 
             return container;      

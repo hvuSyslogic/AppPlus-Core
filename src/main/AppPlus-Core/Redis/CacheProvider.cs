@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AppPlus.Core.Redis
 {
-    public class RedisRepository : AppPlus.Core.Redis.IRedisRepository
+    public class CacheProvider : ICacheProvider
     {
         public string CustomKey;
         private readonly ConnectionMultiplexer _connection;
@@ -18,16 +18,16 @@ namespace AppPlus.Core.Redis
 
         #region Constructor(s)
 
-        public RedisRepository(int dbNo = 0)
+        public CacheProvider(int dbNo = 0)
             : this(dbNo, null)
         {
         }
 
-        public RedisRepository(int dbNo, string readWriteHost)
+        public CacheProvider(int dbNo, string readWriteHost)
         {
             DbNo = dbNo;
-            _connection = string.IsNullOrWhiteSpace(readWriteHost) ? RedisManager.Instance 
-                : RedisManager.GetConnectionMultiplexer(readWriteHost);
+            _connection = string.IsNullOrWhiteSpace(readWriteHost) ? CacheManager.Instance 
+                : CacheManager.GetConnectionMultiplexer(readWriteHost);
         }
 
         #endregion Constructor(s)
@@ -925,7 +925,7 @@ namespace AppPlus.Core.Redis
 
         private string CustomizedKey(string oldKey)
         {
-            var prefixKey = CustomKey ?? RedisManager.RedisKeyPrefix;
+            var prefixKey = CustomKey ?? CacheManager.RedisKeyPrefix;
 
             return string.Concat(prefixKey, oldKey);
         }

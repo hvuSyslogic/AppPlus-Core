@@ -19,7 +19,7 @@ namespace HisPlus.Service.Local.Tests.Sample
         {
             string keyName = "BsLocation";
 
-            RedisRepository repo = new RedisRepository(0);
+            CacheProvider repo = new CacheProvider(0);
             //if (repo.KeyExists(keyName))
             //{
             //    repo.KeyDelete(keyName);
@@ -46,7 +46,7 @@ namespace HisPlus.Service.Local.Tests.Sample
         {
             string keyName = "BsItemUsage";
 
-            RedisRepository repo = new RedisRepository(0);
+            CacheProvider repo = new CacheProvider(0);
             if (repo.KeyExists(keyName))
             {
                 repo.KeyDelete(keyName);
@@ -74,7 +74,7 @@ namespace HisPlus.Service.Local.Tests.Sample
             where TKey : struct
         {
             string keyName = "BsItemUsage";
-            RedisRepository repo = new RedisRepository(0);
+            CacheProvider repo = new CacheProvider(0);
 
             var pages = new List<TDTO>();
             int nextPageNumber = 1;
@@ -97,7 +97,7 @@ namespace HisPlus.Service.Local.Tests.Sample
 
         public void Sub()
         {
-            RedisRepository _redis = new RedisRepository(1);
+            CacheProvider _redis = new CacheProvider(1);
             var channelKey = "Channel1";
             _redis.Subscribe(channelKey, (channel, message) =>
             {

@@ -26,8 +26,8 @@ namespace WindowsFormsDemo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            RedisRepository redis = new RedisRepository(0);            
-
+            CacheProvider redis = new CacheProvider(0);
+            
             new Thread((ThreadStart)delegate()
                 {
                     var result = RetrieveByPage<IBsItemUnitService, BsItemUnitDTO, int>();

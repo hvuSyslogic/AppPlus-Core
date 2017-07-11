@@ -39,7 +39,7 @@ namespace AppPlus.Core.EntityFramework
         #region Properties
 
         [Dependency]
-        public virtual IRedisRepository RedisRepository { get; set; }
+        public virtual ICacheProvider RedisRepository { get; set; }
 
         protected virtual DbSet<TEntity> EFSet { get; set; }
 

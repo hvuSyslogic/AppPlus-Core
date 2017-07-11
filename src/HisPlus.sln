@@ -50,6 +50,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E78C62
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsDemo", "WindowsFormsDemo\WindowsFormsDemo.csproj", "{6F6885A7-7F5B-4578-9837-9866F730BEC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPlus-RabbitMQTests", "RabbitMQTests\AppPlus-RabbitMQTests.csproj", "{503606C3-ACCD-441E-BA4A-73CD48A9A9F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPlus-RedisTests", "AppPlus-RedisTests\AppPlus-RedisTests.csproj", "{569DC5B6-8269-431D-8A5A-B9FC197B6122}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,6 +112,14 @@ Global
 		{6F6885A7-7F5B-4578-9837-9866F730BEC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F6885A7-7F5B-4578-9837-9866F730BEC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F6885A7-7F5B-4578-9837-9866F730BEC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{503606C3-ACCD-441E-BA4A-73CD48A9A9F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{503606C3-ACCD-441E-BA4A-73CD48A9A9F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{503606C3-ACCD-441E-BA4A-73CD48A9A9F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{503606C3-ACCD-441E-BA4A-73CD48A9A9F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{569DC5B6-8269-431D-8A5A-B9FC197B6122}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{569DC5B6-8269-431D-8A5A-B9FC197B6122}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{569DC5B6-8269-431D-8A5A-B9FC197B6122}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{569DC5B6-8269-431D-8A5A-B9FC197B6122}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +138,8 @@ Global
 		{9B4FD8FF-73EF-4E18-9ABE-18B1D0737263} = {EE7A444F-C548-432D-8B20-03C6C9B3DD95}
 		{45ADB831-0B3A-41C3-8CCB-AF7084488A87} = {4E29C5FA-0B88-4111-95B0-5515099575A8}
 		{6F6885A7-7F5B-4578-9837-9866F730BEC5} = {DD4ADB69-38E2-46BF-B7BA-451C38C6C675}
+		{503606C3-ACCD-441E-BA4A-73CD48A9A9F7} = {DD4ADB69-38E2-46BF-B7BA-451C38C6C675}
+		{569DC5B6-8269-431D-8A5A-B9FC197B6122} = {DD4ADB69-38E2-46BF-B7BA-451C38C6C675}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
