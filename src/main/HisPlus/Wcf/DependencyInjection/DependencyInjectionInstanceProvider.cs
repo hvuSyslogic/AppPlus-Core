@@ -1,4 +1,4 @@
-﻿using AppPlus.Infrastructure.Configuration;
+﻿using HisPlus.Infrastructure.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +46,7 @@ namespace HisPlus.Wcf.DependencyInjection
         public object GetInstance(InstanceContext instanceContext, Message message)
         {
             //return DependencyFactory.Resolve(_serviceType);
-            return AppConfigurator.Container.Resolve(_serviceType);
+            return HisPlusConfigurator.Container.Resolve(_serviceType);
         }
 
         /// <summary>

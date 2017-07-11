@@ -1,4 +1,4 @@
-﻿using AppPlus.Infrastructure.Contract.Services;
+﻿using HisPlus.Infrastructure.Contract.Services;
 using HisPlus.Contract.Messages;
 using System;
 using System.Collections.Generic;

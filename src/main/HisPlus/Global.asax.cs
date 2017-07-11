@@ -8,12 +8,12 @@ using System.Web.Hosting;
 using System.Web.Security;
 using System.Web.SessionState;
 using AutoMapper;
-using AppPlus.Core.Service;
-using AppPlus.Core;
+using HisPlus.Core.Service;
+using HisPlus.Core;
 using HisPlus.Wcf.Host;
 using HisPlus.Services;
 using HisPlus.Contract.Services;
-using AppPlus.Infrastructure.Configuration;
+using HisPlus.Infrastructure.Configuration;
 
 namespace HisPlus
 {
@@ -34,7 +34,7 @@ namespace HisPlus
 
         private void Application_Initialize()
         {
-           AppConfigurator.Container               
+           HisPlusConfigurator.Container               
                .RegisterStorage<HisPlus.Domain.HisDbContext>(ConnectionString)               
                .RegisterServices(typeof(IBsGfxeService).Assembly, typeof(BsGfxeService).Assembly)
                .RegisterMapProfiles(typeof(BsGfxeService).Assembly)

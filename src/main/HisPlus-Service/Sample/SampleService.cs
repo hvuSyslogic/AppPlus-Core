@@ -1,7 +1,7 @@
-﻿using AppPlus.Core;
-using AppPlus.Core.EntityFramework;
-using AppPlus.Core.Infrastructure.CodeContracts;
-using AppPlus.Core.Service;
+﻿using HisPlus.Core;
+using HisPlus.Core.EntityFramework;
+using HisPlus.Core.Infrastructure.CodeContracts;
+using HisPlus.Core.Service;
 using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
 using HisPlus.Domain;

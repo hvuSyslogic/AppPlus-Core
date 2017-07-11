@@ -1,6 +1,6 @@
 using System;
 using System.Runtime.Serialization;
-using AppPlus.Infrastructure.Contract.Messages;
+using HisPlus.Infrastructure.Contract.Messages;
 
 namespace HisPlus.Contract.Messages
 {

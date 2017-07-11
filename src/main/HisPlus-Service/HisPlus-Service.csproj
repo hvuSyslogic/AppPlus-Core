@@ -494,13 +494,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AppPlus-Core\AppPlus-Core.csproj">
+    <ProjectReference Include="..\HisPlus-Core\HisPlus-Core.csproj">
       <Project>{e9578bd9-26f5-41cf-a78f-42e704d2928a}</Project>
-      <Name>AppPlus-Core</Name>
+      <Name>HisPlus-Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AppPlus-Infrastructrure\AppPlus-Infrastructure.csproj">
+    <ProjectReference Include="..\HisPlus-Infrastructrure\HisPlus-Infrastructure.csproj">
       <Project>{70a18834-0849-4693-ae65-1610a8e0eb7e}</Project>
-      <Name>AppPlus-Infrastructure</Name>
+      <Name>HisPlus-Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\HisPlus-Contract\HisPlus-Contract.csproj">
       <Project>{6de0dab6-3e4b-43ee-8473-f7a61d0d9cd6}</Project>

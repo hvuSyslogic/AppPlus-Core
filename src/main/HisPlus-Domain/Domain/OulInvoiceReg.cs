@@ -1,5 +1,5 @@
 using System.Data.Entity.ModelConfiguration;
-using AppPlus.Infrastructure.Contract.Messages;
+using HisPlus.Infrastructure.Contract.Messages;
 
 namespace HisPlus.Domain
 {

@@ -9,8 +9,8 @@ using System.ServiceModel.Description;
 using Microsoft.Practices.Unity;
 using log4net;
 using System.ServiceModel.Security;
-using AppPlus.Core;
-using AppPlus.Infrastructure.Configuration;
+using HisPlus.Core;
+using HisPlus.Infrastructure.Configuration;
 using HisPlus.Wcf.DependencyInjection;
 
 namespace HisPlus.Wcf.Host
@@ -23,7 +23,7 @@ namespace HisPlus.Wcf.Host
         {
             ArgumentValidation(reference, baseAddresses);
 
-            var containerRegistrations = AppConfigurator.Container.Registrations;
+            var containerRegistrations = HisPlusConfigurator.Container.Registrations;
 
             var registration = containerRegistrations.Where(x => x.MappedToType.Name.ToLower() == reference.ToLower()).FirstOrDefault();
             if (registration == null)

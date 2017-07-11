@@ -866,9 +866,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AppPlus-Infrastructrure\AppPlus-Infrastructure.csproj">
+    <ProjectReference Include="..\HisPlus-Infrastructrure\HisPlus-Infrastructure.csproj">
       <Project>{70a18834-0849-4693-ae65-1610a8e0eb7e}</Project>
-      <Name>AppPlus-Infrastructure</Name>
+      <Name>HisPlus-Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
