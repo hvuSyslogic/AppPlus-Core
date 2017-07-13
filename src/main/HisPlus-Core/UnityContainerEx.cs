@@ -35,24 +35,24 @@ namespace HisPlus.Core
 
             int totalOfRegisteredTypes = 0;
 
-            foreach (var registeredType in allRegisteredTypes)
+            allRegisteredTypes.ToList().ForEach(type => 
             {
-                var mappedToTypes = allMappedToTypes.Where(x => registeredType.IsAssignableFrom(x));
+                var mappedToTypes = allMappedToTypes.Where(x => type.IsAssignableFrom(x));
 
                 if (mappedToTypes.Any())
                 {
                     foreach (var mappedToType in mappedToTypes)
                     {
-                        if (!unityContainer.IsRegistered(registeredType))
+                        if (!unityContainer.IsRegistered(type))
                         {
-                            unityContainer.RegisterType(registeredType, mappedToType);
+                            unityContainer.RegisterType(type, mappedToType);
                             //Log.DebugFormat("Type {0} ==========> {1}", mappedToType.FullName, registeredType.FullName);
                             totalOfRegisteredTypes++;
                         }
                     }
                 }
-            }
-            
+            });
+        
             //Log.DebugFormat("=================================================== {0} types was registered successfully ========================================================", totalOfRegisteredTypes);
             
             return unityContainer;
@@ -87,7 +87,7 @@ namespace HisPlus.Core
             return container.RegisterAssembly(fromAssembly, toAssembly);
         }
 
-        private static bool IsDerivedOfGenericType(this Type type, Type genericType)
+        internal static bool IsDerivedOfGenericType(this Type type, Type genericType)
         {
             if (type.IsGenericType && type.GetGenericTypeDefinition() == genericType)
             {

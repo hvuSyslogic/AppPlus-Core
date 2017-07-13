@@ -32,7 +32,7 @@ namespace HisPlus.Wcf.DependencyInjection
             //Register the service as a type so it can be found from the instance provider
             //TODO:
             //DependencyFactory.Container.RegisterType(serviceType);
-            HisPlusConfigurator.Container.RegisterType(serviceType);
+            //HisPlusConfigurator.Container.RegisterType(serviceType);
             return new DependencyInjectionServiceHost(serviceType, baseAddresses);
         }
 

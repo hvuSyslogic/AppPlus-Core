@@ -106,7 +106,7 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DependencyFactory.cs" />
+    <Compile Include="DependencyContext.cs" />
     <Compile Include="DynamicExpression.cs" />
     <Compile Include="Redis\Constants.cs" />
     <Compile Include="Redis\ICacheProvider.cs" />

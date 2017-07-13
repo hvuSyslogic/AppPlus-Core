@@ -21,8 +21,8 @@ namespace HisPlus.Client
         public static T GetProxy<T>()
             where T : IServiceRoot
         {
-            var host = HisPlusConfigurator.HisPlusConfiguration.Middle.Host;
-            var port = HisPlusConfigurator.HisPlusConfiguration.Middle.Port;
+            var host = ConfigurationManager.Configuration.ServiceAgent.Host;
+            var port = ConfigurationManager.Configuration.ServiceAgent.Port;
 
             string service = typeof(T).Name.Substring(1);
             string url = string.Format(Constants.Uri, host, port, service);

@@ -10,9 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace HisPlus.Service.Local.UnitTests.Sample
+namespace HisPlus.Redis.UnitTests
 {
-    public class RedisTests : TestBase
+    public class RedisTests : UnitTestBase
     {
         [Fact]
         public void TestMethod()

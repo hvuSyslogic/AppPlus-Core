@@ -1,5 +1,4 @@
 ﻿using HisPlus.Infrastructure.Contract.Messages;
-using HisPlus.Service.Remote.Tests.Common;
 using HisPlus.UnitTests.Common;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HisPlus.Service.Remote.Tests.Common
+namespace HisPlus.Service.UnitTests.Common
 {
     public abstract class TestsFixtureBase<TDTO> : UnitTestBase, IDisposable
         where TDTO: DtoRoot

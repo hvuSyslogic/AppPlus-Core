@@ -38,7 +38,7 @@ namespace HisPlus.Core.Service
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        #region Automapper configuration        
+        #region Automapper configuration
         protected override void ConfigureMap()
         {
             CreateMap<TEntity, TDTO>().ReverseMap();
@@ -304,7 +304,7 @@ namespace HisPlus.Core.Service
 
         //#endregion
 
-        #region ExecuteDataTable      
+        #region ExecuteDataTable
 
         #endregion
 

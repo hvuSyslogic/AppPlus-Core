@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HisPlus.RedisTests
+namespace HisPlus.Redis.UnitTests
 {
     public class UnitTestBase
     {

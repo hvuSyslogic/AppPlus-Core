@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace HisPlus.RedisTests
+namespace HisPlus.Redis.UnitTests
 {
     public class RedisCacheTests : UnitTestBase
     {

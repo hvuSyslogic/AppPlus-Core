@@ -57,6 +57,10 @@
       <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Nerdle.AutoConfig, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nerdle.AutoConfig.1.2.1\lib\Nerdle.AutoConfig.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Serialize.Linq, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Serialize.Linq.1.3.0\lib\net45\Serialize.Linq.dll</HintPath>
       <Private>True</Private>
@@ -79,10 +83,11 @@
     </Compile>
     <Compile Include="CodeContracts\Assumes.cs" />
     <Compile Include="CodeContracts\Requires.cs" />
-    <Compile Include="Configuration\MiddleWareSection.cs" />
-    <Compile Include="Configuration\HisPlusConfigurationManager.cs" />
-    <Compile Include="Configuration\HisPlusConfigurationSection.cs" />
-    <Compile Include="ServiceCallMode.cs" />
+    <Compile Include="Configuration\IServiceAgentConfig.cs" />
+    <Compile Include="Configuration\ICredentialsConfig.cs" />
+    <Compile Include="Configuration\IHisPlusConfiguration.cs" />
+    <Compile Include="Configuration\IAssemblyConfig.cs" />
+    <Compile Include="Configuration\ConfigurationManager.cs" />
     <Compile Include="Exceptions\ExceptionEx.cs" />
     <Compile Include="Exceptions\ServerException.cs" />
     <Compile Include="Exceptions\ClientException.cs" />

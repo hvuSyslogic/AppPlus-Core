@@ -11,7 +11,7 @@ using Xunit;
 using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
 
-namespace HisPlus.Service.Remote.Tests.Common
+namespace HisPlus.Service.UnitTests.Common
 {
     public class BsGfxeServiceTestsFixture : TestsFixtureBase<BsGfxeDTO>
     {

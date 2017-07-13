@@ -10,10 +10,10 @@ using Xunit;
 using HisPlus.Client;
 using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
-using HisPlus.Service.Remote.Tests.Common;
 using HisPlus.UnitTests.Common;
+using HisPlus.Service.UnitTests.Common;
 
-namespace HisPlus.Service.Remote.Tests.BS
+namespace HisPlus.Service.UnitTests.BS
 {
     public class BsGfxeServiceUnitTests : UnitTestBase, IClassFixture<BsGfxeServiceTestsFixture>
     {

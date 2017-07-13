@@ -20,17 +20,17 @@ namespace HisPlus.Client
 {
     public class ServiceHandler
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);        
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static bool MiddleWare
+        private static bool IsDistributed
         {
-            get { return HisPlusConfigurator.HisPlusConfiguration.ServiceCallMode == ServiceCallMode.MiddleWare; }            
+            get { return ConfigurationManager.Configuration.IsDistributed; }
         }
 
         public static void CallService<T>(Expression<Action<T>> expression)
             where T : IServiceRoot
         {
-            using (T service = MiddleWare ? ProxyManager.GetProxy<T>() : HisPlusConfigurator.Container.Resolve<T>())
+            using (T service = IsDistributed ? ProxyManager.GetProxy<T>() : HisPlusConfigurator.Container.Resolve<T>())
             {
                 Perform<T>(service, expression);
             }
@@ -39,7 +39,7 @@ namespace HisPlus.Client
         public static TResult CallService<T, TResult>(Expression<Func<T, TResult>> expression)
             where T : IServiceRoot
         {
-            using (T service = MiddleWare ? ProxyManager.GetProxy<T>() : HisPlusConfigurator.Container.Resolve<T>())
+            using (T service = IsDistributed ? ProxyManager.GetProxy<T>() : HisPlusConfigurator.Container.Resolve<T>())
             {
                 return Perform<T, TResult>(service, expression);
             }
