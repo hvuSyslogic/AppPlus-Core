@@ -18,6 +18,11 @@ namespace HisPlus.Services.Installer
             container.Register(Classes.FromThisAssembly().BasedOn<ServiceRoot>()
                 .WithService.DefaultInterfaces().Configure(c => c.LifestyleTransient()));
 
+            InstallAutoMapper();
+        }
+
+        private void InstallAutoMapper()
+        {
             Mapper.Initialize(cfg =>
             {
                 cfg.AddProfiles(GetType().Assembly);

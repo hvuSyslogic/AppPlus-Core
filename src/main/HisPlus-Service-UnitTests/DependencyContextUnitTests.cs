@@ -23,37 +23,13 @@ namespace HisPlus.Service.UnitTests
         [Fact]
         public void TestRegister()
         {
-            var container = DependencyContext.Container;
-            
-            //container.Install(new StoreageInstaller());
-            //container.Install(FromAssembly.Named("HisPlus.Core"), FromAssembly.Named("HisPlus.Service"));
-            //var isDistributed = ConfigurationManager.Configuration.IsDistributed;
-            //if (isDistributed)
-            //{
-            //    ConfigurationManager.Configuration.LocalSection.Installers.ToList().ForEach(x => 
-            //    {
-            //        container.Install(FromAssembly.Named(x.Value));
-            //    });
-            //}
-
-            //container.Register(Component.For<DbContext>().ImplementedBy<HisDbContext>()
-            //    .DependsOn(Dependency.OnValue("connectionString", "HisPlus"))
-            //    .DependsOn(Dependency.OnValue("assemblies", new Assembly[] { typeof(BsArea).Assembly })).LifestyleTransient());
-            //container.Register(Types.FromAssemblyNamed("HisPlus.Service")
-            //    .Where(type => type.Name.EndsWith("Service"))
-            //    .WithService.DefaultInterfaces().Configure(c => c.LifestyleTransient() ));
+            var container = DependencyContext.Container;                     
 
             var context = container.Resolve<DbContext>();
             var area = context.Set<BsArea>().FirstOrDefault();
-            var hasComponent = DependencyContext.Container.Kernel.HasComponent("HisPlus.Service.BsAreaCommitteeService");
-            //Mapper.Initialize(cfg =>
-            //{
-            //    cfg.AddProfiles(typeof(BsAreaService).Assembly);
-            //});
-
-            IBsLocationService service = container.Resolve<IBsLocationService>();
+            
+            var service = container.Resolve<IBsLocationService>();
             var result = service.RetrieveAll();
-
         }
 
         [Fact]
@@ -63,9 +39,7 @@ namespace HisPlus.Service.UnitTests
 
             foreach (var handler in container.Kernel.GetAssignableHandlers(typeof(object)))
             {
-                Console.WriteLine("{0} {1}",
-                   handler.ComponentModel.Services,
-                   handler.ComponentModel.Implementation);
+                Console.WriteLine("{0} {1}", handler.ComponentModel.Services, handler.ComponentModel.Implementation);
             }
         }
     }
