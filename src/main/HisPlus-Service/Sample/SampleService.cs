@@ -6,7 +6,6 @@ using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
 using HisPlus.Domain;
 using log4net;
-using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +20,9 @@ namespace HisPlus.Services
     public class SampleService : ServiceRoot, ISampleService
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
-        [Dependency]
+        
         public IGblRoleService RoleService { get; set; }
 
-        [Dependency]
         public IGblRoleModuleService RoleModuleService { get; set; }        
 
         public IEnumerable<GblRoleDTO> L1CacheTest()

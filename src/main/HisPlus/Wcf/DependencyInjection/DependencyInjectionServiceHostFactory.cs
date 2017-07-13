@@ -6,7 +6,6 @@ using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.Web;
-using Microsoft.Practices.Unity;
 
 namespace HisPlus.Wcf.DependencyInjection
 {

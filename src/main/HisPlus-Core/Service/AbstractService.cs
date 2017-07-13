@@ -10,7 +10,6 @@ using System.Data.Common;
 using System.Data.Entity;
 using System.ServiceModel;
 using System.Runtime.Serialization;
-using Microsoft.Practices.Unity;
 using log4net;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;

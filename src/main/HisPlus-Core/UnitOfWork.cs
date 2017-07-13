@@ -8,17 +8,19 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using log4net;
-using Microsoft.Practices.Unity;
 using Z.EntityFramework.Plus;
 using HisPlus.Infrastructure.Contract.Messages;
-using HisPlus.Infrastructure.Configuration;
-using System.Runtime.InteropServices;
 using HisPlus.Core.Infrastructure.CodeContracts;
 using HisPlus.Core.Redis;
+using HisPlus.Infrastructure;
 
 namespace HisPlus.Core.EntityFramework
 {
+    /// <summary>
+    /// https://www.codeproject.com/articles/543810/dependency-injection-and-unit-of-work-using-castle
+    /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -34,12 +36,12 @@ namespace HisPlus.Core.EntityFramework
         private UnitOfWork(UnitOfWorkSettings settings)
         {
             Settings = settings ?? UnitOfWorkSettings.Default;
-            Session = HisPlusConfigurator.Container.Resolve<DbContext>();
+            Session = DependencyContext.Container.Resolve<DbContext>();
             SetSession(Session);
             if (Settings.EnableCommit)
             {
                 _transaction = Session.Database.BeginTransaction();
-            }            
+            }
         }
 
         #endregion
@@ -89,7 +91,7 @@ namespace HisPlus.Core.EntityFramework
         {
             if (!repositories.ContainsKey(typeof(TEntity)))
             {
-                var repository = HisPlusConfigurator.Container.Resolve<IRepository<TEntity>>(new ParameterOverrides { { "unitOfWork", this } });
+                var repository = DependencyContext.Container.Resolve<IRepository<TEntity>>(new { unitOfWork = this });
                 repositories.Add(new KeyValuePair<Type, object>(typeof(TEntity), repository));
             }
 

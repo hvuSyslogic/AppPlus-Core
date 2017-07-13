@@ -14,6 +14,9 @@ using HisPlus.Wcf.Host;
 using HisPlus.Services;
 using HisPlus.Contract.Services;
 using HisPlus.Infrastructure.Configuration;
+using HisPlus.Infrastructure;
+using HisPlus.Domain;
+using HisPlus.Services.Installer;
 
 namespace HisPlus
 {
@@ -29,17 +32,13 @@ namespace HisPlus
 
             HostingEnvironment.RegisterVirtualPathProvider(new ServicePathProvider());
 
-            Application_Initialize();
+            //Application_Initialize();
         }
 
-        private void Application_Initialize()
-        {
-           HisPlusConfigurator.Container               
-               .RegisterStorage<HisPlus.Domain.HisDbContext>(ConnectionString)               
-               .RegisterServices(typeof(IBsGfxeService).Assembly, typeof(BsGfxeService).Assembly)
-               .RegisterMapProfiles(typeof(BsGfxeService).Assembly)
-            ;
-        }
+        //private void Application_Initialize()
+        //{            
+        //   DependencyContext.Container.Install(new StoreageInstaller(), new DbContextInstaller(), new ServiceInstaller());  
+        //}
 
         protected void Session_Start(object sender, EventArgs e)
         {

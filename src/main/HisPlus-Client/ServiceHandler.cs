@@ -14,7 +14,6 @@ using HisPlus.Infrastructure.Contract.Messages;
 using HisPlus.Infrastructure.Exceptions;
 using HisPlus.Core.Infrastructure.CodeContracts;
 using log4net;
-using Microsoft.Practices.Unity;
 
 namespace HisPlus.Client
 {
@@ -30,7 +29,7 @@ namespace HisPlus.Client
         public static void CallService<T>(Expression<Action<T>> expression)
             where T : IServiceRoot
         {
-            using (T service = IsDistributed ? ProxyManager.GetProxy<T>() : HisPlusConfigurator.Container.Resolve<T>())
+            using (T service = IsDistributed ? ProxyManager.GetProxy<T>() : DependencyContext.Container.Resolve<T>())
             {
                 Perform<T>(service, expression);
             }
@@ -39,7 +38,7 @@ namespace HisPlus.Client
         public static TResult CallService<T, TResult>(Expression<Func<T, TResult>> expression)
             where T : IServiceRoot
         {
-            using (T service = IsDistributed ? ProxyManager.GetProxy<T>() : HisPlusConfigurator.Container.Resolve<T>())
+            using (T service = IsDistributed ? ProxyManager.GetProxy<T>() : DependencyContext.Container.Resolve<T>())
             {
                 return Perform<T, TResult>(service, expression);
             }

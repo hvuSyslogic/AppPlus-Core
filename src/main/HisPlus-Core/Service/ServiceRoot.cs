@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.Practices.Unity;
 using HisPlus.Infrastructure.Configuration;
 using HisPlus.Infrastructure.Contract.Services;
 using log4net;

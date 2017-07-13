@@ -6,111 +6,128 @@ using System.ServiceModel.Activation;
 using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-using Microsoft.Practices.Unity;
 using log4net;
 using System.ServiceModel.Security;
 using HisPlus.Core;
 using HisPlus.Infrastructure.Configuration;
 using HisPlus.Wcf.DependencyInjection;
+using HisPlus.Infrastructure;
+using HisPlus.Infrastructure.Contract.Services;
 
 namespace HisPlus.Wcf.Host
 {
-    public class DynamicHostFactory : DependencyInjectionServiceHostFactory //ServiceHostFactory
+    /// <summary>
+    /// http://blog.micic.ch/net/dynamic-iis-hosted-wcf-service
+    /// https://ayende.com/blog/3752/rhino-service-bus
+    /// </summary>
+    public class DynamicHostFactory : ServiceHostFactory
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-       
-        public override ServiceHostBase CreateServiceHost(string reference, Uri[] baseAddresses)
+
+        public override ServiceHostBase CreateServiceHost(string constructorString, Uri[] baseAddresses)
         {
-            ArgumentValidation(reference, baseAddresses);
+            //Type registeredType = registration.RegisteredType;
+            //Type mappedToType = registration.MappedToType;
 
-            var containerRegistrations = HisPlusConfigurator.Container.Registrations;
-
-            var registration = containerRegistrations.Where(x => x.MappedToType.Name.ToLower() == reference.ToLower()).FirstOrDefault();
-            if (registration == null)
+            var serviceHandler = DependencyContext.Container.Kernel.GetAssignableHandlers(typeof(object))
+                .ToList().Where(x => x.ComponentModel.Implementation.Name == constructorString).FirstOrDefault();
+            if (serviceHandler == null)
             {
-                throw new ArgumentOutOfRangeException(string.Format("Invalid service name '{0}'", reference));
+                throw new InvalidOperationException(string.Format("Could not find a component with {0} , did you forget to register it?", constructorString));
             }
+
+            var serviceType = serviceHandler.ComponentModel.Implementation;
+
+            //var mappedToType = Type.GetType(constructorString, false);
+
+            ServiceHost host = new ServiceHost(serviceType, baseAddresses);
             
-            Type registeredType = registration.RegisteredType;
-            Type mappedToType = registration.MappedToType;
+            //TimeSpan ts = new TimeSpan(0, 10, 0);
 
-            //object serviceType = AppConfigurator.Container.Resolve(mappedToType);
+            //foreach (Uri address in baseAddresses)
+            //{
+            //    BasicHttpBinding wsHttpBinding = new BasicHttpBinding()
+            //    {
+            //        Name = serviceType.Name,
+            //        MaxBufferSize = Int32.MaxValue,
+            //        MaxBufferPoolSize = Int32.MaxValue,
+            //        MaxReceivedMessageSize = Int32.MaxValue,
+            //        ReaderQuotas = new System.Xml.XmlDictionaryReaderQuotas()
+            //        {
+            //            MaxArrayLength = Int32.MaxValue,
+            //            MaxBytesPerRead = Int32.MaxValue,
+            //            MaxDepth = Int32.MaxValue,
+            //            MaxNameTableCharCount = Int32.MaxValue,
+            //            MaxStringContentLength = Int32.MaxValue,
+            //        },
+            //        CloseTimeout = ts,
+            //        OpenTimeout = ts,
+            //        ReceiveTimeout = ts,
+            //        SendTimeout = ts,
+            //    };
 
-            ServiceHost host = new DependencyInjectionServiceHost(mappedToType, baseAddresses);
-            
-            TimeSpan ts = new TimeSpan(0, 10, 0);
+                //var attribute = Attribute.GetCustomAttribute(registeredType, typeof(ServiceContractAttribute));
+                //var serviceAttribute = (ServiceContractAttribute)attribute;
+                //if (serviceAttribute != null)
+                //{
+                //    //NetTcpBinding tcpBinding = new NetTcpBinding();
 
-            foreach (Uri address in baseAddresses)
+                //    //string url = string.Format("net.tcp://localhost:8888/{0}", reference);
+
+                //    //host.AddServiceEndpoint(registeredType, wsHttpBinding, address);
+
+                //    //host.AddServiceEndpoint(registeredType, tcpBinding, url);
+                //    //host.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexHttpBinding(), "mex");                    
+                //}             
+            //}
+
+            // Add endpoints
+            foreach (Type contract in serviceType.GetInterfaces().Where(x => x.IsSubclassOf(typeof(IServiceRoot))))
             {
-                BasicHttpBinding wsHttpBinding = new BasicHttpBinding()
+                var attribute = (ServiceContractAttribute)Attribute.GetCustomAttribute(contract, typeof(ServiceContractAttribute));
+                if (attribute != null)
                 {
-                    Name = mappedToType.Name,
-                    MaxBufferSize = Int32.MaxValue,
-                    MaxBufferPoolSize = Int32.MaxValue,
-                    MaxReceivedMessageSize = Int32.MaxValue,
-                    ReaderQuotas = new System.Xml.XmlDictionaryReaderQuotas()
-                    {
-                        MaxArrayLength = Int32.MaxValue,
-                        MaxBytesPerRead = Int32.MaxValue,
-                        MaxDepth = Int32.MaxValue,
-                        MaxNameTableCharCount = Int32.MaxValue,
-                        MaxStringContentLength = Int32.MaxValue,
-                    },
-                    CloseTimeout = ts,
-                    OpenTimeout = ts,
-                    ReceiveTimeout = ts,
-                    SendTimeout = ts,
+                    host.AddServiceEndpoint(contract, new BasicHttpBinding(), "");
+                }                    
+            }
+
+            // Add metdata behavior for generating wsdl
+            var metadata = host.Description.Behaviors.Find<ServiceMetadataBehavior>();
+            if (metadata == null)
+            {
+                metadata = new ServiceMetadataBehavior() 
+                { 
+                    HttpGetEnabled = true, 
+                    HttpGetUrl = baseAddresses[0] 
                 };
-
-                var attribute = Attribute.GetCustomAttribute(registeredType, typeof(ServiceContractAttribute));
-                var serviceAttribute = (ServiceContractAttribute)attribute;
-                if (serviceAttribute != null)
-                {
-                    //NetTcpBinding tcpBinding = new NetTcpBinding();
-
-                    //string url = string.Format("net.tcp://localhost:8888/{0}", reference);
-
-                    //host.AddServiceEndpoint(registeredType, wsHttpBinding, address);
-
-                    //host.AddServiceEndpoint(registeredType, tcpBinding, url);
-                    //host.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexHttpBinding(), "mex");                    
-                }             
-            }
-
-            if (host.Description.Behaviors.Find<ServiceMetadataBehavior>() == null)
-            {
-                ServiceMetadataBehavior metadata = new ServiceMetadataBehavior();
-                metadata.HttpGetEnabled = true;                
-                metadata.HttpGetUrl = baseAddresses[0];
+                
                 host.Description.Behaviors.Add(metadata);
-            }
+            };
       
             return host;
         }
 
-        protected override void RegisterDependencies()
-        {
-            //DependencyFactory.Container.RegisterType(typeof(IExampleRepository), typeof(ExampleRepository), new ContainerControlledLifetimeManager());
+        //public override ServiceHostBase CreateServiceHost(string constructorString, Uri[] baseAddresses)
+        //{
+        //    // Load bin/services.dll
+        //    var asm = Assembly.Load("Services");
+        //    var serviceType = asm.GetType(constructorString);
+        //    var host = new ServiceHost(serviceType, baseAddresses);
 
-            Log.Error("+++++++++++++++++++++++++++++");
-        }
+        //    // Add endpoints. (In this example only IHello interface)
+        //    foreach (Type contract in serviceType.GetInterfaces())
+        //    {
+        //        var attribute = (ServiceContractAttribute)
+        //            Attribute.GetCustomAttribute(contract, typeof(ServiceContractAttribute));
+        //        if (attribute != null)
+        //            host.AddServiceEndpoint(contract, new BasicHttpBinding(), "");
+        //    }
+        //    // Add metdata behavior for generating wsdl
+        //    var metadata = new ServiceMetadataBehavior();
+        //    metadata.HttpGetEnabled = true;
+        //    host.Description.Behaviors.Add(metadata);
 
-        private void ArgumentValidation(string reference, Uri[] baseAddresses)
-        {
-            if (string.IsNullOrEmpty(reference))
-            {
-                throw new ArgumentNullException("reference");
-            }
-
-            if (baseAddresses == null)
-            {
-                throw new ArgumentNullException("baseAddresses");
-            }
-
-            if (!baseAddresses.Any())
-            {
-                throw new ArgumentException("baseAddresses can not be empty.");
-            }
-        }
+        //    return host;
+        //}
     }
 }

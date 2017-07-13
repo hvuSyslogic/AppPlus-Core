@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.Configuration
 {
-    public interface IAssemblyConfig
+    public interface IInstaller
     {
-        string Service { get; }
-
-        string Type { get; }
+        string Assembly { get; }
     }
 }

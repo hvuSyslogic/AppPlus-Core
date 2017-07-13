@@ -8,7 +8,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using log4net;
-using Microsoft.Practices.Unity;
 using Z.EntityFramework.Plus;
 using HisPlus.Infrastructure.Contract.Messages;
 using System.Data.Entity.Core.Objects;
@@ -24,7 +23,7 @@ namespace HisPlus.Core.EntityFramework
         
         #region Constructor(s)
 
-        [InjectionConstructor]
+        //[InjectionConstructor]
         public Repository(IUnitOfWork unitOfWork)
         {
             this.Session = unitOfWork.Session;
@@ -38,7 +37,7 @@ namespace HisPlus.Core.EntityFramework
 
         #region Properties
 
-        [Dependency]
+        //[Dependency]
         public virtual ICacheProvider RedisRepository { get; set; }
 
         protected virtual DbSet<TEntity> EFSet { get; set; }

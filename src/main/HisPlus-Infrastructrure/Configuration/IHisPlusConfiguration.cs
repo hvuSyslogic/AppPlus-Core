@@ -12,10 +12,8 @@ namespace HisPlus.Infrastructure.Configuration
     {
         bool IsDistributed { get; }
 
-        IServiceAgentConfig ServiceAgent { get; }        
-        
-        ICredentialsConfig Credentials { get; }
+        IAgentSection AgentSection { get; }
 
-        IEnumerable<IAssemblyConfig> Assemblies { get; }
+        ILocalSection LocalSection { get; }        
     }
 }

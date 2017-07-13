@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,8 +26,8 @@ namespace HisPlus.Domain
         }
 
         protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
-        {                      
-            modelBuilder.Configurations.AddFromAssembly(typeof(BsGfxe).Assembly);
+        {
+            modelBuilder.Configurations.AddFromAssembly(GetType().Assembly);      
         }
 
         public override int SaveChanges()
