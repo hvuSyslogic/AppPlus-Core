@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Service.UnitTests.Common
 {
-    public abstract class TestsFixtureBase<TDTO> : UnitTestBase, IDisposable
+    public abstract class TestsFixtureBase<TDTO> : UnitTestBase<TDTO>, IDisposable
         where TDTO: DtoRoot
-    {
+    {        
         public TestsFixtureBase()
         {
             MockData();

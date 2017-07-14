@@ -63,10 +63,12 @@ namespace HisPlus.Core.Service
 
             var entities = dtos.MapTo<TEntity>();
 
-            return UnitOfWork.Do(uow => 
+            UnitOfWork.Do(uow => 
             {
-                return uow.Repo<TEntity>().Create(entities).MapTo<TDTO>();
+                entities = uow.Repo<TEntity>().Create(entities);                
             });
+
+            return entities.MapTo<TDTO>();
         }
         #endregion              
 

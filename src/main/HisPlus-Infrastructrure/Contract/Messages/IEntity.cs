@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppPlus.Infrastructure.Contracts.Messages
+namespace HisPlus.Infrastructure.Contract.Messages
 {
-    interface IEntity
+    public interface IEntity<TPrimaryKey>
     {
+        TPrimaryKey Id { get; set; }
+
+        bool IsTransient();
     }
 }

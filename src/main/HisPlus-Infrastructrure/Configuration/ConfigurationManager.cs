@@ -1,8 +1,10 @@
-﻿using Nerdle.AutoConfig;
+﻿using log4net;
+using Nerdle.AutoConfig;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +18,8 @@ namespace HisPlus.Infrastructure.Configuration
         private const string LocalSectionName = "localSection";
         private const string AgentSectionName = "agentSection";
 
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         static ConfigurationManager()
         {
             lock (_lock)
@@ -26,7 +30,14 @@ namespace HisPlus.Infrastructure.Configuration
                     mapper.Map(x => x.LocalSection).Optional();
                 });
 
-                _configuration = AutoConfig.Map<IHisPlusConfiguration>();
+                try
+                {
+                    _configuration = AutoConfig.Map<IHisPlusConfiguration>();
+                }
+                catch (TypeInitializationException ex)
+                {
+                    Log.Error(ex);
+                }
             }
             
             AssertConfigurationIsValid(_configuration);

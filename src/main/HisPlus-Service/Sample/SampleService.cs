@@ -49,8 +49,8 @@ namespace HisPlus.Services
             {
                 var role = uow.Repo<GblRole>().Retrieve().FirstOrDefault();
                 Requires.NotNull(role, "role");
-                
-                uow.Repo<GblRole>().Update(role);                
+                role.IconIndex = 9999;
+                uow.Repo<GblRole>().Update(role);
 
                 var roleModule = uow.Repo<GblRoleModule>().Retrieve().FirstOrDefault();
                 Requires.NotNull(roleModule, "roleModule");

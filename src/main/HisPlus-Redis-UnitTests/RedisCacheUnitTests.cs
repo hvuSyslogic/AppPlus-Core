@@ -9,13 +9,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using HisPlus.UnitTests.Common;
 
 namespace HisPlus.Redis.UnitTests
 {
-    public class RedisTests : UnitTestBase
+    public class RedisCacheUnitTests : TestBase
     {
-        [Fact]
-        public void TestMethod()
+        const string TraitName = "RedisCacheUnitTests";
+        const string TraitValue = "RedisCache";
+
+        [Fact(DisplayName="001_Cache")]
+        [Trait(TraitName, TraitValue)]
+        public void Cache_TestMethod()
         {
             string keyName = "BsLocation";
 
@@ -41,7 +46,8 @@ namespace HisPlus.Redis.UnitTests
             //redis.StringSet("BsLocation", result);
         }
 
-        [Fact]
+        [Fact(DisplayName = "002_Redis_Cache_Large_Data")]
+        [Trait(TraitName, TraitValue)]
         public void Redis_LargeData_TestMethod()
         {
             string keyName = "BsItemUsage";
@@ -87,23 +93,6 @@ namespace HisPlus.Redis.UnitTests
             } while (nextPageNumber++ < totalPages);
 
             return pages;
-        }
-
-        [Fact]
-        public void PubSub()
-        {
-            Sub();        
-        }
-
-        public void Sub()
-        {
-            CacheProvider _redis = new CacheProvider(1);
-            var channelKey = "Channel1";
-            _redis.Subscribe(channelKey, (channel, message) =>
-            {
-                Console.WriteLine("接受到发布的内容为：" + message);
-            });
-            Console.WriteLine("您订阅的通道为：<< " + channelKey + " >> ! 请耐心等待消息的到来！！");
-        }
+        }     
     }
 }

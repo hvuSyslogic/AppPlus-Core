@@ -8,7 +8,10 @@ namespace HisPlus.Service.UnitTests.Common
 {
     public class Constants
     {
-        public const int QUOTA_ID = 4;
-        public const int FLAG_TO_DELETE = 10000;
+        internal const int Mock_Record_Counts = 20;
+
+        internal const int Invalid_Primary_Key = -1;
+
+        internal const int To_Be_Delete_Records = 10000;        
     }
 }

@@ -15,9 +15,9 @@ using HisPlus.Service.UnitTests.Common;
 
 namespace HisPlus.Service.UnitTests.BS
 {
-    public class BsGfxeServiceUnitTests : UnitTestBase, IClassFixture<BsGfxeServiceTestsFixture>
+    public class BsGfxeServiceUnitTests : UnitTestBase<BsGfxeDTO>, IClassFixture<BsGfxeServiceTestsFixture>
     {
-        private const string TraitName = "BSGfxeServiceUnitTests";
+        private const string TraitName = "BSGfxeServiceUnitTests";        
 
         #region Retrieve
         [Fact(DisplayName = "001_RetrieveById_ArgumentOutRange_NOK")]
@@ -26,9 +26,7 @@ namespace HisPlus.Service.UnitTests.BS
         {
             Assert.Throws<FaultException>(() => 
             {
-                var result = CallService((IBsGfxeService x) => x.RetrieveById(-1));
-                Assert.NotNull(result);
-                Assert.True(result.Id == Constants.QUOTA_ID);
+                var result = CallService((IBsGfxeService x) => x.RetrieveById(Constants.Invalid_Primary_Key));                
             });
         }
 
@@ -36,9 +34,12 @@ namespace HisPlus.Service.UnitTests.BS
         [Trait(TraitName, "Retrieve")]
         public void RetrieveById_OK()
         {
-            var result = CallService((IBsGfxeService x) => x.RetrieveById(Constants.QUOTA_ID));
+            Assert.NotEmpty(MockCollections);
+            int id = MockCollections.FirstOrDefault().Id;
+            var result = CallService((IBsGfxeService x) => x.RetrieveById(id));
+
             Assert.NotNull(result);
-            Assert.True(result.Id == Constants.QUOTA_ID);
+            Assert.True(result.Id == id);
         }  
 
         [Fact(DisplayName = "003_RetrieveAll_OK")]
@@ -54,12 +55,16 @@ namespace HisPlus.Service.UnitTests.BS
         [Trait(TraitName, "Retrieve")]
         public void RetrieveByExpression_OK()
         {
-            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => !x.IsActive);
+            Assert.NotEmpty(MockCollections);
+
+            var item = MockCollections.First();
+
+            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => item.PyCode == x.PyCode);
             var expressionNode = expression.ToExpressionNode();
 
             var result = CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
             Assert.NotNull(result);
-            Assert.True(result.Count() > 0);
+            Assert.Equal(MockCollections.Count(), result.Count());            
         }
 
         [Fact(DisplayName = "005_RetrieveByExpression_NOK")]
@@ -182,7 +187,7 @@ namespace HisPlus.Service.UnitTests.BS
             newItem.PyCode = "CSFYXE";
             newItem.WbCode = "CCCCCC";
             newItem.IsActive = false;
-            newItem.IconIndex = Constants.FLAG_TO_DELETE;
+            newItem.IconIndex = Constants.To_Be_Delete_Records;
             newItem = CallService((IBsGfxeService x) => x.Create(newItem));
             
             Assert.NotNull(newItem);
@@ -197,7 +202,7 @@ namespace HisPlus.Service.UnitTests.BS
         [Trait(TraitName, "Update")]
         public void Update_TestMethod()
         {
-            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IconIndex == Constants.FLAG_TO_DELETE);
+            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IconIndex == Constants.To_Be_Delete_Records);
             var expressionNode = expression.ToExpressionNode();
             var result = CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
             Assert.NotNull(result);
@@ -223,7 +228,7 @@ namespace HisPlus.Service.UnitTests.BS
         [Trait(TraitName, "Update")]
         public void UpdateAll_TestMethod()
         {
-            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IconIndex == Constants.FLAG_TO_DELETE);
+            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IconIndex == Constants.To_Be_Delete_Records);
             var expressionNode = expression.ToExpressionNode();
             var result = CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
             Assert.NotNull(result);

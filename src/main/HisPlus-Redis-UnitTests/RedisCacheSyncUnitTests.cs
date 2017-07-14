@@ -9,10 +9,11 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using HisPlus.UnitTests.Common;
 
 namespace HisPlus.Redis.UnitTests
 {
-    public class RedisCacheTests : UnitTestBase
+    public class RedisCacheSyncUnitTests : TestBase
     {
         private const string HostName = "localhost";
         private string CacheKey = "BsGfxe";

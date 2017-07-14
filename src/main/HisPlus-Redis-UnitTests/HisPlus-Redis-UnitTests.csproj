@@ -73,9 +73,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RedisTests.cs" />
-    <Compile Include="UnitTestBase.cs" />
-    <Compile Include="RedisCacheTests.cs" />
+    <Compile Include="RedisCacheUnitTests.cs" />
+    <Compile Include="RedisCacheSyncUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,9 +94,16 @@
       <Project>{6de0dab6-3e4b-43ee-8473-f7a61d0d9cd6}</Project>
       <Name>HisPlus-Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HisPlus-UnitTests-Common\HisPlus-UnitTests-Common.csproj">
+      <Project>{bd4f5fcc-7578-4c75-88e5-d134c699fe65}</Project>
+      <Name>HisPlus-UnitTests-Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="Config\log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

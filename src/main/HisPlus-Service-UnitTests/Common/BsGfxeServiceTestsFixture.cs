@@ -14,14 +14,12 @@ using HisPlus.Contract.Services;
 namespace HisPlus.Service.UnitTests.Common
 {
     public class BsGfxeServiceTestsFixture : TestsFixtureBase<BsGfxeDTO>
-    {
-        const int RECORD_COUNT = 20;
-
+    {        
         public override void MockData()
         {
             List<BsGfxeDTO> rows = new List<BsGfxeDTO>();
 
-            for (short i = 0; i < RECORD_COUNT; i++)
+            for (short i = 0; i < Constants.Mock_Record_Counts; i++)
             {
                 string order = i.ToString();
 
@@ -33,20 +31,20 @@ namespace HisPlus.Service.UnitTests.Common
                     WbCode = "CSFYXE",
                     OrderBy = i,
                     IsActive = true,
-                    IconIndex = Constants.FLAG_TO_DELETE
+                    IconIndex = Constants.To_Be_Delete_Records
                 };
                 rows.Add(row);
             }
 
-            var result = CallService((IBsGfxeService x) => x.Create(rows));
+            MockCollections = CallService((IBsGfxeService x) => x.Create(rows));
 
-            Assert.NotNull(result);
-            Assert.Equal(RECORD_COUNT, result.Count());
+            Assert.NotNull(MockCollections);
+            Assert.Equal(Constants.Mock_Record_Counts, MockCollections.Count());
         }
 
         public override void Clean()
         {
-            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IconIndex == Constants.FLAG_TO_DELETE);
+            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IconIndex == Constants.To_Be_Delete_Records);
             var expressionNode = expression.ToExpressionNode();
 
             var effectedRows = CallService((IBsGfxeService x) => x.Delete(expressionNode));

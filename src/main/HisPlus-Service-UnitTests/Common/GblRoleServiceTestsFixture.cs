@@ -31,7 +31,7 @@ namespace HisPlus.Service.UnitTests.Common
                     Name = "测试" + i.ToString(),
                     IsActive = true,
                     OrderBy = i,
-                    IconIndex = Constants.FLAG_TO_DELETE
+                    IconIndex = Constants.To_Be_Delete_Records
                 };
                 rows.Add(row);
             }
@@ -44,7 +44,7 @@ namespace HisPlus.Service.UnitTests.Common
 
         public override void Clean()
         {
-            Expression<Func<GblRoleDTO, bool>> expression = ((GblRoleDTO x) => x.IconIndex == Constants.FLAG_TO_DELETE);
+            Expression<Func<GblRoleDTO, bool>> expression = ((GblRoleDTO x) => x.IconIndex == Constants.To_Be_Delete_Records);
             var expressionNode = expression.ToExpressionNode();
 
             var effectedRows = CallService((IGblRoleService x) => x.Delete(expressionNode));

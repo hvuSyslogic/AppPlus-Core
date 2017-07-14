@@ -8,9 +8,21 @@ using Xunit;
 
 namespace HisPlus.RabbitMQTests
 {    
-    public partial class Send
+    public partial class MessageSenderUnitTests
     {
+        const string TraitName = "MessageSenderUnitTests";
+        const string TraitValue = "MessageQueue";
+
         private const string HostName = "localhost";
+
+        [Fact(DisplayName = "001_MQ_PUB")]
+        [Trait(TraitName, TraitValue)]
+        public void TestSendMessage()
+        {
+            string queueName = "testQueue";
+
+            SendMessage(queueName);
+        }
 
         public void SendMessage(string queueName)
         {
@@ -39,14 +51,6 @@ namespace HisPlus.RabbitMQTests
                     Console.WriteLine(" [x] Sent {0}", message);
                 }
             }
-        }
-
-        [Fact]
-        public void TestSendMessage()
-        {
-            string queueName = "testQueue";
-
-            SendMessage(queueName);
-        }
+        }        
     }
 }

@@ -10,25 +10,30 @@ using System.Threading.Tasks;
 using Xunit;
 using System.Diagnostics;
 using HisPlus.UnitTests.Common;
+using System.ServiceModel;
 
 namespace HisPlus.Service.UnitTests.Sample
 {
-    public partial class SampleTests : UnitTestBase
+    public partial class SampleUnitTests : TestBase
     {
-        const string TraitName = "SampleTests.Remote";              
+        const string TraitName = "SampleUnitTests";
+        const string TraitValue = "Multi_Test";
 
-        [Fact(DisplayName = "002_EntityFramework_L1_Cache_OK")]
-        [Trait(TraitName, "EntityFramework_L1_Cache")]
+        [Fact(DisplayName = "001_EntityFramework_L1_Cache_NOK")]
+        [Trait(TraitName, TraitValue)]
         public void EntityFramework_L1_Cache_OK()
         {
             var result = CallService((ISampleService x) => x.L1CacheTest());
         }
 
-        [Fact(DisplayName = "002_DbTransaction_OK")]
-        [Trait(TraitName, "DbTransaction_OK")]
+        [Fact(DisplayName = "002_Transaction_NOK")]
+        [Trait(TraitName, TraitValue)]
         public void DbTransaction_NOK()
         {
-            var result = CallService((ISampleService x) => x.TransactionTest());
+            Assert.Throws<FaultException>(() => 
+            {
+                var result = CallService((ISampleService x) => x.TransactionTest());
+            });            
         }
 
         [Fact]

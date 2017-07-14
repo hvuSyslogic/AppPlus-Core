@@ -60,10 +60,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Send.cs" />
+    <Compile Include="MessageSenderUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Send.Designer.cs">
-      <DependentUpon>Send.cs</DependentUpon>
+    <Compile Include="MessageSenderUnitTests.Designer.cs">
+      <DependentUpon>MessageSenderUnitTests.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

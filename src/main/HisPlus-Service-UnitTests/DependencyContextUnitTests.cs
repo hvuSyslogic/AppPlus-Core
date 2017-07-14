@@ -20,26 +20,45 @@ namespace HisPlus.Service.UnitTests
 {
     public class DependencyContextUnitTests
     {
-        [Fact]
+        const string TraitName = "DependencyContextUnitTests";
+        const string DisplayName = "DependenyInjection";
+
+        [Fact(DisplayName = "001_Container_Registeration_Test")]
+        [Trait(TraitName, DisplayName)]
         public void TestRegister()
         {
-            var container = DependencyContext.Container;                     
+            if (!ConfigurationManager.Configuration.IsDistributed)
+            {
+                var container = DependencyContext.Container;
+                var context = container.Resolve<DbContext>();
 
-            var context = container.Resolve<DbContext>();
-            var area = context.Set<BsArea>().FirstOrDefault();
-            
-            var service = container.Resolve<IBsLocationService>();
-            var result = service.RetrieveAll();
+                var area = context.Set<BsArea>().FirstOrDefault();
+                Assert.NotNull(area);
+
+                var service = container.Resolve<IBsLocationService>();
+                var result = service.RetrieveAll();
+
+                Assert.NotNull(result);
+            }
         }
 
-        [Fact]
+        [Fact(DisplayName = "002_Container_Get_All_Registeration_Components")]
+        [Trait(TraitName, DisplayName)]
         public void TestConfiguration()
         {
-            var container = DependencyContext.Container;
-
-            foreach (var handler in container.Kernel.GetAssignableHandlers(typeof(object)))
+            if (!ConfigurationManager.Configuration.IsDistributed)
             {
-                Console.WriteLine("{0} {1}", handler.ComponentModel.Services, handler.ComponentModel.Implementation);
+                var container = DependencyContext.Container;
+                var handlers = container.Kernel.GetAssignableHandlers(typeof(object));
+
+                Assert.NotNull(handlers);
+                Assert.NotEmpty(handlers);
+
+                foreach (var handler in handlers)
+                {
+                    var service = handler.ComponentModel.Services;
+                    var type = handler.ComponentModel.Implementation;
+                }
             }
         }
     }
