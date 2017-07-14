@@ -19,15 +19,40 @@ namespace HisPlus.Services
     [GlobalErrorBehaviorAttribute(typeof(GlobalErrorHandler))]    
     public class SampleService : ServiceRoot, ISampleService
     {
+        class PatientInHosInfo
+        {
+            internal BsPatient Patient { get; set; }
+            internal InHosInfo InHosInfo { get; set; }
+        }
+
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         
         public IGblRoleService RoleService { get; set; }
 
-        public IGblRoleModuleService RoleModuleService { get; set; }        
+        public IGblRoleModuleService RoleModuleService { get; set; }
+
+        public PatientInHosInfoDTO GetPatientInHosInfo(string cardNo)
+        {
+            var c = UnitOfWork.Do(uow => 
+            {
+                var queryable = uow.Repo<BsPatient>().Retrieve(x => x.CardNo == cardNo).Join(
+                    uow.Repo<InHosInfo>().Retrieve(),
+                    x => x.InPatNo,
+                    y => y.InPatNo,
+                    (x, y) => new PatientInHosInfo { Patient = x, InHosInfo = y });
+
+                return queryable.First();
+            });
+
+            return new PatientInHosInfoDTO()
+            {
+                Patient = c.Patient.MapTo<BsPatientDTO>(),
+                InHosInfo = c.InHosInfo.MapTo<InHosInfoDTO>()
+            };
+        }
 
         public IEnumerable<GblRoleDTO> L1CacheTest()
-        {
-            
+        {            
             return UnitOfWork.Do(uow => 
             {
                 var currentDateTime = GetCurrentDateTime();

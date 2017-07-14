@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HisPlus.Services.Installer
+namespace HisPlus.Services.Dependency.Installer
 {
     public class ServiceInstaller : IWindsorInstaller
     {

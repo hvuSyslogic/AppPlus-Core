@@ -52,6 +52,7 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="PatientInHosInfoDTO.cs" />
     <Compile Include="Messages\AdviceAuthDtlDTO.cs" />
     <Compile Include="Messages\BaseTableRoleDTO.cs" />
     <Compile Include="Messages\BkPayWayDTO.cs" />

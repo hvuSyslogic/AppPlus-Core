@@ -32,6 +32,11 @@ namespace HisPlus.Infrastructure
             }
         }
 
+        public static void Initialize() 
+        {
+
+        }
+
         public static IWindsorContainer Container
         {
             get { return Nested._instance; }

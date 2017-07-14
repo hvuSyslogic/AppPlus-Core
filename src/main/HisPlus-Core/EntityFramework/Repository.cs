@@ -23,7 +23,6 @@ namespace HisPlus.Core.EntityFramework
         
         #region Constructor(s)
 
-        //[InjectionConstructor]
         public Repository(IUnitOfWork unitOfWork)
         {
             this.Session = unitOfWork.Session;
@@ -36,8 +35,7 @@ namespace HisPlus.Core.EntityFramework
         #endregion
 
         #region Properties
-
-        //[Dependency]
+        
         public virtual ICacheProvider RedisRepository { get; set; }
 
         protected virtual DbSet<TEntity> EFSet { get; set; }
@@ -218,6 +216,6 @@ namespace HisPlus.Core.EntityFramework
 
         #endregion
 
-        public IQueryable<TEntity> Queryable { get { return EFSet.AsQueryable<TEntity>(); } }
+        public IQueryable<TEntity> Queryable { get { return EFSet.AsQueryable<TEntity>(); } }       
     }
 }

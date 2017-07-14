@@ -29,6 +29,7 @@ namespace HisPlus.Core.EntityFramework
 
         [ThreadStatic]
         private static UnitOfWork _current;
+
         private readonly DbContextTransaction _transaction;        
 
         #region Construct(s)

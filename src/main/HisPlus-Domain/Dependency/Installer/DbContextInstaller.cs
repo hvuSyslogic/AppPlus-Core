@@ -8,8 +8,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CastleDependency = Castle.MicroKernel.Registration;
 
-namespace HisPlus.Domain
+namespace HisPlus.Domain.Dependency.Installer
 {
     public class DbContextInstaller : IWindsorInstaller
     {
@@ -20,7 +21,7 @@ namespace HisPlus.Domain
             string connectionStringName = ConfigurationManager.Configuration.LocalSection.ConnectionStringName;
 
             container.Register(Component.For<DbContext>().ImplementedBy<HisDbContext>()
-               .DependsOn(Dependency.OnValue(DependencyName, connectionStringName)).LifestyleTransient());
+               .DependsOn(CastleDependency.Dependency.OnValue(DependencyName, connectionStringName)).LifestyleSingleton());
         }
     }
 }

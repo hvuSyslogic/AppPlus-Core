@@ -103,7 +103,7 @@
     <Compile Include="Redis\ICacheProvider.cs" />
     <Compile Include="Redis\CacheManager.cs" />
     <Compile Include="Redis\CacheProvider.cs" />
-    <Compile Include="StoreageInstaller.cs" />
+    <Compile Include="Dependency\Installer\StoreageInstaller.cs" />
     <Compile Include="UnitOfWorkSettings.cs" />
     <Compile Include="ExpressionUtils.cs" />
     <Compile Include="IRepository.cs" />
@@ -134,7 +134,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Cache\" />
-    <Folder Include="Dependency\Installers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

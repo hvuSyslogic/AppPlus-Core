@@ -94,6 +94,6 @@ namespace HisPlus.Infrastructure.Contract.Services
 
         [OperationContract(Name = "Filter")]
         IEnumerable<TDTO> Filter(out int totalPages, int pageNumber = 0, int pageSize = 50);
-        #endregion        
+        #endregion
     }
 }

@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HisPlus.Core
+namespace HisPlus.Core.Dependency.Installer
 {
     public class StoreageInstaller : IWindsorInstaller
     {

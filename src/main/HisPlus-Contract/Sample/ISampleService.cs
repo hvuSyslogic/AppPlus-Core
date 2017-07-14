@@ -17,5 +17,8 @@ namespace HisPlus.Contract.Services
 
         [OperationContract]
         bool TransactionTest();
+
+        [OperationContract]
+        PatientInHosInfoDTO GetPatientInHosInfo(string cardNo);
     }
 }

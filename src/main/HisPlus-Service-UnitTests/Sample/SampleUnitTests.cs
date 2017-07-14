@@ -72,5 +72,18 @@ namespace HisPlus.Service.UnitTests.Sample
 
             return pages;
         }
+
+        [Fact(DisplayName = "003_Join_OK")]
+        [Trait(TraitName, TraitValue)]
+        public void GetPatientInHosInfo_By_CardNo_TestMethod() 
+        {
+            string cardNo = "201707030007";            
+
+            var result = CallService((ISampleService x) => x.GetPatientInHosInfo(cardNo));
+
+            Assert.NotNull(result);
+            Assert.Equal(result.Patient.InPatNo, result.InHosInfo.InPatNo);
+            Assert.Equal(cardNo, result.Patient.CardNo);
+        }
     }
 }
