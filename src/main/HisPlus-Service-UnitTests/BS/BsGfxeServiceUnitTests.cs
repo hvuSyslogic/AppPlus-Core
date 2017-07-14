@@ -12,6 +12,7 @@ using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
 using HisPlus.UnitTests.Common;
 using HisPlus.Service.UnitTests.Common;
+using HisPlus.Infrastructure.Configuration;
 
 namespace HisPlus.Service.UnitTests.BS
 {
@@ -123,11 +124,22 @@ namespace HisPlus.Service.UnitTests.BS
         {
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.Id > 0);
             var expressionNode = expression.ToExpressionNode();
-
-            Assert.Throws<FaultException>(() =>
+            if (ConfigurationManager.Configuration.IsDistributed)
             {
-                var result = CallService((IBsGfxeService x) => x.Contains(expressionNode));
-            });
+                Assert.Throws<FaultException>(() =>
+                {
+                    var result = CallService((IBsGfxeService x) => x.Contains(expressionNode));
+                });
+
+            }
+            else
+            {
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    var result = CallService((IBsGfxeService x) => x.Contains(expressionNode));
+                });
+
+            }
         }
         #endregion
 
@@ -165,10 +177,21 @@ namespace HisPlus.Service.UnitTests.BS
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.Id > 0);
             var expressionNode = expression.ToExpressionNode();
 
-            Assert.Throws<FaultException>(() => 
+            if (ConfigurationManager.Configuration.IsDistributed)
             {
-                var result = CallService((IBsGfxeService x) => x.Count(expressionNode));
-            });
+                Assert.Throws<FaultException>(() =>
+                {
+                    var result = CallService((IBsGfxeService x) => x.Count(expressionNode));
+                });
+            }
+            else
+            {
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    var result = CallService((IBsGfxeService x) => x.Count(expressionNode));
+                });
+
+            }
         }
         #endregion
 

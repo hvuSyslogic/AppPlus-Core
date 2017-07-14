@@ -21,7 +21,7 @@ namespace HisPlus.Domain.Dependency.Installer
             string connectionStringName = ConfigurationManager.Configuration.LocalSection.ConnectionStringName;
 
             container.Register(Component.For<DbContext>().ImplementedBy<HisDbContext>()
-               .DependsOn(CastleDependency.Dependency.OnValue(DependencyName, connectionStringName)).LifestyleSingleton());
+               .DependsOn(CastleDependency.Dependency.OnValue(DependencyName, connectionStringName)).LifestylePooled());
         }
     }
 }
