@@ -26,73 +26,40 @@ namespace HisPlus.Core.EntityFramework
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private IDictionary<Type, object> repositories = new Dictionary<Type, object>();
+        
+        /// <summary>
+        /// Reference to the currently running transcation.
+        /// </summary>
+        private DbContextTransaction _transaction;
 
         [ThreadStatic]
-        private static UnitOfWork _current;
-
-        private readonly DbContextTransaction _transaction;        
+        private static UnitOfWork _current;     
 
         #region Construct(s)
     
-        private UnitOfWork(UnitOfWorkSettings settings)
-        {
-            Settings = settings ?? UnitOfWorkSettings.Default;
+        private UnitOfWork()
+        {            
             Session = DependencyContext.Container.Resolve<DbContext>();
-            SetSession(Session);
-            if (Settings.EnableCommit)
+            if (Session == null)
             {
-                _transaction = Session.Database.BeginTransaction();
+                throw new NullReferenceException("Can not resolve Session object from IoC container");
             }
+
+            _current = this;
         }
 
         #endregion
 
-        private void SetSession(DbContext session)
-        {
-            Requires.NotNull(session, "session");
-
-            if (_current == null)
-            {
-                IsRoot = true;
-            }
-            else
-            {
-                if (Settings.ThrowIfNestedUnitOfWork)
-                    throw new NotSupportedException("Nested UnitOfWorks are not supported due to UnitOfWorkSettings configuration");
-
-                IsRoot = false;
-            }
-
-            _current = this;
-            Id = Guid.NewGuid();
-        }
-
         #region Properties
 
-        public Guid Id { get; private set; }
-
-        public bool IsFinished
-        {
-            get { return _current == null; }
-        }
-
-        public bool IsRoot { get; private set; }
-      
         public DbContext Session { get; set; }
         
-        public bool IsConnectionOpen
-        {
-            get { return Session != null; }
-        }
-
-        public UnitOfWorkSettings Settings { get; private set; }
-
         public IRepository<TEntity> Repo<TEntity>()
            where TEntity : EntityRoot, new()
         {
             if (!repositories.ContainsKey(typeof(TEntity)))
             {
-                var repository = DependencyContext.Container.Resolve<IRepository<TEntity>>(new { unitOfWork = this });
+                var repository = DependencyContext.Container.Resolve<IRepository<TEntity>>(new { unitOfWork = _current });
                 repositories.Add(new KeyValuePair<Type, object>(typeof(TEntity), repository));
             }
 
@@ -103,22 +70,32 @@ namespace HisPlus.Core.EntityFramework
 
         #region Do (Action or Function)
 
-        public static void Do(Action<UnitOfWork> work, UnitOfWorkSettings settings = null)
+        public static void Do(Action<UnitOfWork> work, TransactionOption option = TransactionOption.SelfTransaction)
         {
             Requires.NotNull(work, "work");
 
-            using (var uow = new UnitOfWork(settings))
-            {                              
+            using (var uow = new UnitOfWork())
+            {
+                if (option == TransactionOption.DbTransaction)
+                {
+                    uow._transaction = uow.Session.Database.BeginTransaction();
+                }
+
                 work(uow);               
             }
         }
 
-        public static TResult Do<TResult>(Func<UnitOfWork, TResult> work, UnitOfWorkSettings settings = null)
+        public static TResult Do<TResult>(Func<UnitOfWork, TResult> work, TransactionOption option = TransactionOption.SelfTransaction)
         {
             Requires.NotNull(work, "work");
 
-            using (var uow = new UnitOfWork(settings))
+            using (var uow = new UnitOfWork())
             {
+                if (option == TransactionOption.DbTransaction)
+                {
+                    uow._transaction = uow.Session.Database.BeginTransaction();
+                }
+
                 return work(uow);
             }
         }
@@ -136,22 +113,12 @@ namespace HisPlus.Core.EntityFramework
         protected virtual void Dispose(bool disposing)
         {
             if (Marshal.GetExceptionCode() == 0)
-            {
-                if (Settings.RollbackOnDispose)
-                {
-                    Rollback();
-                }
-                else
-                {
-                    Commit();
-                }                    
+            {                            
+                Commit();               
             }
             else
-            {
-                if (IsRoot && !IsFinished)
-                {
-                    CloseUnitOfWork();
-                }
+            {                    
+                CloseUnitOfWork();             
             }
         }
 
@@ -159,7 +126,7 @@ namespace HisPlus.Core.EntityFramework
         {
             Perform(() => 
             {
-                if (Settings.EnableCommit && _transaction != null)
+                if (_transaction != null)
                 {
                     _transaction.Rollback();
                 }                    
@@ -174,7 +141,7 @@ namespace HisPlus.Core.EntityFramework
             {
                 Session.SaveChanges();
 
-                if (Settings.EnableCommit && _transaction != null)
+                if (_transaction != null)
                 {                    
                     _transaction.Commit();
                 }                    
@@ -184,23 +151,21 @@ namespace HisPlus.Core.EntityFramework
         private void Perform(Action action)
         {
             Requires.NotNull(action, "action");
-            if (IsRoot && !IsFinished)
+
+            try
             {
-                try
-                {
-                    action();
-                }
-                finally
-                {
-                    CloseUnitOfWork();
-                }
+                action();
+            }
+            finally
+            {
+                CloseUnitOfWork();
             }
         }
 
         private void CloseUnitOfWork()
         {
             repositories.Clear();
-            if ( Settings.EnableCommit && _transaction != null)
+            if ( _transaction != null)
             {
                 _transaction.Dispose();
             }

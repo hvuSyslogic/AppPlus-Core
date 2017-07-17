@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.Configuration
 {
-    public class ConfigurationManager
+    public class HisConfigurationManager
     {        
         private static IHisPlusConfiguration _configuration;
         private static object _lock = new object();
@@ -20,7 +20,7 @@ namespace HisPlus.Infrastructure.Configuration
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        static ConfigurationManager()
+        static HisConfigurationManager()
         {
             lock (_lock)
             {

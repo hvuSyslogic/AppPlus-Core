@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.Configuration
 {
-    public interface IInstaller
+    public interface IServiceAgentNode
     {
-        string Assembly { get; }
+        string Host { get; }
+
+        int Port { get; }
     }
 }

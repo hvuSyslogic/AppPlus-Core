@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using HisPlus.Infrastructure.Configuration;
+using log4net;
 using StackExchange.Redis;
 using System;
 using System.Collections.Concurrent;
@@ -28,8 +29,6 @@ namespace HisPlus.Core.Redis
             {
                 RedisConnectionString = connectionStrings.ConnectionString;
             }
-
-            RedisKeyPrefix = ConfigurationManager.AppSettings[Constants.RedisKeyPrefix] ?? "";
         }
 
         public static ConnectionMultiplexer Instance

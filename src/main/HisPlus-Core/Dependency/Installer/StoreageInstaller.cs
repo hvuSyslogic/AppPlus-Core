@@ -20,8 +20,8 @@ namespace HisPlus.Core.Dependency.Installer
             // type = container.Resolve<IType>(new { connectionString = connectionString });
 
             container.Register(Component.For<ICacheProvider>().ImplementedBy<CacheProvider>().LifestyleTransient());
-            container.Register(Component.For<IUnitOfWork>().ImplementedBy<UnitOfWork>().LifestyleTransient());            
-            container.Register(Component.For(typeof(IRepository<>)).ImplementedBy(typeof(Repository<>)).LifestyleTransient());                                    
+            container.Register(Component.For<IUnitOfWork>().ImplementedBy<UnitOfWork>().LifestyleTransient());
+            container.Register(Component.For(typeof(IRepository<>)).ImplementedBy(typeof(Repository<>)).LifestyleTransient());
         }
     }
 }

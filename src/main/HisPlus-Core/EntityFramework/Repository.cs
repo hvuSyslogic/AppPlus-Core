@@ -27,27 +27,30 @@ namespace HisPlus.Core.EntityFramework
         {
             this.Session = unitOfWork.Session;
 
-            this.Session.Database.CommandTimeout = 3*60*1000;
+            this.Session.Database.CommandTimeout = 3 * 60 * 1000;
 
             this.EFSet = this.Session.Set<TEntity>();
         }
 
-        #endregion
+        #endregion        
 
         #region Properties
-        
-        public virtual ICacheProvider RedisRepository { get; set; }
+
+        public IQueryable<TEntity> Queryable
+        {
+            get { return EFSet.AsQueryable<TEntity>(); }
+        }
+
+        private ObjectContext ObjectContext()
+        {
+            return (Session as IObjectContextAdapter).ObjectContext;
+        }        
 
         protected virtual DbSet<TEntity> EFSet { get; set; }
 
         protected virtual DbContext Session { get; set; }
         
         #endregion
-
-        private ObjectContext ObjectContext()
-        {
-            return (Session as IObjectContextAdapter).ObjectContext;
-        }        
 
         #region Create
 
@@ -59,7 +62,7 @@ namespace HisPlus.Core.EntityFramework
         public virtual IEnumerable<TEntity> Create(IEnumerable<TEntity> entities)
         {
             this.EFSet.AddRange(entities);
-
+            
             return entities;
         }
         
@@ -94,11 +97,6 @@ namespace HisPlus.Core.EntityFramework
             return queryable;
         }
 
-        //public virtual IQueryable<TEntity> Retrieve(string sql, params object[] parameters)
-        //{
-        //    return this.EFSet.SqlQuery(sql, parameters).AsNoTracking().AsQueryable();
-        //}
-
         #endregion
 
         #region Update
@@ -127,7 +125,12 @@ namespace HisPlus.Core.EntityFramework
 
         public virtual int Update(Expression<Func<TEntity, TEntity>> updateExpression, Expression<Func<TEntity, bool>> predicate = null)
         {
-            return (predicate == null) ? this.EFSet.Update(updateExpression) : this.EFSet.Where(predicate).Update(updateExpression);            
+            if (predicate == null)
+            {
+                return this.EFSet.Update(updateExpression);
+            }
+
+            return this.EFSet.Where(predicate).Update(updateExpression);
         }
 
         #endregion
@@ -135,8 +138,10 @@ namespace HisPlus.Core.EntityFramework
         #region Delete
 
         public virtual void Delete(object id)
-        {            
-            this.EFSet.Remove(this.Retrieve(id));
+        {
+            var entity = Retrieve(id);
+            
+            this.EFSet.Remove(entity);
         }
 
         public virtual void Delete(TEntity entity)
@@ -156,16 +161,26 @@ namespace HisPlus.Core.EntityFramework
 
         public virtual int Delete(Expression<Func<TEntity, bool>> predicate = null)
         {
-            return (predicate == null) ? this.EFSet.Delete() : this.EFSet.Where(predicate).Delete();
+            if (predicate == null)
+            {
+                return this.EFSet.Delete();
+            }
+
+            return this.EFSet.Where(predicate).Delete();
         }
 
-        #endregion        
+        #endregion
 
         #region Count
         
-        public virtual int Count(Expression<Func<TEntity, bool>> predicate)
-        {         
-            return (predicate == null) ? this.EFSet.Count() : this.EFSet.Where(predicate).Count();
+        public virtual int Count(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            if (predicate == null)
+            {
+                return this.EFSet.Count();
+            }
+
+            return this.EFSet.Where(predicate).Count();
         }
 
         #endregion
@@ -173,49 +188,56 @@ namespace HisPlus.Core.EntityFramework
         #region LongCount
         
         public virtual long LongCount(Expression<Func<TEntity, bool>> predicate = null)
-        {
-            return (predicate == null) ? this.EFSet.LongCount() : this.EFSet.Where(predicate).LongCount();
+        {            
+            if (predicate == null)
+            {
+                return this.EFSet.LongCount();
+            }
+
+            return this.EFSet.Where(predicate).LongCount();
         }
 
         #endregion
 
         #region Contains
 
-        public virtual bool Contains(Expression<Func<TEntity, bool>> predicate)
+        public virtual bool Contains(Expression<Func<TEntity, bool>> predicate = null)
         {
-            return Count(predicate) > 0;
+            long count = LongCount(predicate);
+
+            return count > 0;
         }
         
         #endregion
 
-        #region Filter
+        #region RetrievePagedData
 
-        public virtual IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, 
-            IOrderedQueryable<TEntity>> orderBy, out int totalPages, int pageNumber = 0, int pageSize = 50)
+        public virtual IQueryable<TEntity> RetrievePagedData(Expression<Func<TEntity, bool>> predicate, 
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy, int pageNumber, int pageSize, out int pageCount)
         {
-            int skipCount = (pageNumber - 1) * pageSize;
+            string primarykeyPropertyName = "Id";
+
+            int skippedCount = (pageNumber - 1) * pageSize;
 
             IQueryable<TEntity> queryable = (predicate == null) ? this.EFSet : this.EFSet.Where(predicate);
 
-            totalPages = (int)Math.Ceiling((decimal)queryable.Count() / pageSize);
+            pageCount = (int)Math.Ceiling((decimal)queryable.Count() / pageSize);
 
             queryable = queryable.AsNoTracking();
             if (orderBy == null)
             {
-                queryable = queryable.OrderBy("Id");
+                queryable = queryable.OrderBy(primarykeyPropertyName);
             }
             else
             {
                 queryable = orderBy(queryable);
             }
-            
-            queryable = (skipCount == 0) ? queryable.Take(pageSize) : queryable.Skip(skipCount).Take(pageSize);
+
+            queryable = (skippedCount == 0) ? queryable.Take(pageSize) : queryable.Skip(skippedCount).Take(pageSize);
             
             return queryable;        
         }
 
         #endregion
-
-        public IQueryable<TEntity> Queryable { get { return EFSet.AsQueryable<TEntity>(); } }       
     }
 }

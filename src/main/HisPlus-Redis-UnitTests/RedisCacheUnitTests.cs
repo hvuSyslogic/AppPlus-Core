@@ -46,8 +46,8 @@ namespace HisPlus.Redis.UnitTests
             //redis.StringSet("BsLocation", result);
         }
 
-        [Fact(DisplayName = "002_Redis_Cache_Large_Data")]
-        [Trait(TraitName, TraitValue)]
+        //[Fact(DisplayName = "002_Redis_Cache_Large_Data")]
+        //[Trait(TraitName, TraitValue)]
         public void Redis_LargeData_TestMethod()
         {
             string keyName = "BsItemUsage";
@@ -84,13 +84,13 @@ namespace HisPlus.Redis.UnitTests
 
             var pages = new List<TDTO>();
             int nextPageNumber = 1;
-            int totalPages = 0;
+            int pageCount = 0;
             do
             {
-                var page = CallService((TService x) => x.Filter(out totalPages, nextPageNumber, pageSize));
+                var page = CallService((TService x) => x.RetrievePagedData(nextPageNumber, pageSize, out pageCount));
                 repo.StringSet(keyName, page);
                 pages.AddRange(page);
-            } while (nextPageNumber++ < totalPages);
+            } while (nextPageNumber++ < pageCount);
 
             return pages;
         }     

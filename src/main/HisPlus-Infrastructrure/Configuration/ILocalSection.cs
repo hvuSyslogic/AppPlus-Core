@@ -10,6 +10,6 @@ namespace HisPlus.Infrastructure.Configuration
     {
         string ConnectionStringName { get; }
 
-        IEnumerable<IInstaller> Installers { get; }
+        IEnumerable<IInstallerNode> Installers { get; }
     }
 }

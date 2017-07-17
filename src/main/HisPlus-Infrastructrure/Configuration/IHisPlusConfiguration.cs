@@ -14,6 +14,8 @@ namespace HisPlus.Infrastructure.Configuration
 
         IAgentSection AgentSection { get; }
 
-        ILocalSection LocalSection { get; }        
+        ILocalSection LocalSection { get; }
+
+        IRedisSection RedisSection { get; }
     }
 }

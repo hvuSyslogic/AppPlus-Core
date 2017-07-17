@@ -18,7 +18,7 @@ namespace HisPlus.Domain.Dependency.Installer
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            string connectionStringName = ConfigurationManager.Configuration.LocalSection.ConnectionStringName;
+            string connectionStringName = HisConfigurationManager.Configuration.LocalSection.ConnectionStringName;
 
             container.Register(Component.For<DbContext>().ImplementedBy<HisDbContext>()
                .DependsOn(CastleDependency.Dependency.OnValue(DependencyName, connectionStringName)).LifestylePooled());

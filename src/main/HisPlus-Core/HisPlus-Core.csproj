@@ -104,7 +104,6 @@
     <Compile Include="Redis\CacheManager.cs" />
     <Compile Include="Redis\CacheProvider.cs" />
     <Compile Include="Dependency\Installer\StoreageInstaller.cs" />
-    <Compile Include="UnitOfWorkSettings.cs" />
     <Compile Include="ExpressionUtils.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Service\DtoEx.cs" />

@@ -15,44 +15,42 @@ namespace HisPlus.Core
     {
         #region Properties
 
-        //public virtual DbSet<TEntity> EFSet { get; set; }
-
-        //public virtual DbContext Session { get; set; }
-
-        //ObjectContext ObjectContext();
-
         IQueryable<TEntity> Queryable { get; }
 
         #endregion
 
         #region Create
+
         TEntity Create(TEntity entity);
 
         IEnumerable<TEntity> Create(IEnumerable<TEntity> entities);
+        
         #endregion
 
         #region Retrieve
-        TEntity Retrieve(params object[] keyValues);        
 
-        IQueryable<TEntity> Retrieve(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, 
-            IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "");
+        TEntity Retrieve(params object[] keyValues);
 
-        //IQueryable<TEntity> Retrieve(string sql, params object[] parameters);
+        IQueryable<TEntity> Retrieve(Expression<Func<TEntity, bool>> predicate = null, 
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "");
+
         #endregion
 
         #region Update
+
         void Update(TEntity entity);
 
         void Update(IEnumerable<TEntity> entities);
 
         int Update(Expression<Func<TEntity, TEntity>> updateExpression, Expression<Func<TEntity, bool>> predicate = null);
+        
         #endregion
 
         #region Delete
         
         void Delete(TEntity entity);
 
-        void Delete(object id);        
+        void Delete(object id);
 
         IEnumerable<TEntity> Delete(IEnumerable<TEntity> entities);
 
@@ -61,20 +59,28 @@ namespace HisPlus.Core
         #endregion
 
         #region Count
+
         int Count(Expression<Func<TEntity, bool>> predicate = null);
+
         #endregion
 
         #region LongCount
+
         long LongCount(Expression<Func<TEntity, bool>> predicate = null);
+
         #endregion
 
         #region Contains
+
         bool Contains(Expression<Func<TEntity, bool>> predicate = null);
+        
         #endregion
 
-        #region Filter
-        IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, 
-            IOrderedQueryable<TEntity>> orderBy, out int totalPages, int pageNumber = 0, int pageSize = 50);
+        #region RetrievePagedData
+
+        IQueryable<TEntity> RetrievePagedData(Expression<Func<TEntity, bool>> predicate, 
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy, int pageNumber, int pageSize, out int pageCount);
+
         #endregion
     }
 }

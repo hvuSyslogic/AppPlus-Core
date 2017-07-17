@@ -8,7 +8,6 @@ namespace HisPlus.Core.Redis
 {
     public class Constants
     {
-        public const string RedisKeyPrefix = "RedisKeyPrefix";
         public const string RedisConnectionString = "Redis";
     }
 }

@@ -23,7 +23,7 @@ namespace HisPlus.Client
 
         private static bool IsDistributed
         {
-            get { return ConfigurationManager.Configuration.IsDistributed; }
+            get { return HisConfigurationManager.Configuration.IsDistributed; }
         }
 
         public static void CallService<T>(Expression<Action<T>> expression)
@@ -42,6 +42,23 @@ namespace HisPlus.Client
             {
                 return Perform<T, TResult>(service, expression);
             }
+        }
+
+        public static List<TDTO> RetrievePagedData<T, TDTO, TKey>(int pageSize = 100000)
+            where T : IGenericService<TDTO, TKey>
+            where TDTO : DtoBase<TKey>, new()
+            where TKey : struct
+        {
+            var pages = new List<TDTO>();
+            int nextPageNumber = 1;
+            int pageCount = 0;
+            do
+            {
+                var page = CallService((T x) => x.RetrievePagedData(nextPageNumber, pageSize, out pageCount));
+                pages.AddRange(page);
+            } while (nextPageNumber++ < pageCount);
+
+            return pages;
         }
 
         private static void Perform<T>(T service, Expression<Action<T>> action)

@@ -124,7 +124,7 @@ namespace HisPlus.Service.UnitTests.BS
         {
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.Id > 0);
             var expressionNode = expression.ToExpressionNode();
-            if (ConfigurationManager.Configuration.IsDistributed)
+            if (HisConfigurationManager.Configuration.IsDistributed)
             {
                 Assert.Throws<FaultException>(() =>
                 {
@@ -177,7 +177,7 @@ namespace HisPlus.Service.UnitTests.BS
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.Id > 0);
             var expressionNode = expression.ToExpressionNode();
 
-            if (ConfigurationManager.Configuration.IsDistributed)
+            if (HisConfigurationManager.Configuration.IsDistributed)
             {
                 Assert.Throws<FaultException>(() =>
                 {

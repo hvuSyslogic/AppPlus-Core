@@ -40,7 +40,7 @@ namespace HisPlus.Services
                     x => x.InPatNo,
                     y => y.InPatNo,
                     (x, y) => new PatientInHosInfo { Patient = x, InHosInfo = y });
-
+                
                 return queryable.First();
             });
 
@@ -52,10 +52,11 @@ namespace HisPlus.Services
         }
 
         public IEnumerable<GblRoleDTO> L1CacheTest()
-        {            
+        {
+            var currentDateTime = GetCurrentDateTime();
+
             return UnitOfWork.Do(uow => 
             {
-                var currentDateTime = GetCurrentDateTime();
                 var date = uow.Repo<BsPatient>();
 
                 var query1 = uow.Repo<GblRole>().Retrieve();

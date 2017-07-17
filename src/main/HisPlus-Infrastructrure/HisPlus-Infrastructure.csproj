@@ -81,11 +81,13 @@
     <Compile Include="CodeContracts\Requires.cs" />
     <Compile Include="Configuration\IAgentSection.cs" />
     <Compile Include="Configuration\ILocalSection.cs" />
-    <Compile Include="Configuration\IServiceAgentConfig.cs" />
-    <Compile Include="Configuration\ICredentialsConfig.cs" />
+    <Compile Include="Configuration\IServiceAgentNode.cs" />
+    <Compile Include="Configuration\ICredentialsNode.cs" />
     <Compile Include="Configuration\IHisPlusConfiguration.cs" />
-    <Compile Include="Configuration\IInstaller.cs" />
-    <Compile Include="Configuration\ConfigurationManager.cs" />
+    <Compile Include="Configuration\IInstallerNode.cs" />
+    <Compile Include="Configuration\HisConfigurationManager.cs" />
+    <Compile Include="Configuration\IRedisSection.cs" />
+    <Compile Include="Configuration\RedisKeyNode.cs" />
     <Compile Include="Contract\Messages\IEntity.cs" />
     <Compile Include="Exceptions\ExceptionEx.cs" />
     <Compile Include="Exceptions\ServerException.cs" />

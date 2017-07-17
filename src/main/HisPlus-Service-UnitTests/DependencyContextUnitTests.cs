@@ -27,7 +27,7 @@ namespace HisPlus.Service.UnitTests
         [Trait(TraitName, DisplayName)]
         public void TestRegister()
         {
-            if (!ConfigurationManager.Configuration.IsDistributed)
+            if (!HisConfigurationManager.Configuration.IsDistributed)
             {
                 var container = DependencyContext.Container;
                 var context = container.Resolve<DbContext>();
@@ -46,7 +46,7 @@ namespace HisPlus.Service.UnitTests
         [Trait(TraitName, DisplayName)]
         public void TestConfiguration()
         {
-            if (!ConfigurationManager.Configuration.IsDistributed)
+            if (!HisConfigurationManager.Configuration.IsDistributed)
             {
                 var container = DependencyContext.Container;
                 var handlers = container.Kernel.GetAssignableHandlers(typeof(object));

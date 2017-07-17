@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.Configuration
 {
-    public interface ICredentialsConfig
+    public interface ICredentialsNode
     {
         string UserName { get; }
 

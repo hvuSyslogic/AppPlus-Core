@@ -202,15 +202,15 @@ namespace HisPlus.Core.Service
 
         #region Count
 
-        public virtual int Count()
+        public virtual long Count()
         {
             return UnitOfWork.Do(uow => 
             {
-                return uow.Repo<TEntity>().Count();
+                return uow.Repo<TEntity>().LongCount();
             });
         }
 
-        public virtual int Count(ExpressionNode predicateExpressionNode)
+        public virtual long Count(ExpressionNode predicateExpressionNode)
         {
             Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
 
@@ -218,12 +218,22 @@ namespace HisPlus.Core.Service
             
             return UnitOfWork.Do(uow =>
             {
-                return uow.Repo<TEntity>().Count(predicate);
+                return uow.Repo<TEntity>().LongCount(predicate);
             });
         }
-        #endregion
+        #endregion        
 
         #region Contains
+
+        public virtual bool Contains(TKey id)
+        {
+            return UnitOfWork.Do(uow =>
+            {
+                var entity = uow.Repo<TEntity>().Retrieve(id);
+
+                return (entity != null);
+            });
+        }
 
         public virtual bool Contains(TDTO dto)
         {
@@ -231,10 +241,7 @@ namespace HisPlus.Core.Service
 
             TKey id = dto.Id;
 
-            return UnitOfWork.Do(uow => 
-            {
-                return uow.Repo<TEntity>().Retrieve(id) != null;
-            });
+            return Contains(id);
         }
 
         public virtual bool Contains(ExpressionNode predicateExpressionNode)
@@ -243,7 +250,7 @@ namespace HisPlus.Core.Service
 
             var predicate = Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());
             
-            return UnitOfWork.Do(uow => 
+            return UnitOfWork.Do(uow =>
             {
                 return uow.Repo<TEntity>().Contains(predicate);
             });
@@ -251,34 +258,26 @@ namespace HisPlus.Core.Service
 
         #endregion
 
-        #region Filter
+        #region RetrievePagedData
 
-        public virtual IEnumerable<TDTO> Filter(out int totalPages, int pageNumber = 0, int pageSize = 50)
+        public virtual IEnumerable<TDTO> RetrievePagedData(int pageNumber, int pageSize, out int pageCount)
         {
-            return Filter(out totalPages, null, pageNumber, pageSize);
+            return RetrievePagedData(null, pageNumber, pageSize, out pageCount);
         }
 
-        //public virtual IEnumerable<TDTO> Filter(Func<IQueryable<TDTO>,
-        //    IOrderedQueryable<TDTO>> orderBy, int pageNumber = 0, int pageSize = 50)
-        //{
-        //    return Filter(null, orderBy, pageNumber, pageSize);
-        //}
-
-        public virtual IEnumerable<TDTO> Filter(out int totalPages, ExpressionNode predicateExpressionNode, int pageNumber = 0, int pageSize = 50)
+        public virtual IEnumerable<TDTO> RetrievePagedData(ExpressionNode predicateExpressionNode, int pageNumber, int pageSize, out int pageCount)
         {
-            //Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
-
             var predicate = (predicateExpressionNode == null)
                    ? null : Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());
 
-            int pages = 0;
+            int totalPages = 0;
 
             var result = UnitOfWork.Do(uow =>
             {
-                return uow.Repo<TEntity>().Filter(predicate, null, out pages, pageNumber, pageSize).MapTo<TDTO>();
+                return uow.Repo<TEntity>().RetrievePagedData(predicate, null, pageNumber, pageSize, out totalPages).MapTo<TDTO>();
             });
 
-            totalPages = pages;
+            pageCount = totalPages;
 
             return result;
         }
@@ -305,11 +304,8 @@ namespace HisPlus.Core.Service
 
         //#endregion
 
-        #region ExecuteDataTable
+        #region GetDataTable
 
-        #endregion
-
-        #region ExecuteDataSet
         protected virtual DataTable GetDataTableByStoredProc(string commandText, DbParameter[] parameters, string tableName = "")
         {
             DataSet ds = this.GetDataSet(commandText, CommandType.StoredProcedure, parameters);
@@ -334,6 +330,10 @@ namespace HisPlus.Core.Service
             
             return dt;
         }
+        
+        #endregion
+
+        #region GetDataSet
 
         private DataSet GetDataSet(string commandText, CommandType commandType, DbParameter[] parameters)
         {

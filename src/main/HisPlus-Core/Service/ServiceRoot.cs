@@ -53,7 +53,7 @@ namespace HisPlus.Core.Service
                     .CreateQuery<DateTime>("CurrentDateTime()")
                     .AsEnumerable()
                     .First();
-            }, new UnitOfWorkSettings() { EnableCommit = false });
+            });
         }
     }
 }

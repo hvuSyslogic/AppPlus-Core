@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using HisPlus.Infrastructure.Configuration;
+using log4net;
 using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
@@ -925,7 +926,7 @@ namespace HisPlus.Core.Redis
 
         private string CustomizedKey(string oldKey)
         {
-            var prefixKey = CustomKey ?? CacheManager.RedisKeyPrefix;
+            var prefixKey = CustomKey ?? HisConfigurationManager.Configuration.RedisSection.Key.Prefix;
 
             return string.Concat(prefixKey, oldKey);
         }

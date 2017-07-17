@@ -16,8 +16,6 @@ namespace HisPlus.Core
 
         DbContext Session { get; set; }
 
-        bool IsConnectionOpen { get; }
-
         #endregion        
     }
 }

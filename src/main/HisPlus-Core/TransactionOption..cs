@@ -7,8 +7,8 @@ namespace HisPlus.Core
 {
     public enum TransactionOption
     {
-        Default = 0,
-        TransactionScope = 1,
-        DBTransaction = 2,
+        SelfTransaction = 0,
+        DbTransaction = 1,
+        TransactionScope = 2,
     }
 }

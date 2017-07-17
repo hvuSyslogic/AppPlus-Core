@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.Configuration
 {
-    public interface IServiceAgentConfig
+    public interface IRedisSection
     {
-        string Host { get; }
-
-        int Port { get; }
+        IRedisKeyNode Key { get; }
     }
 }

@@ -11,6 +11,7 @@ using Xunit;
 using System.Diagnostics;
 using HisPlus.UnitTests.Common;
 using System.ServiceModel;
+using HisPlus.Client;
 
 namespace HisPlus.Service.UnitTests.Sample
 {
@@ -36,7 +37,7 @@ namespace HisPlus.Service.UnitTests.Sample
             });            
         }
 
-        [Fact]
+        //[Fact]
         public void LargeDataTest()
         {
             //int currentPageNumber = 1;
@@ -51,26 +52,9 @@ namespace HisPlus.Service.UnitTests.Sample
 
             var st = new Stopwatch();
             st.Start();
-            var result = RetrieveByPage<IBsItemUnitService, BsItemUnitDTO, int>();
+            var result = ServiceHandler.RetrievePagedData<IBsItemUnitService, BsItemUnitDTO, int>();
             st.Stop();
             var elapsedTime = st.Elapsed;
-        }
-
-        private List<TDTO> RetrieveByPage<T, TDTO, TKey>(int pageSize = 100000)
-            where T : IGenericService<TDTO, TKey>
-            where TDTO : DtoBase<TKey>, new()
-            where TKey : struct
-        {
-            var pages = new List<TDTO>();
-            int nextPageNumber = 1;
-            int totalPages = 0;
-            do
-            {
-                var page = CallService((T x) => x.Filter(out totalPages, nextPageNumber, pageSize));
-                pages.AddRange(page);
-            } while (nextPageNumber++ < totalPages);
-
-            return pages;
         }
 
         [Fact(DisplayName = "003_Join_OK")]

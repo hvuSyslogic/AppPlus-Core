@@ -15,26 +15,30 @@ namespace HisPlus.Infrastructure.Contract.Services
         where TKey : struct
     {
         #region Create
+
         [OperationContract(Name = "Create")]
         TDTO Create(TDTO dto);
 
         [OperationContract(Name = "BatchCreate")]
         IEnumerable<TDTO> Create(IEnumerable<TDTO> dtos);
+        
         #endregion
 
         #region Retrieve
-        [OperationContract(Name = "RetrieveByKey")]
+
+        [OperationContract(Name = "RetrieveById")]
         TDTO RetrieveById(TKey id);
 
         [OperationContract(Name = "RetrieveByExpression")]
         IEnumerable<TDTO> Retrieve(ExpressionNode predicateExpressionNode);
 
         [OperationContract(Name = "RetrieveAll")]
-        //[WebGet(UriTemplate = "/RetrieveAll", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         IEnumerable<TDTO> RetrieveAll();
+
         #endregion
 
         #region Update
+
         [OperationContract(Name = "Update")]
         void Update(TDTO dto);
 
@@ -48,10 +52,12 @@ namespace HisPlus.Infrastructure.Contract.Services
         // int Update<TEntity>(Expression<Func<TEntity, TEntity>> updateExpression,
         //Expression<Func<TEntity, bool>> predicate = null)
         //where TEntity : EntityBase, new();
+        
         #endregion
 
         #region Delete
-        [OperationContract(Name = "DeleteByKey")]
+
+        [OperationContract(Name = "DeleteById")]
         void DeleteById(TKey id);
 
         [OperationContract(Name = "DeleteByEntity")]
@@ -65,6 +71,7 @@ namespace HisPlus.Infrastructure.Contract.Services
 
         [OperationContract(Name = "DeleteAll")]
         int DeleteAll();
+        
         #endregion
 
         //#region CreateOrUpdate
@@ -73,27 +80,36 @@ namespace HisPlus.Infrastructure.Contract.Services
         //#endregion
 
         #region Count
+
         [OperationContract(Name = "Count")]
-        int Count();
+        long Count();
 
         [OperationContract(Name = "CountByExpression")]
-        int Count(ExpressionNode predicateExpressionNode);
+        long Count(ExpressionNode predicateExpressionNode);
+       
         #endregion
 
         #region Contains
+
+        [OperationContract(Name = "ContainsById")]
+        bool Contains(TKey id);
+
         [OperationContract(Name = "Contains")]
         bool Contains(TDTO dto);
 
         [OperationContract(Name = "ContainsByExpression")]
         bool Contains(ExpressionNode predicateExpressionNode);
+        
         #endregion
 
-        #region Filter
-        [OperationContract(Name = "FilterByExpression")]
-        IEnumerable<TDTO> Filter(out int totalPages, ExpressionNode predicateExpressionNode, int pageNumber = 0, int pageSize = 50);
+        #region RetrievePagedData
 
-        [OperationContract(Name = "Filter")]
-        IEnumerable<TDTO> Filter(out int totalPages, int pageNumber = 0, int pageSize = 50);
+        [OperationContract(Name = "RetrievePagedDataByExpression")]
+        IEnumerable<TDTO> RetrievePagedData(ExpressionNode predicateExpressionNode, int pageNumber, int pageSize, out int pageCount);
+
+        [OperationContract(Name = "RetrievePagedData")]
+        IEnumerable<TDTO> RetrievePagedData(int pageNumber, int pageSize, out int pageCount);
+        
         #endregion
     }
 }
