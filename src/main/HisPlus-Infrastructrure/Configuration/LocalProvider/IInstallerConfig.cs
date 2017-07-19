@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.Configuration
 {
-    public interface IRedisSection
+    public interface IInstallerConfig
     {
-        IRedisKeyNode Key { get; }
+        string Assembly { get; }
     }
 }

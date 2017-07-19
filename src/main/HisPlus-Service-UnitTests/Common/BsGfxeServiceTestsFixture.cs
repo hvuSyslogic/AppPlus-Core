@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Serialize.Linq.Nodes;
 using Serialize.Linq.Extensions;
+using FluentAssertions;
 using Xunit;
 using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
@@ -37,9 +38,8 @@ namespace HisPlus.Service.UnitTests.Common
             }
 
             MockCollections = CallService((IBsGfxeService x) => x.Create(rows));
-
-            Assert.NotNull(MockCollections);
-            Assert.Equal(Constants.Mock_Record_Counts, MockCollections.Count());
+            MockCollections.Should().NotBeNullOrEmpty();
+            MockCollections.Count().Should().Be(Constants.Mock_Record_Counts);            
         }
 
         public override void Clean()

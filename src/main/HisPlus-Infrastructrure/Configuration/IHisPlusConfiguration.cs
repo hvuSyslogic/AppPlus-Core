@@ -10,12 +10,12 @@ namespace HisPlus.Infrastructure.Configuration
 {
     public interface IHisPlusConfiguration
     {
-        bool IsDistributed { get; }
+        ProviderType Provider { get; }
 
-        IAgentSection AgentSection { get; }
+        IAgentProvider AgentProvider { get; }
 
-        ILocalSection LocalSection { get; }
+        ILocalProvider LocalProvider { get; }
 
-        IRedisSection RedisSection { get; }
+        ICacheProvider CacheProvider { get; }
     }
 }

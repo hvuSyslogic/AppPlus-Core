@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.Configuration
 {
-    public interface ILocalSection
+    public enum ProviderType
     {
-        string ConnectionStringName { get; }
-
-        IEnumerable<IInstallerNode> Installers { get; }
+        Local = 0,
+        Agent = 1,
     }
 }

@@ -926,7 +926,7 @@ namespace HisPlus.Core.Redis
 
         private string CustomizedKey(string oldKey)
         {
-            var prefixKey = CustomKey ?? HisConfigurationManager.Configuration.RedisSection.Key.Prefix;
+            var prefixKey = CustomKey ?? HisConfigurationManager.Configuration.CacheProvider.CustomizedKey.Prefix;
 
             return string.Concat(prefixKey, oldKey);
         }

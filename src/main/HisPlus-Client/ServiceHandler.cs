@@ -21,108 +21,145 @@ namespace HisPlus.Client
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static bool IsDistributed
+        #region static constructor
+        
+        static ServiceHandler()
         {
-            get { return HisConfigurationManager.Configuration.IsDistributed; }
+            IsDistributed = (HisConfigurationManager.Configuration.Provider == ProviderType.Agent);
         }
+        
+        #endregion
 
-        public static void CallService<T>(Expression<Action<T>> expression)
-            where T : IServiceRoot
+        #region static properties
+
+        private static bool IsDistributed { get; set; }
+
+        #endregion
+
+        #region GetService
+
+        private static T GetService<T>() where T : IServiceRoot
         {
-            using (T service = IsDistributed ? ProxyManager.GetProxy<T>() : DependencyContext.Container.Resolve<T>())
+            if (IsDistributed)
             {
-                Perform<T>(service, expression);
+                return ProxyManager.GetProxy<T>();
             }
+
+            return DependencyContext.Container.Resolve<T>();
         }
 
-        public static TResult CallService<T, TResult>(Expression<Func<T, TResult>> expression)
-            where T : IServiceRoot
-        {
-            using (T service = IsDistributed ? ProxyManager.GetProxy<T>() : DependencyContext.Container.Resolve<T>())
-            {
-                return Perform<T, TResult>(service, expression);
-            }
-        }
+        #endregion
 
-        public static List<TDTO> RetrievePagedData<T, TDTO, TKey>(int pageSize = 100000)
-            where T : IGenericService<TDTO, TKey>
-            where TDTO : DtoBase<TKey>, new()
-            where TKey : struct
-        {
-            var pages = new List<TDTO>();
-            int nextPageNumber = 1;
-            int pageCount = 0;
-            do
-            {
-                var page = CallService((T x) => x.RetrievePagedData(nextPageNumber, pageSize, out pageCount));
-                pages.AddRange(page);
-            } while (nextPageNumber++ < pageCount);
+        #region CallService
 
-            return pages;
-        }
+        public static void CallService<T>(Expression<Action<T>> expression) where T : IServiceRoot
+        {            
+            T service = default(T);
+            string errMsg = "";
 
-        private static void Perform<T>(T service, Expression<Action<T>> action)
-            where T : IServiceRoot
-        {
-            Requires.NotNull(action, "action");
-            
             try
             {
-                action.Compile()(service);
+                Requires.NotNull(expression, "expression");
+
+                service = GetService<T>();
+
+                expression.Compile()(service);
+            }
+            catch (TimeoutException ex)
+            {
+                errMsg = ex.BuildMessage("Service has time out");
+            }
+            catch (FaultException ex)
+            {
+                errMsg = ex.BuildMessage("Service error occurred");
+            }
+            catch (CommunicationException ex)
+            {
+                errMsg = ex.BuildMessage("Communications error occurred");
             }
             catch (Exception ex)
             {
-                string description = "Exception caught at Client Application ServiceHandler";
-                string errMsg = ex.BuildMessage(description);
-
-                Log.Error(errMsg);
-                throw;
+                errMsg = ex.BuildMessage("Error has occurred");
             }
             finally
             {
                 CloseClientChannel(service);
-            }            
+
+                if (!string.IsNullOrWhiteSpace(errMsg))
+                {
+                    Log.Error(errMsg);
+
+                    throw new HisPlusException(errMsg);
+                }
+            }
         }
 
-        private static TResult Perform<T, TResult>(T service, Expression<Func<T, TResult>> expression) 
-            where T : IServiceRoot
+        public static TResult CallService<T, TResult>(Expression<Func<T, TResult>> expression) where T : IServiceRoot
         {
-            Requires.NotNull(expression, "expression");
+            T service = default(T);
+            string errMsg = "";
 
             try
             {
+                Requires.NotNull(expression, "expression");
+                
+                service = GetService<T>();
+
                 return expression.Compile()(service);
             }
+            catch (TimeoutException ex)
+            {
+                errMsg = ex.BuildMessage("Service has time out");
+            }
+            catch (FaultException ex)
+            {
+                errMsg = ex.BuildMessage("Service error occurred");
+            }
+            catch (CommunicationException ex)
+            {
+                errMsg = ex.BuildMessage("Communications error occurred");
+            }
             catch (Exception ex)
             {
-                string description = "Exception caught at Client Application ServiceHandler";
-                string errMsg = ex.BuildMessage(description);
-
-                Log.Error(errMsg);
-                throw;
+                errMsg = ex.BuildMessage("Error has occurred");
             }
             finally
             {
                 CloseClientChannel(service);
+
+                if (!string.IsNullOrWhiteSpace(errMsg))
+                {
+                    Log.Error(errMsg);
+
+                    throw new HisPlusException(errMsg);
+                }                
             }
+
+            return default(TResult);
         }
+
+        #endregion
+
+        #region CloseClientChannel
 
         private static void CloseClientChannel<T>(T service) where T : IServiceRoot
         {
-            var client = (service as IClientChannel);
-            if (client != null)
+            var clientChannel = (service as IClientChannel);
+            if (clientChannel != null)
             {
-                if (client.State == CommunicationState.Faulted)
+                if (clientChannel.State == CommunicationState.Faulted)
                 {
-                    client.Abort();
+                    clientChannel.Abort();
                 }
                 else
                 {
-                    client.Close();
+                    clientChannel.Close();
                 }
 
-                client.Dispose();
+                clientChannel.Dispose();
             }
         }
+
+        #endregion
     }
 }

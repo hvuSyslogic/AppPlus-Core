@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HisPlus.Infrastructure.Exceptions
 {
     [Serializable]
-    public class ClientException : AppPlusException
+    public class ClientException : HisPlusException
     {       
         public ClientException()
         {

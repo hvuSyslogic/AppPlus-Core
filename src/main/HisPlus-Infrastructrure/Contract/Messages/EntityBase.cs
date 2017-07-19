@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace HisPlus.Infrastructure.Contract.Messages
 {
     [Serializable]
-    public abstract class EntityBase<TPrimaryKey> : EntityRoot, IEntity<TPrimaryKey>
+    public abstract class EntityBase<TKey> : EntityRoot, IEntity<TKey>
     {
         /// <summary>
         /// Unique identifier for this entity.
         /// </summary>
-        public virtual TPrimaryKey Id { get; set; }
+        public virtual TKey Id { get; set; }
 
         /// <summary>
         /// Checks if this entity is transient (it has not an Id).
@@ -20,17 +20,17 @@ namespace HisPlus.Infrastructure.Contract.Messages
         /// <returns>True, if this entity is transient</returns>
         public virtual bool IsTransient()
         {
-            if (EqualityComparer<TPrimaryKey>.Default.Equals(Id, default(TPrimaryKey)))
+            if (EqualityComparer<TKey>.Default.Equals(Id, default(TKey)))
             {
                 return true;
             }
 
-            if (typeof(TPrimaryKey) == typeof(int))
+            if (typeof(TKey) == typeof(int))
             {
                 return Convert.ToInt32(Id) <= 0;
             }
 
-            if (typeof(TPrimaryKey) == typeof(long))
+            if (typeof(TKey) == typeof(long))
             {
                 return Convert.ToInt64(Id) <= 0;
             }

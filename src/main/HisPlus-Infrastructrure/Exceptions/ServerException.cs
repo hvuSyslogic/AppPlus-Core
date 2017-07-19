@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HisPlus.Infrastructure.Exceptions
 {
     [Serializable]
-    public class ServerException : AppPlusException
+    public class ServerException : HisPlusException
     {       
         public ServerException()
         {

@@ -55,6 +55,14 @@
       <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FluentAssertions, Version=4.19.3.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentAssertions.4.19.3\lib\net45\FluentAssertions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentAssertions.Core, Version=4.19.3.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentAssertions.4.19.3\lib\net45\FluentAssertions.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -120,13 +128,13 @@
       <Project>{9b4fd8ff-73ef-4e18-9abe-18b1d0737263}</Project>
       <Name>HisPlus-Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HisPlus-Infrastructrure\HisPlus-Infrastructure.csproj">
-      <Project>{70a18834-0849-4693-ae65-1610a8e0eb7e}</Project>
-      <Name>HisPlus-Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HisPlus-Contract\HisPlus-Contract.csproj">
       <Project>{6de0dab6-3e4b-43ee-8473-f7a61d0d9cd6}</Project>
       <Name>HisPlus-Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HisPlus-Infrastructrure\HisPlus-Infrastructure.csproj">
+      <Project>{70a18834-0849-4693-ae65-1610a8e0eb7e}</Project>
+      <Name>HisPlus-Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\HisPlus-Service\HisPlus-Service.csproj">
       <Project>{3d36ed5f-8b85-48d8-b9e6-bde34495967e}</Project>

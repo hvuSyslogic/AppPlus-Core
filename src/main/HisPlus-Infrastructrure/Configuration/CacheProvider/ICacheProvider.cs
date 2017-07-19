@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.Configuration
 {
-    public interface IServiceAgentNode
+    public interface ICacheProvider
     {
-        string Host { get; }
+        IConnectionString ConnectionString { get; }
 
-        int Port { get; }
+        ICustomizedKey CustomizedKey { get; }
     }
 }

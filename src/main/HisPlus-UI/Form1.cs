@@ -30,7 +30,7 @@ namespace HisPlus.UI
             
             new Thread((ThreadStart)delegate()
                 {
-                    var result = ServiceHandler.RetrievePagedData<IBsItemUnitService, BsItemUnitDTO, int>();
+                    var result = ServiceHandler.CallService((IBsItemUnitService x) => x.RetrieveAllByPage());
                 }).Start();
         }
 

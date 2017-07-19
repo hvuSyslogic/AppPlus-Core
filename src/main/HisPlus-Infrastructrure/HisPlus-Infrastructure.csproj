@@ -79,20 +79,22 @@
     </Compile>
     <Compile Include="CodeContracts\Assumes.cs" />
     <Compile Include="CodeContracts\Requires.cs" />
-    <Compile Include="Configuration\IAgentSection.cs" />
-    <Compile Include="Configuration\ILocalSection.cs" />
-    <Compile Include="Configuration\IServiceAgentNode.cs" />
-    <Compile Include="Configuration\ICredentialsNode.cs" />
+    <Compile Include="Configuration\AgentProvider\IAgentProvider.cs" />
+    <Compile Include="Configuration\IHisPlusConfigurationEx.cs" />
+    <Compile Include="Configuration\LocalProvider\IlocalProvider.cs" />
+    <Compile Include="Configuration\AgentProvider\IHostConfig.cs" />
+    <Compile Include="Configuration\AgentProvider\ICredentialsConfig.cs" />
     <Compile Include="Configuration\IHisPlusConfiguration.cs" />
-    <Compile Include="Configuration\IInstallerNode.cs" />
+    <Compile Include="Configuration\LocalProvider\IInstallerConfig.cs" />
     <Compile Include="Configuration\HisConfigurationManager.cs" />
-    <Compile Include="Configuration\IRedisSection.cs" />
-    <Compile Include="Configuration\RedisKeyNode.cs" />
+    <Compile Include="Configuration\CacheProvider\ICacheProvider.cs" />
+    <Compile Include="Configuration\CacheProvider\ICustomizedKey.cs" />
+    <Compile Include="Configuration\ProviderType.cs" />
     <Compile Include="Contract\Messages\IEntity.cs" />
     <Compile Include="Exceptions\ExceptionEx.cs" />
     <Compile Include="Exceptions\ServerException.cs" />
     <Compile Include="Exceptions\ClientException.cs" />
-    <Compile Include="Exceptions\AppPlusException.cs" />
+    <Compile Include="Exceptions\HisPlusException.cs" />
     <Compile Include="DependencyContext.cs" />
     <Compile Include="Contract\Messages\DtoRoot.cs" />
     <Compile Include="Contract\Messages\EntityBase.cs">
@@ -102,9 +104,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Contract\Messages\DtoBase.cs" />
-    <Compile Include="Contract\Messages\AppPlusFault.cs" />
+    <Compile Include="Contract\Messages\UnexpectedServiceFault.cs" />
     <Compile Include="Contract\Services\IGenericService.cs" />
     <Compile Include="Contract\Services\IServiceRoot.cs" />
+    <Compile Include="IConnectionString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using HisPlus.UnitTests.Common;
+using FluentAssertions;
 
 namespace HisPlus.Redis.UnitTests
 {
@@ -31,18 +32,16 @@ namespace HisPlus.Redis.UnitTests
             //}
 
             var result = CallService((IBsLocationService x) => x.RetrieveAll());
-            Assert.NotNull(result);
-            Assert.NotEmpty(result);
+            result.Should().NotBeNullOrEmpty();
 
             repo.StringSet(keyName, result);
+            repo.KeyExists(keyName).Should().BeTrue();
 
-            Assert.True(repo.KeyExists(keyName));
             var redisCacheResult = repo.StringGet<List<BsLocationDTO>>(keyName);
-            Assert.NotNull(redisCacheResult);
-            Assert.NotEmpty(redisCacheResult);
+            redisCacheResult.Should().NotBeNullOrEmpty();
 
-            Assert.Equal(result.Count(), redisCacheResult.Count());
-            
+            result.Count().Should().Be(redisCacheResult.Count());
+
             //redis.StringSet("BsLocation", result);
         }
 
@@ -58,19 +57,15 @@ namespace HisPlus.Redis.UnitTests
                 repo.KeyDelete(keyName);
             }
 
-            var result = RetrieveByPage<IBsItemUsageService, BsItemUsageDTO, int>();
-            //Assert.NotNull(result);
-            //Assert.NotEmpty(result);
+            var result = RetrieveByPage<IBsItemUsageService, BsItemUsageDTO, int>();            
 
             //repo.StringSet(keyName, result);
 
-            Assert.True(repo.KeyExists(keyName));
+            repo.KeyExists(keyName).Should().BeTrue();
             var redisCacheResult = repo.StringGet<List<BsItemUsageDTO>>(keyName);
-            Assert.NotNull(redisCacheResult);
-            Assert.NotEmpty(redisCacheResult);
-
-            Assert.Equal(result.Count(), redisCacheResult.Count());
-
+            redisCacheResult.Should().NotBeNullOrEmpty();
+            
+            result.Count().Should().Be(redisCacheResult.Count());
             //redis.StringSet("BsLocation", result);
         }
 

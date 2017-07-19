@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 namespace HisPlus.Infrastructure.Exceptions
 {
     [Serializable]
-    public class AppPlusException : Exception
+    public class HisPlusException : Exception
     {       
-        public AppPlusException()
+        public HisPlusException()
         {
 
         }
 
-        public AppPlusException(string message)
+        public HisPlusException(string message)
                 : base(message)
         {
 
         }
 
-        public AppPlusException(string message, Exception innerException)
+        public HisPlusException(string message, Exception innerException)
                 : base(message, innerException)
         {
 

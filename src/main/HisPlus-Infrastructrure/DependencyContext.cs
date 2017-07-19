@@ -22,10 +22,9 @@ namespace HisPlus.Infrastructure
 
         private static void InstallComponents()
         {
-            var isDistributed = HisConfigurationManager.Configuration.IsDistributed;
-            if (!isDistributed)
+            if (HisConfigurationManager.Configuration.Provider == ProviderType.Local)
             {
-                HisConfigurationManager.Configuration.LocalSection.Installers.ToList().ForEach(installer =>
+                HisConfigurationManager.Configuration.LocalProvider.Installers.ToList().ForEach(installer =>
                 {
                     Container.Install(FromAssembly.Named(installer.Assembly));
                 });

@@ -15,6 +15,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using FluentAssertions;
 
 namespace HisPlus.Service.UnitTests
 {
@@ -27,18 +28,17 @@ namespace HisPlus.Service.UnitTests
         [Trait(TraitName, DisplayName)]
         public void TestRegister()
         {
-            if (!HisConfigurationManager.Configuration.IsDistributed)
+            if (HisConfigurationManager.Configuration.Provider == ProviderType.Local)
             {
                 var container = DependencyContext.Container;
                 var context = container.Resolve<DbContext>();
 
-                var area = context.Set<BsArea>().FirstOrDefault();
-                Assert.NotNull(area);
+                var area = context.Set<BsArea>().FirstOrDefault();                
+                area.Should().NotBeNull();
 
                 var service = container.Resolve<IBsLocationService>();
                 var result = service.RetrieveAll();
-
-                Assert.NotNull(result);
+                result.Should().NotBeNullOrEmpty();                
             }
         }
 
@@ -46,14 +46,12 @@ namespace HisPlus.Service.UnitTests
         [Trait(TraitName, DisplayName)]
         public void TestConfiguration()
         {
-            if (!HisConfigurationManager.Configuration.IsDistributed)
+            if (HisConfigurationManager.Configuration.Provider == ProviderType.Local)
             {
                 var container = DependencyContext.Container;
-                var handlers = container.Kernel.GetAssignableHandlers(typeof(object));
-
-                Assert.NotNull(handlers);
-                Assert.NotEmpty(handlers);
-
+                var handlers = container.Kernel.GetAssignableHandlers(typeof(object));                
+                handlers.Should().NotBeNullOrEmpty();
+                
                 foreach (var handler in handlers)
                 {
                     var service = handler.ComponentModel.Services;

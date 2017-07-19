@@ -60,7 +60,8 @@ namespace HisPlus.Infrastructure.Exceptions
         public static string BuildMessage(this System.Exception error, string description)
         {
             StringBuilder errBuilder = new StringBuilder();
-            errBuilder.AppendLine(description);
+            errBuilder.AppendFormat("{0}: {1}", description, error.Message);
+            errBuilder.AppendLine();
 
             DbEntityValidationException entityValidationException = error as DbEntityValidationException;
             if (entityValidationException != null)
@@ -79,10 +80,12 @@ namespace HisPlus.Infrastructure.Exceptions
             else
             {
                 errBuilder.AppendFormat("   Exception: {0}", error.GetType().FullName);
+                //errBuilder.AppendLine();
+                //errBuilder.AppendFormat("   Message: {0}", error.Message);
                 errBuilder.AppendLine();
-                errBuilder.AppendFormat("   Method: {0}", error.TargetSite.Name);
+                errBuilder.AppendFormat("   Source: {0}", error.Source);
                 errBuilder.AppendLine();
-                errBuilder.AppendFormat("   Message: {0}", error.Message);
+                errBuilder.AppendFormat("   Target: {0}", error.TargetSite.ToString());                
                 errBuilder.AppendLine();
                 errBuilder.AppendFormat("   StackTrace: {0}", error.StackTrace);
 
@@ -91,7 +94,7 @@ namespace HisPlus.Infrastructure.Exceptions
                 {
                     innerEx = error.Unwrap();
                     errBuilder.AppendLine();
-                    errBuilder.AppendFormat("   Exception: {0}", innerEx.GetType().FullName);
+                    errBuilder.AppendFormat("   InnerException: {0}", innerEx.GetType().FullName);
                     errBuilder.AppendLine();
                     errBuilder.AppendFormat("   InnerException Message: {0}", innerEx.Message);
                     errBuilder.AppendLine();

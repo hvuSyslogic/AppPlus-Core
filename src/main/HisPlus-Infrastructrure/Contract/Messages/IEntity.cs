@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.Contract.Messages
 {
-    public interface IEntity<TPrimaryKey>
+    public interface IEntity<TKey>
     {
-        TPrimaryKey Id { get; set; }
+        TKey Id { get; set; }
 
         bool IsTransient();
     }

@@ -1,17 +1,19 @@
-﻿using HisPlus.Infrastructure.Contract.Messages;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.ServiceModel;
+using System.Text;
+using System.Threading.Tasks;
+using FluentAssertions;
+using Xunit;
+using HisPlus.UnitTests.Common;
+using HisPlus.Infrastructure.Contract.Messages;
 using HisPlus.Infrastructure.Contract.Services;
 using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using System.Diagnostics;
-using HisPlus.UnitTests.Common;
-using System.ServiceModel;
 using HisPlus.Client;
+using HisPlus.Infrastructure.Exceptions;
 
 namespace HisPlus.Service.UnitTests.Sample
 {
@@ -31,10 +33,8 @@ namespace HisPlus.Service.UnitTests.Sample
         [Trait(TraitName, TraitValue)]
         public void DbTransaction_NOK()
         {
-            Assert.Throws<FaultException>(() => 
-            {
-                var result = CallService((ISampleService x) => x.TransactionTest());
-            });            
+            Action action = () => CallService((ISampleService x) => x.TransactionTest());
+            action.ShouldThrow<HisPlusException>();            
         }
 
         //[Fact]
@@ -52,9 +52,9 @@ namespace HisPlus.Service.UnitTests.Sample
 
             var st = new Stopwatch();
             st.Start();
-            var result = ServiceHandler.RetrievePagedData<IBsItemUnitService, BsItemUnitDTO, int>();
+            var result = CallService((IBsItemUnitService x) => x.RetrieveAllByPage());
             st.Stop();
-            var elapsedTime = st.Elapsed;
+            var elapsedTime = st.Elapsed.TotalMilliseconds;
         }
 
         [Fact(DisplayName = "003_Join_OK")]
@@ -65,9 +65,9 @@ namespace HisPlus.Service.UnitTests.Sample
 
             var result = CallService((ISampleService x) => x.GetPatientInHosInfo(cardNo));
 
-            Assert.NotNull(result);
-            Assert.Equal(result.Patient.InPatNo, result.InHosInfo.InPatNo);
-            Assert.Equal(cardNo, result.Patient.CardNo);
+            result.Should().NotBeNull();            
+            result.Patient.InPatNo.Should().Be(result.InHosInfo.InPatNo);
+            result.Patient.CardNo.Should().Be(cardNo);
         }
     }
 }

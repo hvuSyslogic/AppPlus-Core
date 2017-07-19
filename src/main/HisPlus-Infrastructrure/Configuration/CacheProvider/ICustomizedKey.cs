@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.Configuration
 {
-    public interface IAgentSection
+    public interface ICustomizedKey
     {
-        IServiceAgentNode ServiceAgent { get; }
-
-        ICredentialsNode Credentials { get; }
+        string Prefix { get; }
     }
 }

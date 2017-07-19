@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.Configuration
 {
-    public interface IRedisKeyNode
+    public interface IHostConfig
     {
-        string Prefix { get; }
+        string Name { get; }
+
+        int Port { get; }
+
+        ICredentialsConfig Credentials { get; }
     }
 }

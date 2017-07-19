@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.Configuration
 {
-    public interface IInstallerNode
+    public interface IAgentProvider
     {
-        string Assembly { get; }
+        IHostConfig Host { get; }
     }
 }
