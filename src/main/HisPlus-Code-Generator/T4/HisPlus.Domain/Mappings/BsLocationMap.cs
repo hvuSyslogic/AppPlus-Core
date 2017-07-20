@@ -40,8 +40,6 @@ namespace HisPlus.Domain.Mapping
             Property(x => x.IsPriceSub).HasColumnName(@"IsPriceSub").IsOptional().HasColumnType("bit");
             Property(x => x.IsClinical).HasColumnName(@"IsClinical").IsOptional().HasColumnType("bit");
             Property(x => x.IsChinLocation).HasColumnName(@"IsChinLocation").IsOptional().HasColumnType("bit");
-            Property(x => x.IsRegLocation).HasColumnName(@"IsRegLocation").IsOptional().HasColumnType("bit");
-            Property(x => x.IsAllLocation).HasColumnName(@"IsAllLocation").IsOptional().HasColumnType("bit");
         }
     }
 }

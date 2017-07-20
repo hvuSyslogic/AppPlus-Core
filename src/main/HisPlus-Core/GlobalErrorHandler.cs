@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using log4net;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Reflection;
@@ -10,6 +9,8 @@ using System.ServiceModel.Dispatcher;
 using HisPlus.Infrastructure.Contract.Messages;
 using System.Text;
 using HisPlus.Infrastructure.Exceptions;
+using Castle.Core.Logging;
+using HisPlus.Infrastructure;
 
 namespace HisPlus.Core
 {
@@ -19,14 +20,17 @@ namespace HisPlus.Core
     /// </summary>
     public class GlobalErrorHandler : IErrorHandler
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-                
+        private ILogger Logger 
+        {
+            get { return DependencyContext.Container.Resolve<ILogger>(); } 
+        }
+
         public void ProvideFault(System.Exception error, MessageVersion version, ref Message msg)
         {
             string description = "Exception caught at Service Application GlobalErrorHandler";
             string errMsg = error.BuildMessage(description);
-            
-            Log.Error(errMsg);
+
+            Logger.Error(errMsg);
 
             var exception = new FaultException(errMsg);
 

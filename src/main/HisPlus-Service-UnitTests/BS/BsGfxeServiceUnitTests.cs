@@ -27,8 +27,7 @@ namespace HisPlus.Service.UnitTests.BS
         [Trait(TraitName, "Retrieve")]
         public void RetrieveById_ArgumentOutRange_NOK()
         {
-            Action retrieveById = () => CallService((IBsGfxeService x) => x.RetrieveById(Constants.Invalid_Primary_Key));
-            
+            Action retrieveById = () => CallService((IBsGfxeService x) => x.RetrieveById(Constants.Invalid_Primary_Key));            
             retrieveById.ShouldThrow<HisPlusException>();
         }
 
@@ -163,6 +162,7 @@ namespace HisPlus.Service.UnitTests.BS
             result.Should().NotBeNullOrEmpty();
 
             var newItem = result.FirstOrDefault();
+            newItem.Id = 0;
             newItem.Code = "99";
             newItem.Name = "测试费用限额";
             newItem.PyCode = "CSFYXE";

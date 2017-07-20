@@ -9,12 +9,13 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using log4net;
 using Z.EntityFramework.Plus;
 using HisPlus.Infrastructure.Contract.Messages;
 using HisPlus.Core.Infrastructure.CodeContracts;
 using HisPlus.Core.Redis;
 using HisPlus.Infrastructure;
+using System.Transactions;
+using Castle.Core.Logging;
 
 namespace HisPlus.Core.EntityFramework
 {
@@ -22,9 +23,7 @@ namespace HisPlus.Core.EntityFramework
     /// https://www.codeproject.com/articles/543810/dependency-injection-and-unit-of-work-using-castle
     /// </summary>
     public class UnitOfWork : IUnitOfWork
-    {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
+    {        
         private IDictionary<Type, object> repositories = new Dictionary<Type, object>();
         
         /// <summary>
@@ -52,6 +51,11 @@ namespace HisPlus.Core.EntityFramework
 
         #region Properties
 
+        public ILogger Logger 
+        {
+            get { return DependencyContext.Container.Resolve<ILogger>(); }
+        }        
+
         public DbContext Session { get; set; }
         
         public IRepository<TEntity> Repo<TEntity>()
@@ -76,12 +80,61 @@ namespace HisPlus.Core.EntityFramework
 
             using (var uow = new UnitOfWork())
             {
+                if (option == TransactionOption.TransactionScope)
+                {
+                    uow.DoWithTS(work, uow);
+                    return;
+                }
+                
                 if (option == TransactionOption.DbTransaction)
                 {
                     uow._transaction = uow.Session.Database.BeginTransaction();
                 }
-
+                
                 work(uow);               
+            }
+        }
+
+        private void DoWithTS(Action<UnitOfWork> work, UnitOfWork uow)
+        {
+            using (var tx = new TransactionScope())
+            {
+                try
+                {
+                    work(uow);
+                    tx.Complete();
+                }
+                catch (Exception ex)
+                {
+                    if (tx != null)
+                    {
+                        tx.Dispose();
+                    }
+                    Logger.Error("Do TransactionScope error: ", ex);
+                    throw;
+                }
+            }
+        }
+
+        private TResult DoWithTS<TResult>(Func<UnitOfWork, TResult> work, UnitOfWork uow)
+        {
+            using (var tx = new TransactionScope())
+            {
+                try
+                {
+                    var result = work(uow);
+                    tx.Complete();
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    if (tx != null)
+                    {
+                        tx.Dispose();
+                    }
+                    Logger.Error("Do TransactionScope error: ", ex);
+                    throw;
+                }
             }
         }
 
@@ -91,10 +144,15 @@ namespace HisPlus.Core.EntityFramework
 
             using (var uow = new UnitOfWork())
             {
+                if (option == TransactionOption.TransactionScope)
+                {
+                    return uow.DoWithTS(work, uow);
+                }
+
                 if (option == TransactionOption.DbTransaction)
                 {
                     uow._transaction = uow.Session.Database.BeginTransaction();
-                }
+                }                
 
                 return work(uow);
             }

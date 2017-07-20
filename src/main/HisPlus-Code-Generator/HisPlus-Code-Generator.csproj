@@ -115,6 +115,11 @@
     <Compile Include="T4\HisPlus.Domain\Mappings\BsLocationMap.cs">
       <DependentUpon>Map.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Domain\Mappings\Map.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Domain\Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

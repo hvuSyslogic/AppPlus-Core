@@ -10,21 +10,20 @@ using System.Data.Common;
 using System.Data.Entity;
 using System.ServiceModel;
 using System.Runtime.Serialization;
-using log4net;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Serialize.Linq.Nodes;
 using Serialize.Linq.Extensions;
 using Serialize.Linq.Serializers;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
+using System.Data.Entity.Core.EntityClient;
+using System.ServiceModel.Web;
 using HisPlus.Infrastructure.Contract.Messages;
 using HisPlus.Infrastructure.Contract.Services;
 using HisPlus.Infrastructure.Configuration;
 using HisPlus.Core.EntityFramework;
-using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
-using System.Data.Entity.Core.EntityClient;
 using HisPlus.Core.Infrastructure.CodeContracts;
-using System.ServiceModel.Web;
 
 namespace HisPlus.Core.Service
 {
@@ -35,8 +34,6 @@ namespace HisPlus.Core.Service
         where TDTO : DtoBase<TKey>, new()
         where TKey : struct
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
         #region Automapper configuration
         protected override void ConfigureMap()
         {
@@ -51,10 +48,12 @@ namespace HisPlus.Core.Service
 
             var entity = dto.MapTo<TEntity>();
 
-            return UnitOfWork.Do(uow => 
+            UnitOfWork.Do(uow => 
             {
-                return uow.Repo<TEntity>().Create(entity).MapTo<TDTO>();
+                entity = uow.Repo<TEntity>().Create(entity);                
             });
+
+            return entity.MapTo<TDTO>();
         }
 
         public virtual IEnumerable<TDTO> Create(IEnumerable<TDTO> dtos)
@@ -74,7 +73,7 @@ namespace HisPlus.Core.Service
 
         #region Retrieve
         public virtual TDTO RetrieveById(TKey id)
-        {
+        {            
             long result;
             long.TryParse(id.ToString(), out result);
             Requires.InRange(result > 0, "id");

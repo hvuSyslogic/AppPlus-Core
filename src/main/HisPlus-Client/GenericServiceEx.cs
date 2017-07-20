@@ -1,11 +1,10 @@
-﻿using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
-using HisPlus.Infrastructure.Contract.Messages;
-using HisPlus.Infrastructure.Contract.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HisPlus.Infrastructure.Contract.Messages;
+using HisPlus.Infrastructure.Contract.Services;
 
 namespace HisPlus.Client
 {

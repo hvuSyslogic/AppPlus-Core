@@ -6,7 +6,6 @@ using System.ServiceModel.Activation;
 using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-using log4net;
 using System.ServiceModel.Security;
 using HisPlus.Core;
 using HisPlus.Infrastructure.Configuration;
@@ -21,9 +20,7 @@ namespace HisPlus.Wcf.Host
     /// https://ayende.com/blog/3752/rhino-service-bus
     /// </summary>
     public class DynamicHostFactory : ServiceHostFactory
-    {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
+    {        
         public override ServiceHostBase CreateServiceHost(string constructorString, Uri[] baseAddresses)
         {
             //Type registeredType = registration.RegisteredType;
@@ -33,7 +30,7 @@ namespace HisPlus.Wcf.Host
                 .ToList().Where(x => x.ComponentModel.Implementation.Name == constructorString).FirstOrDefault();
             if (serviceHandler == null)
             {
-                throw new InvalidOperationException(string.Format("Could not find a component with {0} , did you forget to register it?", constructorString));
+                throw new InvalidOperationException(string.Format("Could not find a component with name '{0}' , did you forget to register it?", constructorString));
             }
 
             var serviceType = serviceHandler.ComponentModel.Implementation;

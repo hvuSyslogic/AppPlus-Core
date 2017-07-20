@@ -1,5 +1,6 @@
-﻿using HisPlus.Infrastructure.Configuration;
-using log4net;
+﻿using Castle.Core.Logging;
+using HisPlus.Infrastructure;
+using HisPlus.Infrastructure.Configuration;
 using StackExchange.Redis;
 using System;
 using System.Collections.Concurrent;
@@ -17,18 +18,21 @@ namespace HisPlus.Core.Redis
         public static readonly string RedisKeyPrefix = "";
         private static readonly string RedisConnectionString = "";
         private static ConnectionMultiplexer _instance;
-        private static readonly object _locker = new object();        
+        private static readonly object _locker = new object();
         private static readonly ConcurrentDictionary<string, ConnectionMultiplexer> ConnectionCache = new ConcurrentDictionary<string, ConnectionMultiplexer>();
-        
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
+                
         static CacheManager()
         {
-            var connectionStrings = ConfigurationManager.ConnectionStrings[Constants.RedisConnectionString];
+            var connectionStrings = ConfigurationManager.ConnectionStrings[HisConfigurationManager.Configuration.ClientCacheProvider.ConnectionString.Name];
             if (connectionStrings != null)
             {
                 RedisConnectionString = connectionStrings.ConnectionString;
             }
+        }
+
+        private static ILogger Logger 
+        {
+            get { return DependencyContext.Container.Resolve<ILogger>(); } 
         }
 
         public static ConnectionMultiplexer Instance
@@ -84,7 +88,7 @@ namespace HisPlus.Core.Redis
         /// <param name="e"></param>
         private static void MuxerConfigurationChanged(object sender, EndPointEventArgs e)
         {
-            Log.ErrorFormat("Configuration changed: {0}", e.EndPoint);
+            Logger.ErrorFormat("Configuration changed: {0}", e.EndPoint);
         }
 
         /// <summary>
@@ -94,7 +98,7 @@ namespace HisPlus.Core.Redis
         /// <param name="e"></param>
         private static void MuxerErrorMessage(object sender, RedisErrorEventArgs e)
         {
-            Log.ErrorFormat("ErrorMessage: {0}", e.Message);
+            Logger.ErrorFormat("ErrorMessage: {0}", e.Message);
         }
 
         /// <summary>
@@ -104,7 +108,7 @@ namespace HisPlus.Core.Redis
         /// <param name="e"></param>
         private static void MuxerConnectionRestored(object sender, ConnectionFailedEventArgs e)
         {
-            Log.ErrorFormat("ConnectionRestored: {0}", e.EndPoint);
+            Logger.ErrorFormat("ConnectionRestored: {0}", e.EndPoint);
         }
 
         /// <summary>
@@ -114,7 +118,7 @@ namespace HisPlus.Core.Redis
         /// <param name="e"></param>
         private static void MuxerConnectionFailed(object sender, ConnectionFailedEventArgs e)
         {
-            Log.ErrorFormat("Reconnect：Endpoint failed: {0}, {1}", e.EndPoint, e.FailureType + (e.Exception == null ? "" : (", " + e.Exception.Message)));
+            Logger.ErrorFormat("Reconnect：Endpoint failed: {0}, {1}", e.EndPoint, e.FailureType + (e.Exception == null ? "" : (", " + e.Exception.Message)));
         }
 
         /// <summary>
@@ -124,7 +128,7 @@ namespace HisPlus.Core.Redis
         /// <param name="e"></param>
         private static void MuxerHashSlotMoved(object sender, HashSlotMovedEventArgs e)
         {
-            Log.ErrorFormat("MuxerHashSlotMoved: NewEndPoint {0}, OldEndPoint {1}", e.NewEndPoint, e.OldEndPoint);
+            Logger.ErrorFormat("MuxerHashSlotMoved: NewEndPoint {0}, OldEndPoint {1}", e.NewEndPoint, e.OldEndPoint);
         }
 
         /// <summary>
@@ -134,7 +138,7 @@ namespace HisPlus.Core.Redis
         /// <param name="e"></param>
         private static void MuxerInternalError(object sender, InternalErrorEventArgs e)
         {
-            Log.ErrorFormat("InternalError: Message ==> {0}", e.Exception.Message);
+            Logger.ErrorFormat("InternalError: Message ==> {0}", e.Exception.Message);
         }
 
         #endregion

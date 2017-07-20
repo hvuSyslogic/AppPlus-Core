@@ -7,7 +7,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using log4net;
 using Z.EntityFramework.Plus;
 using HisPlus.Infrastructure.Contract.Messages;
 using System.Data.Entity.Core.Objects;
@@ -18,9 +17,7 @@ namespace HisPlus.Core.EntityFramework
 {
     internal partial class Repository<TEntity> : IRepository<TEntity>
         where TEntity : EntityRoot, new()
-    {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        
+    {        
         #region Constructor(s)
 
         public Repository(IUnitOfWork unitOfWork)

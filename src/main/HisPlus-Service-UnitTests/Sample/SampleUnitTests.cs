@@ -14,6 +14,9 @@ using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
 using HisPlus.Client;
 using HisPlus.Infrastructure.Exceptions;
+using System.Linq.Expressions;
+using Serialize.Linq.Nodes;
+using Serialize.Linq.Extensions;
 
 namespace HisPlus.Service.UnitTests.Sample
 {
@@ -29,12 +32,12 @@ namespace HisPlus.Service.UnitTests.Sample
             var result = CallService((ISampleService x) => x.L1CacheTest());
         }
 
-        [Fact(DisplayName = "002_Transaction_NOK")]
+        [Fact(DisplayName = "002_UnitOfWork_Transaction_NOK")]
         [Trait(TraitName, TraitValue)]
-        public void DbTransaction_NOK()
+        public void UnitOfWork_Transaction_NOK()
         {
-            Action action = () => CallService((ISampleService x) => x.TransactionTest());
-            action.ShouldThrow<HisPlusException>();            
+            Action action = () => CallService((ISampleService x) => x.L1Transaction());
+            action.ShouldThrow<HisPlusException>();
         }
 
         //[Fact]
@@ -68,6 +71,24 @@ namespace HisPlus.Service.UnitTests.Sample
             result.Should().NotBeNull();            
             result.Patient.InPatNo.Should().Be(result.InHosInfo.InPatNo);
             result.Patient.CardNo.Should().Be(cardNo);
+        }
+
+        [Fact(DisplayName = "004_Nested_Transaction_NOK")]
+        [Trait(TraitName, TraitValue)]
+        public void Nested_Transaction_NOK()
+        {            
+            Expression<Func<GblRoleDTO, bool>> expression = (x => x.GroupName == "");
+            var expressionNode = expression.ToExpressionNode();
+            
+            GblRoleDTO roleDTO = CallService((IGblRoleService x) => x.Retrieve(expressionNode)).FirstOrDefault();
+            roleDTO.Should().NotBeNull();
+
+            BsLocationDTO locationDTO = CallService((IBsLocationService x) => x.RetrieveAll()).FirstOrDefault();
+            locationDTO.Should().NotBeNull();
+
+            Action action = () => CallService((ISampleService x) => x.L2Transaction(roleDTO, locationDTO));
+
+            action.ShouldThrow<HisPlusException>();
         }
     }
 }

@@ -6,18 +6,24 @@ using System.Threading.Tasks;
 using AutoMapper;
 using HisPlus.Infrastructure.Configuration;
 using HisPlus.Infrastructure.Contract.Services;
-using log4net;
 using System.Reflection;
 using HisPlus.Core.EntityFramework;
 using System.Data.Entity.Infrastructure;
+using Castle.Core.Logging;
 
 namespace HisPlus.Core.Service
 {    
     public abstract class ServiceRoot : Profile, IServiceRoot
     {
         private bool _disposed = false;
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-          
+
+        public ServiceRoot()
+        {
+            Logger = NullLogger.Instance;
+        }
+
+        public ILogger Logger { get; set; }
+
         [Obsolete]
         protected override void Configure()
         {

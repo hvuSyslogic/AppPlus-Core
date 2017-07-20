@@ -13,24 +13,26 @@ using HisPlus.Infrastructure;
 using HisPlus.Infrastructure.Contract.Messages;
 using HisPlus.Infrastructure.Exceptions;
 using HisPlus.Core.Infrastructure.CodeContracts;
-using log4net;
+using Castle.Core.Logging;
 
 namespace HisPlus.Client
 {
     public class ServiceHandler
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
         #region static constructor
         
         static ServiceHandler()
         {
             IsDistributed = (HisConfigurationManager.Configuration.Provider == ProviderType.Agent);
-        }
-        
+        }        
         #endregion
 
         #region static properties
+
+        public static ILogger Logger 
+        {
+            get { return DependencyContext.Container.Resolve<ILogger>(); }
+        }
 
         private static bool IsDistributed { get; set; }
 
@@ -87,7 +89,7 @@ namespace HisPlus.Client
 
                 if (!string.IsNullOrWhiteSpace(errMsg))
                 {
-                    Log.Error(errMsg);
+                    Logger.Error(errMsg);
 
                     throw new HisPlusException(errMsg);
                 }
@@ -129,7 +131,7 @@ namespace HisPlus.Client
 
                 if (!string.IsNullOrWhiteSpace(errMsg))
                 {
-                    Log.Error(errMsg);
+                    Logger.Error(errMsg);
 
                     throw new HisPlusException(errMsg);
                 }                

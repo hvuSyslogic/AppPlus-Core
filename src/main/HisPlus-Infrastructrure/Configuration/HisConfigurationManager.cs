@@ -1,4 +1,4 @@
-﻿using log4net;
+﻿using Castle.Core.Logging;
 using Nerdle.AutoConfig;
 using System;
 using System.Collections.Generic;
@@ -15,32 +15,56 @@ namespace HisPlus.Infrastructure.Configuration
         private static IHisPlusConfiguration _configuration;
         private static object _lock = new object();
 
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static ILogger Logger
+        {
+            get;
+            set;
+        }
 
         static HisConfigurationManager()
         {
-            lock (_lock)
+            Logger = DependencyContext.Container.Resolve<ILogger>();
+
+            if (Configuration == null)
             {
-                AutoConfig.WhenMapping<IHisPlusConfiguration>(mapper =>
+                lock (_lock)
                 {
-                    mapper.Map(x => x.AgentProvider).Optional();
-                    mapper.Map(x => x.LocalProvider).Optional();
-                    mapper.Map(x => x.CacheProvider).Optional();
-                });
+                    if (Configuration == null)
+                    {
+                        AutoConfig.WhenMapping<IHisPlusConfiguration>(mapper =>
+                        {
+                            mapper.Map(x => x.AgentProvider).Optional();
+                            mapper.Map(x => x.LocalProvider).Optional();
+                            mapper.Map(x => x.ClientCacheProvider).Optional();
+                        });
 
-                try
-                {
-                    _configuration = AutoConfig.Map<IHisPlusConfiguration>();
-                }
-                catch (TypeInitializationException ex)
-                {
-                    Log.Error(ex);
-                    throw;
-                }
-            }
+                        try
+                        {
+                            _configuration = AutoConfig.Map<IHisPlusConfiguration>();
+                            Logger.Info("HisPlus configuration was successfully loaded from app config.");
 
-            _configuration.AssertConfigurationIsValid();
-        }        
+                            _configuration.AssertConfigurationIsValid();
+
+                            LoadIsCompleted = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            LoadIsCompleted = false;
+                            Logger.Error("HisPlus configuration error occured: ", ex);
+                            throw;
+                        }
+
+                        DependencyContext.InstallComponents();
+                    }                    
+                }
+            }                       
+        }
+
+        public static bool LoadIsCompleted
+        {
+            get;
+            private set;
+        }
 
         public static IHisPlusConfiguration Configuration
         {

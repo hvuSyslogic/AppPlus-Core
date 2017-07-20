@@ -5,7 +5,6 @@ using HisPlus.Core.Service;
 using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
 using HisPlus.Domain;
-using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,21 +12,22 @@ using System.Reflection;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace HisPlus.Services
 {
-    [GlobalErrorBehaviorAttribute(typeof(GlobalErrorHandler))]    
+    [GlobalErrorBehaviorAttribute(typeof(GlobalErrorHandler))]
     public class SampleService : ServiceRoot, ISampleService
     {
         class PatientInHosInfo
         {
             internal BsPatient Patient { get; set; }
             internal InHosInfo InHosInfo { get; set; }
-        }
+        }        
 
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        
         public IGblRoleService RoleService { get; set; }
+        
+        public IBsLocationService LocationService { get; set; }
 
         public IGblRoleModuleService RoleModuleService { get; set; }
 
@@ -69,7 +69,7 @@ namespace HisPlus.Services
             });
         }
 
-        public bool TransactionTest()
+        public bool L1Transaction()
         {
             return UnitOfWork.Do(uow => 
             {
@@ -86,6 +86,20 @@ namespace HisPlus.Services
 
                 return true;
             });
+        }
+
+        public void L2Transaction(GblRoleDTO roleDTO, BsLocationDTO locationDTO)
+        {
+            Requires.NotNull(roleDTO, "roleDTO");
+            Requires.NotNull(roleDTO, "locationDTO");
+
+            roleDTO.GroupName = "Testing Group";
+            locationDTO.PyCode = "9999999999999999999999999999999999999999999999999999999999999999";
+            UnitOfWork.Do(uow =>
+            {
+                RoleService.Update(roleDTO);
+                LocationService.Create(locationDTO);
+            }, TransactionOption.TransactionScope);
         }
     }
 }

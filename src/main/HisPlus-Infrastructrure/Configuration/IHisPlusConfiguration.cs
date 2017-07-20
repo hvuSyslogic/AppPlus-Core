@@ -16,6 +16,6 @@ namespace HisPlus.Infrastructure.Configuration
 
         ILocalProvider LocalProvider { get; }
 
-        ICacheProvider CacheProvider { get; }
+        ICacheProvider ClientCacheProvider { get; }
     }
 }

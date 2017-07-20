@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Threading;
 using System.Collections.ObjectModel;
-using log4net;
 using HisPlus.Client.Binding;
 using System.ServiceModel;
 using HisPlus.Infrastructure.Contract.Services;

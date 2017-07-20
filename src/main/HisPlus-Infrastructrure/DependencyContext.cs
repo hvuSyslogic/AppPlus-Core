@@ -6,34 +6,59 @@ using System.Threading.Tasks;
 using Castle.Windsor;
 using HisPlus.Infrastructure.Configuration;
 using Castle.Windsor.Installer;
+using Castle.Facilities.Logging;
+using Castle.Core.Logging;
 
 namespace HisPlus.Infrastructure
 {
     public class DependencyContext
-    {       
+    {
+        private const string Log4netConfigPath = "config\\log4net.config";
+        private static object _lock = new object();
+
         static DependencyContext()
         {
+            InstallLogger();
             InstallComponents();
         }
 
         private DependencyContext()
-        {            
+        {
         }
 
-        private static void InstallComponents()
+        private static void InstallLogger()
         {
-            if (HisConfigurationManager.Configuration.Provider == ProviderType.Local)
+            Container.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.Log4net).WithConfig(Log4netConfigPath));
+        }
+
+        public static void InstallComponents()
+        {
+            var logger = Container.Resolve<ILogger>();
+            if (HisConfigurationManager.LoadIsCompleted)
             {
-                HisConfigurationManager.Configuration.LocalProvider.Installers.ToList().ForEach(installer =>
+                lock (_lock)
                 {
-                    Container.Install(FromAssembly.Named(installer.Assembly));
-                });
+                    if (!ConfigurationIsInstalled)
+                    {
+                        if (HisConfigurationManager.Configuration.Provider == ProviderType.Local)
+                        {
+                            HisConfigurationManager.Configuration.LocalProvider.Installers.ToList().ForEach(installer =>
+                            {
+                                Container.Install(FromAssembly.Named(installer.Assembly));
+                                //logger.InfoFormat("Components was successfully installed from assembly '{0}.dll'.", installer.Assembly);
+                                
+                                ConfigurationIsInstalled = true;
+                            });
+                        }
+                    }
+                }
             }
         }
 
-        public static void Initialize() 
+        private static bool ConfigurationIsInstalled
         {
-
+            get;
+            set;
         }
 
         public static IWindsorContainer Container

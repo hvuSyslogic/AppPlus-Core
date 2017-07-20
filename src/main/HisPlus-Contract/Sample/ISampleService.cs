@@ -16,9 +16,12 @@ namespace HisPlus.Contract.Services
         IEnumerable<GblRoleDTO> L1CacheTest();
 
         [OperationContract]
-        bool TransactionTest();
+        bool L1Transaction();
 
         [OperationContract]
         PatientInHosInfoDTO GetPatientInHosInfo(string cardNo);
+
+        [OperationContract]
+        void L2Transaction(GblRoleDTO roleDTO, BsLocationDTO locationDTO);
     }
 }

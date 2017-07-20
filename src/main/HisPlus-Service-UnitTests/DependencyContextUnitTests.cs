@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Castle.MicroKernel.Registration;
-using Castle.Windsor.Installer;
 using HisPlus.Contract.Services;
 using HisPlus.Core;
 using HisPlus.Domain;

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Castle.Core.Logging;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using HisPlus.Core.Service;
+using HisPlus.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +15,21 @@ namespace HisPlus.Services.Dependency.Installer
 {
     public class ServiceInstaller : IWindsorInstaller
     {
+        private ILogger Logger
+        {
+            get { return DependencyContext.Container.Resolve<ILogger>(); }
+        }
+
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Classes.FromThisAssembly().BasedOn<ServiceRoot>()
                 .WithService.DefaultInterfaces().Configure(c => c.LifestyleTransient()));
 
+            Logger.InfoFormat("Services was successfully installed from assembly '{0}'.", GetType().Assembly);
+
             InstallAutoMapper();
+
+            Logger.InfoFormat("Automapper profiles was successfully configured from assembly '{0}'.", GetType().Assembly);
         }
 
         private void InstallAutoMapper()

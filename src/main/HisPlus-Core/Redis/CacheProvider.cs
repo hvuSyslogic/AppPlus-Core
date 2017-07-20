@@ -1,5 +1,4 @@
 ﻿using HisPlus.Infrastructure.Configuration;
-using log4net;
 using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
@@ -13,20 +12,18 @@ namespace HisPlus.Core.Redis
 {
     public class CacheProvider : ICacheProvider
     {
-        public string CustomKey;
         private readonly ConnectionMultiplexer _connection;
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
+        
         #region Constructor(s)
 
-        public CacheProvider(int dbNo = 0)
-            : this(dbNo, null)
+        public CacheProvider(int db = 0)
+            : this(db, null)
         {
         }
 
-        public CacheProvider(int dbNo, string readWriteHost)
+        public CacheProvider(int db, string readWriteHost)
         {
-            DbNo = dbNo;
+            Db = db;
             _connection = string.IsNullOrWhiteSpace(readWriteHost) ? CacheManager.Instance 
                 : CacheManager.GetConnectionMultiplexer(readWriteHost);
         }
@@ -35,7 +32,9 @@ namespace HisPlus.Core.Redis
 
         #region Properties
 
-        private int DbNo { get; set; }
+        public string KeyPrefix { get; set; }
+
+        private int Db { get; set; }
 
         #endregion
 
@@ -903,7 +902,7 @@ namespace HisPlus.Core.Redis
 
         public IDatabase GetDatabase()
         {
-            return _connection.GetDatabase(DbNo);
+            return _connection.GetDatabase(Db);
         }
 
         public IServer GetServer(string hostAndPort)
@@ -915,9 +914,9 @@ namespace HisPlus.Core.Redis
         /// 设置前缀
         /// </summary>
         /// <param name="customKey"></param>
-        public void AddKeyPrefix(string customKey)
+        public void AddKeyPrefix(string KeyPrefix)
         {
-            CustomKey = customKey;
+            KeyPrefix = KeyPrefix;
         }
 
         #endregion
@@ -926,14 +925,14 @@ namespace HisPlus.Core.Redis
 
         private string CustomizedKey(string oldKey)
         {
-            var prefixKey = CustomKey ?? HisConfigurationManager.Configuration.CacheProvider.CustomizedKey.Prefix;
+            var prefixKey = KeyPrefix ?? HisConfigurationManager.Configuration.ClientCacheProvider.CustomizedKey.Prefix;
 
             return string.Concat(prefixKey, oldKey);
         }
 
         private T Do<T>(Func<IDatabase, T> func)
         {
-            var database = _connection.GetDatabase(DbNo);
+            var database = _connection.GetDatabase(Db);
             return func(database);
         }
 
