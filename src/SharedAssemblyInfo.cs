@@ -10,7 +10,6 @@ using HisPlus;
 [assembly: AssemblyTrademark(ProductInformation.Trademark)]
 [assembly: AssemblyVersion(ProductInformation.VersionString)]
 [assembly: AssemblyInformationalVersion(ProductInformation.InformationalVersion)]
-[assembly: CLSCompliant(true)]
 [assembly: AssemblyConfiguration(ProductInformation.Configuration)]
 
 namespace HisPlus

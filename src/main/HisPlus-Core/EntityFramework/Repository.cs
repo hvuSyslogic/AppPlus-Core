@@ -11,7 +11,6 @@ using Z.EntityFramework.Plus;
 using HisPlus.Infrastructure.Contract.Messages;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
-using HisPlus.Core.Redis;
 
 namespace HisPlus.Core.EntityFramework
 {

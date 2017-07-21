@@ -11,13 +11,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HisPlus.Services.Dependency.Installer
+namespace HisPlus.Services.Installer
 {
     public class ServiceInstaller : IWindsorInstaller
     {
-        private ILogger Logger
+        ILogger Logger
         {
-            get { return DependencyContext.Container.Resolve<ILogger>(); }
+            get { return GetType().GetLogger(); }
         }
 
         public void Install(IWindsorContainer container, IConfigurationStore store)

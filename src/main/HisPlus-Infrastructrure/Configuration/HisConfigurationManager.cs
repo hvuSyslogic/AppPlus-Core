@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Logging;
+using HisPlus.Infrastructure.Dependency;
 using Nerdle.AutoConfig;
 using System;
 using System.Collections.Generic;
@@ -15,16 +16,13 @@ namespace HisPlus.Infrastructure.Configuration
         private static IHisPlusConfiguration _configuration;
         private static object _lock = new object();
 
-        private static ILogger Logger
+        static ILogger Logger
         {
-            get;
-            set;
+            get { return typeof(HisConfigurationManager).GetLogger(); }
         }
 
         static HisConfigurationManager()
         {
-            Logger = DependencyContext.Container.Resolve<ILogger>();
-
             if (Configuration == null)
             {
                 lock (_lock)
@@ -54,7 +52,7 @@ namespace HisPlus.Infrastructure.Configuration
                             throw;
                         }
 
-                        DependencyContext.InstallComponents();
+                        IoCManager.InstallComponents();
                     }                    
                 }
             }                       

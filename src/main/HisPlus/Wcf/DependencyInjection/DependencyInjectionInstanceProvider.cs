@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Dispatcher;
 using System.Web;
 using System.ServiceModel.Channels;
-using HisPlus.Infrastructure;
+using HisPlus.Infrastructure.Dependency;
 
 namespace HisPlus.Wcf.DependencyInjection
 {
@@ -45,7 +45,7 @@ namespace HisPlus.Wcf.DependencyInjection
         /// <returns>The service object.</returns>        
         public object GetInstance(InstanceContext instanceContext, Message message)
         {
-            return DependencyContext.Container.Resolve(_serviceType);
+            return IoCManager.Container.Resolve(_serviceType);
         }
 
         /// <summary>

@@ -7,7 +7,7 @@ using System.Web.Hosting;
 using System.Web.Security;
 using System.Web.SessionState;
 using HisPlus.Wcf.Host;
-using HisPlus.Infrastructure;
+using HisPlus.Infrastructure.Dependency;
 
 namespace HisPlus
 {
@@ -20,7 +20,7 @@ namespace HisPlus
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            DependencyContext.InstallComponents();
+            IoCManager.InstallComponents();
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
@@ -45,9 +45,9 @@ namespace HisPlus
 
         protected void Application_End(object sender, EventArgs e)
         {
-            if (DependencyContext.Container != null)
+            if (IoCManager.Container != null)
             {
-                DependencyContext.Container.Dispose();
+                IoCManager.Container.Dispose();
             }
         }
     }

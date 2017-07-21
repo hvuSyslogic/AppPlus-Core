@@ -12,15 +12,15 @@ using System.Text;
 using System.Threading.Tasks;
 using CastleDependency = Castle.MicroKernel.Registration;
 
-namespace HisPlus.Domain.Dependency.Installer
+namespace HisPlus.Domain.Installer
 {
-    public class DbContextInstaller : IWindsorInstaller
+    public class SessionInstaller : IWindsorInstaller
     {
         private const string DependencyName = "connectionString";
 
-        private ILogger Logger
+        ILogger Logger
         {
-            get { return DependencyContext.Container.Resolve<ILogger>(); }
+            get { return GetType().GetLogger(); }
         }
 
         public void Install(IWindsorContainer container, IConfigurationStore store)

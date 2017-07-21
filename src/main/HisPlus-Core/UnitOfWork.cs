@@ -12,10 +12,9 @@ using System.Runtime.InteropServices;
 using Z.EntityFramework.Plus;
 using HisPlus.Infrastructure.Contract.Messages;
 using HisPlus.Core.Infrastructure.CodeContracts;
-using HisPlus.Core.Redis;
-using HisPlus.Infrastructure;
 using System.Transactions;
 using Castle.Core.Logging;
+using HisPlus.Infrastructure.Dependency;
 
 namespace HisPlus.Core.EntityFramework
 {
@@ -38,7 +37,7 @@ namespace HisPlus.Core.EntityFramework
     
         private UnitOfWork()
         {            
-            Session = DependencyContext.Container.Resolve<DbContext>();
+            Session = IoCManager.Container.Resolve<DbContext>();
             if (Session == null)
             {
                 throw new NullReferenceException("Can not resolve Session object from IoC container");
@@ -53,7 +52,7 @@ namespace HisPlus.Core.EntityFramework
 
         public ILogger Logger 
         {
-            get { return DependencyContext.Container.Resolve<ILogger>(); }
+            get { return GetType().GetLogger(); }
         }        
 
         public DbContext Session { get; set; }
@@ -63,7 +62,7 @@ namespace HisPlus.Core.EntityFramework
         {
             if (!repositories.ContainsKey(typeof(TEntity)))
             {
-                var repository = DependencyContext.Container.Resolve<IRepository<TEntity>>(new { unitOfWork = _current });
+                var repository = IoCManager.Container.Resolve<IRepository<TEntity>>(new { unitOfWork = _current });
                 repositories.Add(new KeyValuePair<Type, object>(typeof(TEntity), repository));
             }
 

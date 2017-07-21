@@ -1,11 +1,4 @@
-﻿using AutoMapper;
-using HisPlus.Contract.Services;
-using HisPlus.Core;
-using HisPlus.Domain;
-using HisPlus.Infrastructure;
-using HisPlus.Infrastructure.Configuration;
-using HisPlus.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -14,6 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using FluentAssertions;
+using HisPlus.Infrastructure.Dependency;
+using AutoMapper;
+using HisPlus.Contract.Services;
+using HisPlus.Core;
+using HisPlus.Domain;
+using HisPlus.Infrastructure.Configuration;
+using HisPlus.Services;
 
 namespace HisPlus.Service.UnitTests
 {
@@ -28,7 +28,7 @@ namespace HisPlus.Service.UnitTests
         {
             if (HisConfigurationManager.Configuration.Provider == ProviderType.Local)
             {
-                var container = DependencyContext.Container;
+                var container = IoCManager.Container;
                 var context = container.Resolve<DbContext>();
 
                 var area = context.Set<BsArea>().FirstOrDefault();                
@@ -46,7 +46,7 @@ namespace HisPlus.Service.UnitTests
         {
             if (HisConfigurationManager.Configuration.Provider == ProviderType.Local)
             {
-                var container = DependencyContext.Container;
+                var container = IoCManager.Container;
                 var handlers = container.Kernel.GetAssignableHandlers(typeof(object));                
                 handlers.Should().NotBeNullOrEmpty();
                 

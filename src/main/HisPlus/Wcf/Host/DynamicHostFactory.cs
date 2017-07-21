@@ -10,8 +10,8 @@ using System.ServiceModel.Security;
 using HisPlus.Core;
 using HisPlus.Infrastructure.Configuration;
 using HisPlus.Wcf.DependencyInjection;
-using HisPlus.Infrastructure;
 using HisPlus.Infrastructure.Contract.Services;
+using HisPlus.Infrastructure.Dependency;
 
 namespace HisPlus.Wcf.Host
 {
@@ -26,7 +26,7 @@ namespace HisPlus.Wcf.Host
             //Type registeredType = registration.RegisteredType;
             //Type mappedToType = registration.MappedToType;
 
-            var serviceHandler = DependencyContext.Container.Kernel.GetAssignableHandlers(typeof(object))
+            var serviceHandler = IoCManager.Container.Kernel.GetAssignableHandlers(typeof(object))
                 .ToList().Where(x => x.ComponentModel.Implementation.Name == constructorString).FirstOrDefault();
             if (serviceHandler == null)
             {

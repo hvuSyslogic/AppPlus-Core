@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using HisPlus.UnitTests.Common;
+using HisPlus.Infrastructure;
 
 namespace HisPlus.Redis.UnitTests
 {
@@ -17,7 +18,7 @@ namespace HisPlus.Redis.UnitTests
     {
         private const string HostName = "localhost";
         private string CacheKey = "BsGfxe";
-        ICacheProvider cacheProvider = new CacheProvider(0);
+        ICacheProvider cacheProvider = DependencyContext.Container.Resolve<ICacheProvider>();
 
         [Fact]
         public void Initialize_Redis_Cache()

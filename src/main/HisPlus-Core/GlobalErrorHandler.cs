@@ -10,7 +10,7 @@ using HisPlus.Infrastructure.Contract.Messages;
 using System.Text;
 using HisPlus.Infrastructure.Exceptions;
 using Castle.Core.Logging;
-using HisPlus.Infrastructure;
+using HisPlus.Infrastructure.Dependency;
 
 namespace HisPlus.Core
 {
@@ -22,7 +22,7 @@ namespace HisPlus.Core
     {
         private ILogger Logger 
         {
-            get { return DependencyContext.Container.Resolve<ILogger>(); } 
+            get { return IoCManager.Container.Resolve<ILogger>(); } 
         }
 
         public void ProvideFault(System.Exception error, MessageVersion version, ref Message msg)

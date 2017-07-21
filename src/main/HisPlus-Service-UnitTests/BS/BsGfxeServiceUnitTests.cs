@@ -66,7 +66,7 @@ namespace HisPlus.Service.UnitTests.BS
         [Fact(DisplayName = "005_RetrieveByExpression_NOK")]
         [Trait(TraitName, "Retrieve")]
         public void RetrieveByExpression_NullExpression_FaultException_NOK()
-        {
+        {         
             Action retrieve = () => CallService((IBsGfxeService x) => x.Retrieve(null));
             retrieve.ShouldThrow<HisPlusException>();
         }

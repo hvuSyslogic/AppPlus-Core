@@ -1,10 +1,4 @@
-﻿using HisPlus.Client;
-using HisPlus.Core.Redis;
-using HisPlus.Infrastructure.Contract.Messages;
-using HisPlus.Infrastructure.Contract.Services;
-using HisPlus.Contract.Messages;
-using HisPlus.Contract.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +8,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HisPlus.Infrastructure;
+using HisPlus.Client;
+using HisPlus.Infrastructure.Contract.Messages;
+using HisPlus.Infrastructure.Contract.Services;
+using HisPlus.Contract.Messages;
+using HisPlus.Contract.Services;
 
 namespace HisPlus.UI
 {
@@ -26,8 +26,6 @@ namespace HisPlus.UI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            CacheProvider redis = new CacheProvider(0);
-            
             new Thread((ThreadStart)delegate()
                 {
                     var result = ServiceHandler.CallService((IBsItemUnitService x) => x.RetrieveAllByPage());

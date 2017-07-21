@@ -64,8 +64,7 @@ namespace HisPlus.Service.UnitTests.Sample
         [Trait(TraitName, TraitValue)]
         public void GetPatientInHosInfo_By_CardNo_TestMethod() 
         {
-            string cardNo = "201707030007";            
-
+            string cardNo = "201707030007";
             var result = CallService((ISampleService x) => x.GetPatientInHosInfo(cardNo));
 
             result.Should().NotBeNull();            
@@ -87,7 +86,6 @@ namespace HisPlus.Service.UnitTests.Sample
             locationDTO.Should().NotBeNull();
 
             Action action = () => CallService((ISampleService x) => x.L2Transaction(roleDTO, locationDTO));
-
             action.ShouldThrow<HisPlusException>();
         }
     }

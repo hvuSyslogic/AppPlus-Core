@@ -14,6 +14,7 @@ using HisPlus.Infrastructure.Contract.Messages;
 using HisPlus.Infrastructure.Exceptions;
 using HisPlus.Core.Infrastructure.CodeContracts;
 using Castle.Core.Logging;
+using HisPlus.Infrastructure.Dependency;
 
 namespace HisPlus.Client
 {
@@ -31,7 +32,7 @@ namespace HisPlus.Client
 
         public static ILogger Logger 
         {
-            get { return DependencyContext.Container.Resolve<ILogger>(); }
+            get { return typeof(ServiceHandler).GetLogger(); }
         }
 
         private static bool IsDistributed { get; set; }
@@ -47,7 +48,7 @@ namespace HisPlus.Client
                 return ProxyManager.GetProxy<T>();
             }
 
-            return DependencyContext.Container.Resolve<T>();
+            return IoCManager.Container.Resolve<T>();
         }
 
         #endregion

@@ -4,42 +4,16 @@ using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HisPlus.Core.Redis
+namespace HisPlus.Infrastructure.Cache
 {
-    public class CacheProvider : ICacheProvider
+    public abstract class CacheBase : HisPlus.Infrastructure.Cache.ICacheBase
     {
-        private readonly ConnectionMultiplexer _connection;
-        
-        #region Constructor(s)
+        public abstract IDatabase CurrentDB { get; }
 
-        public CacheProvider(int db = 0)
-            : this(db, null)
-        {
-        }
-
-        public CacheProvider(int db, string readWriteHost)
-        {
-            Db = db;
-            _connection = string.IsNullOrWhiteSpace(readWriteHost) ? CacheManager.Instance 
-                : CacheManager.GetConnectionMultiplexer(readWriteHost);
-        }
-
-        #endregion Constructor(s)
-
-        #region Properties
-
-        public string KeyPrefix { get; set; }
-
-        private int Db { get; set; }
-
-        #endregion
-
-        #region String
-
+        #region
         #region Synchorize methods
 
         /// <summary>
@@ -843,57 +817,57 @@ namespace HisPlus.Core.Redis
         /// </summary>
         /// <param name="subChannel"></param>
         /// <param name="handler"></param>
-        public void Subscribe(string subChannel, Action<RedisChannel, RedisValue> handler = null)
-        {
-            ISubscriber sub = _connection.GetSubscriber();
-            sub.Subscribe(subChannel, (channel, message) =>
-            {
-                if (handler == null)
-                {
-                    Console.WriteLine(subChannel + " 订阅收到消息：" + message);
-                }
-                else
-                {
-                    handler(channel, message);
-                }
-            });
-        }
+        //public void Subscribe(string subChannel, Action<RedisChannel, RedisValue> handler = null)
+        //{
+        //    ISubscriber sub = _connection.GetSubscriber();
+        //    sub.Subscribe(subChannel, (channel, message) =>
+        //    {
+        //        if (handler == null)
+        //        {
+        //            Console.WriteLine(subChannel + " 订阅收到消息：" + message);
+        //        }
+        //        else
+        //        {
+        //            handler(channel, message);
+        //        }
+        //    });
+        //}
 
-        /// <summary>
-        /// Redis Publish  发布
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="channel"></param>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        public long Publish<T>(string channel, T msg)
-        {
-            ISubscriber sub = _connection.GetSubscriber();
-            return sub.Publish(channel, ConvertJson(msg));
-        }
+        ///// <summary>
+        ///// Redis Publish  发布
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="channel"></param>
+        ///// <param name="msg"></param>
+        ///// <returns></returns>
+        //public long Publish<T>(string channel, T msg)
+        //{
+        //    ISubscriber sub = _connection.GetSubscriber();
+        //    return sub.Publish(channel, ConvertJson(msg));
+        //}
 
-        /// <summary>
-        /// Redis Unsubscribe
-        /// </summary>
-        /// <param name="channel"></param>
-        public void Unsubscribe(string channel)
-        {
-            ISubscriber sub = _connection.GetSubscriber();
-            sub.Unsubscribe(channel);
-        }
+        ///// <summary>
+        ///// Redis Unsubscribe
+        ///// </summary>
+        ///// <param name="channel"></param>
+        //public void Unsubscribe(string channel)
+        //{
+        //    ISubscriber sub = _connection.GetSubscriber();
+        //    sub.Unsubscribe(channel);
+        //}
 
-        /// <summary>
-        /// Redis UnsubscribeAll
-        /// </summary>
-        public void UnsubscribeAll()
-        {
-            ISubscriber sub = _connection.GetSubscriber();
-            sub.UnsubscribeAll();
-        }
+        ///// <summary>
+        ///// Redis UnsubscribeAll
+        ///// </summary>
+        //public void UnsubscribeAll()
+        //{
+        //    ISubscriber sub = _connection.GetSubscriber();
+        //    sub.UnsubscribeAll();
+        //}
 
         #endregion Pub/Sub
 
-        #region 
+        #region
 
         public ITransaction CreateTransaction()
         {
@@ -902,38 +876,23 @@ namespace HisPlus.Core.Redis
 
         public IDatabase GetDatabase()
         {
-            return _connection.GetDatabase(Db);
+            return CurrentDB;
         }
-
-        public IServer GetServer(string hostAndPort)
-        {
-            return _connection.GetServer(hostAndPort);
-        }
-
-        /// <summary>
-        /// 设置前缀
-        /// </summary>
-        /// <param name="customKey"></param>
-        public void AddKeyPrefix(string KeyPrefix)
-        {
-            KeyPrefix = KeyPrefix;
-        }
-
+       
         #endregion
 
         #region 辅助方法
 
         private string CustomizedKey(string oldKey)
         {
-            var prefixKey = KeyPrefix ?? HisConfigurationManager.Configuration.ClientCacheProvider.CustomizedKey.Prefix;
+            var prefixKey =  HisConfigurationManager.Configuration.ClientCacheProvider.CustomizedKey.Prefix;
 
             return string.Concat(prefixKey, oldKey);
         }
 
         private T Do<T>(Func<IDatabase, T> func)
         {
-            var database = _connection.GetDatabase(Db);
-            return func(database);
+            return func(CurrentDB);
         }
 
         private string ConvertJson<T>(T value)

@@ -1,12 +1,11 @@
 ﻿using System;
-namespace HisPlus.Core.Redis
+namespace HisPlus.Infrastructure.Cache
 {
-    public interface ICacheProvider
+    public interface ICacheBase
     {
-        void AddKeyPrefix(string customKey);
         StackExchange.Redis.ITransaction CreateTransaction();
+        StackExchange.Redis.IDatabase CurrentDB { get; }
         StackExchange.Redis.IDatabase GetDatabase();
-        StackExchange.Redis.IServer GetServer(string hostAndPort);
         double HashDecrement(string key, string dataKey, double val = 1);
         System.Threading.Tasks.Task<double> HashDecrementAsync(string key, string dataKey, double val = 1);
         long HashDelete(string key, System.Collections.Generic.List<StackExchange.Redis.RedisValue> dataKeys);
@@ -42,7 +41,6 @@ namespace HisPlus.Core.Redis
         System.Threading.Tasks.Task<T> ListRightPopAsync<T>(string key);
         void ListRightPush<T>(string key, T value);
         System.Threading.Tasks.Task<long> ListRightPushAsync<T>(string key, T value);
-        long Publish<T>(string channel, T msg);
         bool SortedSetAdd<T>(string key, T value, double score);
         System.Threading.Tasks.Task<bool> SortedSetAddAsync<T>(string key, T value, double score);
         long SortedSetLength(string key);
@@ -67,8 +65,5 @@ namespace HisPlus.Core.Redis
         System.Threading.Tasks.Task<bool> StringSetAsync(System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<StackExchange.Redis.RedisKey, StackExchange.Redis.RedisValue>> keyValues);
         System.Threading.Tasks.Task<bool> StringSetAsync(string key, string value, TimeSpan? expiry = default(TimeSpan?));
         System.Threading.Tasks.Task<bool> StringSetAsync<T>(string key, T obj, TimeSpan? expiry = default(TimeSpan?));
-        void Subscribe(string subChannel, Action<StackExchange.Redis.RedisChannel, StackExchange.Redis.RedisValue> handler = null);
-        void Unsubscribe(string channel);
-        void UnsubscribeAll();
     }
 }

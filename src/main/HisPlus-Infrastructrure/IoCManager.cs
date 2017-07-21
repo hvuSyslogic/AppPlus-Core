@@ -8,22 +8,36 @@ using HisPlus.Infrastructure.Configuration;
 using Castle.Windsor.Installer;
 using Castle.Facilities.Logging;
 using Castle.Core.Logging;
+using Castle.MicroKernel.Registration;
+using HisPlus.Infrastructure.Cache;
+using ICacheProvider = HisPlus.Infrastructure.Cache.ICacheProvider;
 
-namespace HisPlus.Infrastructure
+namespace HisPlus.Infrastructure.Dependency
 {
-    public class DependencyContext
+    public class IoCManager
     {
         private const string Log4netConfigPath = "config\\log4net.config";
         private static object _lock = new object();
 
-        static DependencyContext()
+        static IoCManager()
         {
-            InstallLogger();
-            InstallComponents();
+            Install();
         }
 
-        private DependencyContext()
+        private IoCManager()
         {
+        }
+
+        static ILogger Logger 
+        {
+            get { return typeof(IoCManager).GetLogger(); } 
+        }
+
+        private static void Install()
+        {
+            InstallLogger();
+            InstallClientCache();
+            InstallComponents();
         }
 
         private static void InstallLogger()
@@ -31,9 +45,14 @@ namespace HisPlus.Infrastructure
             Container.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.Log4net).WithConfig(Log4netConfigPath));
         }
 
+        private static void InstallClientCache()
+        {
+            Container.Register(Component.For<ICacheManager>().ImplementedBy<CacheManager>().LifestyleSingleton());
+            Container.Register(Component.For<ICacheProvider>().ImplementedBy<CacheProvider>().LifestyleSingleton());
+        }
+
         public static void InstallComponents()
         {
-            var logger = Container.Resolve<ILogger>();
             if (HisConfigurationManager.LoadIsCompleted)
             {
                 lock (_lock)
@@ -45,7 +64,6 @@ namespace HisPlus.Infrastructure
                             HisConfigurationManager.Configuration.LocalProvider.Installers.ToList().ForEach(installer =>
                             {
                                 Container.Install(FromAssembly.Named(installer.Assembly));
-                                //logger.InfoFormat("Components was successfully installed from assembly '{0}.dll'.", installer.Assembly);
                                 
                                 ConfigurationIsInstalled = true;
                             });
