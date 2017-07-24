@@ -3,10 +3,8 @@ using System;
 
 namespace HisPlus.Infrastructure.Cache
 {
-    public interface ICacheProvider : ICacheBase
+    public interface ICacheProvider : ICacheProviderBase
     {
-        ICacheManager CacheManager { get; set; }
-        
-        IDatabase CurrentDB { get; }    
+        ICacheManager CacheManager { get; set; }        
     }
 }

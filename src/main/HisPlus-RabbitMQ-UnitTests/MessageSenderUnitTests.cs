@@ -1,56 +1,31 @@
-﻿using System;
+﻿using HisPlus.MQ;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RabbitMQ.Client;
 using Xunit;
 
-namespace HisPlus.RabbitMQTests
+namespace HisPlus.RabbitMQ.UnitTests
 {    
     public partial class MessageSenderUnitTests
     {
         const string TraitName = "MessageSenderUnitTests";
         const string TraitValue = "MessageQueue";
 
-        private const string HostName = "localhost";
-
-        [Fact(DisplayName = "001_MQ_PUB")]
-        [Trait(TraitName, TraitValue)]
-        public void TestSendMessage()
+        [Fact]
+        public void Message_Send_Test()
         {
-            string queueName = "testQueue";
-
-            SendMessage(queueName);
-        }
-
-        public void SendMessage(string queueName)
-        {
-            var connectionFactory = new ConnectionFactory()
+            Message msg = new Message() 
             {
-                HostName = HostName
+                Id = "1111",
+                Title = "Test",
+                Router = "testQueue",
+                Body = "Hello World!"
             };
 
-            using(var connection = connectionFactory.CreateConnection()) 
-            {
-                using (var channel = connection.CreateModel())
-                {
-                    channel.QueueDeclare(queue: queueName,
-                                 durable: false,
-                                 exclusive: false,
-                                 autoDelete: false,
-                                 arguments: null);
-
-                    string message = "Hello World .... !";
-                    var body = Encoding.UTF8.GetBytes(message);
-
-                    channel.BasicPublish(exchange: "",
-                                         routingKey: "hello",
-                                         basicProperties: null,
-                                         body: body);
-                    Console.WriteLine(" [x] Sent {0}", message);
-                }
-            }
-        }        
+            MQHelper mq = new MQHelper();
+            mq.Publish(msg);
+        }
     }
 }

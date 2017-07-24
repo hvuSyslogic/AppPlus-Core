@@ -19,7 +19,7 @@ using HisPlus.Infrastructure.Dependency;
 namespace HisPlus.Core.EntityFramework
 {
     /// <summary>
-    /// https://www.codeproject.com/articles/543810/dependency-injection-and-unit-of-work-using-castle
+    /// https://www.codeproject.com/articles/543810/dependency-injection-and-unit-of-work-using-castle   
     /// </summary>
     public class UnitOfWork : IUnitOfWork
     {        

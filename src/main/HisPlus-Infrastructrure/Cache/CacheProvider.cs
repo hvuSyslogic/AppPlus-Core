@@ -10,15 +10,17 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.Cache
 {
-    public class CacheProvider : CacheBase, ICacheProvider
+    public abstract class CacheProvider : CacheProviderBase, ICacheProvider
     {
         private int _db;
+        private string _keyFormat;
 
         #region Constructor(s)
 
-        public CacheProvider(int db)
+        public CacheProvider(int db, string keyFormat)
         {
             this._db = db;
+            this._keyFormat = keyFormat;
         }
 
         #endregion

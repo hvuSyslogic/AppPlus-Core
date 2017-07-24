@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HisPlus.Infrastructure.Configuration
+namespace HisPlus.MQ
 {
-    public interface ICustomizedKey
+    public interface IMessageProcessor
     {
-        string KeyFormat { get; }
+        void Process(Message msg);
     }
 }

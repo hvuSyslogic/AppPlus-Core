@@ -11,6 +11,7 @@ using Castle.Core.Logging;
 using Castle.MicroKernel.Registration;
 using HisPlus.Infrastructure.Cache;
 using ICacheProvider = HisPlus.Infrastructure.Cache.ICacheProvider;
+using Depends = Castle.MicroKernel.Registration.Dependency;
 
 namespace HisPlus.Infrastructure.Dependency
 {
@@ -47,8 +48,12 @@ namespace HisPlus.Infrastructure.Dependency
 
         private static void InstallClientCache()
         {
+            var keyFormat = HisConfigurationManager.Configuration.ClientCacheProvider.CustomizedKey.KeyFormat;
             Container.Register(Component.For<ICacheManager>().ImplementedBy<CacheManager>().LifestyleSingleton());
-            Container.Register(Component.For<ICacheProvider>().ImplementedBy<CacheProvider>().LifestyleSingleton());
+            //Container.Register(Component.For<ICacheProvider>().ImplementedBy<CacheProvider>().LifestyleSingleton());
+            Container.Register(Component.For<Db0CacheProvider>().ImplementedBy<Db0CacheProvider>().DependsOn(Depends.OnValue("keyFormat", keyFormat)).LifestyleSingleton());
+            Container.Register(Component.For<Db1CacheProvider>().ImplementedBy<Db1CacheProvider>().DependsOn(Depends.OnValue("keyFormat", keyFormat)).LifestyleSingleton());
+            Container.Register(Component.For<Db2CacheProvider>().ImplementedBy<Db2CacheProvider>().DependsOn(Depends.OnValue("keyFormat", keyFormat)).LifestyleSingleton());
         }
 
         public static void InstallComponents()

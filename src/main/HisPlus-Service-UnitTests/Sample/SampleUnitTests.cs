@@ -88,5 +88,21 @@ namespace HisPlus.Service.UnitTests.Sample
             Action action = () => CallService((ISampleService x) => x.L2Transaction(roleDTO, locationDTO));
             action.ShouldThrow<HisPlusException>();
         }
+
+        [Fact(DisplayName="005_Expression_To_Expression_Node")]
+        [Trait(TraitName, TraitValue)]
+        public void Expression_To_Expression_Node()
+        {
+            var workStation = "AEOAY-603111527";
+            var ipAddr = "192.168.1.140";
+            var userId = 9;
+
+            Expression<Func<GblOnlinerDTO, bool>> expression = ((GblOnlinerDTO t) => 
+                t.WorkStationName == workStation && t.LockIp == ipAddr && t.UserId == userId);
+
+            var expressionNode = expression.ToExpressionNode();
+            
+            expressionNode.Should().NotBeNull();
+        }
     }
 }

@@ -86,11 +86,14 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Cache\CacheBase.cs" />
+    <Compile Include="Cache\CacheProviderBase.cs" />
     <Compile Include="Cache\CacheManager.cs" />
     <Compile Include="Cache\CacheProvider.cs" />
-    <Compile Include="Cache\CacheType.cs" />
-    <Compile Include="Cache\ICacheBase.cs" />
+    <Compile Include="Cache\CacheProviderType.cs" />
+    <Compile Include="Cache\Db2CacheProvider.cs" />
+    <Compile Include="Cache\Db1CacheProvider.cs" />
+    <Compile Include="Cache\Db0CacheProvider.cs" />
+    <Compile Include="Cache\ICacheProviderBase.cs" />
     <Compile Include="Cache\ICacheManager.cs" />
     <Compile Include="Cache\ICacheProvider.cs" />
     <Compile Include="CodeContracts\Assumes.cs" />

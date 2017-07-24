@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,83 +19,66 @@ namespace HisPlus.Redis.UnitTests
     {
         private const string TraitName = "RedisCacheUnitTests";
         private const string TraitValue = "RedisCache";
-
-        [Fact(DisplayName="001_Cache")]
+    
+        [Fact(DisplayName = "001_Db0CacheProvider_StringSet_OK")]
         [Trait(TraitName, TraitValue)]
-        public void Cache_TestMethod()
+        public void Db0CacheProvider_StringSet_OK()
         {
-            string keyName = "redBsLocation";
+            HisPlus.Infrastructure.Cache.ICacheProvider cacheProvider = IoCManager.Container.Resolve<Db0CacheProvider>();                
 
-            ICacheProvider cacheProvider = IoCManager.Container.Resolve<ICacheProvider>(new { db = 1 });
-            var key = "aaa";
-            var value = "AAAA";
+            var key = "Db0Cache";
+            var value = "Db0CacheProvider_StringSet_OK";
 
             bool result = cacheProvider.StringSet(key, value);
-            if (result)
-            {
-                cacheProvider.StringGet(key).Should().Be(value);
-            }
-
-            //var locations = cacheProvider.StringGet(keyName);
-
-            //var result = CallService((IBsLocationService x) => x.RetrieveAll());
-            //result.Should().NotBeNullOrEmpty();
-
-            //baseDataCache.CurrentDB.ListLeftPush(keyName, result.ToArray(), StackExchange.Redis.CommandFlags.FireAndForget);
-
-            //repo.KeyExists(keyName).Should().BeTrue();
-
-            //var redisCacheResult = repo.StringGet<List<BsLocationDTO>>(keyName);
-            //redisCacheResult.Should().NotBeNullOrEmpty();
-
-            //result.Count().Should().Be(redisCacheResult.Count());
-
-            //redis.StringSet("BsLocation", result);
+            
+            result.Should().BeTrue();
+            cacheProvider.StringGet(key).Should().Be(value);
         }
 
-        //[Fact(DisplayName = "002_Redis_Cache_Large_Data")]
-        //[Trait(TraitName, TraitValue)]
-        //public void Redis_LargeData_TestMethod()
-        //{
-        //    string keyName = "BsItemUsage";
+        [Fact(DisplayName = "002_Db1CacheProvider_StringSet_OK")]
+        [Trait(TraitName, TraitValue)]
+        public void Db1CacheProvider_StringSet_OK()
+        {
+            ICacheProvider cacheProvider = IoCManager.Container.Resolve<Db1CacheProvider>();
 
-        //    ICacheProvider repo = DependencyContext.Container.Resolve<ICacheProvider>(); ;
-        //    if (repo.KeyExists(keyName))
-        //    {
-        //        repo.KeyDelete(keyName);
-        //    }
+            var key = "Db1Cache";
+            var value = "Db1CacheProvider_StringSet_OK";
 
-        //    var result = RetrieveByPage<IBsItemUsageService, BsItemUsageDTO, int>();            
+            bool result = cacheProvider.StringSet(key, value);
 
-        //    //repo.StringSet(keyName, result);
+            result.Should().BeTrue();
+            cacheProvider.StringGet(key).Should().Be(value);
+        }
 
-        //    repo.KeyExists(keyName).Should().BeTrue();
-        //    var redisCacheResult = repo.StringGet<List<BsItemUsageDTO>>(keyName);
-        //    redisCacheResult.Should().NotBeNullOrEmpty();
+        [Fact(DisplayName = "003_Db2CacheProvider_StringSet_OK")]
+        [Trait(TraitName, TraitValue)]
+        public void Db2CacheProvider_StringSet_OK()
+        {
+            ICacheProvider cacheProvider = IoCManager.Container.Resolve<Db2CacheProvider>();
+
+            var key = "Db2Cache";
+            var value = "Db2CacheProvider_StringSet_OK";
+
+            bool result = cacheProvider.StringSet(key, value);
+
+            result.Should().BeTrue();
+            cacheProvider.StringGet(key).Should().Be(value);
+        }
+
+        [Fact(DisplayName = "003_Db2CacheProvider_StringSet_Object_OK")]
+        [Trait(TraitName, TraitValue)]
+        public void Db2CacheProvider_StringSet_Object_OK()
+        {
+            var locations = CallService((IBsLocationService x) => x.RetrieveAll());
+
+            ICacheProvider cacheProvider = IoCManager.Container.Resolve<Db2CacheProvider>();
+
+            var key = "BSLOCATION";
+
+            bool result = cacheProvider.StringSet(key, locations);
             
-        //    result.Count().Should().Be(redisCacheResult.Count());
-        //    //redis.StringSet("BsLocation", result);
-        //}
-
-        //private List<TDTO> RetrieveByPage<TService, TDTO, TKey>(int pageSize = 100000)
-        //    where TService : IGenericService<TDTO, TKey>
-        //    where TDTO : DtoBase<TKey>, new()
-        //    where TKey : struct
-        //{
-        //    string keyName = "BsItemUsage";
-        //    CacheProvider repo = DependencyContext.Container.Resolve<ICacheProvider>();
-
-        //    var pages = new List<TDTO>();
-        //    int nextPageNumber = 1;
-        //    int pageCount = 0;
-        //    do
-        //    {
-        //        var page = CallService((TService x) => x.RetrievePagedData(nextPageNumber, pageSize, out pageCount));
-        //        repo.StringSet(keyName, page);
-        //        pages.AddRange(page);
-        //    } while (nextPageNumber++ < pageCount);
-
-        //    return pages;
-        //}     
+            result.Should().BeTrue();
+            cacheProvider.StringGet<List<BsLocationDTO>>(key).Select(x => x.Code).Should().Equal(locations.Select(x => x.Code));
+        }
     }
 }

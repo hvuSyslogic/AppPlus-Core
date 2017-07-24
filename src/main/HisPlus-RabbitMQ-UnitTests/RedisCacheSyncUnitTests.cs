@@ -1,5 +1,4 @@
-﻿using HisPlus.Core.Redis;
-using HisPlus.Contract.Services;
+﻿
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;
@@ -9,47 +8,22 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using HisPlus.UnitTests.Common;
-using HisPlus.Infrastructure;
+ 
 
 namespace HisPlus.Redis.UnitTests
 {
-    public class RedisCacheSyncUnitTests : TestBase
+    public class RedisCacheSyncUnitTests 
     {
         private const string HostName = "localhost";
         private string CacheKey = "BsGfxe";
-        ICacheProvider cacheProvider = DependencyContext.Container.Resolve<ICacheProvider>();
-
-        [Fact]
-        public void Initialize_Redis_Cache()
-        {            
-            var locations = CallService((IBsLocationService x) => x.RetrieveAll());
-            cacheProvider.StringSet("BsLocation", locations);
-
-            var users = CallService((IBsUserService x) => x.RetrieveAll());
-            cacheProvider.StringSet("BsUser", users);
-
-            var result = CallService((IBsGfxeService x) => x.RetrieveAll());
-            cacheProvider.StringSet(CacheKey, result);
-        }
-
-        [Fact]
-        public void Update_Db_And_Publish_Message()
-        {
-            var result = CallService((IBsGfxeService x) => x.RetrieveAll());
-
-            result.ToList().ForEach(x => x.IsActive = true);
-
-            CallService((IBsGfxeService x) => x.Update(result));
-
-            PublishMessage(CacheKey, result);
-        }
+        
 
         [Fact]
         public void Retrieve_From_Cache()
         {
-            cacheProvider.StringGet(CacheKey);
+            PublishMessage(CacheKey, "aaaaaaaaaaaa");
         }
+
         public void PublishMessage(string queueName, object message)
         {
             var connectionFactory = new ConnectionFactory()

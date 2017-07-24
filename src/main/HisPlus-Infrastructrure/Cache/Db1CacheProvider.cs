@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.Cache
 {
-    public enum CacheType
+    public class Db1CacheProvider : CacheProvider, ICacheProvider
     {
-        Singleton = 0,
-        Transient = 1,
+        public Db1CacheProvider(string keyFormat)
+            : base(1, keyFormat)
+        {
+        }
     }
 }
