@@ -1,4 +1,5 @@
-﻿using HisPlus.Client;
+﻿using Castle.Core.Logging;
+using HisPlus.Client;
 using HisPlus.Infrastructure.Contract.Messages;
 using HisPlus.Infrastructure.Contract.Services;
 using System;
@@ -27,6 +28,11 @@ namespace HisPlus.UnitTests.Common
             where T : IServiceRoot
         {
             return ServiceHandler.CallService(expression);
+        }
+
+        public ILogger Logger
+        {
+            get { return typeof(ServiceHandler).GetLogger(); }
         }
     }
 }

@@ -15,12 +15,16 @@ using HisPlus.Infrastructure.Exceptions;
 using HisPlus.Core.Infrastructure.CodeContracts;
 using Castle.Core.Logging;
 using HisPlus.Infrastructure.Dependency;
+using HisPlus.Infrastructure.Cache;
 
 namespace HisPlus.Client
 {
+    /// <summary>
+    /// 客户端统一调用入口
+    /// </summary>
     public class ServiceHandler
     {
-        #region static constructor
+        #region Constructor(s)
         
         static ServiceHandler()
         {
@@ -28,35 +32,21 @@ namespace HisPlus.Client
         }        
         #endregion
 
-        #region static properties
+        #region Private Properties
 
-        public static ILogger Logger 
+        private static ILogger Logger 
         {
             get { return typeof(ServiceHandler).GetLogger(); }
         }
 
         private static bool IsDistributed { get; set; }
 
-        #endregion
-
-        #region GetService
-
-        private static T GetService<T>() where T : IServiceRoot
-        {
-            if (IsDistributed)
-            {
-                return ProxyManager.GetProxy<T>();
-            }
-
-            return IoCManager.Container.Resolve<T>();
-        }
-
-        #endregion
+        #endregion        
 
         #region CallService
 
         public static void CallService<T>(Expression<Action<T>> expression) where T : IServiceRoot
-        {            
+        {
             T service = default(T);
             string errMsg = "";
 
@@ -139,6 +129,36 @@ namespace HisPlus.Client
             }
 
             return default(TResult);
+        }
+
+        //public static TResult CallService<T, TResult>(Expression<Func<T, TResult>> expression, CacheType cacheType) where T : IServiceRoot
+        //{
+        //    var key = typeof(TResult).GenericTypeArguments[0].Name;
+        //    TResult result = CacheHandler.GetResultFromCache<TResult>(key);
+        //    if (result == null)
+        //    {
+        //        result = CallService<T, TResult>(expression);
+        //        if (cacheType == CacheType.GetAndCache)
+        //        {
+        //            CacheHandler.SetResultToCache<TResult>(key, result);
+        //        }
+        //    }
+
+        //    return result;
+        //}
+
+        #endregion        
+
+        #region GetService
+
+        private static T GetService<T>() where T : IServiceRoot
+        {
+            if (IsDistributed)
+            {
+                return ProxyManager.GetProxy<T>();
+            }
+
+            return IoCManager.Container.Resolve<T>();
         }
 
         #endregion

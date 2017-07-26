@@ -11,5 +11,5 @@ namespace HisPlus.Infrastructure.Contract.Messages
     [DataContract]
     public abstract class DtoRoot
     {
-    }
+    }    
 }

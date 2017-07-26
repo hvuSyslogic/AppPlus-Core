@@ -10,8 +10,11 @@ using Castle.Facilities.Logging;
 using Castle.Core.Logging;
 using Castle.MicroKernel.Registration;
 using HisPlus.Infrastructure.Cache;
-using ICacheProvider = HisPlus.Infrastructure.Cache.ICacheProvider;
 using Depends = Castle.MicroKernel.Registration.Dependency;
+using System.Configuration;
+using HisPlus.Core.Infrastructure.CodeContracts;
+using CachingFramework.Redis.Contracts;
+using CachingFramework.Redis;
 
 namespace HisPlus.Infrastructure.Dependency
 {
@@ -37,7 +40,7 @@ namespace HisPlus.Infrastructure.Dependency
         private static void Install()
         {
             InstallLogger();
-            InstallClientCache();
+            InstallCacheProvider();
             InstallComponents();
         }
 
@@ -46,14 +49,26 @@ namespace HisPlus.Infrastructure.Dependency
             Container.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.Log4net).WithConfig(Log4netConfigPath));
         }
 
-        private static void InstallClientCache()
+        private static void InstallCacheProvider()
         {
             var keyFormat = HisConfigurationManager.Configuration.ClientCacheProvider.CustomizedKey.KeyFormat;
-            Container.Register(Component.For<ICacheManager>().ImplementedBy<CacheManager>().LifestyleSingleton());
-            //Container.Register(Component.For<ICacheProvider>().ImplementedBy<CacheProvider>().LifestyleSingleton());
-            Container.Register(Component.For<Db0CacheProvider>().ImplementedBy<Db0CacheProvider>().DependsOn(Depends.OnValue("keyFormat", keyFormat)).LifestyleSingleton());
-            Container.Register(Component.For<Db1CacheProvider>().ImplementedBy<Db1CacheProvider>().DependsOn(Depends.OnValue("keyFormat", keyFormat)).LifestyleSingleton());
-            Container.Register(Component.For<Db2CacheProvider>().ImplementedBy<Db2CacheProvider>().DependsOn(Depends.OnValue("keyFormat", keyFormat)).LifestyleSingleton());
+            var connectionStringName = HisConfigurationManager.Configuration.ClientCacheProvider.ConnectionString.Name;
+            
+            Requires.NotNull(ConfigurationManager.ConnectionStrings, "ConfigurationManager.ConnectionStrings");
+            Requires.NotNull(ConfigurationManager.ConnectionStrings[connectionStringName], "connectionStringName");
+
+            var connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+                        
+            //Register Redis cache context
+            Container.Register(Component.For<IRedisContext>().ImplementedBy<RedisContext>()
+                .DependsOn(Depends.OnValue("connectionString", connectionString))
+                .LifestyleSingleton());
+
+            //Container.Register(Component.For<RedisCacheOptions>().ImplementedBy<RedisCacheOptions>()
+            //    .DependsOn(Depends.OnValue("connectionString", connectionString), Depends.OnValue("databaseId", 0), Depends.OnValue("keyFormat", keyFormat))
+            //    .LifestyleSingleton());
+            //Container.Register(Component.For<IRedisCache>().ImplementedBy<RedisCache>().LifestyleSingleton());
+            //Container.Register(Component.For<IRedisCacheDatabaseProvider>().ImplementedBy<RedisCacheDatabaseProvider>().LifestyleSingleton());                     
         }
 
         public static void InstallComponents()
