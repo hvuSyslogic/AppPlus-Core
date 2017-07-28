@@ -84,7 +84,7 @@ namespace HisPlus.Infrastructure.DynamicProxy
             }
             catch (DynaAccessException dae)
             {
-                throw dae;
+                throw;
             }
             catch (Exception e)
             {
@@ -105,7 +105,7 @@ namespace HisPlus.Infrastructure.DynamicProxy
             }
             catch (DynaAccessException dae)
             {
-                throw dae;
+                throw;
             }
             catch (Exception e)
             {

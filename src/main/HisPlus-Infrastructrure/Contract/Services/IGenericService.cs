@@ -22,7 +22,7 @@ namespace HisPlus.Infrastructure.Contract.Services
         [OperationContract(Name = "BatchCreate")]
         IEnumerable<TDTO> Create(IEnumerable<TDTO> dtos);
         
-        #endregion
+        #endregion        
 
         #region Retrieve
 

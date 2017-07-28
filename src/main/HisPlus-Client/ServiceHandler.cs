@@ -19,20 +19,21 @@ using HisPlus.Infrastructure.Cache;
 
 namespace HisPlus.Client
 {
-    /// <summary>
-    /// 客户端统一调用入口
-    /// </summary>
     public class ServiceHandler
     {
+
         #region Constructor(s)
         
         static ServiceHandler()
         {
             IsDistributed = (HisConfigurationManager.Configuration.Provider == ProviderType.Agent);
+            RedisContext = IoCManager.Container.Resolve<IRedisContext>();
         }        
         #endregion
 
         #region Private Properties
+
+        private static IRedisContext RedisContext { get; set; }
 
         private static ILogger Logger 
         {
@@ -95,7 +96,7 @@ namespace HisPlus.Client
             try
             {
                 Requires.NotNull(expression, "expression");
-                
+                                
                 service = GetService<T>();
 
                 return expression.Compile()(service);
@@ -130,23 +131,7 @@ namespace HisPlus.Client
 
             return default(TResult);
         }
-
-        //public static TResult CallService<T, TResult>(Expression<Func<T, TResult>> expression, CacheType cacheType) where T : IServiceRoot
-        //{
-        //    var key = typeof(TResult).GenericTypeArguments[0].Name;
-        //    TResult result = CacheHandler.GetResultFromCache<TResult>(key);
-        //    if (result == null)
-        //    {
-        //        result = CallService<T, TResult>(expression);
-        //        if (cacheType == CacheType.GetAndCache)
-        //        {
-        //            CacheHandler.SetResultToCache<TResult>(key, result);
-        //        }
-        //    }
-
-        //    return result;
-        //}
-
+        
         #endregion        
 
         #region GetService

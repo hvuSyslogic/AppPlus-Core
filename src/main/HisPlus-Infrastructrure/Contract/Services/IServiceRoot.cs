@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HisPlus.Infrastructure.Contract.Services
 {
     [ServiceContract]
-    public interface IServiceRoot : IDisposable
+    public interface IServiceRoot
     {
         [OperationContract(Name = "GetCurrentDateTime")]
         DateTime GetCurrentDateTime();

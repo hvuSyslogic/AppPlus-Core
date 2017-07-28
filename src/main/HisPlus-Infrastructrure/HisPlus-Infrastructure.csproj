@@ -92,6 +92,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BaseCloneableObject.cs" />
+    <Compile Include="Cache\CacheProviderEx.cs" />
     <Compile Include="Cache\IRedisContext.cs" />
     <Compile Include="Cache\RedisContext.cs" />
     <Compile Include="EnumCompareToType.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Contract\Services\IGenericService.cs" />
     <Compile Include="Contract\Services\IServiceRoot.cs" />
     <Compile Include="IConnectionString.cs" />
+    <Compile Include="ExpressionEx.cs" />
     <Compile Include="StringEx.cs" />
     <Compile Include="TypeEx.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

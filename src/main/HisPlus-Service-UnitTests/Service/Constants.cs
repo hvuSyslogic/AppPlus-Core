@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HisPlus.Service.UnitTests.Common
+namespace HisPlus.UnitTesting.Service
 {
     public class Constants
     {

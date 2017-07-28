@@ -11,12 +11,18 @@ using FluentAssertions;
 using Xunit;
 using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
+using HisPlus.UnitTesting.Common;
 
-namespace HisPlus.Service.UnitTests.Common
+namespace HisPlus.UnitTesting.Service
 {
-    public class BsGfxeServiceTestsFixture : TestsFixtureBase<BsGfxeDTO>
-    {        
-        public override void MockData()
+    public class BsGfxeServiceTestsFixture : ClassFixtureBase<BsGfxeDTO>
+    {
+        public BsGfxeServiceTestsFixture()
+        {
+            BuildDataSource();
+        }
+
+        public override void BuildDataSource()
         {
             List<BsGfxeDTO> rows = new List<BsGfxeDTO>();
 
@@ -37,12 +43,12 @@ namespace HisPlus.Service.UnitTests.Common
                 rows.Add(row);
             }
 
-            MockCollections = CallService((IBsGfxeService x) => x.Create(rows));
-            MockCollections.Should().NotBeNullOrEmpty();
-            MockCollections.Count().Should().Be(Constants.Mock_Record_Counts);            
+            DataSource = CallService((IBsGfxeService x) => x.Create(rows));
+            DataSource.Should().NotBeNullOrEmpty();
+            DataSource.Count().Should().Be(Constants.Mock_Record_Counts);            
         }
 
-        public override void Clean()
+        public override void CleanDataSource()
         {
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IconIndex == Constants.To_Be_Delete_Records);
             var expressionNode = expression.ToExpressionNode();

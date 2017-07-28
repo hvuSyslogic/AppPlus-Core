@@ -22,7 +22,7 @@ namespace HisPlus.Core
     {
         private ILogger Logger 
         {
-            get { return IoCManager.Container.Resolve<ILogger>(); } 
+            get { return GetType().GetLogger(); } 
         }
 
         public void ProvideFault(System.Exception error, MessageVersion version, ref Message msg)

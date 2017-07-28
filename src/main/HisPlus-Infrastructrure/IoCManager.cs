@@ -93,11 +93,7 @@ namespace HisPlus.Infrastructure.Dependency
             }
         }
 
-        private static bool ConfigurationIsInstalled
-        {
-            get;
-            set;
-        }
+        private static bool ConfigurationIsInstalled { get; set; }
 
         public static IWindsorContainer Container
         {

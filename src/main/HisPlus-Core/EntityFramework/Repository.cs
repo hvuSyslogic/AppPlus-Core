@@ -19,13 +19,11 @@ namespace HisPlus.Core.EntityFramework
     {        
         #region Constructor(s)
 
+        private readonly IUnitOfWork _unitOfWork;
+
         public Repository(IUnitOfWork unitOfWork)
         {
-            this.Session = unitOfWork.Session;
-
-            this.Session.Database.CommandTimeout = 3 * 60 * 1000;
-
-            this.EFSet = this.Session.Set<TEntity>();
+            this._unitOfWork = unitOfWork;            
         }
 
         #endregion        
@@ -40,11 +38,21 @@ namespace HisPlus.Core.EntityFramework
         private ObjectContext ObjectContext()
         {
             return (Session as IObjectContextAdapter).ObjectContext;
-        }        
+        }
 
-        protected virtual DbSet<TEntity> EFSet { get; set; }
+        protected DbSet<TEntity> EFSet 
+        {
+            get { return this.Session.Set<TEntity>(); } 
+        }
 
-        protected virtual DbContext Session { get; set; }
+        protected DbContext Session 
+        {
+            get 
+            {
+                _unitOfWork.Session.Database.CommandTimeout = 3 * 60 * 1000;
+                return _unitOfWork.Session;
+            } 
+        }
         
         #endregion
 

@@ -10,13 +10,12 @@ using Xunit;
 using HisPlus.Client;
 using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
-using HisPlus.UnitTests.Common;
-using HisPlus.Service.UnitTests.Common;
 using HisPlus.Infrastructure.Configuration;
 using FluentAssertions;
 using HisPlus.Infrastructure.Exceptions;
+using HisPlus.UnitTesting.Common;
 
-namespace HisPlus.Service.UnitTests.BS
+namespace HisPlus.UnitTesting.Service.BS
 {
     public class BsGfxeServiceUnitTests : UnitTestBase<BsGfxeDTO>, IClassFixture<BsGfxeServiceTestsFixture>
     {
@@ -35,32 +34,36 @@ namespace HisPlus.Service.UnitTests.BS
         [Trait(TraitName, "Retrieve")]
         public void RetrieveById_OK()
         {
-            int id = MockCollections.FirstOrDefault().Id;
+            DataSource.Should().NotBeNullOrEmpty();
+
+            int id = DataSource.FirstOrDefault().Id;
             var result = CallService((IBsGfxeService x) => x.RetrieveById(id));
 
             result.Should().NotBeNull();
-            result.Id.Should().Be(id);            
+            result.Id.Should().Be(id);
         }  
 
         [Fact(DisplayName = "003_RetrieveAll_OK")]
         [Trait(TraitName, "Retrieve")]
         public void RetrieveAll_OK()
         {
-            CallService((IBsGfxeService x) => x.RetrieveAll()).Should().NotBeNullOrEmpty();            
+            CallService((IBsGfxeService x) => x.RetrieveAll()).Should().NotBeNullOrEmpty();
         }              
 
         [Fact(DisplayName = "004_RetrieveByExpression_OK")]
         [Trait(TraitName, "Retrieve")]
         public void RetrieveByExpression_OK()
-        {            
-            var item = MockCollections.First();
+        {
+            DataSource.Should().NotBeNullOrEmpty();
 
+            var item = DataSource.First();
+            
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => item.PyCode == x.PyCode);
             var expressionNode = expression.ToExpressionNode();
 
             var result = CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
             result.Should().NotBeNullOrEmpty();
-            result.Count().Should().Be(MockCollections.Count());            
+            result.Count().Should().Be(DataSource.Count());            
         }
 
         [Fact(DisplayName = "005_RetrieveByExpression_NOK")]
@@ -193,7 +196,7 @@ namespace HisPlus.Service.UnitTests.BS
             var result = CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
             result.Should().NotBeNullOrEmpty();
 
-            var itemToBeUpdated = result.FirstOrDefault();            
+            var itemToBeUpdated = result.FirstOrDefault();
 
             string code = "1000";
 
@@ -234,6 +237,6 @@ namespace HisPlus.Service.UnitTests.BS
             }
         }
 
-        #endregion        
+        #endregion
     }
 }

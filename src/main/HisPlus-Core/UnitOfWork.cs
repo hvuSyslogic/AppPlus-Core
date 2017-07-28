@@ -79,61 +79,69 @@ namespace HisPlus.Core.EntityFramework
 
             using (var uow = new UnitOfWork())
             {
+                // Transaction Scope
                 if (option == TransactionOption.TransactionScope)
                 {
-                    uow.DoWithTS(work, uow);
-                    return;
+                    uow.DoTransactionScope(work, uow);                    
                 }
-                
-                if (option == TransactionOption.DbTransaction)
+                else
                 {
-                    uow._transaction = uow.Session.Database.BeginTransaction();
-                }
-                
-                work(uow);               
-            }
-        }
+                    // DbTransaction
+                    if (option == TransactionOption.DbTransaction)
+                    {
+                        uow._transaction = uow.Session.Database.BeginTransaction();
+                    }
 
-        private void DoWithTS(Action<UnitOfWork> work, UnitOfWork uow)
-        {
-            using (var tx = new TransactionScope())
-            {
-                try
-                {
+                    // SelfTransaction
                     work(uow);
-                    tx.Complete();
-                }
-                catch (Exception ex)
+                }                
+            }
+        }
+
+        private void DoTransactionScope(Action<UnitOfWork> work, UnitOfWork uow)
+        {
+            var ts = new TransactionScope();
+
+            try
+            {
+                work(uow);
+                ts.Complete();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Do TransactionScope error: ", ex);
+                throw;
+            }
+            finally
+            {
+                if (ts != null)
                 {
-                    if (tx != null)
-                    {
-                        tx.Dispose();
-                    }
-                    Logger.Error("Do TransactionScope error: ", ex);
-                    throw;
+                    ts.Dispose();
                 }
             }
         }
 
-        private TResult DoWithTS<TResult>(Func<UnitOfWork, TResult> work, UnitOfWork uow)
+        private TResult DoTransactionScope<TResult>(Func<UnitOfWork, TResult> work, UnitOfWork uow)
         {
-            using (var tx = new TransactionScope())
+            var ts = new TransactionScope();;
+
+            try
+            {                
+                var result = work(uow);
+                ts.Complete();
+                return result;
+            }
+            catch (Exception ex)
             {
-                try
+                Logger.Error("Do TransactionScope error: ", ex);
+                throw;
+            }
+            finally
+            {
+                if (ts != null)
                 {
-                    var result = work(uow);
-                    tx.Complete();
-                    return result;
-                }
-                catch (Exception ex)
-                {
-                    if (tx != null)
-                    {
-                        tx.Dispose();
-                    }
-                    Logger.Error("Do TransactionScope error: ", ex);
-                    throw;
-                }
+                    ts.Dispose();
+                }                
             }
         }
 
@@ -141,19 +149,25 @@ namespace HisPlus.Core.EntityFramework
         {
             Requires.NotNull(work, "work");
 
+            TResult result;
+
             using (var uow = new UnitOfWork())
             {
                 if (option == TransactionOption.TransactionScope)
                 {
-                    return uow.DoWithTS(work, uow);
+                    result = uow.DoTransactionScope(work, uow);
+                }
+                else
+                {
+                    if (option == TransactionOption.DbTransaction)
+                    {
+                        uow._transaction = uow.Session.Database.BeginTransaction();
+                    }
+
+                    result = work(uow);
                 }
 
-                if (option == TransactionOption.DbTransaction)
-                {
-                    uow._transaction = uow.Session.Database.BeginTransaction();
-                }                
-
-                return work(uow);
+                return result;
             }
         }
 
@@ -175,7 +189,7 @@ namespace HisPlus.Core.EntityFramework
             }
             else
             {                    
-                CloseUnitOfWork();             
+                CloseUnitOfWork();
             }
         }
 

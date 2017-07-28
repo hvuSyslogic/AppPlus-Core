@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
-using HisPlus.UnitTests.Common;
 using HisPlus.Infrastructure.Contract.Messages;
 using HisPlus.Infrastructure.Contract.Services;
 using HisPlus.Contract.Messages;
@@ -17,8 +16,9 @@ using HisPlus.Infrastructure.Exceptions;
 using System.Linq.Expressions;
 using Serialize.Linq.Nodes;
 using Serialize.Linq.Extensions;
+using HisPlus.UnitTesting.Common;
 
-namespace HisPlus.Service.UnitTests.Sample
+namespace HisPlus.UnitTesting.Service.Sample
 {
     public partial class SampleUnitTests : TestBase
     {

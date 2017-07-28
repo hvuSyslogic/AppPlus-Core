@@ -10,6 +10,7 @@ namespace HisPlus.Infrastructure.DynamicProxy
     public sealed class DynaAccessUtils
     {
         private static readonly char[] DELIM_CHARS = new char[] { '.', '[', ']' };
+        static object o = new object();
 
         /// <summary>
         /// 线程安全的类型属性Map(Type,IDynaAccessProxy)
@@ -181,7 +182,7 @@ namespace HisPlus.Infrastructure.DynamicProxy
             {
                 Type type = target.GetType();
 
-                lock (type)
+                lock (o)
                 {
                     IDynaAccessProxy cache = (IDynaAccessProxy)_proxyCache[type];
                     if (cache == null)

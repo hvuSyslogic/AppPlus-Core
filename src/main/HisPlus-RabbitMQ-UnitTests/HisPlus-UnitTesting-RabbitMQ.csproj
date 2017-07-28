@@ -9,8 +9,8 @@
     <ProjectGuid>{503606C3-ACCD-441E-BA4A-73CD48A9A9F7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HisPlus.RabbitMQ.UnitTests</RootNamespace>
-    <AssemblyName>HisPlus.RabbitMQ.UnitTests</AssemblyName>
+    <RootNamespace>HisPlus.UnitTesting</RootNamespace>
+    <AssemblyName>HisPlus.UnitTesting.RabbitMQ</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -88,12 +88,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MessageSenderUnitTests.cs" />
+    <Compile Include="RabbitMQ\MessageSenderUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MessageSenderUnitTests.Designer.cs">
+    <Compile Include="RabbitMQ\MessageSenderUnitTests.Designer.cs">
       <DependentUpon>MessageSenderUnitTests.cs</DependentUpon>
     </Compile>
-    <Compile Include="RedisCacheSyncUnitTests.cs" />
+    <Compile Include="RabbitMQ\RedisCacheSyncUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

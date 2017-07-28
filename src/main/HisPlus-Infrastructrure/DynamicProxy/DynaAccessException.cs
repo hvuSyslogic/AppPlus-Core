@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace HisPlus.Infrastructure.DynamicProxy
 {
-    public class DynaAccessException : System.ApplicationException
+    [Serializable]
+    public class DynaAccessException : System.ApplicationException, ISerializable
     {
         public DynaAccessException()
             : base("A property reflection error has occurred.")

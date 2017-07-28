@@ -70,7 +70,7 @@ namespace HisPlus.Core.Service
             return entities.MapTo<TDTO>();
         }
         #endregion              
-
+        
         #region Retrieve
         public virtual TDTO RetrieveById(TKey id)
         {            
@@ -334,10 +334,11 @@ namespace HisPlus.Core.Service
 
         #region GetDataSet
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         private DataSet GetDataSet(string commandText, CommandType commandType, DbParameter[] parameters)
         {
             DataSet ds = new DataSet();
-
+            
             return UnitOfWork.Do(uow => 
             {
                 EntityConnection entityConnection = (EntityConnection)uow.Session.Database.Connection;

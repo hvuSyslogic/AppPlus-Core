@@ -1,5 +1,4 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
@@ -8,9 +7,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
- 
 
-namespace HisPlus.Redis.UnitTests
+namespace HisPlus.UnitTesting.RabbitMQ
 {
     public class RedisCacheSyncUnitTests 
     {

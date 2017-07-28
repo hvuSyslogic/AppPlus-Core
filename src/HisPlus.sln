@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Contract", "main\Hi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Service", "main\HisPlus-Service\HisPlus-Service.csproj", "{3D36ED5F-8B85-48D8-B9E6-BDE34495967E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Service-UnitTests", "main\HisPlus-Service-UnitTests\HisPlus-Service-UnitTests.csproj", "{B1292C46-4B3D-4DC2-8881-66BB72B169C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-UnitTesting-Service", "main\HisPlus-Service-UnitTests\HisPlus-UnitTesting-Service.csproj", "{B1292C46-4B3D-4DC2-8881-66BB72B169C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Domain", "main\HisPlus-Domain\HisPlus-Domain.csproj", "{9B4FD8FF-73EF-4E18-9ABE-18B1D0737263}"
 EndProject
@@ -44,11 +44,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E78C62
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-UI", "main\HisPlus-UI\HisPlus-UI.csproj", "{6F6885A7-7F5B-4578-9837-9866F730BEC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-RabbitMQ-UnitTests", "main\HisPlus-RabbitMQ-UnitTests\HisPlus-RabbitMQ-UnitTests.csproj", "{503606C3-ACCD-441E-BA4A-73CD48A9A9F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-UnitTesting-RabbitMQ", "main\HisPlus-RabbitMQ-UnitTests\HisPlus-UnitTesting-RabbitMQ.csproj", "{503606C3-ACCD-441E-BA4A-73CD48A9A9F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Redis-UnitTests", "main\HisPlus-Redis-UnitTests\HisPlus-Redis-UnitTests.csproj", "{569DC5B6-8269-431D-8A5A-B9FC197B6122}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-UnitTesting-Redis", "main\HisPlus-Redis-UnitTests\HisPlus-UnitTesting-Redis.csproj", "{569DC5B6-8269-431D-8A5A-B9FC197B6122}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-UnitTests-Common", "main\HisPlus-UnitTests-Common\HisPlus-UnitTests-Common.csproj", "{BD4F5FCC-7578-4C75-88E5-D134C699FE65}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-UnitTesting-Common", "main\HisPlus-UnitTests-Common\HisPlus-UnitTesting-Common.csproj", "{BD4F5FCC-7578-4C75-88E5-D134C699FE65}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-MQ", "main\HisPlus-MQ\HisPlus-MQ.csproj", "{E596E8B0-2268-49E8-8455-309787BA1C1B}"
 EndProject

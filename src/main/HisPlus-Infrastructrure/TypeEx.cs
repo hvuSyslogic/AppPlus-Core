@@ -12,7 +12,14 @@ namespace HisPlus
     {
         public static ILogger GetLogger(this Type type)
         {
-            return IoCManager.Container.Resolve<ILoggerFactory>().Create(type);
-        }
+            ILogger logger = IoCManager.Container.Resolve<ILoggerFactory>().Create(type);
+
+            if (logger == null)
+            {
+                logger = NullLogger.Instance;
+            }
+
+            return logger;
+        }        
     }
 }

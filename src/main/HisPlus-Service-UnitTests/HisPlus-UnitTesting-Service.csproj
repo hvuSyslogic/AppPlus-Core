@@ -9,8 +9,8 @@
     <ProjectGuid>{B1292C46-4B3D-4DC2-8881-66BB72B169C6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HisPlus.Service.UnitTests</RootNamespace>
-    <AssemblyName>HisPlus.Service.UnitTests</AssemblyName>
+    <RootNamespace>HisPlus.UnitTesting</RootNamespace>
+    <AssemblyName>HisPlus.UnitTesting.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -98,14 +98,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\BsGfxeServiceTestsFixture.cs" />
-    <Compile Include="BS\BsGfxeServiceUnitTests.cs" />
-    <Compile Include="Common\Constants.cs" />
-    <Compile Include="Common\GblRoleServiceTestsFixture.cs" />
-    <Compile Include="Common\TestsFixtureBase.cs" />
+    <Compile Include="Service\BsGfxeServiceTestsFixture.cs" />
+    <Compile Include="Service\BS\BsGfxeServiceUnitTests.cs" />
+    <Compile Include="Service\Constants.cs" />
+    <Compile Include="Service\GblRoleServiceTestsFixture.cs" />
     <Compile Include="DependencyContextUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sample\SampleUnitTests.cs" />
+    <Compile Include="Service\Sample\SampleUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -144,9 +143,9 @@
       <Project>{3d36ed5f-8b85-48d8-b9e6-bde34495967e}</Project>
       <Name>HisPlus-Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HisPlus-UnitTests-Common\HisPlus-UnitTests-Common.csproj">
+    <ProjectReference Include="..\HisPlus-UnitTests-Common\HisPlus-UnitTesting-Common.csproj">
       <Project>{bd4f5fcc-7578-4c75-88e5-d134c699fe65}</Project>
-      <Name>HisPlus-UnitTests-Common</Name>
+      <Name>HisPlus-UnitTesting-Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

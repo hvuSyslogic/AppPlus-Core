@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace HisPlus.RabbitMQ.UnitTests
+namespace HisPlus.UnitTesting.RabbitMQ
 {    
     public partial class MessageSenderUnitTests
     {

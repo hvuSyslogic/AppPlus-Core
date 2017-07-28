@@ -11,12 +11,18 @@ using FluentAssertions;
 using Xunit;
 using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
+using HisPlus.UnitTesting.Common;
 
-namespace HisPlus.Service.UnitTests.Common
+namespace HisPlus.UnitTesting.Service
 {
-    public class GblRoleServiceTestsFixture : TestsFixtureBase<GblRoleDTO>
+    public class GblRoleServiceTestsFixture : ClassFixtureBase<GblRoleDTO>
     {
-        public override void MockData()
+        public GblRoleServiceTestsFixture()
+        {
+            BuildDataSource();
+        }
+
+        public override void BuildDataSource()
         {
             List<GblRoleDTO> rows = new List<GblRoleDTO>();
 
@@ -40,7 +46,7 @@ namespace HisPlus.Service.UnitTests.Common
             result.Count().Should().Be(Constants.Mock_Record_Counts);            
         }
 
-        public override void Clean()
+        public override void CleanDataSource()
         {
             Expression<Func<GblRoleDTO, bool>> expression = ((GblRoleDTO x) => x.IconIndex == Constants.To_Be_Delete_Records);
             var expressionNode = expression.ToExpressionNode();

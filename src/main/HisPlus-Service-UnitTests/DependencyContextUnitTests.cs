@@ -15,7 +15,7 @@ using HisPlus.Domain;
 using HisPlus.Infrastructure.Configuration;
 using HisPlus.Services;
 
-namespace HisPlus.Service.UnitTests
+namespace HisPlus.UnitTesting
 {
     public class DependencyContextUnitTests
     {

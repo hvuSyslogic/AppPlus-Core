@@ -9,13 +9,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HisPlus.UnitTests.Common
+namespace HisPlus.UnitTesting.Common
 {
-    public class UnitTestBase<TDTO> : TestBase where TDTO : DtoRoot
-    {
-        protected static IEnumerable<TDTO> MockCollections = new List<TDTO>();
-    }
-
     public class TestBase
     {
         protected void CallService<T>(Expression<Action<T>> expression)
@@ -30,9 +25,9 @@ namespace HisPlus.UnitTests.Common
             return ServiceHandler.CallService(expression);
         }
 
-        public ILogger Logger
+        protected ILogger Logger
         {
-            get { return typeof(ServiceHandler).GetLogger(); }
+            get { return this.GetType().GetLogger(); }
         }
     }
 }
