@@ -37,7 +37,7 @@ namespace HisPlus.Wcf.Host
 
             //var mappedToType = Type.GetType(constructorString, false);
 
-            ServiceHost host = new ServiceHost(serviceType, baseAddresses);
+            ServiceHost host = new ServiceHost(serviceType, baseAddresses);            
             
             //TimeSpan ts = new TimeSpan(0, 10, 0);
 
@@ -102,7 +102,7 @@ namespace HisPlus.Wcf.Host
             };
       
             return host;
-        }
+        }       
 
         //public override ServiceHostBase CreateServiceHost(string constructorString, Uri[] baseAddresses)
         //{

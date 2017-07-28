@@ -1,5 +1,6 @@
 ﻿using HisPlus.Core;
 using HisPlus.Infrastructure.Configuration;
+using HisPlus.Infrastructure.Dependency;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace HisPlus.Wcf.DependencyInjection
         {
             //Register the service as a type so it can be found from the instance provider
             //TODO:
-            //DependencyFactory.Container.RegisterType(serviceType);
+            //IoCManager.Container.Register(serviceType);
             //HisPlusConfigurator.Container.RegisterType(serviceType);
             return new DependencyInjectionServiceHost(serviceType, baseAddresses);
         }

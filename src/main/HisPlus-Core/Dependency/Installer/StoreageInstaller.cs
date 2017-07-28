@@ -15,20 +15,16 @@ namespace HisPlus.Core.Installer
 {
     public class StoreageInstaller : IWindsorInstaller
     {
-        ILogger Logger
-        {
-            get { return GetType().GetLogger(); }
-        }
-
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             // You can set dependencies on Resolve() method by adding an anonymous type with constructor parameter's name
             // type = container.Resolve<IType>(new { connectionString = connectionString });
-            Logger.InfoFormat("Starting to install components for Storeage .....");
+            this.GetLogger().InfoFormat("Starting to install components for Storeage .....");
 
             container.Register(Component.For<IUnitOfWork>().ImplementedBy<UnitOfWork>().LifestyleTransient());
             container.Register(Component.For(typeof(IRepository<>)).ImplementedBy(typeof(Repository<>)).LifestyleTransient());
-            Logger.InfoFormat("Storeage components was successfully installed from assembly '{0}'.", GetType().Assembly);
+            
+            this.GetLogger().InfoFormat("Storeage components was successfully installed from assembly '{0}'.", GetType().Assembly);
         }
     }
 }

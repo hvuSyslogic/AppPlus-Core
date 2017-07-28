@@ -20,6 +20,18 @@ namespace HisPlus
             }
 
             return logger;
-        }        
+        }
+
+        public static ILogger GetLogger(this object c) 
+        {
+            ILogger logger = IoCManager.Container.Resolve<ILoggerFactory>().Create(c.GetType());
+
+            if (logger == null)
+            {
+                logger = NullLogger.Instance;
+            }
+
+            return logger;
+        }  
     }
 }

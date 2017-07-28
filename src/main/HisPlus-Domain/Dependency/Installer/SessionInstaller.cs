@@ -18,11 +18,6 @@ namespace HisPlus.Domain.Installer
     {
         private const string DependencyName = "connectionString";
 
-        ILogger Logger
-        {
-            get { return GetType().GetLogger(); }
-        }
-
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             string connectionStringName = HisConfigurationManager.Configuration.LocalProvider.ConnectionString.Name;
@@ -30,7 +25,7 @@ namespace HisPlus.Domain.Installer
             container.Register(Component.For<DbContext>().ImplementedBy<HisDbContext>()
                .DependsOn(CastleDependency.Dependency.OnValue(DependencyName, connectionStringName)).LifestylePooled());
 
-            Logger.InfoFormat("DbContext component was successfully installed from assembly '{0}'.", GetType().Assembly);
+            this.GetLogger().InfoFormat("DbContext component was successfully installed from assembly '{0}'.", GetType().Assembly);
         }
     }
 }

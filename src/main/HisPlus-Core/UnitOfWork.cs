@@ -50,11 +50,6 @@ namespace HisPlus.Core.EntityFramework
 
         #region Properties
 
-        public ILogger Logger 
-        {
-            get { return GetType().GetLogger(); }
-        }        
-
         public DbContext Session { get; set; }
         
         public IRepository<TEntity> Repo<TEntity>()
@@ -109,7 +104,7 @@ namespace HisPlus.Core.EntityFramework
             }
             catch (Exception ex)
             {
-                Logger.Error("Do TransactionScope error: ", ex);
+                this.GetLogger().Error("Do TransactionScope error: ", ex);
                 throw;
             }
             finally
@@ -133,7 +128,7 @@ namespace HisPlus.Core.EntityFramework
             }
             catch (Exception ex)
             {
-                Logger.Error("Do TransactionScope error: ", ex);
+                this.GetLogger().Error("Do TransactionScope error: ", ex);
                 throw;
             }
             finally
