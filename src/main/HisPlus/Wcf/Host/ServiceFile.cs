@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Hosting;
 using System.IO;
 
-namespace HisPlus.Wcf.Host
+namespace HisPlus.WCF.Host
 {
     public class ServiceFile : VirtualFile
     {

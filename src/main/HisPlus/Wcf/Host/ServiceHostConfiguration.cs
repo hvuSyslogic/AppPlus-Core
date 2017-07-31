@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace HisPlus.Wcf.Host
+namespace HisPlus.WCF.Host
 {
     public class ServiceHostConfiguration
     {

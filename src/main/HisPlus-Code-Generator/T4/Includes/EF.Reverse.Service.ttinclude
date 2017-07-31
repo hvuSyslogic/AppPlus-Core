@@ -537,11 +537,10 @@ if(!tbl.HasPrimaryKey) { #>
 <# } #>
 <#if(IncludeComments != CommentsStyle.None){#>    // <#=tbl.Name#>
 <# } #>
-	<# if(AddWcfDataAttributes) { #>[GlobalErrorBehaviorAttribute(typeof(GlobalErrorHandler))]
-<# }#>
-    public <# if(MakeClassesPartial) { #>partial <# } #>class <#=tbl.NameHumanCase#>Service<#=WriteServiceBaseClasses != null ? WriteServiceBaseClasses(tbl) : "" #>
-    {
-    }
+<# if(AddWcfDataAttributes) { #>[GlobalErrorBehaviorAttribute(typeof(GlobalErrorHandler))] <# }#>
+	public <# if(MakeClassesPartial) { #>partial <# } #>class <#=tbl.NameHumanCase#>Service<#=WriteServiceBaseClasses != null ? WriteServiceBaseClasses(tbl) : "" #>
+	{
+	}
 <# } }
 if(ElementsToGenerate.HasFlag(Elements.Poco) && !GenerateSeparateFiles) { #>
     #endregion

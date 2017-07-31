@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
 
-namespace HisPlus.Wcf
+namespace HisPlus.WCF
 {
     public class MyClientBehavior : BehaviorExtensionElement, IEndpointBehavior
     {

@@ -9,11 +9,11 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using HisPlus.Core;
 using HisPlus.Infrastructure.Configuration;
-using HisPlus.Wcf.DependencyInjection;
+using HisPlus.WCF.DependencyInjection;
 using HisPlus.Infrastructure.Contract.Services;
-using HisPlus.Infrastructure.Dependency;
+using HisPlus.Infrastructure.DependencyInjection;
 
-namespace HisPlus.Wcf.Host
+namespace HisPlus.WCF.Host
 {
     /// <summary>
     /// http://blog.micic.ch/net/dynamic-iis-hosted-wcf-service
@@ -77,6 +77,8 @@ namespace HisPlus.Wcf.Host
                 //    //host.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexHttpBinding(), "mex");                    
                 //}             
             //}
+
+            host.Description.Behaviors.Add(new ErrorHandlerBehavior());
 
             // Add endpoints
             foreach (Type contract in serviceType.GetInterfaces().Where(x => x.IsSubclassOf(typeof(IServiceRoot))))

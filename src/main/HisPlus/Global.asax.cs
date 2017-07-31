@@ -6,8 +6,8 @@ using System.Web;
 using System.Web.Hosting;
 using System.Web.Security;
 using System.Web.SessionState;
-using HisPlus.Wcf.Host;
-using HisPlus.Infrastructure.Dependency;
+using HisPlus.WCF.Host;
+using HisPlus.Infrastructure.DependencyInjection;
 
 namespace HisPlus
 {

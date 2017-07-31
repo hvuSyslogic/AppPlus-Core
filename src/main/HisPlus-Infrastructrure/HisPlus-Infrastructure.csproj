@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="CachingFramework.Redis, Version=7.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CachingFramework.Redis.7.2.0\lib\net45\CachingFramework.Redis.dll</HintPath>
       <Private>True</Private>
@@ -91,25 +95,29 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BaseCloneableObject.cs" />
-    <Compile Include="Cache\CacheProviderEx.cs" />
+    <Compile Include="Compatible\BaseCloneableObject.cs" />
+    <Compile Include="DependencyInjection\AllTypes.cs" />
+    <Compile Include="Extensions\ArrayEx.cs" />
+    <Compile Include="Extensions\CacheProviderEx.cs" />
     <Compile Include="Cache\IRedisContext.cs" />
     <Compile Include="Cache\RedisContext.cs" />
-    <Compile Include="EnumCompareToType.cs" />
-    <Compile Include="Contract\Messages\absModel.cs" />
-    <Compile Include="IModel.cs" />
-    <Compile Include="DynamicProxy\BasicProxy.cs" />
-    <Compile Include="DynamicProxy\IDynaAccessProxy.cs" />
-    <Compile Include="DynamicProxy\FieldGetterSetter.cs" />
-    <Compile Include="DynamicProxy\IFieldGetterSetter.cs" />
-    <Compile Include="DynamicProxy\IPropertyGetterSetter.cs" />
-    <Compile Include="DynamicProxy\IGetterSetter.cs" />
-    <Compile Include="DynamicProxy\PropertyGetterSetter.cs" />
-    <Compile Include="DynamicProxy\ListProxy.cs" />
-    <Compile Include="DynamicProxy\DynaAccessException.cs" />
-    <Compile Include="DynamicProxy\DictionaryProxy.cs" />
-    <Compile Include="DynamicProxy\IDynaAccessible.cs" />
-    <Compile Include="DynamicProxy\DynaAccessUtils.cs" />
+    <Compile Include="Extensions\DtoEx.cs" />
+    <Compile Include="Extensions\EntityEx.cs" />
+    <Compile Include="Compatible\EnumCompareToType.cs" />
+    <Compile Include="Compatible\absModel.cs" />
+    <Compile Include="Compatible\IModel.cs" />
+    <Compile Include="Compatible\DynamicProxy\BasicProxy.cs" />
+    <Compile Include="Compatible\DynamicProxy\IDynaAccessProxy.cs" />
+    <Compile Include="Compatible\DynamicProxy\FieldGetterSetter.cs" />
+    <Compile Include="Compatible\DynamicProxy\IFieldGetterSetter.cs" />
+    <Compile Include="Compatible\DynamicProxy\IPropertyGetterSetter.cs" />
+    <Compile Include="Compatible\DynamicProxy\IGetterSetter.cs" />
+    <Compile Include="Compatible\DynamicProxy\PropertyGetterSetter.cs" />
+    <Compile Include="Compatible\DynamicProxy\ListProxy.cs" />
+    <Compile Include="Compatible\DynamicProxy\DynaAccessException.cs" />
+    <Compile Include="Compatible\DynamicProxy\DictionaryProxy.cs" />
+    <Compile Include="Compatible\DynamicProxy\IDynaAccessible.cs" />
+    <Compile Include="Compatible\DynamicProxy\DynaAccessUtils.cs" />
     <Compile Include="CodeContracts\Assumes.cs" />
     <Compile Include="CodeContracts\Requires.cs" />
     <Compile Include="Configuration\AgentProvider\IAgentProvider.cs" />
@@ -128,7 +136,7 @@
     <Compile Include="Exceptions\ServerException.cs" />
     <Compile Include="Exceptions\ClientException.cs" />
     <Compile Include="Exceptions\HisPlusException.cs" />
-    <Compile Include="IoCManager.cs" />
+    <Compile Include="DependencyInjection\IoCManager.cs" />
     <Compile Include="Contract\Messages\DtoRoot.cs" />
     <Compile Include="Contract\Messages\EntityBase.cs">
       <SubType>Code</SubType>
@@ -140,10 +148,14 @@
     <Compile Include="Contract\Messages\UnexpectedServiceFault.cs" />
     <Compile Include="Contract\Services\IGenericService.cs" />
     <Compile Include="Contract\Services\IServiceRoot.cs" />
-    <Compile Include="IConnectionString.cs" />
-    <Compile Include="ExpressionEx.cs" />
-    <Compile Include="StringEx.cs" />
-    <Compile Include="TypeEx.cs" />
+    <Compile Include="Configuration\IConnectionString.cs" />
+    <Compile Include="Extensions\EnumerableEx.cs" />
+    <Compile Include="Extensions\ExpressionEx.cs" />
+    <Compile Include="DependencyInjection\From.cs" />
+    <Compile Include="Extensions\ObjectEx.cs" />
+    <Compile Include="Extensions\StaticMembersDynamicWrapper.cs" />
+    <Compile Include="Extensions\StringEx.cs" />
+    <Compile Include="Extensions\TypeEx.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

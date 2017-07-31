@@ -5,7 +5,7 @@ using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 
-namespace HisPlus.Core.Infrastructure.CodeContracts
+namespace HisPlus.Infrastructure.CodeContracts
 {
     /// <summary>
     /// Argument validation checks that throw some kind of ArgumentException when they fail (unless otherwise noted).
@@ -27,7 +27,7 @@ namespace HisPlus.Core.Infrastructure.CodeContracts
                 throw new ArgumentNullException(parameterName);
             }
 
-            Contract.EndContractBlock();
+            System.Diagnostics.Contracts.Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace HisPlus.Core.Infrastructure.CodeContracts
                 throw new ArgumentNullException(parameterName, message);
             }
 
-            Contract.EndContractBlock();
+            System.Diagnostics.Contracts.Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace HisPlus.Core.Infrastructure.CodeContracts
         {
             NotNull(value, parameterName);
             True(value.Length > 0, parameterName, "The empty string is not allowed.");
-            Contract.EndContractBlock();
+            System.Diagnostics.Contracts.Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace HisPlus.Core.Infrastructure.CodeContracts
         {
             NotNull(value, parameterName);
             True(value.Any(), parameterName, "The argument has an unexpected value.");
-            Contract.EndContractBlock();
+            System.Diagnostics.Contracts.Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace HisPlus.Core.Infrastructure.CodeContracts
                 throw new ArgumentOutOfRangeException(parameterName, message);
             }
 
-            Contract.EndContractBlock();
+            System.Diagnostics.Contracts.Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace HisPlus.Core.Infrastructure.CodeContracts
                 throw new ArgumentException(message ?? "The argument has an unexpected value.", parameterName);
             }
 
-            Contract.EndContractBlock();
+            System.Diagnostics.Contracts.Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace HisPlus.Core.Infrastructure.CodeContracts
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, unformattedMessage, args), parameterName);
             }
 
-            Contract.EndContractBlock();
+            System.Diagnostics.Contracts.Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace HisPlus.Core.Infrastructure.CodeContracts
                 throw new InvalidOperationException();
             }
 
-            Contract.EndContractBlock();
+            System.Diagnostics.Contracts.Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace HisPlus.Core.Infrastructure.CodeContracts
                 throw new InvalidOperationException(message);
             }
 
-            Contract.EndContractBlock();
+            System.Diagnostics.Contracts.Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace HisPlus.Core.Infrastructure.CodeContracts
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, unformattedMessage, args));
             }
 
-            Contract.EndContractBlock();
+            System.Diagnostics.Contracts.Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace HisPlus.Core.Infrastructure.CodeContracts
         {
             NotNull(type, parameterName);
             True(typeof (T).IsAssignableFrom(type), parameterName, "The type {0} or a derived type was expected, but {1} was given.", typeof (T).FullName, type.FullName);
-            Contract.EndContractBlock();
+            System.Diagnostics.Contracts.Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace HisPlus.Core.Infrastructure.CodeContracts
                 throw new FormatException(message);
             }
 
-            Contract.EndContractBlock();
+            System.Diagnostics.Contracts.Contract.EndContractBlock();
         }
 
         /// <summary>

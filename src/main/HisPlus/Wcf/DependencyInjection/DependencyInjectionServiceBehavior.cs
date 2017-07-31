@@ -5,7 +5,7 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using System.Web;
 
-namespace HisPlus.Wcf.DependencyInjection
+namespace HisPlus.WCF.DependencyInjection
 {
     /// <summary>
     /// A custom service behavior which will register the dependency injection instance provider.

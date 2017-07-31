@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CastleDependency = Castle.MicroKernel.Registration;
+using HisPlus.Infrastructure.Extensions;
 
 namespace HisPlus.Domain.Installer
 {

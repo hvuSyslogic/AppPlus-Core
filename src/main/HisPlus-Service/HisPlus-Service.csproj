@@ -332,11 +332,9 @@
     <Compile Include="Service\HuVoucherService.cs" />
     <Compile Include="Service\InAdviceGroupService.cs" />
     <Compile Include="Service\InAdviceLongService.cs" />
-    <Compile Include="Service\InadvicenurseService.cs" />
     <Compile Include="Service\InAdviceTempService.cs" />
     <Compile Include="Service\InAdviceWeekDayService.cs" />
     <Compile Include="Service\InArrearAmountService.cs" />
-    <Compile Include="Service\InbabybodyheatService.cs" />
     <Compile Include="Service\InBodyHeatService.cs" />
     <Compile Include="Service\InCallBackService.cs" />
     <Compile Include="Service\InChangeBedService.cs" />
@@ -500,7 +498,9 @@
       <Name>HisPlus-Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

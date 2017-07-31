@@ -4,7 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Web;
 
-namespace HisPlus.Wcf.DependencyInjection
+namespace HisPlus.WCF.DependencyInjection
 {
     /// <summary>
     /// This service host is used to set up the service behavior that replaces the instance provider to use dependency injection.

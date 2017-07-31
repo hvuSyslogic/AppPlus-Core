@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Hosting;
 
-namespace HisPlus.Wcf.Host
+namespace HisPlus.WCF.Host
 {
     public class ServicePathProvider : VirtualPathProvider
     {        

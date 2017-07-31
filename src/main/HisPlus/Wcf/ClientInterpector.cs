@@ -7,7 +7,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 
-namespace HisPlus.Wcf
+namespace HisPlus.WCF
 {
     public class ClientInterpector : IClientMessageInspector
     {

@@ -1,15 +1,15 @@
-﻿using AutoMapper;
-using Castle.Core.Logging;
-using Castle.MicroKernel.Registration;
-using Castle.MicroKernel.SubSystems.Configuration;
-using Castle.Windsor;
-using HisPlus.Core.Service;
-using HisPlus.Infrastructure;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Castle.Core.Logging;
+using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.SubSystems.Configuration;
+using Castle.Windsor;
+using HisPlus.Infrastructure.Extensions;
+using HisPlus.Core.Abstractions.Support;
 
 namespace HisPlus.Services.Installer
 {

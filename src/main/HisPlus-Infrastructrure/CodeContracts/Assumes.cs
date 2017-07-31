@@ -5,7 +5,7 @@ using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 
-namespace HisPlus.Core.Infrastructure.CodeContracts
+namespace HisPlus.Infrastructure.CodeContracts
 {
     /// <summary>
     /// Internal state consistency checks that throw an internal error exception when they fail.

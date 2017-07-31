@@ -6,9 +6,9 @@ using System.ServiceModel;
 using System.ServiceModel.Dispatcher;
 using System.Web;
 using System.ServiceModel.Channels;
-using HisPlus.Infrastructure.Dependency;
+using HisPlus.Infrastructure.DependencyInjection;
 
-namespace HisPlus.Wcf.DependencyInjection
+namespace HisPlus.WCF.DependencyInjection
 {
     /// <summary>
     /// A custom instance provider that uses the ServiceLocator from MS Pattern and Practices to resolve service types.

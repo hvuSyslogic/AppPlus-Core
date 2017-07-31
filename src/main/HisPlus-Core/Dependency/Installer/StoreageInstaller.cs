@@ -1,17 +1,16 @@
-﻿using Castle.Core.Logging;
-using Castle.MicroKernel.Registration;
-using Castle.MicroKernel.SubSystems.Configuration;
-using Castle.Windsor;
-using Castle.Windsor.Installer;
-using HisPlus.Core.EntityFramework;
-using HisPlus.Infrastructure;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.SubSystems.Configuration;
+using Castle.Windsor;
+using HisPlus.Core.Abstractions;
+using HisPlus.Core.Abstractions.Support;
+using HisPlus.Infrastructure.Extensions;
 
-namespace HisPlus.Core.Installer
+namespace HisPlus.Core.Dependency.Installer
 {
     public class StoreageInstaller : IWindsorInstaller
     {

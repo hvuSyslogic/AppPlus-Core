@@ -12,7 +12,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HisPlus</RootNamespace>
-    <AssemblyName>HisPlus.Wcf</AssemblyName>
+    <AssemblyName>HisPlus.WCF</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
     <UseIISExpress>true</UseIISExpress>
@@ -114,26 +114,29 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="WCF\GlobalErrorBehaviorAttribute.cs" />
+    <Compile Include="WCF\GlobalErrorHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Wcf\ClientInterpector.cs" />
-    <Compile Include="Wcf\DependencyInjection\DependencyInjectionInstanceProvider.cs">
+    <Compile Include="WCF\ErrorHandlerBehavior.cs" />
+    <Compile Include="WCF\ClientInterpector.cs" />
+    <Compile Include="WCF\DependencyInjection\DependencyInjectionInstanceProvider.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Wcf\DependencyInjection\DependencyInjectionServiceBehavior.cs">
+    <Compile Include="WCF\DependencyInjection\DependencyInjectionServiceBehavior.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Wcf\DependencyInjection\DependencyInjectionServiceHost.cs">
+    <Compile Include="WCF\DependencyInjection\DependencyInjectionServiceHost.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Wcf\DependencyInjection\DependencyInjectionServiceHostFactory.cs">
+    <Compile Include="WCF\DependencyInjection\DependencyInjectionServiceHostFactory.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Wcf\Host\Constants.cs" />
-    <Compile Include="Wcf\Host\DynamicHostFactory.cs" />
-    <Compile Include="Wcf\Host\ServiceFile.cs" />
-    <Compile Include="Wcf\Host\ServiceHostConfiguration.cs" />
-    <Compile Include="Wcf\Host\ServicePathProvider.cs" />
-    <Compile Include="Wcf\MyClientBehavior.cs" />
+    <Compile Include="WCF\Host\Constants.cs" />
+    <Compile Include="WCF\Host\DynamicHostFactory.cs" />
+    <Compile Include="WCF\Host\ServiceFile.cs" />
+    <Compile Include="WCF\Host\ServiceHostConfiguration.cs" />
+    <Compile Include="WCF\Host\ServicePathProvider.cs" />
+    <Compile Include="WCF\MyClientBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

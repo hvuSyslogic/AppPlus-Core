@@ -1,13 +1,14 @@
-﻿using Castle.Core.Logging;
-using HisPlus.Infrastructure.Dependency;
-using Nerdle.AutoConfig;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Castle.Core.Logging;
+using Nerdle.AutoConfig;
+using HisPlus.Infrastructure.Extensions;
+using HisPlus.Infrastructure.DependencyInjection;
 
 namespace HisPlus.Infrastructure.Configuration
 {

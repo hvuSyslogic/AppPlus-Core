@@ -1,11 +1,4 @@
-﻿using HisPlus.Core;
-using HisPlus.Core.EntityFramework;
-using HisPlus.Core.Infrastructure.CodeContracts;
-using HisPlus.Core.Service;
-using HisPlus.Contract.Messages;
-using HisPlus.Contract.Services;
-using HisPlus.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -13,10 +6,15 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using HisPlus.Core.Abstractions.Support;
+using HisPlus.Contract.Services;
+using HisPlus.Domain;
+using HisPlus.Contract.Messages;
+using HisPlus.Infrastructure.CodeContracts;
+using HisPlus.Infrastructure.Extensions;
 
 namespace HisPlus.Services
 {
-    [GlobalErrorBehaviorAttribute(typeof(GlobalErrorHandler))]
     public class SampleService : ServiceRoot, ISampleService
     {
         class PatientInHosInfo
@@ -99,7 +97,7 @@ namespace HisPlus.Services
             {
                 RoleService.Update(roleDTO);
                 LocationService.Create(locationDTO);
-            }, TransactionOption.TransactionScope);
+            }, TransactionalOption.TransactionScope);
         }
     }
 }

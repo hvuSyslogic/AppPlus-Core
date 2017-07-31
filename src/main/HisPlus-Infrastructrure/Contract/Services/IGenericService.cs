@@ -19,7 +19,7 @@ namespace HisPlus.Infrastructure.Contract.Services
         [OperationContract(Name = "Create")]
         TDTO Create(TDTO dto);
 
-        [OperationContract(Name = "BatchCreate")]
+        [OperationContract(Name = "CreateBatch")]
         IEnumerable<TDTO> Create(IEnumerable<TDTO> dtos);
         
         #endregion        
@@ -29,7 +29,7 @@ namespace HisPlus.Infrastructure.Contract.Services
         [OperationContract(Name = "RetrieveById")]
         TDTO RetrieveById(TKey id);
 
-        [OperationContract(Name = "RetrieveByExpression")]
+        [OperationContract(Name = "Retrieve")]
         IEnumerable<TDTO> Retrieve(ExpressionNode predicateExpressionNode);
 
         [OperationContract(Name = "RetrieveAll")]

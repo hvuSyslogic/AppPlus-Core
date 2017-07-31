@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AppPlus.Core;
-using AppPlus.Core.Service;
 using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
+using HisPlus.Core.Abstractions.Support;
 using HisPlus.Domain;
 
 namespace HisPlus.Services
 {
-	[GlobalErrorBehaviorAttribute(typeof(GlobalErrorHandler))]
-    public class CkIllAdviceService : AbstractService<CkIllAdvice, CkIllAdviceDTO, int>, ICkIllAdviceService
-    {
-    }
+	public class CkIllAdviceService : AbstractService<CkIllAdvice, CkIllAdviceDTO, int>, ICkIllAdviceService
+	{
+	}
 }

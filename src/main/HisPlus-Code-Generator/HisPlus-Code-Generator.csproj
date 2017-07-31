@@ -125,12 +125,1272 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4\HisPlus.Services\AdviceAuthDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BaseTableRoleService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BkPayWayService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsAnaeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsAreaCommitteeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsAreaPoliceStationService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsAreaProvinceService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsAreaRegionService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsAreaService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBacteriaDrugService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBacteriaGramService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBacteriaService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBacteriaShuService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBacteriaStandTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBacteriaTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBankService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBaseDrugService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBedService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBpCureDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBpCureService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBpEvaluateService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBpEvaluateTestService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBphisIllRelationService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBpIllListService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBpItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBpPatientGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsBranchService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsCareGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsCertificateService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsCheckTestListService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsCommitteeRoadService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsCompanyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsCountryService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsDiagRoomService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsDocLevelService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsDocRegTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsDoctorService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsDrugFormService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsEducationIllService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsEducationService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsEduLevelService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsEqTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsExecLocationService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsFamilyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsFluidService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsFrequencyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsFrequencyTimeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsFromHospitalService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsGfxeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsGroupSub2Service.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsGroupSubService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsHealthEduRecService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsHospitalService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsHouseService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsHsFeetyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsIllListService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsIllnessService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsInfectionService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsInvInItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsInvMzItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemAttachService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemBpIdService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemDrugService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemFirstPageService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemFrequencyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemIllTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemListService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemLocationService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemNameMultiService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemNameService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemPacService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemPatTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsitemSelectService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemTallyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemUnitService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemUsageService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsItemYbService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsLabSourceItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsLabSourceService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsLimitDocLevService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsLimitGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsLocationRoomWindowService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4\HisPlus.Services\BsLocationService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsLocSystemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsLocSystemSub2Service.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsLocSystemSubService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsManufacturerService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsMessageTemplateService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsMzFeetyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsNationService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsNewService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsOaGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsOaGroupSubService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsOpService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsOpsItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsOpsRoomService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsOuMergeFeeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsPatientService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsPatTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsPatTypeYbIllService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsPayWayService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsQuestionService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsRegPatAmountService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsRegSpanSubService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsRegTimeSpanService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsRegTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsRelationService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsReportNurseItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsRoomService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsRoomWindowService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsScoreService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsSexService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsSpecialityService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsSpecialtyRoomService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsSubjectService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsTallyGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsTallyTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsTestPaperService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsTubeTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsUnitRatioService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsUnitService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsUsageItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsUsageService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsUserEmrTemplateService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsUserHouseService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsUserLocationService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsUserMenuService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsUserModuleService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsUserRoleService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsUserRoomService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsUserService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsUserWindowService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsUserWordService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsVipLevelService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsVipTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsWorkTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsXdGroupDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsXdGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsXdRpDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsXdRpService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsYbIllTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\BsZyFeetyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkBdBankService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkBldApplyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkBldDonateService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkBldFreeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkBldReactionService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkBldToStationService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkBloodBackService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkBloodSendService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkBloodTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkCompanyCkeckService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkCompanyGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkCompanyManService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkCompanyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkCompGroupPsApplyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkFormulaService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkGroupDepartMentService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkGroupItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkIllAdviceService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkInFeeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkItemQcService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkItemRangeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkItemResultService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkLabBoodService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkLabDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkLabMicDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkLabMicService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkLabResultService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkLabService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkMachineFluidService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkMachineImageService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkMachineNoPassageService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkMachinePassageService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkMachineResultDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkMachineResultService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkMachineSampleService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkMachineService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkMainIllService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkMainService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkProfileService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkPsApplyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkQcControlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkQcLotService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkQcResultService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkReportDefineService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkReportService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkResultGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkResultService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkTestGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkTestTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\CkTogetherService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\EmrReCordService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblAutoUpdateOldService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblAutoUpdateService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblBaseTableItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblCatalogExceptService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblCatalogJoinService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblCatalogKeyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblChinCharService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblCurrentUserService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblElClassService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblElGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblEmailService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblEmailUserService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblEmrBranchService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblEmrCatalogService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblEmrQcGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblEmrQcItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblFieldDescService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblFuctionService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblGetSequenceNumService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblInvRegService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblKeyLockSettingService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblLatDayRunTimeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblMenuSetService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblModuleService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblMrkService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblOnlinerService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblPatientMenuService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblPhoneMsgService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblPrinterService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblQuestionService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblReportDetailService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblReportGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblReportService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblRoleModuleService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblRoleService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblSettingService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblSystemFunctionService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblSystemMenuService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblSystemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\GblTraceService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HistMoveHosInfoService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuAdjustDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuAdjustPlanDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuAdjustPlanService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuAdjustService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuBackDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuBackService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuCheckDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuCheckService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuLoseDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuLoseService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuOtherInDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuOtherInService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuOtherOutDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuOtherOutService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuOutDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuOutService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuPkDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuPkService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuPydtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuPyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuStockDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuStockReqdtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuStockReqService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuStockService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuStoreLogService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuStoreService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuVoucherDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\HuVoucherService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InAdviceGroupService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InAdviceLongService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InAdviceNurseService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InAdviceTempService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InAdviceWeekDayService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InArrearAmountService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InBabyBodyHeatService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InBodyHeatService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InCallBackService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InChangeBedService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InChinRicipeDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InChinRicipeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InChinRicipExecService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InDayAddService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InDayChargeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InDepositService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InDrugReqBackService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InDrugReqdtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InDrugReqdtlSkinBackService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InDrugReqService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InEmrNrRecordService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InEmrScoreService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InEmrService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InEmrXmlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InExecutePrintService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InExecuteService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InFeeCheckService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InHosBedService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InHosInfoService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InHosMzIllService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InHosOpService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InInvoiceDtlCancelService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InInvoiceDtlChkService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InInvoiceDtlDumpService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InInvoiceDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InInvoiceDtlTempService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InInvoiceFeetySumService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InInvoiceInvItemSumService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InInvoiceService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InInvoYbService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InLogInHospitalService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InLogOutHospitalService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InLogOutLocationService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InLogStatusInService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InOutLocationService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InPatLogService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InPayService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InRecFirstPageService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InRmKsDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InWorkLogService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\InYbBalanceService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OaDocAuthService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OaDocFileService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OaDocKeyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OaDocReaderService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OaDocumentService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OaScheduleService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OpsApplyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OpsChargeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OpsManService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuClincDiagService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuClinicFirstService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuDayReportService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuDiagCallService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuDocMyPatService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuDocRegTypeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuDocSpanSubService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuExecuteBackService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuExecuteDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuExecuteService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuFeeArrearService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuHosInfoService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuInvoiceDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuInvoiceDtlTempService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuInvoiceFeetySumService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuInvoiceInvItemSumService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuInvoicePayService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuInvoiceService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuLeadRegService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OulInvoiceRegService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuRecipeBackService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuRecipeChinService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuRecipeDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuRecipeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OuRecipeTempService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\OutMedTableHiService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\PatCardFeeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\PsApplyReportService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\PsDiagDoctorService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\PsDiagMeetingService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\PsDrugActionService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\PsExecuteService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RdInfectiouService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RdNewBirthService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmAdjustDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmAdjustService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmAppDrugDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmAppDrugService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmApplbackDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmApplbackService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmBackDetailService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmBackService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmCheckDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmCheckService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmKOutDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmKsBackDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmKsBackService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmKsOutService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmLoseDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmLoseService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmMoveDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmMoveService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmOtherInDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmOtherInService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmOutDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmOutOthDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmOutOthService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmOutService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmPkDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmPkService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmPyDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmPyService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmSendingService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmStoreLogService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmstoreService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmUnderLineService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmZyBackDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmZyBackService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmZyOutDtlService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\RmZyOutService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
     <Compile Include="T4\HisPlus.Services\Services.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\SysdiagramService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\TmpEmrService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\TmpOuEmrService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\TraceService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\TrAdviceService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\TrDoctorEmrService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\TrInHosInfoService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\TrPractiseService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\TrSchedulerService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\TrScheLineService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipBindingService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipCardDiscountService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipCardLogService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipCardService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipChargeConfigService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipChargeItemService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipIntegralService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipReChargeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VipReckoningChargeService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VisitMessageLogService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VisitRecordService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\VisitRecordUserService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\YbChargeLogService.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4\HisPlus.Services\YbPatSeqService.cs">
       <DependentUpon>Services.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -174,9 +1434,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HisPlus-Contract\HisPlus-Contract.csproj">
+      <Project>{6de0dab6-3e4b-43ee-8473-f7a61d0d9cd6}</Project>
+      <Name>HisPlus-Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HisPlus-Core\HisPlus-Core.csproj">
       <Project>{e9578bd9-26f5-41cf-a78f-42e704d2928a}</Project>
       <Name>HisPlus-Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HisPlus-Domain\HisPlus-Domain.csproj">
+      <Project>{9b4fd8ff-73ef-4e18-9abe-18b1d0737263}</Project>
+      <Name>HisPlus-Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\HisPlus-Infrastructrure\HisPlus-Infrastructure.csproj">
       <Project>{70a18834-0849-4693-ae65-1610a8e0eb7e}</Project>

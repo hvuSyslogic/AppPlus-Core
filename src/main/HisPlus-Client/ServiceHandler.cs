@@ -12,10 +12,11 @@ using HisPlus.Infrastructure.Configuration;
 using HisPlus.Infrastructure;
 using HisPlus.Infrastructure.Contract.Messages;
 using HisPlus.Infrastructure.Exceptions;
-using HisPlus.Core.Infrastructure.CodeContracts;
 using Castle.Core.Logging;
-using HisPlus.Infrastructure.Dependency;
 using HisPlus.Infrastructure.Cache;
+using HisPlus.Infrastructure.CodeContracts;
+using HisPlus.Infrastructure.DependencyInjection;
+using HisPlus.Infrastructure.Extensions;
 
 namespace HisPlus.Client
 {
