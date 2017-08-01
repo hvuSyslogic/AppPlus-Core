@@ -11,7 +11,7 @@ using AutoMapper;
 using HisPlus.Contract.Services;
 using HisPlus.Core;
 using HisPlus.Domain;
-using HisPlus.Infrastructure.Configuration;
+using HisPlus.Infrastructure.Config;
 using HisPlus.Services;
 using HisPlus.Infrastructure.DependencyInjection;
 
@@ -21,12 +21,13 @@ namespace HisPlus.UnitTesting
     {
         const string TraitName = "DependencyContextUnitTests";
         const string DisplayName = "DependenyInjection";
+        IHisPlusConfiguration config = IoCManager.Container.Resolve<IHisPlusConfiguration>();
 
         [Fact(DisplayName = "001_Container_Registeration_Test")]
         [Trait(TraitName, DisplayName)]
         public void TestRegister()
         {
-            if (HisConfigurationManager.Configuration.Provider == ProviderType.Local)
+            if (config.Provider == ProviderType.Local)
             {
                 var container = IoCManager.Container;
                 var context = container.Resolve<DbContext>();
@@ -44,7 +45,7 @@ namespace HisPlus.UnitTesting
         [Trait(TraitName, DisplayName)]
         public void TestConfiguration()
         {
-            if (HisConfigurationManager.Configuration.Provider == ProviderType.Local)
+            if (config.Provider == ProviderType.Local)
             {
                 var container = IoCManager.Container;
                 var handlers = container.Kernel.GetAssignableHandlers(typeof(object));                

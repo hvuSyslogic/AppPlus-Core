@@ -9,22 +9,28 @@ using System.Collections.ObjectModel;
 using HisPlus.Client.Binding;
 using System.ServiceModel;
 using HisPlus.Infrastructure.Contract.Services;
-using HisPlus.Infrastructure.Configuration;
+using HisPlus.Infrastructure.Config;
+using HisPlus.Infrastructure.DependencyInjection;
 
 namespace HisPlus.Client
 {
     public class ProxyManager
     {
-        public static BindingType BindingType { get; set; }
+        static string _host;
+        static int _port;
+
+        static ProxyManager()
+        {
+            var config = IoCManager.Container.Resolve<IHisPlusConfiguration>();
+            _host = config.AgentProvider.Host.Name;
+            _port = config.AgentProvider.Host.Port;
+        }
 
         public static T GetProxy<T>()
             where T : IServiceRoot
-        {
-            var host = HisConfigurationManager.Configuration.AgentProvider.Host.Name;
-            var port = HisConfigurationManager.Configuration.AgentProvider.Host.Port;
-
+        {          
             string service = typeof(T).Name.Substring(1);
-            string url = string.Format(Constants.Uri, host, port, service);
+            string url = string.Format(Constants.Uri, _host, _port, service);
             return GetProxy<T>(BindingType.BasicHttpBinding, url);
         }
 
@@ -40,6 +46,8 @@ namespace HisPlus.Client
 
             return channelFactory.CreateChannel();
         }
+
+        public static BindingType BindingType { get; set; }
 
         private static IBindingBuilder GetBuilder(BindingType bindingType)
         {

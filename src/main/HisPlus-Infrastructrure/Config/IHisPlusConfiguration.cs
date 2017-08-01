@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nerdle.AutoConfig;
 
-namespace HisPlus.Infrastructure.Configuration
+namespace HisPlus.Infrastructure.Config
 {
     public interface IHisPlusConfiguration
     {
@@ -17,5 +17,16 @@ namespace HisPlus.Infrastructure.Configuration
         ILocalProvider LocalProvider { get; }
 
         ICacheProvider ClientCacheProvider { get; }
+    }
+
+    public class HisPlusConfiguration : IHisPlusConfiguration
+    {
+        public ProviderType Provider { get; private set; }
+
+        public IAgentProvider AgentProvider { get; private set; }
+
+        public ILocalProvider LocalProvider { get; private set; }
+
+        public ICacheProvider ClientCacheProvider { get; private set; }
     }
 }

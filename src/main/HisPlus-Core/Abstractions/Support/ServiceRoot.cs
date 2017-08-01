@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Data.Entity.Infrastructure;
 using AutoMapper;
 using Castle.Core.Logging;
-using HisPlus.Infrastructure.Configuration;
+using HisPlus.Infrastructure.Config;
 using HisPlus.Infrastructure.Contract.Services;
 
 namespace HisPlus.Core.Abstractions.Support

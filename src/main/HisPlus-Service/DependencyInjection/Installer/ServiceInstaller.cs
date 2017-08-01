@@ -11,7 +11,7 @@ using Castle.Windsor;
 using HisPlus.Infrastructure.Extensions;
 using HisPlus.Core.Abstractions.Support;
 
-namespace HisPlus.Services.Installer
+namespace HisPlus.Services.DependencyInjection.Installer
 {
     public class ServiceInstaller : IWindsorInstaller
     {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HisPlus.Infrastructure.Compatible;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -9,7 +10,7 @@ namespace HisPlus.Infrastructure.Contract.Messages
 {
     [Serializable]
     [DataContract]
-    public abstract class DtoRoot
+    public abstract class DtoRoot : absModel
     {
     }    
 }

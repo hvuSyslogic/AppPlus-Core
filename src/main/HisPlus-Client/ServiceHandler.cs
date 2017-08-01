@@ -8,7 +8,7 @@ using System.Threading;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
 using HisPlus.Infrastructure.Contract.Services;
-using HisPlus.Infrastructure.Configuration;
+using HisPlus.Infrastructure.Config;
 using HisPlus.Infrastructure;
 using HisPlus.Infrastructure.Contract.Messages;
 using HisPlus.Infrastructure.Exceptions;
@@ -22,12 +22,12 @@ namespace HisPlus.Client
 {
     public class ServiceHandler
     {
-
         #region Constructor(s)
         
         static ServiceHandler()
         {
-            IsDistributed = (HisConfigurationManager.Configuration.Provider == ProviderType.Agent);
+            var config = IoCManager.Container.Resolve<IHisPlusConfiguration>();
+            IsDistributed = (config.Provider == ProviderType.Agent);
             RedisContext = IoCManager.Container.Resolve<IRedisContext>();
         }        
         #endregion

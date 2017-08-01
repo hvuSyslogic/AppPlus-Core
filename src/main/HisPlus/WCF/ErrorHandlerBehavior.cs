@@ -22,7 +22,6 @@ namespace HisPlus.WCF
             {
                 channelDispatcher.ErrorHandlers.Add(new GlobalErrorHandler());
             }
-
         }
 
         public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)

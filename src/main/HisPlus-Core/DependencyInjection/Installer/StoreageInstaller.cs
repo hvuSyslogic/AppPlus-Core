@@ -10,7 +10,7 @@ using HisPlus.Core.Abstractions;
 using HisPlus.Core.Abstractions.Support;
 using HisPlus.Infrastructure.Extensions;
 
-namespace HisPlus.Core.Dependency.Installer
+namespace HisPlus.Core.DependencyInjection.Installer
 {
     public class StoreageInstaller : IWindsorInstaller
     {

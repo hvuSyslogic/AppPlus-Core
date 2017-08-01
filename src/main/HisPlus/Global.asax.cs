@@ -19,8 +19,7 @@ namespace HisPlus
         }
 
         protected void Session_Start(object sender, EventArgs e)
-        {
-            IoCManager.InstallComponents();
+        {            
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

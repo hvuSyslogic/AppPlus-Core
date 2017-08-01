@@ -97,7 +97,7 @@ namespace HisPlus.Services
             {
                 RoleService.Update(roleDTO);
                 LocationService.Create(locationDTO);
-            }, TransactionalOption.TransactionScope);
+            });
         }
     }
 }

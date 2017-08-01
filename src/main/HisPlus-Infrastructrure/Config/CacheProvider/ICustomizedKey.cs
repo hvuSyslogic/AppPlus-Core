@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HisPlus.Infrastructure.Configuration
+namespace HisPlus.Infrastructure.Config
 {
-    public interface IConnectionString
+    public interface ICustomizedKey
     {
-        string Name { get; }
+        string KeyFormat { get; }
     }
 }

@@ -8,7 +8,7 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using HisPlus.Core;
-using HisPlus.Infrastructure.Configuration;
+using HisPlus.Infrastructure.Config;
 using HisPlus.WCF.DependencyInjection;
 using HisPlus.Infrastructure.Contract.Services;
 using HisPlus.Infrastructure.DependencyInjection;

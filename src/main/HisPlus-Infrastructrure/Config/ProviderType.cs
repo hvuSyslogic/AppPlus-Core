@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HisPlus.Infrastructure.Configuration
+namespace HisPlus.Infrastructure.Config
 {
-    public interface IInstallerConfig
+    public enum ProviderType
     {
-        string Assembly { get; }
+        Local = 0,
+        Agent = 1,
     }
 }

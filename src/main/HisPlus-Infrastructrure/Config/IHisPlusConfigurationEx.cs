@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HisPlus.Infrastructure.Configuration
+namespace HisPlus.Infrastructure.Config
 {
     public static class IHisPlusConfigurationEx
     {

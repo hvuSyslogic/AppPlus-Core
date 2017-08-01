@@ -11,7 +11,7 @@ using HisPlus.Infrastructure.Extensions;
 namespace HisPlus.Infrastructure.Compatible
 {
     public abstract class absModel : BaseCloneableObject, IComparable<absModel>, IModel
-    {        
+    {
         public bool IsModify { get; set; }
 
         public bool IsSelected { get; set; }        
@@ -20,18 +20,12 @@ namespace HisPlus.Infrastructure.Compatible
 
         public DateTime InputTime { get; set; }
 
-        public abstract int ID { get; set; }
+        public int ID { get; set; }
 
-        public abstract void Fill(System.Data.IDataReader dr);
+        //public abstract void Fill(System.Data.IDataReader dr);
 
-        public int SortOrder { get; set; }
+        public int SortOrder { get; set; }       
 
-        public void SetIsModify(bool isModify)
-        {
-            this.IsModify = isModify;
-        }
-
-        #region 转换为其它Model
         public M ConvertTo<M>() where M : absModel, new()
         {
             BindingFlags BINDING_FLAGS
@@ -57,8 +51,8 @@ namespace HisPlus.Infrastructure.Compatible
                         DynaAccessUtils.SetProperty(newObject, properties[k].Name, val);
                     }
                 }
-
             }
+
             return newObject;
         }
 
@@ -84,21 +78,22 @@ namespace HisPlus.Infrastructure.Compatible
                         DynaAccessUtils.SetProperty(newObject, properties[k].Name, val);
                     }
                 }
-
             }
             return newObject;
         }
-        #endregion
 
         #region Equals
+        
         public bool Equals(absModel comparedTo)
         {
             if (this.SortOrder == comparedTo.SortOrder)
             {
                 return true;
             }
+
             return false;
         }
+        
         #endregion
 
         protected bool CheckHasFiled(IDataReader datareader, string filedName)
@@ -130,13 +125,12 @@ namespace HisPlus.Infrastructure.Compatible
         }
 
         #region Compare To
+
         public int CompareTo(absModel comparedTo)
         {
             return this.SortOrder.CompareTo(comparedTo.SortOrder);
         }
-        #endregion
-        
-        #region Compare To
+      
         public int CompareTo(absModel comparedTo, string key)
         {
             string[] keys = key.Split(',');
@@ -179,19 +173,10 @@ namespace HisPlus.Infrastructure.Compatible
             return System.String.Compare(a1, a2);
         }
 
-        /// <summary>
-        /// 属性比较
-        /// </summary>
-        /// <param name="comparedTo">比较的 T wehre T:absModel  </param>
-        /// <param name="key">属性</param>
-        /// <param name="comparedType">比较类型 Number,String,DateTime</param>
-        /// <param name="isAfter">不符合规则的是否放在最后</param>
-        /// <returns></returns>
         private int CompareToByKey(absModel comparedTo, string key, EnumCompareToType comparedType, bool isToAfter)
         {
             string a1 = DynaAccessUtils.GetProperty(this, key).ToString();
             string a2 = DynaAccessUtils.GetProperty(comparedTo, key).ToString();
-
 
             string MaxNumber = "9999999";
             string MinNumber = "-999999";
@@ -211,6 +196,7 @@ namespace HisPlus.Infrastructure.Compatible
                 else
                     return -1;
             }
+
             if (comparedType == EnumCompareToType.DateTime)
             {
                 a1 = a1.IsDate() ? a1 : isToAfter ? MaxDateTime : MinDateTime;
@@ -220,6 +206,7 @@ namespace HisPlus.Infrastructure.Compatible
 
             return System.String.Compare(a1, a2);
         }
+
         #endregion
     }
 }

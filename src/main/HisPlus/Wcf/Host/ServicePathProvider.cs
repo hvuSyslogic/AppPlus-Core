@@ -22,9 +22,7 @@ namespace HisPlus.WCF.Host
         {
             virtualPath = VirtualPathUtility.ToAppRelative(virtualPath);
             
-            return virtualPath.ToUpper().StartsWith(string.Format("~/{0}", string.Empty));
-            
-            //return virtualPath.ToUpper().StartsWith(string.Format("~/{0}", ServiceHostConfiguration.Prefix));
+            return virtualPath.ToUpper().StartsWith(string.Format("~/{0}", string.Empty));            
         }
         
         public override bool FileExists(string virtualPath)
@@ -36,6 +34,5 @@ namespace HisPlus.WCF.Host
                 
             return true;
         }
-
     }
 }

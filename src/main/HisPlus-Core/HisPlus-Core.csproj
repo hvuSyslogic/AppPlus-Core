@@ -87,7 +87,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Abstractions\Support\TransactionalOption..cs" />
-    <Compile Include="Dependency\Installer\StoreageInstaller.cs" />
+    <Compile Include="DependencyInjection\Installer\StoreageInstaller.cs" />
     <Compile Include="Abstractions\IRepository.cs" />
     <Compile Include="Abstractions\Support\DbContextBase.cs" />
     <Compile Include="Abstractions\Support\Repository.cs" />

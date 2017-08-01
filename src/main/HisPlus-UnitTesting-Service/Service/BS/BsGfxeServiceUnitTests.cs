@@ -10,10 +10,11 @@ using Xunit;
 using HisPlus.Client;
 using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
-using HisPlus.Infrastructure.Configuration;
+using HisPlus.Infrastructure.Config;
 using FluentAssertions;
 using HisPlus.Infrastructure.Exceptions;
 using HisPlus.UnitTesting.Common;
+using HisPlus.Services;
 
 namespace HisPlus.UnitTesting.Service.BS
 {
@@ -60,7 +61,7 @@ namespace HisPlus.UnitTesting.Service.BS
 
             var item = DataSource.First();
             
-            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => item.PyCode == x.PyCode);
+            Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => item.PyCode == x.PyCode && x.IsActive);
             var expressionNode = expression.ToExpressionNode();
 
             var result = CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
@@ -94,7 +95,7 @@ namespace HisPlus.UnitTesting.Service.BS
         [Fact(DisplayName = "Contains_OK")]
         [Trait(TraitName, "Contains")]
         public void Contains_OK()
-        {                        
+        {
             var result = CallService((IBsGfxeService x) => x.Contains(DataSource.First().Id));
             result.Should().BeTrue();
         }
@@ -108,7 +109,7 @@ namespace HisPlus.UnitTesting.Service.BS
 
             var item = result.FirstOrDefault();            
             var exists = CallService((IBsGfxeService x) => x.Contains(item));
-            exists.Should().BeTrue();            
+            exists.Should().BeTrue();
         }
 
         [Fact(DisplayName = "Contains_By_Expression_OK")]

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HisPlus.Infrastructure.Configuration
+namespace HisPlus.Infrastructure.Config
 {
-    public interface ICustomizedKey
+    public interface IAgentProvider
     {
-        string KeyFormat { get; }
+        IHostConfig Host { get; }
     }
 }
