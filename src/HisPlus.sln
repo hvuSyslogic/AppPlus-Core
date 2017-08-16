@@ -52,7 +52,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-UnitTesting-Common"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-MQ", "main\HisPlus-MQ\HisPlus-MQ.csproj", "{E596E8B0-2268-49E8-8455-309787BA1C1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Redis", "HisPlus-Redis\HisPlus-Redis.csproj", "{C5E42405-F442-493D-BAB6-DEC93214CA25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Redis", "main\HisPlus-Redis\HisPlus-Redis.csproj", "{C5E42405-F442-493D-BAB6-DEC93214CA25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

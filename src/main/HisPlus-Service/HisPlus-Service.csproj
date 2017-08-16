@@ -498,7 +498,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\HisPlus-Redis\HisPlus-Redis.csproj">
+    <ProjectReference Include="..\HisPlus-Redis\HisPlus-Redis.csproj">
       <Project>{c5e42405-f442-493d-bab6-dec93214ca25}</Project>
       <Name>HisPlus-Redis</Name>
     </ProjectReference>
