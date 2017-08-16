@@ -7,7 +7,7 @@
     <ProjectGuid>{BD4F5FCC-7578-4C75-88E5-D134C699FE65}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HisPlus.UnitTesting</RootNamespace>
+    <RootNamespace>HisPlus.UnitTesting.Common</RootNamespace>
     <AssemblyName>HisPlus.UnitTesting.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -52,12 +52,23 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.core, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.extensibility.core.2.1.0\lib\dotnet\xunit.core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\UnitTestBase.cs" />
-    <Compile Include="Common\ClassFixtureBase.cs" />
-    <Compile Include="Common\TestBase.cs" />
+    <Compile Include="OrderAttribute.cs" />
+    <Compile Include="UnitTestBase.cs" />
+    <Compile Include="ClassFixtureBase.cs" />
+    <Compile Include="TestBase.cs" />
+    <Compile Include="PriorityOrderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestPriorityAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HisPlus-Client\Hisplus-Client.csproj">
