@@ -12,7 +12,7 @@ using HisPlus.Infrastructure.Contract.Messages;
 using HisPlus.Infrastructure.Exceptions;
 using HisPlus.Infrastructure.Extensions;
 
-namespace HisPlus.WCF
+namespace HisPlus.Core.Hosting
 {
     /// <summary>
     /// https://blogs.msdn.microsoft.com/carlosfigueira/2011/06/07/wcf-extensibility-ierrorhandler/

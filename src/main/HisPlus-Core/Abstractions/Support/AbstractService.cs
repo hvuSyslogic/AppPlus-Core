@@ -23,6 +23,7 @@ using HisPlus.Infrastructure.Contract.Messages;
 using HisPlus.Infrastructure.Contract.Services;
 using HisPlus.Infrastructure.CodeContracts;
 using HisPlus.Infrastructure.Extensions;
+using HisPlus.Redis;
 
 namespace HisPlus.Core.Abstractions.Support
 {    
@@ -32,14 +33,21 @@ namespace HisPlus.Core.Abstractions.Support
         where TKey : struct
     {
         #region Automapper configuration
+
         protected override void ConfigureMap()
         {
             CreateMap<TEntity, TDTO>().ReverseMap();
         }
+
         #endregion
 
-        #region Create
-        public virtual TDTO Create(TDTO dto)
+        #region Propertie(s)
+        public IRedisContext RedisContext { get; set; }
+        #endregion
+
+        #region Add
+
+        public virtual TDTO Add(TDTO dto)
         {
             Requires.NotNull(dto, "dto");
 
@@ -47,41 +55,48 @@ namespace HisPlus.Core.Abstractions.Support
 
             UnitOfWork.Do(uow => 
             {
-                entity = uow.Repo<TEntity>().Create(entity);                
+                entity = uow.Repo<TEntity>().Add(entity);                
             });
 
             return entity.MapTo<TDTO>();
         }
 
-        public virtual IEnumerable<TDTO> Create(IEnumerable<TDTO> dtos)
+        public virtual IEnumerable<TDTO> AddBatch(IEnumerable<TDTO> addValueFactory)
         {
-            Requires.NotNullOrEmpty(dtos, "dtos");
+            Requires.NotNullOrEmpty(addValueFactory, "addValueFactory");
 
-            var entities = dtos.MapTo<TEntity>();
+            var entities = addValueFactory.MapTo<TEntity>();
 
-            UnitOfWork.Do(uow => 
+            UnitOfWork.Do(uow =>
             {
-                entities = uow.Repo<TEntity>().Create(entities);                
+                entities = uow.Repo<TEntity>().Add(entities);                
             });
 
             return entities.MapTo<TDTO>();
         }
-        #endregion              
         
-        #region Retrieve
-        public virtual TDTO RetrieveById(TKey id)
+        #endregion                      
+
+        #region Get
+
+        public virtual TDTO GetById(TKey id)
         {            
-            long result;
-            long.TryParse(id.ToString(), out result);
-            Requires.InRange(result > 0, "id");
+            long value;
+            bool result = long.TryParse(id.ToString(), out value);
+            if (!result)
+            {
+                throw new ArgumentOutOfRangeException("id");
+            }
+
+            Requires.InRange(value > 0, "id");
 
             return UnitOfWork.Do(uow =>
             {
-                return uow.Repo<TEntity>().Retrieve(id).MapTo<TDTO>();
+                return uow.Repo<TEntity>().Get(id).MapTo<TDTO>();
             });
         }
         
-        public virtual IEnumerable<TDTO> Retrieve(ExpressionNode predicateExpressionNode)
+        public virtual IEnumerable<TDTO> GetBy(ExpressionNode predicateExpressionNode)
         {
             Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
             
@@ -91,17 +106,18 @@ namespace HisPlus.Core.Abstractions.Support
 
             return UnitOfWork.Do(uow =>
             {
-                return uow.Repo<TEntity>().Retrieve(predicateExpression).MapTo<TDTO>();
+                return uow.Repo<TEntity>().Get(predicateExpression).MapTo<TDTO>();
             });
         }
         
-        public virtual IEnumerable<TDTO> RetrieveAll()
+        public virtual IEnumerable<TDTO> GetAll()
         {
             return UnitOfWork.Do(uow =>
             {
-                return uow.Repo<TEntity>().Retrieve().MapTo<TDTO>();
+                return uow.Repo<TEntity>().Get().MapTo<TDTO>();
             });
         }
+
         #endregion
 
         #region Update
@@ -117,24 +133,18 @@ namespace HisPlus.Core.Abstractions.Support
             });
         }
 
-        public virtual void Update(IEnumerable<TDTO> dtos)
+        public virtual void UpdateBatch(IEnumerable<TDTO> updateValueFactory)
         {
-            Requires.NotNullOrEmpty(dtos, "dtos");
+            Requires.NotNullOrEmpty(updateValueFactory, "updateValueFactory");
 
-            var entities = dtos.MapTo<TEntity>();
+            var entities = updateValueFactory.MapTo<TEntity>();
 
             UnitOfWork.Do(uow => 
             {
                 uow.Repo<TEntity>().Update(entities);
             });
         }
-
-        //public int Update<TEntity>(Expression<Func<TEntity, TEntity>> updateExpression,
-        //    Expression<Func<TEntity, bool>> predicate = null)
-        //    where TEntity : EntityBase, new()
-        //{
-
-        //}
+  
         #endregion
 
         #region Delete
@@ -150,7 +160,7 @@ namespace HisPlus.Core.Abstractions.Support
             });
         }
 
-        public virtual void Delete(TDTO dto)
+        public virtual void DeleteByObject(TDTO dto)
         {
             Requires.NotNull(dto, "dto");
 
@@ -162,11 +172,11 @@ namespace HisPlus.Core.Abstractions.Support
             });
         }
 
-        public virtual void Delete(IEnumerable<TDTO> dtos)
+        public virtual void DeleteBatch(IEnumerable<TDTO> deleteValueFactory)
         {
-            Requires.NotNullOrEmpty(dtos, "dtos");
+            Requires.NotNullOrEmpty(deleteValueFactory, "deleteValueFactory");
 
-            var entities = dtos.MapTo<TEntity>();
+            var entities = deleteValueFactory.MapTo<TEntity>();
             
             UnitOfWork.Do(uow => 
             {
@@ -174,7 +184,7 @@ namespace HisPlus.Core.Abstractions.Support
             });
         }
 
-        public virtual int Delete(ExpressionNode predicateExpressionNode)
+        public virtual int DeleteBy(ExpressionNode predicateExpressionNode)
         {
             Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
 
@@ -206,7 +216,7 @@ namespace HisPlus.Core.Abstractions.Support
             });
         }
 
-        public virtual long Count(ExpressionNode predicateExpressionNode)
+        public virtual long CountBy(ExpressionNode predicateExpressionNode)
         {
             Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
 
@@ -225,7 +235,7 @@ namespace HisPlus.Core.Abstractions.Support
         {
             return UnitOfWork.Do(uow =>
             {
-                var entity = uow.Repo<TEntity>().Retrieve(id);
+                var entity = uow.Repo<TEntity>().Get(id);
 
                 return (entity != null);
             });
@@ -240,7 +250,7 @@ namespace HisPlus.Core.Abstractions.Support
             return Contains(id);
         }
 
-        public virtual bool Contains(ExpressionNode predicateExpressionNode)
+        public virtual bool ContainsBy(ExpressionNode predicateExpressionNode)
         {
             Requires.NotNull(predicateExpressionNode, "predicateExpressionNode");
 
@@ -254,14 +264,14 @@ namespace HisPlus.Core.Abstractions.Support
 
         #endregion
 
-        #region RetrievePagedData
+        #region GetPagedData
 
-        public virtual IEnumerable<TDTO> RetrievePagedData(int pageNumber, int pageSize, out int pageCount)
+        public virtual IEnumerable<TDTO> GetPagedData(int pageNumber, int pageSize, out int pageCount)
         {
-            return RetrievePagedData(null, pageNumber, pageSize, out pageCount);
+            return GetPagedDataBy(null, pageNumber, pageSize, out pageCount);
         }
 
-        public virtual IEnumerable<TDTO> RetrievePagedData(ExpressionNode predicateExpressionNode, int pageNumber, int pageSize, out int pageCount)
+        public virtual IEnumerable<TDTO> GetPagedDataBy(ExpressionNode predicateExpressionNode, int pageNumber, int pageSize, out int pageCount)
         {
             var predicate = (predicateExpressionNode == null)
                    ? null : Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());
@@ -270,7 +280,7 @@ namespace HisPlus.Core.Abstractions.Support
 
             var result = UnitOfWork.Do(uow =>
             {
-                return uow.Repo<TEntity>().RetrievePagedData(predicate, null, pageNumber, pageSize, out totalPages).MapTo<TDTO>();
+                return uow.Repo<TEntity>().GetPagedData(predicate, null, pageNumber, pageSize, out totalPages).MapTo<TDTO>();
             });
 
             pageCount = totalPages;
@@ -280,25 +290,26 @@ namespace HisPlus.Core.Abstractions.Support
 
         #endregion
 
-        //#region CreateOrUpdate
+        #region AddOrUpdate
 
-        //public virtual Tuple<Int32, Int32> CreateOrUpdate(IEnumerable<TDTO> dtos)
-        //{
-        //    Requires.NotNullOrEmpty(dtos, "dtos");
+        public virtual Tuple<Int32, Int32> AddOrUpdate(IEnumerable<TDTO> valueFactory)
+        {
+            Requires.NotNullOrEmpty(valueFactory, "dtos");
 
-        //    var addedEntityCollection = dtos.Where(x => x.Id.Equals(0)).MapTo<TEntity>();
-        //    var modifiedEntityCollection = dtos.Where(x => !x.Id.Equals(0)).MapTo<TEntity>();
+            var addValueFactory = valueFactory.Where(x => x.Id.Equals(0)).MapTo<TEntity>();
+            var updateValueFactory = valueFactory.Where(x => !x.Id.Equals(0)).MapTo<TEntity>();
 
-        //    return UnitOfWork.Do(uow => 
-        //    {
-        //        uow.Repo<TEntity>().Create(addedEntityCollection);
-        //        uow.Repo<TEntity>().Update(modifiedEntityCollection);
+            return UnitOfWork.Do(uow =>
+            {
+                uow.Repo<TEntity>().Add(addValueFactory);
+                uow.Repo<TEntity>().Update(updateValueFactory);
 
-        //        return new Tuple<int, int>(addedEntityCollection.Count(), modifiedEntityCollection.Count());
-        //    });
-        //}
+                return new Tuple<int, int>(addValueFactory.Count(), updateValueFactory.Count());
 
-        //#endregion
+            }, TransactionalOption.DbTransaction);
+        }
+
+        #endregion
 
         #region GetDataTable
 

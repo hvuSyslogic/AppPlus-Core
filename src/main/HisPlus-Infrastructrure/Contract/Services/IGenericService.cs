@@ -14,101 +14,90 @@ namespace HisPlus.Infrastructure.Contract.Services
         where TDTO : DtoBase<TKey>, new()
         where TKey : struct
     {
-        #region Create
+        #region Add
 
-        [OperationContract(Name = "Create")]
-        TDTO Create(TDTO dto);
+        [OperationContract]
+        TDTO Add(TDTO dto);
 
-        [OperationContract(Name = "CreateBatch")]
-        IEnumerable<TDTO> Create(IEnumerable<TDTO> dtos);
+        [OperationContract]
+        IEnumerable<TDTO> AddBatch(IEnumerable<TDTO> addValueFactory);
         
         #endregion        
 
-        #region Retrieve
+        #region Get
 
-        [OperationContract(Name = "RetrieveById")]
-        TDTO RetrieveById(TKey id);
+        [OperationContract]
+        TDTO GetById(TKey id);
 
-        [OperationContract(Name = "Retrieve")]
-        IEnumerable<TDTO> Retrieve(ExpressionNode predicateExpressionNode);
+        [OperationContract]
+        IEnumerable<TDTO> GetBy(ExpressionNode predicateExpressionNode);
 
-        [OperationContract(Name = "RetrieveAll")]
-        IEnumerable<TDTO> RetrieveAll();
+        [OperationContract]
+        IEnumerable<TDTO> GetAll();
 
         #endregion
 
         #region Update
 
-        [OperationContract(Name = "Update")]
+        [OperationContract]
         void Update(TDTO dto);
 
-        [OperationContract(Name = "BatchUpdate")]
-        void Update(IEnumerable<TDTO> dtos);
-
-        //[OperationContract(Name = "UpdateByExpression")]
-        //[FaultContract(typeof(ServiceFault))]
-        //int Update(TDTO dto, ExpressionNode predicateExpressionNode = null);
-
-        // int Update<TEntity>(Expression<Func<TEntity, TEntity>> updateExpression,
-        //Expression<Func<TEntity, bool>> predicate = null)
-        //where TEntity : EntityBase, new();
+        [OperationContract]
+        void UpdateBatch(IEnumerable<TDTO> updateValueFactory);
         
         #endregion
 
         #region Delete
 
-        [OperationContract(Name = "DeleteById")]
+        [OperationContract]
         void DeleteById(TKey id);
 
-        [OperationContract(Name = "DeleteByEntity")]
-        void Delete(TDTO dto);
+        [OperationContract]
+        void DeleteByObject(TDTO obj);
 
-        [OperationContract(Name = "BatchDelete")]
-        void Delete(IEnumerable<TDTO> dtos);
+        [OperationContract]
+        void DeleteBatch(IEnumerable<TDTO> dtos);
 
-        [OperationContract(Name = "DeleteByExpression")]
-        int Delete(ExpressionNode predicateExpressionNode);
+        [OperationContract]
+        int DeleteBy(ExpressionNode predicateExpressionNode);
 
-        [OperationContract(Name = "DeleteAll")]
+        [OperationContract]
         int DeleteAll();
         
         #endregion
 
-        //#region CreateOrUpdate
-        //[OperationContract(Name = "CreateOrUpdate")]
-        //Tuple<int, int> CreateOrUpdate(IEnumerable<TDTO> dtos);
-        //#endregion
+        #region AddOrUpdate
+        [OperationContract]
+        Tuple<int, int> AddOrUpdate(IEnumerable<TDTO> valueFactory);
+        #endregion
 
         #region Count
 
-        [OperationContract(Name = "Count")]
+        [OperationContract]
         long Count();
 
-        [OperationContract(Name = "CountByExpression")]
-        long Count(ExpressionNode predicateExpressionNode);
+        [OperationContract]
+        long CountBy(ExpressionNode predicateExpressionNode);
        
         #endregion
 
         #region Contains
 
-        [OperationContract(Name = "ContainsById")]
+        [OperationContract]
         bool Contains(TKey id);
 
-        [OperationContract(Name = "Contains")]
-        bool Contains(TDTO dto);
-
-        [OperationContract(Name = "ContainsByExpression")]
-        bool Contains(ExpressionNode predicateExpressionNode);
+        [OperationContract]
+        bool ContainsBy(ExpressionNode predicateExpressionNode);
         
         #endregion
 
-        #region RetrievePagedData
+        #region GetPagedData
 
-        [OperationContract(Name = "RetrievePagedDataByExpression")]
-        IEnumerable<TDTO> RetrievePagedData(ExpressionNode predicateExpressionNode, int pageNumber, int pageSize, out int pageCount);
+        [OperationContract]
+        IEnumerable<TDTO> GetPagedDataBy(ExpressionNode predicateExpressionNode, int pageNumber, int pageSize, out int pageCount);
 
-        [OperationContract(Name = "RetrievePagedData")]
-        IEnumerable<TDTO> RetrievePagedData(int pageNumber, int pageSize, out int pageCount);
+        [OperationContract]
+        IEnumerable<TDTO> GetPagedData(int pageNumber, int pageSize, out int pageCount);
         
         #endregion
     }

@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppPlus.Common.Extensions
+namespace HisPlus.Infrastructure.Extensions
 {
     public static class ObjectEx
     {

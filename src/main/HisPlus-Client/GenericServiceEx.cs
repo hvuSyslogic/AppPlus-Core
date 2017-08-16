@@ -12,33 +12,33 @@ namespace HisPlus.Client
     {
         private const int PageSize = 100000;
 
-        #region RetrieveAllByPage
+        #region GetAllByPage
 
-        public static IEnumerable<TDTO> RetrieveAllByPage<TDTO>(this IGenericService<TDTO, int> service)
+        public static IEnumerable<TDTO> GetAllByPage<TDTO>(this IGenericService<TDTO, int> service)
             where TDTO : DtoBase<int>, new()
         {
-            return RetrieveAllByPage<TDTO, int>(service, PageSize);
+            return GetAllByPage<TDTO, int>(service, PageSize);
         }
 
-        public static IEnumerable<TDTO> RetrieveAllByPage<TDTO>(this IGenericService<TDTO, long> service)
+        public static IEnumerable<TDTO> GetAllByPage<TDTO>(this IGenericService<TDTO, long> service)
             where TDTO : DtoBase<long>, new()
         {
-            return RetrieveAllByPage<TDTO, long>(service, PageSize);
+            return GetAllByPage<TDTO, long>(service, PageSize);
         }
 
-        public static IEnumerable<TDTO> RetrieveAllByPage<TDTO>(this IGenericService<TDTO, int> service, int pageSize)
+        public static IEnumerable<TDTO> GetAllByPage<TDTO>(this IGenericService<TDTO, int> service, int pageSize)
             where TDTO : DtoBase<int>, new()
         {
-            return RetrieveAllByPage<TDTO, int>(service, pageSize);
+            return GetAllByPage<TDTO, int>(service, pageSize);
         }
 
-        public static IEnumerable<TDTO> RetrieveAllByPage<TDTO>(this IGenericService<TDTO, long> service, int pageSize)
+        public static IEnumerable<TDTO> GetAllByPage<TDTO>(this IGenericService<TDTO, long> service, int pageSize)
             where TDTO : DtoBase<long>, new()
         {
-            return RetrieveAllByPage<TDTO, long>(service, pageSize);
+            return GetAllByPage<TDTO, long>(service, pageSize);
         }
 
-        private static IEnumerable<TDTO> RetrieveAllByPage<TDTO, TKey>(this IGenericService<TDTO, TKey> service, int pageSize)
+        private static IEnumerable<TDTO> GetAllByPage<TDTO, TKey>(this IGenericService<TDTO, TKey> service, int pageSize)
             where TDTO : DtoBase<TKey>, new()
             where TKey : struct
         {
@@ -47,7 +47,7 @@ namespace HisPlus.Client
             int pageCount = 0;
             do
             {
-                var page = service.RetrievePagedData(nextPageNumber, pageSize, out pageCount);
+                var page = service.GetPagedData(nextPageNumber, pageSize, out pageCount);
                 pages.AddRange(page);
 
             } while (nextPageNumber++ < pageCount);

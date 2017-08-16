@@ -98,9 +98,6 @@
     <Compile Include="Compatible\BaseCloneableObject.cs" />
     <Compile Include="DependencyInjection\AllTypes.cs" />
     <Compile Include="Extensions\ArrayEx.cs" />
-    <Compile Include="Extensions\CacheProviderEx.cs" />
-    <Compile Include="Cache\IRedisContext.cs" />
-    <Compile Include="Cache\RedisContext.cs" />
     <Compile Include="Extensions\DtoEx.cs" />
     <Compile Include="Extensions\EntityEx.cs" />
     <Compile Include="Compatible\EnumCompareToType.cs" />
@@ -164,7 +161,15 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Cache\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\HisPlus-Redis\HisPlus-Redis.csproj">
+      <Project>{c5e42405-f442-493d-bab6-dec93214ca25}</Project>
+      <Name>HisPlus-Redis</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

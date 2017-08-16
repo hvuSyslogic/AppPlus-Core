@@ -59,12 +59,12 @@ namespace HisPlus.Core.Abstractions.Support
 
         #region Create
 
-        public virtual TEntity Create(TEntity entity)
+        public virtual TEntity Add(TEntity entity)
         {            
             return this.EFSet.Add(entity);
         }
 
-        public virtual IEnumerable<TEntity> Create(IEnumerable<TEntity> entities)
+        public virtual IEnumerable<TEntity> Add(IEnumerable<TEntity> entities)
         {
             this.EFSet.AddRange(entities);
             
@@ -75,12 +75,12 @@ namespace HisPlus.Core.Abstractions.Support
 
         #region Retrieve
 
-        public virtual TEntity Retrieve(params object[] keyValues)
+        public virtual TEntity Get(params object[] keyValues)
         {
             return this.EFSet.Find(keyValues);
         }        
 
-        public virtual IQueryable<TEntity> Retrieve(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, 
+        public virtual IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, 
             IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
         {
             IQueryable<TEntity> queryable = this.EFSet;
@@ -144,7 +144,7 @@ namespace HisPlus.Core.Abstractions.Support
 
         public virtual void Delete(object id)
         {
-            var entity = Retrieve(id);
+            var entity = Get(id);
             
             this.EFSet.Remove(entity);
         }
@@ -217,7 +217,7 @@ namespace HisPlus.Core.Abstractions.Support
 
         #region RetrievePagedData
 
-        public virtual IQueryable<TEntity> RetrievePagedData(Expression<Func<TEntity, bool>> predicate, 
+        public virtual IQueryable<TEntity> GetPagedData(Expression<Func<TEntity, bool>> predicate, 
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy, int pageNumber, int pageSize, out int pageCount)
         {
             string primarykeyPropertyName = "Id";

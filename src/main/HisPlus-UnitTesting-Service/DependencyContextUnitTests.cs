@@ -14,6 +14,8 @@ using HisPlus.Domain;
 using HisPlus.Infrastructure.Config;
 using HisPlus.Services;
 using HisPlus.Infrastructure.DependencyInjection;
+using Castle.MicroKernel.Registration;
+using HisPlus.Core.Abstractions.Support;
 
 namespace HisPlus.UnitTesting
 {
@@ -36,7 +38,7 @@ namespace HisPlus.UnitTesting
                 area.Should().NotBeNull();
 
                 var service = container.Resolve<IBsLocationService>();
-                var result = service.RetrieveAll();
+                var result = service.GetAll();
                 result.Should().NotBeNullOrEmpty();                
             }
         }
@@ -57,6 +59,6 @@ namespace HisPlus.UnitTesting
                     var type = handler.ComponentModel.Implementation;
                 }
             }
-        }
+        }        
     }
 }

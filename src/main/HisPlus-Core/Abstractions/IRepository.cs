@@ -19,19 +19,19 @@ namespace HisPlus.Core.Abstractions
 
         #endregion
 
-        #region Create
+        #region Add
 
-        TEntity Create(TEntity entity);
+        TEntity Add(TEntity entity);
 
-        IEnumerable<TEntity> Create(IEnumerable<TEntity> entities);
+        IEnumerable<TEntity> Add(IEnumerable<TEntity> entities);
         
         #endregion
 
-        #region Retrieve
+        #region Get
 
-        TEntity Retrieve(params object[] keyValues);
+        TEntity Get(params object[] keyValues);
 
-        IQueryable<TEntity> Retrieve(Expression<Func<TEntity, bool>> predicate = null, 
+        IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicate = null, 
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "");
 
         #endregion
@@ -78,7 +78,7 @@ namespace HisPlus.Core.Abstractions
 
         #region RetrievePagedData
 
-        IQueryable<TEntity> RetrievePagedData(Expression<Func<TEntity, bool>> predicate, 
+        IQueryable<TEntity> GetPagedData(Expression<Func<TEntity, bool>> predicate, 
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy, int pageNumber, int pageSize, out int pageCount);
 
         #endregion

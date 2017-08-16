@@ -13,10 +13,11 @@ using HisPlus.Infrastructure;
 using HisPlus.Infrastructure.Contract.Messages;
 using HisPlus.Infrastructure.Exceptions;
 using Castle.Core.Logging;
-using HisPlus.Infrastructure.Cache;
 using HisPlus.Infrastructure.CodeContracts;
 using HisPlus.Infrastructure.DependencyInjection;
 using HisPlus.Infrastructure.Extensions;
+using Castle.Facilities.WcfIntegration;
+using Castle.MicroKernel.Registration;
 
 namespace HisPlus.Client
 {
@@ -28,13 +29,10 @@ namespace HisPlus.Client
         {
             var config = IoCManager.Container.Resolve<IHisPlusConfiguration>();
             IsDistributed = (config.Provider == ProviderType.Agent);
-            RedisContext = IoCManager.Container.Resolve<IRedisContext>();
         }        
         #endregion
 
         #region Private Properties
-
-        private static IRedisContext RedisContext { get; set; }
 
         private static ILogger Logger 
         {
@@ -141,7 +139,7 @@ namespace HisPlus.Client
         {
             if (IsDistributed)
             {
-                return ProxyManager.GetProxy<T>();
+               return ProxyManager.GetProxy<T>();
             }
 
             return IoCManager.Container.Resolve<T>();

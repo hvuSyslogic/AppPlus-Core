@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using AppPlus.Common.Extensions;
+using HisPlus.Infrastructure.Extensions;
 
 namespace HisPlus.Infrastructure.DependencyInjection
 {

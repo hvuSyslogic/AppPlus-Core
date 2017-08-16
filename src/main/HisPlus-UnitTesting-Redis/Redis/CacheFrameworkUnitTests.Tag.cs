@@ -14,10 +14,15 @@ using HisPlus.Redis;
 namespace HisPlus.UnitTesting.Redis
 {
     public partial class CacheFrameworkUnitTests : TestBase
-    {        
-        private const string TraitName = "CacheFrameworkUnitTests";
-        private const string TraitValue = "CacheFramework.Redis";
+    {
+        [Fact]
+        public void AddTagsToHashField_Test() 
+        {
+            string[] tags = new[] { "AddTagsToHashField_Test-1", "AddTagsToHashField_Test-2" };
+            redisContext.Cache.AddTagsToHashField<BsLocationDTO>(856, tags);
 
-        private static readonly IRedisContext redisContext = IoCManager.Container.Resolve<IRedisContext>();
+            redisContext.Cache.GetAllTags().Should().Contain(tags[0]);
+        }
+
     }
 }

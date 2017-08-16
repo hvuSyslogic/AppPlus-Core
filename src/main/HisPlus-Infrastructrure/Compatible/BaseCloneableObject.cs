@@ -6,9 +6,12 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using HisPlus.Infrastructure.Compatible.DynamicProxy;
+using System.Runtime.Serialization;
 
 namespace HisPlus.Infrastructure.Compatible
 {
+    [Serializable]
+    [DataContract]
     public abstract class BaseCloneableObject : ICloneable
     {
         public object Clone()

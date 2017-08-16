@@ -41,7 +41,7 @@ namespace HisPlus.UnitTesting.Service
                 rows.Add(row);
             }
 
-            var result = CallService((IGblRoleService x) => x.Create(rows));
+            var result = CallService((IGblRoleService x) => x.AddBatch(rows));
             result.Should().NotBeNull();
             result.Count().Should().Be(Constants.Mock_Record_Counts);            
         }
@@ -51,7 +51,7 @@ namespace HisPlus.UnitTesting.Service
             Expression<Func<GblRoleDTO, bool>> expression = ((GblRoleDTO x) => x.IconIndex == Constants.To_Be_Delete_Records);
             var expressionNode = expression.ToExpressionNode();
 
-            CallService((IGblRoleService x) => x.Delete(expressionNode)).Should().Be(Constants.Mock_Record_Counts);
+            CallService((IGblRoleService x) => x.DeleteBy(expressionNode)).Should().Be(Constants.Mock_Record_Counts);
         }
     }
 }

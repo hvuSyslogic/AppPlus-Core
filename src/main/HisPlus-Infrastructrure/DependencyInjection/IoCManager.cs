@@ -12,10 +12,10 @@ using Castle.MicroKernel.Registration;
 using Depends = Castle.MicroKernel.Registration.Dependency;
 using CachingFramework.Redis.Contracts;
 using CachingFramework.Redis;
-using HisPlus.Infrastructure.Cache;
 using HisPlus.Infrastructure.Config;
 using HisPlus.Infrastructure.CodeContracts;
 using HisPlus.Infrastructure.Extensions;
+using HisPlus.Redis;
 
 namespace HisPlus.Infrastructure.DependencyInjection
 {
@@ -26,11 +26,25 @@ namespace HisPlus.Infrastructure.DependencyInjection
 
         #region static constructor
         
-        // Load configuration from app config automatically
         static IoCManager()
         {
+            Bootstrapper();
+        }
+
+        #endregion
+
+        #region Bootstrapper
+
+        private static void Bootstrapper()
+        {
+            // The first step: we should register logger in castle windsor.
             SetupLogger();
-            BuildContainer(HisConfigurationManager.Initialize());
+
+            // The second step: Loading configuration from app config.
+            var config = HisConfigurationManager.Initialize();
+
+            // The thrid step: Build castle windsor container with configuration.
+            BuildContainer(config);
         }
 
         #endregion
@@ -52,7 +66,7 @@ namespace HisPlus.Infrastructure.DependencyInjection
 
         #endregion
 
-        #region build container for castle windsor
+        #region Build castle windsor container with configuration
 
         private static void BuildContainer(IHisPlusConfiguration config)
         {            
@@ -76,9 +90,10 @@ namespace HisPlus.Infrastructure.DependencyInjection
         private static void SetupCacheProvider(ICacheProvider cacheConfig)
         {
             var keyFormat = cacheConfig.CustomizedKey.KeyFormat;
+            var connectionString = cacheConfig.ConnectionString.Value;
 
             Container.Register(Component.For<IRedisContext>().ImplementedBy<RedisContext>()
-                .DependsOn(Depends.OnValue("connectionString", cacheConfig.ConnectionString.Value))
+                .DependsOn(Depends.OnValue("connectionString", connectionString))
                 .LifestyleSingleton());
         }
 
@@ -94,7 +109,7 @@ namespace HisPlus.Infrastructure.DependencyInjection
 
                 if (config.Provider == ProviderType.Local)
                 {
-                    config.LocalProvider.Installers.ToList().ForEach(installer =>
+                    config.LocalProvider.Installers.ForEach(installer =>
                     {
                         Container.Install(FromAssembly.Named(installer.Assembly));
                     });
@@ -104,11 +119,15 @@ namespace HisPlus.Infrastructure.DependencyInjection
 
         #endregion
 
+        #region internal class
+
         private class Nested
         {
             static Nested() { }
 
             internal readonly static IWindsorContainer _instance = new WindsorContainer();
         }
+
+        #endregion
     }    
 }

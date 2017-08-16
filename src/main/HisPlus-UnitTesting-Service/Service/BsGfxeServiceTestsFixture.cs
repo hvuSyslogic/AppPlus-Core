@@ -12,13 +12,18 @@ using Xunit;
 using HisPlus.Contract.Messages;
 using HisPlus.Contract.Services;
 using HisPlus.UnitTesting.Common;
+using HisPlus.Infrastructure.DependencyInjection;
+using Castle.MicroKernel.Registration;
+using Castle.Facilities.WcfIntegration;
+using System.ServiceModel;
+using HisPlus.Infrastructure.Contract.Services;
 
 namespace HisPlus.UnitTesting.Service
 {
     public class BsGfxeServiceTestsFixture : ClassFixtureBase<BsGfxeDTO>
     {
         public BsGfxeServiceTestsFixture()
-        {
+        { 
             BuildDataSource();
         }
 
@@ -43,7 +48,7 @@ namespace HisPlus.UnitTesting.Service
                 rows.Add(row);
             }
 
-            DataSource = CallService((IBsGfxeService x) => x.Create(rows));
+            DataSource = CallService((IBsGfxeService x) => x.AddBatch(rows));
             DataSource.Should().NotBeNullOrEmpty();
             DataSource.Count().Should().Be(Constants.Mock_Record_Counts);            
         }
@@ -53,7 +58,7 @@ namespace HisPlus.UnitTesting.Service
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IconIndex == Constants.To_Be_Delete_Records);
             var expressionNode = expression.ToExpressionNode();
 
-            var effectedRows = CallService((IBsGfxeService x) => x.Delete(expressionNode));
+            var effectedRows = CallService((IBsGfxeService x) => x.DeleteBy(expressionNode));
 
             //Assert.True(effectedRows == RECORD_COUNT);
         }

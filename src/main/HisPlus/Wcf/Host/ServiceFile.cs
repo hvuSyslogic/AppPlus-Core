@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Hosting;
 using System.IO;
+using HisPlus.Infrastructure.Extensions;
 
 namespace HisPlus.WCF.Host
 {
@@ -18,8 +19,7 @@ namespace HisPlus.WCF.Host
         {
             get
             {
-                return base.VirtualPath
-                    .Replace(ServiceHostConfiguration.PathSeparator, string.Empty)
+                return base.VirtualPath.Replace(ServiceHostConfiguration.PathSeparator, string.Empty)
                     .Replace(ServiceHostConfiguration.Extension, string.Empty)
                     .TrimStart(ServiceHostConfiguration.Prefix.ToCharArray());                
             }
@@ -35,9 +35,13 @@ namespace HisPlus.WCF.Host
             var serviceDef = new MemoryStream();
             var defWriter = new StreamWriter(serviceDef);
             string serviceName = this.GetService();
-            var type = typeof(DynamicHostFactory);
-            var typeName = string.Format("{0}, {1}", type.FullName, type.Assembly.FullName);
-            var serviceHostDef = string.Format(ServiceHostConfiguration.Definition, ServiceHostConfiguration.Debug, serviceName, typeName);                            
+                        
+            //var type = typeof(DynamicHostFactory);
+            //var typeName = string.Format("{0}, {1}", type.FullName, type.Assembly.FullName);
+
+            //https://stackoverflow.com/questions/10085172/using-castle-windsor-wcffacility-to-create-client-endpoints
+            //var serviceHostDef = string.Format(ServiceHostConfiguration.Definition, ServiceHostConfiguration.Debug, serviceName, typeName);                            
+            var serviceHostDef = string.Format(ServiceHostConfiguration.Definition, serviceName);
 
             defWriter.Write(serviceHostDef);
             defWriter.Flush();

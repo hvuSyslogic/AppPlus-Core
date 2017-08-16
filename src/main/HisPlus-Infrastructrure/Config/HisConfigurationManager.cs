@@ -14,58 +14,54 @@ using HisPlus.Infrastructure.CodeContracts;
 namespace HisPlus.Infrastructure.Config
 {
     internal class HisConfigurationManager
-    {        
-        private static IHisPlusConfiguration _configuration;
+    {
         private static object _lock = new object();
-        private static ILogger _logger = typeof(HisConfigurationManager).GetLogger();        
+        private static bool _hasLoaded;        
+        private static ILogger _logger = typeof(HisConfigurationManager).GetLogger();
 
-        static HisConfigurationManager()
+        internal static IHisPlusConfiguration Initialize()
         {
-            if (_configuration == null)
+            var config = LoadConfigurationFromAppConfig();
+
+            return SetRedisConnectionString(config);
+        }
+
+        private static IHisPlusConfiguration LoadConfigurationFromAppConfig()
+        {
+            if (!_hasLoaded)
             {
                 lock (_lock)
                 {
-                    if (_configuration == null)
+                    if (!_hasLoaded)
                     {
-                        AutoConfig.WhenMapping<IHisPlusConfiguration>(mapper =>
+                        AutoConfig.WhenMapping<IHisPlusConfiguration>(ms =>
                         {
-                            mapper.Map(x => x.AgentProvider).Optional();
-                            mapper.Map(x => x.LocalProvider).Optional();                            
-                            mapper.Map(x => x.ClientCacheProvider).Optional();
+                            ms.Map(x => x.AgentProvider).Optional();
+                            ms.Map(x => x.LocalProvider).Optional();
+                            ms.Map(x => x.ClientCacheProvider).Optional();
                         });
 
-                        AutoConfig.WhenMapping<IConnectionString>(mapper => 
+                        AutoConfig.WhenMapping<IConnectionString>(ms =>
                         {
-                            mapper.Map(x => x.Value).Optional();
+                            ms.Map(x => x.Value).Optional();
                         });
 
-                        try
-                        {
-                            _configuration = AutoConfig.Map<IHisPlusConfiguration>();
-                            _logger.Info("Successfully loaded HisPlusConfiguration from app config.");
+                        IHisPlusConfiguration _configuration = AutoConfig.Map<IHisPlusConfiguration>();                        
 
-                            _configuration.AssertConfigurationIsValid();                            
-                        }
-                        catch (Exception ex)
-                        {                            
-                            _logger.Error("Failed to load HisPlus configuration: ", ex);
-                            throw;
-                        }                        
-                    }                    
+                        _configuration.AssertConfigurationIsValid();
+                        _hasLoaded = true;
+
+                        _logger.Info("Successfully loaded HisPlusConfiguration from app config.");
+
+                        return _configuration;
+                    }
                 }
-            }                       
-        }
+            }
 
-        internal static IHisPlusConfiguration Initialize() 
-        {
-            Requires.NotNull(_configuration, "HisPlusConfiguration");
+            return null;
+        }        
 
-            SetRedisConnectionString(_configuration);
-
-            return _configuration;
-        }
-
-        private static void SetRedisConnectionString(IHisPlusConfiguration config)
+        private static IHisPlusConfiguration SetRedisConnectionString(IHisPlusConfiguration config)
         {
             var connectionStringName = config.ClientCacheProvider.ConnectionString.Name;
 
@@ -76,6 +72,8 @@ namespace HisPlus.Infrastructure.Config
             var connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
 
             config.ClientCacheProvider.ConnectionString.Value = connectionString;
-        }    
+
+            return config;
+        }
     }
 }

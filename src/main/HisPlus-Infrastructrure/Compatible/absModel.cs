@@ -7,14 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 using HisPlus.Infrastructure.Compatible.DynamicProxy;
 using HisPlus.Infrastructure.Extensions;
+using System.Runtime.Serialization;
 
 namespace HisPlus.Infrastructure.Compatible
 {
+    [Serializable]
+    [DataContract]
     public abstract class absModel : BaseCloneableObject, IComparable<absModel>, IModel
     {
         public bool IsModify { get; set; }
 
-        public bool IsSelected { get; set; }        
+        public bool IsSelected { get; set; }
 
         public string StrTemp { get; set; }
 

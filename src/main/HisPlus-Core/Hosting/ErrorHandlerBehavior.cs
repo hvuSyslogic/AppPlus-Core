@@ -8,7 +8,7 @@ using System.ServiceModel.Dispatcher;
 using System.Web;
 using System.Collections.ObjectModel;
 
-namespace HisPlus.WCF
+namespace HisPlus.Core.Hosting
 {
     public class ErrorHandlerBehavior : IServiceBehavior
     {

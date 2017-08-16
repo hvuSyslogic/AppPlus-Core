@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HisPlus.Infrastructure.Cache
+namespace HisPlus.Redis
 {
     public interface IRedisContext : IContext
     {

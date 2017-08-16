@@ -10,6 +10,12 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using HisPlus.Infrastructure.Extensions;
 using HisPlus.Core.Abstractions.Support;
+using HisPlus.Infrastructure.DependencyInjection;
+using HisPlus.Infrastructure.Config;
+using System.ServiceModel.Description;
+using System.ServiceModel;
+using Castle.Facilities.WcfIntegration;
+using HisPlus.Core.Hosting;
 
 namespace HisPlus.Services.DependencyInjection.Installer
 {
@@ -21,22 +27,18 @@ namespace HisPlus.Services.DependencyInjection.Installer
         }
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
-        {
-            container.Register(Classes.FromThisAssembly().BasedOn<ServiceRoot>()
+        {           
+            container.Register(Classes.FromThisAssembly().BasedOn<ServiceRoot>()            
                 .WithService.DefaultInterfaces().Configure(c => c.LifestyleTransient()));
 
-            Logger.InfoFormat("Services was successfully installed from assembly '{0}'.", GetType().Assembly);
-
-            InstallAutoMapper();
-
-            Logger.InfoFormat("Automapper profiles was successfully configured from assembly '{0}'.", GetType().Assembly);
+            SetupMapperConfiguration();
         }
 
-        private void InstallAutoMapper()
+        private void SetupMapperConfiguration()
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.AddProfiles(GetType().Assembly);
+                cfg.AddProfiles(typeof(ServiceInstaller).Assembly);
             });
         }
     }

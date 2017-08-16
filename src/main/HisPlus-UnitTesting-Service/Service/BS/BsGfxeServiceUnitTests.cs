@@ -22,40 +22,40 @@ namespace HisPlus.UnitTesting.Service.BS
     {
         private const string TraitName = "BSGfxeServiceUnitTests";        
 
-        #region Retrieve
+        #region Get
 
-        [Fact(DisplayName = "Retrieve_By_Id_Argument_Out_Range_NOK")]
-        [Trait(TraitName, "Retrieve")]
-        public void Retrieve_By_Id_Argument_Out_Range_NOK()
+        [Fact(DisplayName = "Get_By_Id_Argument_Out_Range_NOK")]
+        [Trait(TraitName, "Get")]
+        public void Get_By_Id_Argument_Out_Range_NOK()
         {
-            Action retrieveById = () => CallService((IBsGfxeService x) => x.RetrieveById(Constants.Invalid_Primary_Key));            
+            Action retrieveById = () => CallService((IBsGfxeService x) => x.GetById(Constants.Invalid_Primary_Key));            
             retrieveById.ShouldThrow<HisPlusException>();
         }
 
-        [Fact(DisplayName = "Retrieve_By_Id_OK")]
-        [Trait(TraitName, "Retrieve")]
+        [Fact(DisplayName = "Get_By_Id_OK")]
+        [Trait(TraitName, "Get")]
         public void Retrieve_By_Id_OK()
         {
             DataSource.Should().NotBeNullOrEmpty();
 
             int id = DataSource.FirstOrDefault().Id;
-            var result = CallService((IBsGfxeService x) => x.RetrieveById(id));
+            var result = CallService((IBsGfxeService x) => x.GetById(id));
 
             result.Should().NotBeNull();
             result.Id.Should().Be(id);
         }  
 
-        [Fact(DisplayName = "Retrieve_All_OK")]
-        [Trait(TraitName, "Retrieve")]
-        public void RetrieveAll_OK()
+        [Fact(DisplayName = "Get_All_OK")]
+        [Trait(TraitName, "Get")]
+        public void GetAll_OK()
         {
-            var result = CallService((IBsGfxeService x) => x.RetrieveAll());
+            var result = CallService((IBsGfxeService x) => x.GetAll());
             result.Should().NotBeNullOrEmpty();
         }              
 
-        [Fact(DisplayName = "Retrieve_By_Expression_OK")]
-        [Trait(TraitName, "Retrieve")]
-        public void Retrieve_By_Expression_OK()
+        [Fact(DisplayName = "Get_By_Expression_OK")]
+        [Trait(TraitName, "Get")]
+        public void Get_By_Expression_OK()
         {
             DataSource.Should().NotBeNullOrEmpty();
 
@@ -64,26 +64,26 @@ namespace HisPlus.UnitTesting.Service.BS
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => item.PyCode == x.PyCode && x.IsActive);
             var expressionNode = expression.ToExpressionNode();
 
-            var result = CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
+            var result = CallService((IBsGfxeService x) => x.GetBy(expressionNode));
             result.Should().NotBeNullOrEmpty();
             //result.Count().Should().Be(DataSource.Count());
         }
 
-        [Fact(DisplayName = "Retrieve_By_Expression_With_Null_Expression_Node_NOK")]
-        [Trait(TraitName, "Retrieve")]
-        public void Retrieve_By_Expression_With_Null_Expression_Node_NOK()
+        [Fact(DisplayName = "Get_By_Expression_With_Null_Expression_Node_NOK")]
+        [Trait(TraitName, "Get")]
+        public void Get_By_Expression_With_Null_Expression_Node_NOK()
         {         
-            Action retrieve = () => CallService((IBsGfxeService x) => x.Retrieve((ExpressionNode)null));
+            Action retrieve = () => CallService((IBsGfxeService x) => x.GetBy((ExpressionNode)null));
             retrieve.ShouldThrow<HisPlusException>();
         }
 
-        [Fact(DisplayName = "Retrieve_By_Expression_Include_Key_NOK")]
-        [Trait(TraitName, "Retrieve")]
-        public void Retrieve_By_Expression_Include_Key_NOK()
+        [Fact(DisplayName = "Get_By_Expression_Include_Key_NOK")]
+        [Trait(TraitName, "Get")]
+        public void Get_By_Expression_Include_Key_NOK()
         {
             Expression<Func<BsGfxeDTO, bool>> expression = (BsGfxeDTO x) => x.Id == 3;
             ExpressionNode predicateExpressionNode = expression.ToExpressionNode();
-            Action retrieve = () => CallService((IBsGfxeService x) => x.Retrieve(predicateExpressionNode));
+            Action retrieve = () => CallService((IBsGfxeService x) => x.GetBy(predicateExpressionNode));
             
             retrieve.ShouldThrow<HisPlusException>();
         }
@@ -92,25 +92,14 @@ namespace HisPlus.UnitTesting.Service.BS
 
         #region Contains
 
-        [Fact(DisplayName = "Contains_OK")]
+        [Fact(DisplayName = "Contains_By_Id_OK")]
         [Trait(TraitName, "Contains")]
-        public void Contains_OK()
+        public void Contains_By_Id_OK()
         {
-            var result = CallService((IBsGfxeService x) => x.Contains(DataSource.First().Id));
+            int id = DataSource.First().Id;
+            var result = CallService((IBsGfxeService x) => x.Contains(id));
             result.Should().BeTrue();
-        }
-
-        [Fact(DisplayName = "Contains_By_Entity_OK")]
-        [Trait(TraitName, "Contains")]
-        public void Contains_By_Entity_OK()
-        {
-            var result = CallService((IBsGfxeService x) => x.RetrieveAll());
-            result.Should().NotBeNullOrEmpty();
-
-            var item = result.FirstOrDefault();            
-            var exists = CallService((IBsGfxeService x) => x.Contains(item));
-            exists.Should().BeTrue();
-        }
+        }        
 
         [Fact(DisplayName = "Contains_By_Expression_OK")]
         [Trait(TraitName, "Contains")]
@@ -118,23 +107,15 @@ namespace HisPlus.UnitTesting.Service.BS
         {
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IsActive);
             var expressionNode = expression.ToExpressionNode();
-            var result = CallService((IBsGfxeService x) => x.Contains(expressionNode));
+            var result = CallService((IBsGfxeService x) => x.ContainsBy(expressionNode));
             result.Should().BeTrue();            
-        }
-
-        [Fact(DisplayName = "Contains_Null_Entity_NOK")]
-        [Trait(TraitName, "Contains")]
-        public void Contains_Null_Entity_NOK()
-        {
-            Action action = () => CallService((IBsGfxeService x) => x.Contains((BsGfxeDTO)null));
-            action.ShouldThrow<HisPlusException>();
         }
 
         [Fact(DisplayName = "Contains_By_Expression_With_Null_Expression_Node_NOK")]
         [Trait(TraitName, "Contains")]
         public void Contains_By_Expression_With_Null_Expression_Node_NOK()
         {
-            Action action = () => CallService((IBsGfxeService x) => x.Contains((ExpressionNode)null));
+            Action action = () => CallService((IBsGfxeService x) => x.ContainsBy((ExpressionNode)null));
             action.ShouldThrow<HisPlusException>();
         }
 
@@ -144,7 +125,7 @@ namespace HisPlus.UnitTesting.Service.BS
         {
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.Id > 0);
             var expressionNode = expression.ToExpressionNode();
-            Action action = () => CallService((IBsGfxeService x) => x.Contains(expressionNode));
+            Action action = () => CallService((IBsGfxeService x) => x.ContainsBy(expressionNode));
             action.ShouldThrow<HisPlusException>();            
         }
 
@@ -166,12 +147,12 @@ namespace HisPlus.UnitTesting.Service.BS
         {
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IsActive);
             var expressionNode = expression.ToExpressionNode();
-            var result = CallService((IBsGfxeService x) => x.Count(expressionNode));
+            var result = CallService((IBsGfxeService x) => x.CountBy(expressionNode));
             result.Should().BeGreaterThan(0);
 
             expression = ((BsGfxeDTO x) => x.PyCode == "CSFYXE");
             expressionNode = expression.ToExpressionNode();
-            result = CallService((IBsGfxeService x) => x.Count(expressionNode));
+            result = CallService((IBsGfxeService x) => x.CountBy(expressionNode));
             result.Should().BeGreaterThan(0);
         }
 
@@ -182,7 +163,7 @@ namespace HisPlus.UnitTesting.Service.BS
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.Id > 0);
             var expressionNode = expression.ToExpressionNode();
 
-            Action countAction = () => CallService((IBsGfxeService x) => x.Count(expressionNode));
+            Action countAction = () => CallService((IBsGfxeService x) => x.CountBy(expressionNode));
             countAction.ShouldThrow<HisPlusException>();
         }
 
@@ -190,18 +171,18 @@ namespace HisPlus.UnitTesting.Service.BS
         [Trait(TraitName, "Count")]
         public void Count_By_Expression_With_Null_Expression_Node_NOK()
         {
-            Action countAction = () => CallService((IBsGfxeService x) => x.Count((ExpressionNode)null));
+            Action countAction = () => CallService((IBsGfxeService x) => x.CountBy((ExpressionNode)null));
             countAction.ShouldThrow<HisPlusException>();
         }
         #endregion
 
-        #region Create
+        #region Add
 
-        [Fact(DisplayName = "Create_OK")]
-        [Trait(TraitName, "Create")]
-        public void Create_OK()
+        [Fact(DisplayName = "Add_OK")]
+        [Trait(TraitName, "Add")]
+        public void Add_OK()
         {
-            var result = CallService((IBsGfxeService x) => x.RetrieveAll());
+            var result = CallService((IBsGfxeService x) => x.GetAll());
             result.Should().NotBeNullOrEmpty();
 
             var newItem = result.FirstOrDefault();
@@ -215,20 +196,20 @@ namespace HisPlus.UnitTesting.Service.BS
             
             newItem.Id.Should().BeLessOrEqualTo(0);
 
-            newItem = CallService((IBsGfxeService x) => x.Create(newItem));
+            newItem = CallService((IBsGfxeService x) => x.Add(newItem));
 
             newItem.Should().NotBeNull();
             newItem.Id.Should().BeGreaterThan(0);
 
-            var result1 = CallService((IBsGfxeService x) => x.RetrieveById(newItem.Id));
+            var result1 = CallService((IBsGfxeService x) => x.GetById(newItem.Id));
             result1.Should().NotBeNull();
         }
 
-        [Fact(DisplayName = "Create_Null_Entity_NOK")]
-        [Trait(TraitName, "Create")]
-        public void Create_Null_Entity_NOK()
+        [Fact(DisplayName = "Add_Null_Entity_NOK")]
+        [Trait(TraitName, "Add")]
+        public void Add_Null_Entity_NOK()
         {
-            Action action = () => CallService((IBsGfxeService x) => x.Create((BsGfxeDTO)null));
+            Action action = () => CallService((IBsGfxeService x) => x.Add((BsGfxeDTO)null));
             action.ShouldThrow<HisPlusException>();
         }
         #endregion
@@ -241,7 +222,7 @@ namespace HisPlus.UnitTesting.Service.BS
         {
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IconIndex == Constants.To_Be_Delete_Records);
             var expressionNode = expression.ToExpressionNode();
-            var result = CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
+            var result = CallService((IBsGfxeService x) => x.GetBy(expressionNode));
             result.Should().NotBeNullOrEmpty();
 
             var itemToBeUpdated = result.FirstOrDefault();
@@ -255,7 +236,7 @@ namespace HisPlus.UnitTesting.Service.BS
             itemToBeUpdated.IsActive = true;
             CallService((IBsGfxeService x) => x.Update(itemToBeUpdated));
 
-            var updatedItem = CallService((IBsGfxeService x) => x.RetrieveById(itemToBeUpdated.Id));
+            var updatedItem = CallService((IBsGfxeService x) => x.GetById(itemToBeUpdated.Id));
             
             updatedItem.Should().NotBeNull();
             updatedItem.Code.Should().Be(code);
@@ -267,7 +248,7 @@ namespace HisPlus.UnitTesting.Service.BS
         {
             Expression<Func<BsGfxeDTO, bool>> expression = ((BsGfxeDTO x) => x.IconIndex == Constants.To_Be_Delete_Records);
             var expressionNode = expression.ToExpressionNode();
-            var result = CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
+            var result = CallService((IBsGfxeService x) => x.GetBy(expressionNode));
             result.Should().NotBeNullOrEmpty();
 
             string name = "TESTING DATA";
@@ -277,8 +258,8 @@ namespace HisPlus.UnitTesting.Service.BS
                 item.Name = name;
             }
 
-            CallService((IBsGfxeService x) => x.Update(result));
-            result = CallService((IBsGfxeService x) => x.Retrieve(expressionNode));
+            CallService((IBsGfxeService x) => x.UpdateBatch(result));
+            result = CallService((IBsGfxeService x) => x.GetBy(expressionNode));
             foreach (var item in result)
             {
                 item.Name.Should().Be(name);

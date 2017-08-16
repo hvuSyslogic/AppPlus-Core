@@ -8,7 +8,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.Collections.ObjectModel;
 
-namespace HisPlus.WCF
+namespace HisPlus.Core.Hosting
 {
     public class GlobalErrorBehaviorAttribute : Attribute, IServiceBehavior
     {

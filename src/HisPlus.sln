@@ -52,6 +52,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-UnitTesting-Common"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-MQ", "main\HisPlus-MQ\HisPlus-MQ.csproj", "{E596E8B0-2268-49E8-8455-309787BA1C1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HisPlus-Redis", "HisPlus-Redis\HisPlus-Redis.csproj", "{C5E42405-F442-493D-BAB6-DEC93214CA25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,6 +116,10 @@ Global
 		{E596E8B0-2268-49E8-8455-309787BA1C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E596E8B0-2268-49E8-8455-309787BA1C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E596E8B0-2268-49E8-8455-309787BA1C1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5E42405-F442-493D-BAB6-DEC93214CA25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5E42405-F442-493D-BAB6-DEC93214CA25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5E42405-F442-493D-BAB6-DEC93214CA25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5E42405-F442-493D-BAB6-DEC93214CA25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -133,6 +139,7 @@ Global
 		{569DC5B6-8269-431D-8A5A-B9FC197B6122} = {DD4ADB69-38E2-46BF-B7BA-451C38C6C675}
 		{BD4F5FCC-7578-4C75-88E5-D134C699FE65} = {DD4ADB69-38E2-46BF-B7BA-451C38C6C675}
 		{E596E8B0-2268-49E8-8455-309787BA1C1B} = {16D79C93-C630-46EF-B3E9-0319AF011895}
+		{C5E42405-F442-493D-BAB6-DEC93214CA25} = {16D79C93-C630-46EF-B3E9-0319AF011895}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35

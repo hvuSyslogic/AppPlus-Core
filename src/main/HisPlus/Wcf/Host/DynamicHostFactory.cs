@@ -12,6 +12,7 @@ using HisPlus.Infrastructure.Config;
 using HisPlus.WCF.DependencyInjection;
 using HisPlus.Infrastructure.Contract.Services;
 using HisPlus.Infrastructure.DependencyInjection;
+using HisPlus.Core.Hosting;
 
 namespace HisPlus.WCF.Host
 {

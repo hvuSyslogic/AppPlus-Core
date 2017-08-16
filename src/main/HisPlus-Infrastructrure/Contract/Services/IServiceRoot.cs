@@ -10,7 +10,7 @@ namespace HisPlus.Infrastructure.Contract.Services
     [ServiceContract]
     public interface IServiceRoot
     {
-        [OperationContract(Name = "GetCurrentDateTime")]
+        [OperationContract]
         DateTime GetCurrentDateTime();
     }
 }

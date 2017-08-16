@@ -31,22 +31,29 @@ namespace HisPlus.Services
 
         public PatientInHosInfoDTO GetPatientInHosInfo(string cardNo)
         {
-            var c = UnitOfWork.Do(uow => 
+            return UnitOfWork.Do(uow => 
             {
-                var queryable = uow.Repo<BsPatient>().Retrieve(x => x.CardNo == cardNo).Join(
-                    uow.Repo<InHosInfo>().Retrieve(),
+                var queryable = uow.Repo<BsPatient>().Get(x => x.CardNo == cardNo).Join(
+                    uow.Repo<InHosInfo>().Get(),
                     x => x.InPatNo,
                     y => y.InPatNo,
                     (x, y) => new PatientInHosInfo { Patient = x, InHosInfo = y });
-                
-                return queryable.First();
+
+                if (queryable.LongCount() > 0)
+                {
+                    var result = queryable.First();
+
+                    return new PatientInHosInfoDTO()
+                    {
+                        Patient = result.Patient.MapTo<BsPatientDTO>(),
+                        InHosInfo = result.InHosInfo.MapTo<InHosInfoDTO>()
+                    };
+                }
+
+                return null;
             });
 
-            return new PatientInHosInfoDTO()
-            {
-                Patient = c.Patient.MapTo<BsPatientDTO>(),
-                InHosInfo = c.InHosInfo.MapTo<InHosInfoDTO>()
-            };
+            
         }
 
         public IEnumerable<GblRoleDTO> L1CacheTest()
@@ -57,8 +64,8 @@ namespace HisPlus.Services
             {
                 var date = uow.Repo<BsPatient>();
 
-                var query1 = uow.Repo<GblRole>().Retrieve();
-                var query2 = uow.Repo<BsPatient>().Retrieve()
+                var query1 = uow.Repo<GblRole>().Get();
+                var query2 = uow.Repo<BsPatient>().Get()
                     .Where(x => (x.BirthDate > currentDateTime));
                 
                 query2.ToList();
@@ -71,16 +78,16 @@ namespace HisPlus.Services
         {
             return UnitOfWork.Do(uow => 
             {
-                var role = uow.Repo<GblRole>().Retrieve().FirstOrDefault();
+                var role = uow.Repo<GblRole>().Get().FirstOrDefault();
                 Requires.NotNull(role, "role");
                 role.IconIndex = 9999;
                 uow.Repo<GblRole>().Update(role);
 
-                var roleModule = uow.Repo<GblRoleModule>().Retrieve().FirstOrDefault();
+                var roleModule = uow.Repo<GblRoleModule>().Get().FirstOrDefault();
                 Requires.NotNull(roleModule, "roleModule");
 
                 roleModule.ModuleId = 9999999;
-                uow.Repo<GblRoleModule>().Create(roleModule);
+                uow.Repo<GblRoleModule>().Add(roleModule);
 
                 return true;
             });
@@ -96,7 +103,7 @@ namespace HisPlus.Services
             UnitOfWork.Do(uow =>
             {
                 RoleService.Update(roleDTO);
-                LocationService.Create(locationDTO);
+                LocationService.Add(locationDTO);
             });
         }
     }

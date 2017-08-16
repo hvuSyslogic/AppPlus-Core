@@ -55,7 +55,7 @@ namespace HisPlus.UnitTesting.Service.Sample
 
             var st = new Stopwatch();
             st.Start();
-            var result = CallService((IBsItemUnitService x) => x.RetrieveAllByPage());
+            var result = CallService((IBsItemUnitService x) => x.GetAllByPage());
             st.Stop();
             var elapsedTime = st.Elapsed.TotalMilliseconds;
         }
@@ -64,10 +64,10 @@ namespace HisPlus.UnitTesting.Service.Sample
         [Trait(TraitName, TraitValue)]
         public void GetPatientInHosInfo_By_CardNo_TestMethod() 
         {
-            string cardNo = "201707030007";
+            string cardNo = "201708030030";
             var result = CallService((ISampleService x) => x.GetPatientInHosInfo(cardNo));
 
-            result.Should().NotBeNull();            
+            result.Should().NotBeNull();
             result.Patient.InPatNo.Should().Be(result.InHosInfo.InPatNo);
             result.Patient.CardNo.Should().Be(cardNo);
         }
@@ -79,10 +79,10 @@ namespace HisPlus.UnitTesting.Service.Sample
             Expression<Func<GblRoleDTO, bool>> expression = (x => x.GroupName == "");
             var expressionNode = expression.ToExpressionNode();
             
-            GblRoleDTO roleDTO = CallService((IGblRoleService x) => x.Retrieve(expressionNode)).FirstOrDefault();
+            GblRoleDTO roleDTO = CallService((IGblRoleService x) => x.GetBy(expressionNode)).FirstOrDefault();
             roleDTO.Should().NotBeNull();
 
-            BsLocationDTO locationDTO = CallService((IBsLocationService x) => x.RetrieveAll()).FirstOrDefault();
+            BsLocationDTO locationDTO = CallService((IBsLocationService x) => x.GetAll()).FirstOrDefault();
             locationDTO.Should().NotBeNull();
 
             Action action = () => CallService((ISampleService x) => x.L2Transaction(roleDTO, locationDTO));

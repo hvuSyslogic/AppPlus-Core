@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HisPlus.Infrastructure.Cache;
 using FluentAssertions;
 using Xunit;
 using HisPlus.UnitTesting.Common;
 using HisPlus.Infrastructure.Extensions;
+using HisPlus.Redis;
 
 namespace HisPlus.UnitTesting.Redis
 {
@@ -19,13 +19,14 @@ namespace HisPlus.UnitTesting.Redis
         [Trait(TraitName, TraitValue)]
         public void FetchHashed_Test_OK()
         {
-            var locationId = 1573;
-            var location = redisContext.Cache.FetchHashed<BsLocationDTO>(locationId, () => CallService((IBsLocationService x) => x.RetrieveById(locationId)));
+            var locationId = 908;
+            Func<BsLocationDTO> func = () => CallService((IBsLocationService x) => x.GetById(locationId));
+            var location = redisContext.Cache.FetchHashed<BsLocationDTO>(locationId, func);
             location.Should().NotBeNull();
             location.Id.Should().Equals(locationId);
 
-            var itemId = 304822;
-            var item = redisContext.Cache.FetchHashed<BsItemDTO>(itemId, () => CallService((IBsItemService x) => x.RetrieveById(itemId)));
+            var itemId = 334247;
+            var item = redisContext.Cache.FetchHashed<BsItemDTO>(itemId, () => CallService((IBsItemService x) => x.GetById(itemId)));
             item.Should().NotBeNull();
             item.Id.Should().Equals(itemId);
         }
@@ -35,7 +36,7 @@ namespace HisPlus.UnitTesting.Redis
         public void TryGetHashed_Test_OK()
         {
             BsLocationDTO value;
-            int id = 1572;
+            int id = 830;
             bool result = redisContext.Cache.TryGetHashed<BsLocationDTO>(id, out value);
             result.Should().BeTrue();
             value.Should().NotBeNull();
@@ -45,13 +46,24 @@ namespace HisPlus.UnitTesting.Redis
         [Trait(TraitName, TraitValue)]
         public void FetchObject_Test_OK()
         {
-            int id = 1572;
-            var location = redisContext.Cache.FetchObject<BsLocationDTO>(id, () => CallService((IBsLocationService x) => x.RetrieveById(id)));
+            int id = 830;
+            var location = redisContext.Cache.FetchObject<BsLocationDTO>(id, () => CallService((IBsLocationService x) => x.GetById(id)));
             location.Should().NotBeNull();
 
-            id = 1573;
-            location = redisContext.Cache.FetchObject<BsLocationDTO>(id, () => CallService((IBsLocationService x) => x.RetrieveById(id)));
+            id = 828;
+            location = redisContext.Cache.FetchObject<BsLocationDTO>(id, () => CallService((IBsLocationService x) => x.GetById(id)));
             location.Should().NotBeNull();
         }
+
+        //[Fact]
+        //public void aa()
+        //{
+        //    Func<string> func = () => SayHello("dragon");
+        //}
+
+        //public string SayHello(string name)
+        //{
+        //    return string.Format("Hello, {0}!", name);
+        //}
     }
 }

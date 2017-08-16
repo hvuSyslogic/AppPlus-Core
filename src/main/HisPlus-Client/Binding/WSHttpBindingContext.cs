@@ -16,8 +16,8 @@ namespace HisPlus.Client.Binding
             {
                 MaxReceivedMessageSize = Constants.MaxReceivedMessageSize
             };
-            wsHttpBinding.Security.Message.ClientCredentialType = MessageCredentialType.Windows;
-            wsHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
+            //wsHttpBinding.Security.Message.ClientCredentialType = MessageCredentialType.Windows;
+            //wsHttpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Windows;
             
             return wsHttpBinding;
         }
