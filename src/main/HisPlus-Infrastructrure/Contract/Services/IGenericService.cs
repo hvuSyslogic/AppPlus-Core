@@ -91,14 +91,12 @@ namespace HisPlus.Infrastructure.Contract.Services
         
         #endregion
 
-        #region GetPagedData
+        #region GetByPage
+        [OperationContract(Name="GetByPageBy")]
+        IEnumerable<TDTO> GetByPage(ExpressionNode predicateExpressionNode, int pageNumber, int pageSize, out int pageCount);
 
         [OperationContract]
-        IEnumerable<TDTO> GetPagedDataBy(ExpressionNode predicateExpressionNode, int pageNumber, int pageSize, out int pageCount);
-
-        [OperationContract]
-        IEnumerable<TDTO> GetPagedData(int pageNumber, int pageSize, out int pageCount);
-        
+        IEnumerable<TDTO> GetByPage(int pageNumber, int pageSize, out int pageCount);        
         #endregion
     }
 }

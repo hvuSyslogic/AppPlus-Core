@@ -17,20 +17,20 @@ namespace HisPlus.Core.Abstractions.Support
 {
     internal partial class Repository<TEntity> : IRepository<TEntity>
         where TEntity : EntityRoot, new()
-    {        
-        #region Constructor(s)
-
+    {
+        #region Private Field(s)
+        private const string DefaultPrimaryKeyColumn = "Id";
         private readonly IUnitOfWork _unitOfWork;
+        #endregion
 
+        #region Constructor(s)
         public Repository(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;            
         }
-
         #endregion        
 
-        #region Properties
-
+        #region Propertie(s)
         public IQueryable<TEntity> Queryable
         {
             get { return EFSet.AsQueryable<TEntity>(); }
@@ -53,12 +53,10 @@ namespace HisPlus.Core.Abstractions.Support
                 _unitOfWork.Session.Database.CommandTimeout = 3 * 60 * 1000;
                 return _unitOfWork.Session;
             } 
-        }
-        
+        }        
         #endregion
 
-        #region Create
-
+        #region Add
         public virtual TEntity Add(TEntity entity)
         {            
             return this.EFSet.Add(entity);
@@ -69,12 +67,10 @@ namespace HisPlus.Core.Abstractions.Support
             this.EFSet.AddRange(entities);
             
             return entities;
-        }
-        
+        }        
         #endregion
 
-        #region Retrieve
-
+        #region Get
         public virtual TEntity Get(params object[] keyValues)
         {
             return this.EFSet.Find(keyValues);
@@ -101,11 +97,9 @@ namespace HisPlus.Core.Abstractions.Support
 
             return queryable;
         }
-
         #endregion
 
         #region Update
-
         public virtual void Update(TEntity entity)
         {
             if (this.Session.Entry<TEntity>(entity).State == EntityState.Detached)
@@ -134,14 +128,12 @@ namespace HisPlus.Core.Abstractions.Support
             {
                 return this.EFSet.Update(updateExpression);
             }
-
+            
             return this.EFSet.Where(predicate).Update(updateExpression);
         }
-
         #endregion
 
         #region Delete
-
         public virtual void Delete(object id)
         {
             var entity = Get(id);
@@ -173,11 +165,9 @@ namespace HisPlus.Core.Abstractions.Support
 
             return this.EFSet.Where(predicate).Delete();
         }
-
         #endregion
 
         #region Count
-        
         public virtual int Count(Expression<Func<TEntity, bool>> predicate = null)
         {
             if (predicate == null)
@@ -187,11 +177,9 @@ namespace HisPlus.Core.Abstractions.Support
 
             return this.EFSet.Where(predicate).Count();
         }
-
         #endregion
 
         #region LongCount
-        
         public virtual long LongCount(Expression<Func<TEntity, bool>> predicate = null)
         {            
             if (predicate == null)
@@ -201,27 +189,21 @@ namespace HisPlus.Core.Abstractions.Support
 
             return this.EFSet.Where(predicate).LongCount();
         }
-
         #endregion
 
         #region Contains
-
         public virtual bool Contains(Expression<Func<TEntity, bool>> predicate = null)
         {
             long count = LongCount(predicate);
 
             return count > 0;
-        }
-        
+        }        
         #endregion
 
-        #region RetrievePagedData
-
-        public virtual IQueryable<TEntity> GetPagedData(Expression<Func<TEntity, bool>> predicate, 
+        #region GetByPage
+        public virtual IQueryable<TEntity> GetByPage(Expression<Func<TEntity, bool>> predicate, 
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy, int pageNumber, int pageSize, out int pageCount)
         {
-            string primarykeyPropertyName = "Id";
-
             int skippedCount = (pageNumber - 1) * pageSize;
 
             IQueryable<TEntity> queryable = (predicate == null) ? this.EFSet : this.EFSet.Where(predicate);
@@ -231,7 +213,7 @@ namespace HisPlus.Core.Abstractions.Support
             queryable = queryable.AsNoTracking();
             if (orderBy == null)
             {
-                queryable = queryable.OrderBy(primarykeyPropertyName);
+                queryable = queryable.OrderBy(DefaultPrimaryKeyColumn);
             }
             else
             {
@@ -242,7 +224,6 @@ namespace HisPlus.Core.Abstractions.Support
             
             return queryable;        
         }
-
         #endregion
     }
 }

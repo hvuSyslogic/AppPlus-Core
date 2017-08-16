@@ -230,7 +230,6 @@ namespace HisPlus.Core.Abstractions.Support
         #endregion        
 
         #region Contains
-
         public virtual bool Contains(TKey id)
         {
             return UnitOfWork.Do(uow =>
@@ -261,17 +260,15 @@ namespace HisPlus.Core.Abstractions.Support
                 return uow.Repo<TEntity>().Contains(predicate);
             });
         }
-
         #endregion
 
-        #region GetPagedData
-
-        public virtual IEnumerable<TDTO> GetPagedData(int pageNumber, int pageSize, out int pageCount)
+        #region GetByPage
+        public virtual IEnumerable<TDTO> GetByPage(int pageNumber, int pageSize, out int pageCount)
         {
-            return GetPagedDataBy(null, pageNumber, pageSize, out pageCount);
+            return GetByPage(null, pageNumber, pageSize, out pageCount);
         }
 
-        public virtual IEnumerable<TDTO> GetPagedDataBy(ExpressionNode predicateExpressionNode, int pageNumber, int pageSize, out int pageCount)
+        public virtual IEnumerable<TDTO> GetByPage(ExpressionNode predicateExpressionNode, int pageNumber, int pageSize, out int pageCount)
         {
             var predicate = (predicateExpressionNode == null)
                    ? null : Mapper.Map<Expression<Func<TEntity, bool>>>(predicateExpressionNode.ToBooleanExpression<TDTO>());
@@ -280,18 +277,16 @@ namespace HisPlus.Core.Abstractions.Support
 
             var result = UnitOfWork.Do(uow =>
             {
-                return uow.Repo<TEntity>().GetPagedData(predicate, null, pageNumber, pageSize, out totalPages).MapTo<TDTO>();
+                return uow.Repo<TEntity>().GetByPage(predicate, null, pageNumber, pageSize, out totalPages).MapTo<TDTO>();
             });
 
             pageCount = totalPages;
 
             return result;
         }
-
         #endregion
 
         #region AddOrUpdate
-
         public virtual Tuple<Int32, Int32> AddOrUpdate(IEnumerable<TDTO> valueFactory)
         {
             Requires.NotNullOrEmpty(valueFactory, "dtos");
@@ -308,11 +303,9 @@ namespace HisPlus.Core.Abstractions.Support
 
             }, TransactionalOption.DbTransaction);
         }
-
         #endregion
 
         #region GetDataTable
-
         protected virtual DataTable GetDataTableByStoredProc(string commandText, DbParameter[] parameters, string tableName = "")
         {
             DataSet ds = this.GetDataSet(commandText, CommandType.StoredProcedure, parameters);
@@ -336,12 +329,10 @@ namespace HisPlus.Core.Abstractions.Support
             }
             
             return dt;
-        }
-        
+        }        
         #endregion
 
         #region GetDataSet
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         private DataSet GetDataSet(string commandText, CommandType commandType, DbParameter[] parameters)
         {
@@ -383,7 +374,6 @@ namespace HisPlus.Core.Abstractions.Support
                 }
             });
         }
-
         #endregion
     }
 }

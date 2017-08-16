@@ -153,7 +153,10 @@ namespace HisPlus.Redis
             return cacheProvider.KeyTimeToLive(GetHashedKey<T>(), ttl);
         }
 
-        //bool Remove(string key);
+        //public static bool Remove(this ICacheProvider cacheProvider, object key)
+        //{
+        //    cacheProvider.Remove()
+        //}
 
         //void Remove(string[] keys);
 
@@ -166,13 +169,22 @@ namespace HisPlus.Redis
             return cacheProvider.RemoveHashed(GetHashedKey<T>(), GetHashedField<T>(key));
         }
 
-        //void RemoveTagsFromHashField(string key, string field, string[] tags) { throw new NotImplementedException(); }
+        public static void RemoveTagsFromHashField<T>(this ICacheProvider cacheProvider, string field, string[] tags) 
+        {
+            cacheProvider.RemoveTagsFromHashField(GetHashedKey<T>(), field, tags);
+        }
 
-        //void RemoveTagsFromKey(string key, string[] tags) { throw new NotImplementedException(); }
+        public static void RemoveTagsFromKey<T>(this ICacheProvider cacheProvider, object key, string[] tags) 
+        {
+            cacheProvider.RemoveTagsFromKey(GetObjectKey<T>(key), tags);
+        }
 
         //void RemoveTagsFromSetMember<T>(string key, T member, string[] tags) { throw new NotImplementedException(); }
 
-        //void RenameTagForHashField(string key, string field, string currentTag, string newTag) { throw new NotImplementedException(); }
+        public static void RenameTagForHashField<T>(this ICacheProvider cacheProvider, string field, string currentTag, string newTag) 
+        {
+            cacheProvider.RenameTagForHashField(GetHashedKey<T>(), field, currentTag, newTag);
+        }
 
         //void RenameTagForKey(string key, string currentTag, string newTag) { throw new NotImplementedException(); }
 

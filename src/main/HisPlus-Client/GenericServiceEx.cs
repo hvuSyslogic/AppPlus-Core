@@ -47,7 +47,7 @@ namespace HisPlus.Client
             int pageCount = 0;
             do
             {
-                var page = service.GetPagedData(nextPageNumber, pageSize, out pageCount);
+                var page = service.GetByPage(nextPageNumber, pageSize, out pageCount);
                 pages.AddRange(page);
 
             } while (nextPageNumber++ < pageCount);
