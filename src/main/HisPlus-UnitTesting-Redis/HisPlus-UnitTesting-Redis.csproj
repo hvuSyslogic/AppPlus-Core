@@ -93,24 +93,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Redis\CacheFrameworkUnitTests.cs" />
-    <Compile Include="Redis\CacheFrameworkUnitTests.Fetch.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>CacheFrameworkUnitTests.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Redis\CacheFrameworkUnitTests.Get.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>CacheFrameworkUnitTests.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Redis\CacheFrameworkUnitTests.Set.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>CacheFrameworkUnitTests.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Redis\RedisCacheUnitTests.For.Object.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Redis\CacheFrameworkUnitTests.Tag.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>CacheFrameworkUnitTests.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HisPlus-Redis\HisPlus-Redis.csproj">

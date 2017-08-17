@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CacheType.cs" />
     <Compile Include="ICacheProviderEx.cs" />
     <Compile Include="IRedisContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

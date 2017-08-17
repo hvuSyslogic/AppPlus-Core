@@ -55,7 +55,7 @@ namespace HisPlus.UnitTesting.Service.Sample
 
             var st = new Stopwatch();
             st.Start();
-            var result = CallService((IBsItemUnitService x) => x.GetAllByPage());
+            var result = CallService((IBsItemUnitService x) => x.GetAllByPage(10000));
             st.Stop();
             var elapsedTime = st.Elapsed.TotalMilliseconds;
         }

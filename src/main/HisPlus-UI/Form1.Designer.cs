@@ -35,13 +35,11 @@
             this.TxtUserId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.BtnCancel = new System.Windows.Forms.Button();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.simpleButton1);
             this.groupBox1.Controls.Add(this.BtnOK);
             this.groupBox1.Controls.Add(this.TxtPasswrod);
             this.groupBox1.Controls.Add(this.label2);
@@ -109,14 +107,6 @@
             this.BtnCancel.UseVisualStyleBackColor = false;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Location = new System.Drawing.Point(227, 203);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(75, 23);
-            this.simpleButton1.TabIndex = 6;
-            this.simpleButton1.Text = "simpleButton1";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -146,7 +136,6 @@
         private System.Windows.Forms.TextBox TxtUserId;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BtnCancel;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
 
     }
 }
