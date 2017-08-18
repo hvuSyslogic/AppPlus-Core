@@ -20,7 +20,7 @@ namespace HisPlus.UnitTesting.Service.BS
 {
     public class BsGfxeServiceUnitTests : UnitTestBase<BsGfxeDTO>, IClassFixture<BsGfxeServiceTestsFixture>
     {
-        private const string TraitName = "BSGfxeServiceUnitTests";        
+        private const string TraitName = "BSGfxeServiceUnitTests";
 
         #region Get
 

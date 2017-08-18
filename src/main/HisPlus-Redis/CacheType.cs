@@ -9,7 +9,9 @@ namespace HisPlus.Redis
     public enum CacheType
     {
         Object = 0,
-        Hashed = 1,
-        Sorted = 2,
+        Hash = 1,
+        Set = 2,
+        SortedSet = 4,
+        String = 5,
     }
 }

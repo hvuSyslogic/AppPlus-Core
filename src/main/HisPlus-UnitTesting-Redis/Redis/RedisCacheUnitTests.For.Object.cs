@@ -14,262 +14,208 @@ using HisPlus.Infrastructure.Contract.Messages;
 
 namespace HisPlus.UnitTesting.Redis
 {
-    public partial class RedisCacheUnitTests : TestBase
+    public partial class RedisCacheUnitTests : RedisTestBase, IClassFixture<RedisTestFixture>
     {
         private const string TraitName = "RedisCacheUnitTests";
-        private const string TraitValue = "Cache Object";
-        private static readonly IRedisContext redisContext = IoCManager.Container.Resolve<IRedisContext>();
+        private const string TraitCacheObjectValue = "Object";
+        private const string TraitCacheHashedValue = "Hashed";
+        
         private string[] tags_1 = new string[] { "The_Tag_1_For_The_First_User", "The_Tag_2_For_The_First_User" };
         private string[] tags_2 = new string[] { "The_Tag_1_For_The_Second_User", "The_Tag_2_For_The_Second_User" };
         
         #region Object cache testing
-        [Fact]
-        [Trait(TraitName, TraitValue)]
+        [Fact(DisplayName = "SetObject_OK")]
+        [Trait(TraitName, TraitCacheObjectValue)]
         public void SetObject_OK()
-        {
-            var users = CallService((IBsUserService x) => x.GetAll());
-            users.Should().NotBeNullOrEmpty();
-
-            var first = users.First();
-            var last = users.Last();
-            first.Should().NotBeNull();
-            last.Should().NotBeNull();
-            
-            var keys = new object[] { first.Id, last.Id };
-            redisContext.Cache.Remove<BsUserDTO>(keys);
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeFalse();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeFalse();
+        {                        
+            var keys = new object[] { TheFirstUser.Id, TheLastUser.Id };
+            RedisContext.Cache.RemoveKey<BsUserDTO>(keys);
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeFalse();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeFalse();
          
-            redisContext.Cache.SetObject<BsUserDTO>(first.Id, first);
-            redisContext.Cache.SetObject<BsUserDTO>(last.Id, last);
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeTrue();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeTrue();
+            RedisContext.Cache.SetObject<BsUserDTO>(TheFirstUser.Id, TheFirstUser);
+            RedisContext.Cache.SetObject<BsUserDTO>(TheLastUser.Id, TheLastUser);
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeTrue();
         }
 
-        [Fact]
-        [Trait(TraitName, TraitValue)]
-        public void GetObjectA_OK()
-        {
-            var users = CallService((IBsUserService x) => x.GetAll());
-            users.Should().NotBeNullOrEmpty();
+        [Fact(DisplayName = "GetObject_OK")]
+        [Trait(TraitName, TraitCacheObjectValue)]
+        public void GetObject_OK()
+        {           
+            var keys = new object[] { TheFirstUser.Id, TheLastUser.Id };
+            RedisContext.Cache.RemoveKey<BsUserDTO>(keys);
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeFalse();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeFalse();
 
-            var first = users.First();
-            var last = users.Last();
-            first.Should().NotBeNull();
-            last.Should().NotBeNull();
+            RedisContext.Cache.SetObject<BsUserDTO>(TheFirstUser.Id, TheFirstUser);
+            RedisContext.Cache.SetObject<BsUserDTO>(TheLastUser.Id, TheLastUser);
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeTrue();
 
-            var keys = new object[] { first.Id, last.Id };
-            redisContext.Cache.Remove<BsUserDTO>(keys);
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeFalse();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeFalse();
-
-            redisContext.Cache.SetObject<BsUserDTO>(first.Id, first);
-            redisContext.Cache.SetObject<BsUserDTO>(last.Id, last);
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeTrue();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeTrue();
-
-            var firstCache = redisContext.Cache.GetObjectA<BsUserDTO>(first.Id);
-            var lastCache = redisContext.Cache.GetObjectA<BsUserDTO>(last.Id);
+            var firstCache = RedisContext.Cache.GetObject<BsUserDTO>(TheFirstUser.Id);
+            var lastCache = RedisContext.Cache.GetObject<BsUserDTO>(TheLastUser.Id);
             firstCache.Should().NotBeNull();
-            firstCache.Should().Equals(first);
+            firstCache.Should().Equals(TheFirstUser);
             lastCache.Should().NotBeNull();
-            lastCache.Should().Equals(last);
+            lastCache.Should().Equals(TheLastUser);
         }
 
-        [Fact]
-        [Trait(TraitName, TraitValue)]
+        [Fact(DisplayName = "GetObjectByTags_OK")]
+        [Trait(TraitName, TraitCacheObjectValue)]
         public void GetObjectByTags_OK()
-        {
-            var users = CallService((IBsUserService x) => x.GetAll());
-            users.Should().NotBeNullOrEmpty();
+        {            
+            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tags_1, CacheType.Object, TheFirstUser.Id);
+            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tags_2, CacheType.Object, TheLastUser.Id);
 
-            var first = users.First();
-            var last = users.Last();
-            first.Should().NotBeNull();
-            last.Should().NotBeNull();
+            RedisContext.Cache.SetObject<BsUserDTO>(TheFirstUser.Id, TheFirstUser, tags_1);
+            RedisContext.Cache.SetObject<BsUserDTO>(TheLastUser.Id, TheLastUser, tags_2);
 
-            redisContext.Cache.RemoveTagsFromKey<BsUserDTO>(first.Id, tags_1);
-            redisContext.Cache.RemoveTagsFromKey<BsUserDTO>(last.Id, tags_2);
-
-            redisContext.Cache.SetObject<BsUserDTO>(first.Id, first, tags_1);
-            redisContext.Cache.SetObject<BsUserDTO>(last.Id, last, tags_2);
-
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeTrue();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeTrue();
 
             var tags = tags_1.Union(tags_2).ToArray();
-            var result = redisContext.Cache.GetObjectsByTag<BsUserDTO>(tags).ToList();
+            var result = RedisContext.Cache.GetObjectsByTag<BsUserDTO>(tags).ToList();
             result.Should().NotBeNullOrEmpty();
             
-            result.Where(x => x.Id == first.Id).Should().NotBeNullOrEmpty();
-            result.Where(x => x.Id == last.Id).Should().NotBeNullOrEmpty();
+            result.Where(x => x.Id == TheFirstUser.Id).Should().NotBeNullOrEmpty();
+            result.Where(x => x.Id == TheLastUser.Id).Should().NotBeNullOrEmpty();
         }
 
-        [Fact]
-        [Trait(TraitName, TraitValue)]
-        public void RemoveObject_OK()
+        [Fact(DisplayName = "RemoveKey_Object_OK")]
+        [Trait(TraitName, TraitCacheObjectValue)]
+        public void RemoveKey_Object_OK()
         {
-            var users = CallService((IBsUserService x) => x.GetAll());
-            users.Should().NotBeNullOrEmpty();
+            RedisContext.Cache.SetObject<BsUserDTO>(TheFirstUser.Id, TheFirstUser);
+            RedisContext.Cache.SetObject<BsUserDTO>(TheLastUser.Id, TheLastUser);
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeTrue();
 
-            var first = users.First();
-            var last = users.Last();
-            first.Should().NotBeNull();
-            last.Should().NotBeNull();
+            RedisContext.Cache.RemoveKey<BsUserDTO>(new object[] { TheFirstUser.Id, TheLastUser.Id });
 
-            redisContext.Cache.SetObject<BsUserDTO>(first.Id, first);
-            redisContext.Cache.SetObject<BsUserDTO>(last.Id, last);
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeTrue();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeFalse();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeFalse();
+        }
 
-            redisContext.Cache.Remove<BsUserDTO>(new object[] { first.Id, last.Id });
-
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeFalse();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeFalse();
-        }        
-
-        [Fact]
-        [Trait(TraitName, TraitValue)]
+        [Fact(DisplayName = "SetObject_With_Tag_OK")]
+        [Trait(TraitName, TraitCacheObjectValue)]
         public void SetObject_With_Tag_OK()
         {
-            var users = CallService((IBsUserService x) => x.GetAll());
-            users.Should().NotBeNullOrEmpty();
+            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tags_1, CacheType.Object, TheFirstUser.Id);
+            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tags_2, CacheType.Object, TheLastUser.Id);
 
-            var first = users.First();
-            var last = users.Last();
-            first.Should().NotBeNull();
-            last.Should().NotBeNull();
+            RedisContext.Cache.SetObject<BsUserDTO>(TheFirstUser.Id, TheFirstUser, tags_1);
+            RedisContext.Cache.SetObject<BsUserDTO>(TheLastUser.Id, TheLastUser, tags_2);
 
-            redisContext.Cache.RemoveTagsFromKey<BsUserDTO>(first.Id, tags_1);
-            redisContext.Cache.RemoveTagsFromKey<BsUserDTO>(last.Id, tags_2);
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeTrue();           
 
-            redisContext.Cache.SetObject<BsUserDTO>(first.Id, first, tags_1);
-            redisContext.Cache.SetObject<BsUserDTO>(last.Id, last, tags_2);
-
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeTrue();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeTrue();           
-
-            var redisKeys = redisContext.Cache.GetKeysByTagA(tags_1.Union(tags_2).ToArray());
-            var keys = new[] { first.Id.ToString(), last.Id.ToString() };
+            var redisKeys = RedisContext.Cache.GetRawKeysByTag(tags_1.Union(tags_2).ToArray(), CacheType.Object);
+            var keys = new[] { TheFirstUser.Id.ToString(), TheLastUser.Id.ToString() };
             redisKeys.Should().Contain(keys);            
         }
 
-        [Fact]
-        [Trait(TraitName, TraitValue)]
-        public void AddTagsToKey_OK()
-        {            
-            var users = CallService((IBsUserService x) => x.GetAll());
-            users.Should().NotBeNullOrEmpty();
-
-            var first = users.First();
-            var last = users.Last();
-            first.Should().NotBeNull();
-            last.Should().NotBeNull();
-            
-            var keys = new[] { first.Id, last.Id };
+        [Fact(DisplayName = "AddTagsToKey_Object_OK")]
+        [Trait(TraitName, TraitCacheObjectValue)]
+        public void AddTagsToKey_Object_OK()
+        {             
+            var keys = new object[] { TheFirstUser.Id, TheLastUser.Id };
             var tags = tags_1.Union(tags_2).ToArray();
 
-            redisContext.Cache.SetObject<BsUserDTO>(first.Id, first);
-            redisContext.Cache.SetObject<BsUserDTO>(last.Id, last);
+            RedisContext.Cache.SetObject<BsUserDTO>(TheFirstUser.Id, TheFirstUser);
+            RedisContext.Cache.SetObject<BsUserDTO>(TheLastUser.Id, TheLastUser);
 
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeTrue();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeTrue();
 
             // Remove tag for the key
-            redisContext.Cache.RemoveTagsFromKey<BsUserDTO>(first.Id, tags_1);
-            redisContext.Cache.RemoveTagsFromKey<BsUserDTO>(last.Id, tags_2);                       
+            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tags_1, CacheType.Object, TheFirstUser.Id);
+            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tags_2, CacheType.Object, TheLastUser.Id);
 
+            //var redisKeys = RedisContext.Cache.GetKeysByTag(tags);
+            var rawKeys = RedisContext.Cache.GetRawKeysByTag(tags);
+
+            //TODO:
             // Assert
-            redisContext.Cache.GetAllTags().Should().NotContain(tags);
+            RedisContext.Cache.GetAllTags().Should().NotContain(tags);
 
             // Add tags to the key
-            redisContext.Cache.AddTagsToKey(first.Id.ToString(), tags_1);
-            redisContext.Cache.AddTagsToKey(last.Id.ToString(), tags_2);
+            RedisContext.Cache.AddTagsToKey<BsUserDTO>(tags_1, CacheType.Object, TheFirstUser.Id);
+            RedisContext.Cache.AddTagsToKey<BsUserDTO>(tags_2, CacheType.Object, TheLastUser.Id);
 
+            //TODO:
             // Assert the tags for the key should be contain in cache
-            redisContext.Cache.GetAllTags().Should().Contain(tags);
-        }        
+            RedisContext.Cache.GetAllTags().Should().Contain(tags);
+        }
 
-        [Fact]
-        [Trait(TraitName, TraitValue)]
+        [Fact(DisplayName = "TryGetObject_OK")]
+        [Trait(TraitName, TraitCacheObjectValue)]
         public void TryGetObject_OK()
         {
-            redisContext.Cache.FlushAll();
-
-            var users = CallService((IBsUserService x) => x.GetAll());
-            users.Should().NotBeNullOrEmpty();
-
-            var first = users.First();
-            var last = users.Last();
-            first.Should().NotBeNull();
-            last.Should().NotBeNull();
-
-            redisContext.Cache.SetObject<BsUserDTO>(first.Id, first);
-            redisContext.Cache.SetObject<BsUserDTO>(last.Id, last);
+            RedisContext.Cache.SetObject<BsUserDTO>(TheFirstUser.Id, TheFirstUser);
+            RedisContext.Cache.SetObject<BsUserDTO>(TheLastUser.Id, TheLastUser);
             BsUserDTO firstUserDTO;
             BsUserDTO lastUserDTO;
-            redisContext.Cache.TryGetObject<BsUserDTO>(first.Id, out firstUserDTO).Should().BeTrue();
-            redisContext.Cache.TryGetObject<BsUserDTO>(last.Id, out lastUserDTO).Should().BeTrue();
+            RedisContext.Cache.TryGetObject<BsUserDTO>(TheFirstUser.Id, out firstUserDTO).Should().BeTrue();
+            RedisContext.Cache.TryGetObject<BsUserDTO>(TheLastUser.Id, out lastUserDTO).Should().BeTrue();
             firstUserDTO.Should().NotBeNull();
             lastUserDTO.Should().NotBeNull();
         }
 
-        [Fact]
-        [Trait(TraitName, TraitValue)]
-        public void RemoveTagsFromKey_From_Object_OK()
+        [Fact(DisplayName = "RemoveTagsFromObjectKey_OK")]
+        [Trait(TraitName, TraitCacheObjectValue)]
+        public void RemoveTagsFromObjectKey_OK()
         {
-            redisContext.Cache.FlushAll();
+            RedisContext.Cache.SetObject<BsUserDTO>(TheFirstUser.Id, TheFirstUser, tags_1);
+            RedisContext.Cache.SetObject<BsUserDTO>(TheLastUser.Id, TheLastUser, tags_2);
 
-            var users = CallService((IBsUserService x) => x.GetAll());
-            users.Should().NotBeNullOrEmpty();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeTrue();
 
-            var first = users.First();
-            var last = users.Last();
-            first.Should().NotBeNull();
-            last.Should().NotBeNull();
-        
-            redisContext.Cache.SetObject<BsUserDTO>(first.Id, first, tags_1);
-            redisContext.Cache.SetObject<BsUserDTO>(last.Id, last, tags_2);
+            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tags_1, CacheType.Object, TheFirstUser.Id);
 
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeTrue();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeTrue();
-
-            redisContext.Cache.RemoveTagsFromKey<BsUserDTO>(first.Id, tags_1);
-            
-            redisContext.Cache.RemoveTagsFromKey<BsUserDTO>(last.Id, tags_2);
+            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tags_2, CacheType.Object, TheLastUser.Id);
 
             var tags = tags_1.Union(tags_2).ToArray();
-            var redisKeys = redisContext.Cache.GetKeysByTagA(tags);
+            var redisKeys = RedisContext.Cache.GetKeysByTag(tags);
 
-            var keys = new[] { first.Id, last.Id };
-            redisKeys.Should().NotContain(keys);            
+            var keys = new[] { TheFirstUser.Id, TheLastUser.Id };
+            redisKeys.Should().NotContain(keys);
         }
 
-        [Fact]
-        [Trait(TraitName, TraitValue)]
-        public void FetchObject_None_Hit_Cache_OK()
+        [Fact(DisplayName = "FetchObject_NoCacheHit_OK")]
+        [Trait(TraitName, TraitCacheObjectValue)]
+        public void FetchObject_NoCacheHit_OK()
         {
-            var users = CallService((IBsUserService x) => x.GetAll());
-            users.Should().NotBeNullOrEmpty();
-
-            var first = users.First();
-            var last = users.Last();
-            first.Should().NotBeNull();
-            last.Should().NotBeNull();
-
-            var keys = new object[] { first.Id, last.Id };
-            redisContext.Cache.Remove<BsUserDTO>(keys);
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeFalse();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeFalse();
+            var keys = new object[] { TheFirstUser.Id, TheLastUser.Id };
+            RedisContext.Cache.RemoveKey<BsUserDTO>(keys);
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeFalse();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeFalse();
             int id1 = 10000;
             int id2 = 20000;
-            redisContext.Cache.FetchObject<BsUserDTO>(first.Id, () => { return new BsUserDTO() { Id = id1 }; });
-            redisContext.Cache.FetchObject<BsUserDTO>(last.Id, () => { return new BsUserDTO() { Id = id2 }; });
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeTrue();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeTrue();
+            int count = 0;
 
-            var firstCache = redisContext.Cache.GetObjectA<BsUserDTO>(first.Id);
-            var lastCache = redisContext.Cache.GetObjectA<BsUserDTO>(last.Id);
+            // None cahe hit
+            RedisContext.Cache.FetchObject<BsUserDTO>(TheFirstUser.Id, () => { count++; return new BsUserDTO() { Id = id1 }; });
+            count.Should().Be(1);
+
+            // Cache hit
+            RedisContext.Cache.FetchObject<BsUserDTO>(TheFirstUser.Id, () => { count++; return new BsUserDTO() { Id = id1 }; });
+            count.Should().Be(1);
+
+            // None cahe hit
+            RedisContext.Cache.FetchObject<BsUserDTO>(TheLastUser.Id, () => { count++; return new BsUserDTO() { Id = id2 }; });
+            count.Should().Be(2);
+            
+            // Cache hit
+            RedisContext.Cache.FetchObject<BsUserDTO>(TheLastUser.Id, () => { count++; return new BsUserDTO() { Id = id2 }; });
+            count.Should().Be(2);
+
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeTrue();
+
+            var firstCache = RedisContext.Cache.GetObject<BsUserDTO>(TheFirstUser.Id);
+            var lastCache = RedisContext.Cache.GetObject<BsUserDTO>(TheLastUser.Id);
 
             firstCache.Should().NotBeNull();
             lastCache.Should().NotBeNull();
@@ -277,257 +223,280 @@ namespace HisPlus.UnitTesting.Redis
             lastCache.Id.Should().Equals(id2);
         }
 
-        [Fact]
-        [Trait(TraitName, TraitValue)]
-        public void FetchObject_Hit_Cache_OK()
+        [Fact(DisplayName = "FetchObject_CacheHit_OK")]
+        [Trait(TraitName, TraitCacheObjectValue)]
+        public void FetchObject_CacheHit_OK()
         {
-            var users = CallService((IBsUserService x) => x.GetAll());
-            users.Should().NotBeNullOrEmpty();
+            RedisContext.Cache.SetObject<BsUserDTO>(TheFirstUser.Id, TheFirstUser);
+            RedisContext.Cache.SetObject<BsUserDTO>(TheLastUser.Id, TheLastUser);
 
-            var first = users.First();
-            var last = users.Last();
-            first.Should().NotBeNull();
-            last.Should().NotBeNull();
+            int firstId = 10000;
+            int lastId = 20000;
+            int count = 0;
 
-            redisContext.Cache.SetObject<BsUserDTO>(first.Id, first);
-            redisContext.Cache.SetObject<BsUserDTO>(last.Id, last);
+            // Cache hit
+            RedisContext.Cache.FetchObject<BsUserDTO>(TheFirstUser.Id, () => { count++; return new BsUserDTO() { Id = firstId }; });
+            // Cache hit
+            RedisContext.Cache.FetchObject<BsUserDTO>(TheLastUser.Id, () => { count++; return new BsUserDTO() { Id = lastId }; });
+            
+            count.Should().Be(0);
 
-            int id1 = 10000;
-            int id2 = 20000;
-            redisContext.Cache.FetchObject<BsUserDTO>(first.Id, () => { return new BsUserDTO() { Id = id1 }; });
-            redisContext.Cache.FetchObject<BsUserDTO>(last.Id, () => { return new BsUserDTO() { Id = id2 }; });
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeTrue();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeTrue();            
 
-            var firstCache = redisContext.Cache.GetObjectA<BsUserDTO>(first.Id);
-            var lastCache = redisContext.Cache.GetObjectA<BsUserDTO>(last.Id);
+            var firstCache = RedisContext.Cache.GetObject<BsUserDTO>(TheFirstUser.Id);
+            var lastCache = RedisContext.Cache.GetObject<BsUserDTO>(TheLastUser.Id);
 
             firstCache.Should().NotBeNull();
             lastCache.Should().NotBeNull();
-            firstCache.Id.Should().Equals(first.Id);
-            lastCache.Id.Should().Equals(last.Id);
+            firstCache.Id.Should().Equals(TheFirstUser.Id);
+            lastCache.Id.Should().Equals(TheLastUser.Id);
         }
 
-        [Fact]
-        [Trait(TraitName, TraitValue)]
+        [Fact(DisplayName = "FetchObjectWithTag_OK")]
+        [Trait(TraitName, TraitCacheObjectValue)]
         public void FetchObjectWithTag_OK()
-        {
-            var users = CallService((IBsUserService x) => x.GetAll());
-            users.Should().NotBeNullOrEmpty();
-
-            var first = users.First();
-            var last = users.Last();
-            first.Should().NotBeNull();
-            last.Should().NotBeNull();
-             
+        {             
             int id1 = 10000;
             int id2 = 20000;
             var tag_10000 = new[] { "TAG_10000_1", "TAG_10000_2" };
             var tag_20000 = new[] { "TAG_20000_1", "TAG_20000_2" };
 
-            var keys = new object[] { first.Id, last.Id };
-            redisContext.Cache.RemoveTagsFromKey(first.Id.ToString(), tag_10000);
-            redisContext.Cache.RemoveTagsFromKey(last.Id.ToString(), tag_20000);
+            var keys = new object[] { TheFirstUser.Id, TheLastUser.Id };
+            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tag_10000, CacheType.Object, TheFirstUser.Id);
+            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tag_20000, CacheType.Object, TheLastUser.Id);
 
-            redisContext.Cache.Remove<BsUserDTO>(keys);
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeFalse();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeFalse();
-           
-            
-            redisContext.Cache.GetAllTags().Should().NotContain(tag_10000.Union(tag_20000).ToArray());
+            RedisContext.Cache.RemoveKey<BsUserDTO>(keys);
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeFalse();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeFalse();
+                       
+            RedisContext.Cache.GetAllTags().Should().NotContain(tag_10000.Union(tag_20000).ToArray());
 
-            redisContext.Cache.FetchObject<BsUserDTO>(first.Id, () => new BsUserDTO() { Id = id1 }, tag_10000);
-            redisContext.Cache.FetchObject<BsUserDTO>(last.Id, () => new BsUserDTO() { Id = id2 }, tag_20000);
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeTrue();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeTrue();
+            RedisContext.Cache.FetchObject<BsUserDTO>(TheFirstUser.Id, () => new BsUserDTO() { Id = id1 }, tag_10000);
+            RedisContext.Cache.FetchObject<BsUserDTO>(TheLastUser.Id, () => new BsUserDTO() { Id = id2 }, tag_20000);
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeTrue();
 
-            var firstCache = redisContext.Cache.GetObjectA<BsUserDTO>(first.Id);
-            var lastCache = redisContext.Cache.GetObjectA<BsUserDTO>(last.Id);
+            var firstCache = RedisContext.Cache.GetObject<BsUserDTO>(TheFirstUser.Id);
+            var lastCache = RedisContext.Cache.GetObject<BsUserDTO>(TheLastUser.Id);
 
             firstCache.Should().NotBeNull();
             lastCache.Should().NotBeNull();
             firstCache.Id.Should().Equals(id1);
             lastCache.Id.Should().Equals(id2);
 
-            redisContext.Cache.GetAllTags().Should().Contain(tag_10000.Union(tag_20000).ToArray());
+            RedisContext.Cache.GetAllTags().Should().Contain(tag_10000.Union(tag_20000).ToArray());
         }
 
-        [Fact]
-        [Trait(TraitName, TraitValue)]
+        [Fact(DisplayName = "FetchObjectWithTagBuilder_OK")]
+        [Trait(TraitName, TraitCacheObjectValue)]
         public void FetchObjectWithTagBuilder_OK()
         {
-            var users = CallService((IBsUserService x) => x.GetAll());
-            users.Should().NotBeNullOrEmpty();
+            var keys = new object[] { TheFirstUser.Id, TheLastUser.Id };
 
-            var first = users.First();
-            var last = users.Last();
-            first.Should().NotBeNull();
-            last.Should().NotBeNull();
-
-            var keys = new object[] { first.Id, last.Id };
-
-            int id1 = 10000;
-            int id2 = 20000;
+            int firstId = 10000;
+            int lastId = 20000;
             var tag_10000 = new[] { "TAG_10000_1", "TAG_10000_2" };
             var tag_20000 = new[] { "TAG_20000_1", "TAG_20000_2" };
 
-            redisContext.Cache.RemoveTagsFromKey<BsUserDTO>(first.Id.ToString(), tag_10000);
-            redisContext.Cache.RemoveTagsFromKey<BsUserDTO>(last.Id.ToString(), tag_20000);
-            redisContext.Cache.Remove<BsUserDTO>(keys);
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeFalse();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeFalse();
+            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tag_10000, CacheType.Object, TheFirstUser.Id);
+            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tag_20000, CacheType.Object, TheLastUser.Id);
+            RedisContext.Cache.RemoveKey<BsUserDTO>(keys);
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeFalse();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeFalse();
             
-            redisContext.Cache.GetAllTags().Should().NotContain(tag_10000.Union(tag_20000).ToArray());
+            RedisContext.Cache.GetAllTags().Should().NotContain(tag_10000.Union(tag_20000).ToArray());
 
-            redisContext.Cache.FetchObject<BsUserDTO>(first.Id, () => new BsUserDTO() { Id = id1 }, x => new[] { string.Format("TAG_{0}_1", x.Id), string.Format("TAG_{0}_2", x.Id) });
+            RedisContext.Cache.FetchObject<BsUserDTO>(TheFirstUser.Id, () => new BsUserDTO() { Id = firstId }, x => new[] { string.Format("TAG_{0}_1", x.Id), string.Format("TAG_{0}_2", x.Id) });
 
-            redisContext.Cache.FetchObject<BsUserDTO>(last.Id, () => new BsUserDTO() { Id = id2 }, x => new[] { string.Format("TAG_{0}_1", x.Id), string.Format("TAG_{0}_2", x.Id) });
-            redisContext.Cache.KeyExists<BsUserDTO>(first.Id).Should().BeTrue();
-            redisContext.Cache.KeyExists<BsUserDTO>(last.Id).Should().BeTrue();
+            RedisContext.Cache.FetchObject<BsUserDTO>(TheLastUser.Id, () => new BsUserDTO() { Id = lastId }, x => new[] { string.Format("TAG_{0}_1", x.Id), string.Format("TAG_{0}_2", x.Id) });
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheFirstUser.Id).Should().BeTrue();
+            RedisContext.Cache.KeyExists<BsUserDTO>(CacheType.Object, TheLastUser.Id).Should().BeTrue();
 
-            var firstCache = redisContext.Cache.GetObjectA<BsUserDTO>(first.Id);
-            var lastCache = redisContext.Cache.GetObjectA<BsUserDTO>(last.Id);
+            var firstCache = RedisContext.Cache.GetObject<BsUserDTO>(TheFirstUser.Id);
+            var lastCache = RedisContext.Cache.GetObject<BsUserDTO>(TheLastUser.Id);
 
             firstCache.Should().NotBeNull();
             lastCache.Should().NotBeNull();
-            firstCache.Id.Should().Equals(id1);
-            lastCache.Id.Should().Equals(id2);
+            firstCache.Id.Should().Equals(firstId);
+            lastCache.Id.Should().Equals(lastId);
 
-            redisContext.Cache.GetAllTags().Should().Contain(tag_10000.Union(tag_20000).ToArray());
+            RedisContext.Cache.GetAllTags().Should().Contain(tag_10000.Union(tag_20000).ToArray());
         }
         #endregion        
 
-        #region To Be Deleted
-        //[Fact(DisplayName = "SetHashed_Test_OK")]
-        //[Trait(TraitName, TraitValue)]
-        //public void SetHashed_Test_OK()
-        //{
-        //    var users = CallService((IBsUserService x) => x.GetAll()).ToList();
-        //    users.ForEach(x => SetHashedToCache(redisContext, x, new[] { string.Format("BsUserDTO:Code:{0}", x.Code), string.Format("BsUserDTO:Name:{0}", x.Name) }));
-        //}
+        #region Hashed cache testing
+        [Fact(DisplayName = "SetHashed_OK")]
+        [Trait(TraitName, TraitCacheHashedValue)]
+        public void SetHashed_OK()
+        {
+            RedisContext.Cache.RemoveKey<BsUserDTO>();
+            RedisContext.Cache.KeyExists<BsUserDTO>().Should().BeFalse();
+            IDictionary<object, BsUserDTO> fieldValues = new Dictionary<object, BsUserDTO>();
+            AllUsers.ToList().ForEach(x =>
+            {
+                fieldValues.Add(x.Id, x);
+            });
+            RedisContext.Cache.SetHashed<BsUserDTO>(fieldValues);
+            RedisContext.Cache.KeyExists<BsUserDTO>().Should().BeTrue();
+        }
+
+        [Fact(DisplayName = "GetHash_OK")]
+        [Trait(TraitName, TraitCacheHashedValue)]
+        public void GetHash_OK()
+        {
+            RedisContext.Cache.RemoveKey<BsUserDTO>();
+            RedisContext.Cache.KeyExists<BsUserDTO>().Should().BeFalse();
+            IDictionary<object, BsUserDTO> fieldValues = new Dictionary<object, BsUserDTO>();
+            AllUsers.ToList().ForEach(x =>
+            {
+                fieldValues.Add(x.Id, x);
+            });
+            RedisContext.Cache.SetHashed<BsUserDTO>(fieldValues);
+            RedisContext.Cache.KeyExists<BsUserDTO>().Should().BeTrue();
+
+            var theFirstUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheFirstUser.Id);
+            var theLastUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheLastUser.Id);
+            theFirstUser.Should().NotBeNull();
+            theFirstUser.Should().Equals(TheFirstUser);
+            theLastUser.Should().NotBeNull();
+            theLastUser.Should().Equals(TheLastUser);
+        }
+
+        [Fact(DisplayName = "GetHashByTags_OK")]
+        [Trait(TraitName, TraitCacheHashedValue)]
+        public void GetHashByTags_OK()
+        {
+            //RedisContext.Cache.RemoveTagsFromHashField<BsUserDTO>(TheFirstUser.Id, tags_1);
+            //RedisContext.Cache.RemoveTagsFromHashField<BsUserDTO>(TheLastUser.Id, tags_2);
+
+            //RedisContext.Cache.SetHashed<BsUserDTO>(TheFirstUser.Id, TheFirstUser, tags_1);
+            //RedisContext.Cache.SetHashed<BsUserDTO>(TheLastUser.Id, TheLastUser, tags_2);
+
+            //RedisContext.Cache.KeyExists<BsUserDTO>().Should().BeTrue();
+
+            //var tags = tags_1.Union(tags_2).ToArray();
+            //var theFirstUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheFirstUser.Id);
+            //theFirstUser.Should().NotBeNull();
+            //theFirstUser.Should().Equals(TheFirstUser);
+        }
+
+        [Fact(DisplayName = "RemoveHashed_OK")]
+        [Trait(TraitName, TraitCacheHashedValue)]
+        public void RemoveHashed_OK()
+        {
+            RedisContext.Cache.RemoveKey<BsUserDTO>();
+            RedisContext.Cache.KeyExists<BsUserDTO>().Should().BeFalse();
+            IDictionary<object, BsUserDTO> fieldValues = new Dictionary<object, BsUserDTO>();
+            AllUsers.ToList().ForEach(x =>
+            {
+                fieldValues.Add(x.Id, x);
+            });
+            RedisContext.Cache.SetHashed<BsUserDTO>(fieldValues);
+            RedisContext.Cache.KeyExists<BsUserDTO>().Should().BeTrue();
+
+            RedisContext.Cache.RemoveHashed<BsUserDTO>(TheFirstUser.Id);
+            RedisContext.Cache.RemoveHashed<BsUserDTO>(TheLastUser.Id);
+
+            var theFirstUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheFirstUser.Id);
+            var theLastUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheLastUser.Id);
+            theFirstUser.Should().BeNull();
+            theLastUser.Should().BeNull();
+        }
+
+        [Fact(DisplayName = "SetHash_With_Tag_OK")]
+        [Trait(TraitName, TraitCacheHashedValue)]
+        public void SetHash_With_Tag_OK()
+        {
+            var tags = tags_1.Union(tags_2).ToArray();
+
+            RedisContext.Cache.RemoveTagsFromHashField<BsUserDTO>(TheFirstUser.Id, tags_1);
+            RedisContext.Cache.RemoveTagsFromHashField<BsUserDTO>(TheLastUser.Id, tags_2);
+
+            RedisContext.Cache.GetRawKeysByTag(tags).Should().NotContain(new[] { "BsUser:hash" });
+
+            RedisContext.Cache.SetHashed<BsUserDTO>(TheFirstUser.Id, TheFirstUser, tags_1);
+            RedisContext.Cache.SetHashed<BsUserDTO>(TheLastUser.Id, TheLastUser, tags_2);
+
+            RedisContext.Cache.KeyExists<BsUserDTO>().Should().BeTrue();
+            
+            var result = RedisContext.Cache.GetRawKeysByTag(tags);
+            result.Should().NotBeNullOrEmpty();
+
+            result.Should().Contain(new[] { "BsUser:hash" });
+        }
+
+        [Fact(DisplayName = "AddTagsToKey_Hashed_OK")]
+        [Trait(TraitName, TraitCacheHashedValue)]
+        public void AddTagsToKey_Hashed_OK()
+        {
+            var keys = new object[] { TheFirstUser.Id, TheLastUser.Id };
+            var tags = tags_1.Union(tags_2).ToArray();
+
+            RedisContext.Cache.SetHashed<BsUserDTO>(TheFirstUser.Id, TheFirstUser);
+            RedisContext.Cache.SetHashed<BsUserDTO>(TheLastUser.Id, TheLastUser);
+
+            RedisContext.Cache.KeyExists<BsUserDTO>().Should().BeTrue();
+
+            // Remove tag for the key
+            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tags);
+
+            //var redisKeys = RedisContext.Cache.GetKeysByTag(tags);
+            //var rawKeys = RedisContext.Cache.GetRawKeysByTag(tags);
+
+            // TODO:
+            // Assert
+            RedisContext.Cache.GetAllTags().Should().NotContain(tags);
+
+            // Add tags to the key
+            RedisContext.Cache.AddTagsToKey<BsUsageDTO>(tags_1);
+
+            // TODO:
+            // Assert the tags for the key should be contain in cache
+            RedisContext.Cache.GetAllTags().Should().Contain(tags);
+        }
 
         //[Fact]
-        //public void GetAllTags()
+        //[Trait(TraitName, TraitCacheHashedValue)]
+        //public void AddTagsToHashField_OK()
         //{
-        //    var tags = redisContext.Cache.GetAllTags().ToList();
-        //    tags.Should().NotBeNullOrEmpty();
-        //}
+        //    var users = CallService((IBsUserService x) => x.GetAll());
+        //    users.Should().NotBeNullOrEmpty();
 
-        //[Fact]
-        //public void Get()
-        //{
-        //    var keys = redisContext.Cache.GetKeysByTagA(new[] { string.Format("BsUserDTO:Code:999999", ""), "BsUserDTO:Name:蔡华琼" }).ToList();
-        //    keys.Should().NotBeNullOrEmpty();
-
-        //    var first = redisContext.Cache.GetHashed<BsUserDTO>(keys.First());
+        //    var first = users.First();
+        //    var last = users.Last();
         //    first.Should().NotBeNull();
-        //    var last = redisContext.Cache.GetHashed<BsUserDTO>(keys.Last());
         //    last.Should().NotBeNull();
-        //}
 
-        //[Fact]
-        //public void GetHashed_Test()
-        //{
-        //    var keys = redisContext.Cache.GetKeysByTag(new[] { "BsUserDTO:Code:999999" });
-        //    keys.Should().NotBeNullOrEmpty();
+        //    var keys = new object[] { first.Id, last.Id };
+        //    var tags = tags_1.Union(tags_2).ToArray();
 
-        //    var user = redisContext.Cache.GetHashed<BsUserDTO>(9);
+        //    redisContext.Cache.SetHashed<BsUserDTO>(first.Id, first);
+        //    redisContext.Cache.SetHashed<BsUserDTO>(last.Id, last);
 
-        //    //var user = redisContext.Cache.GetObjectsByTag<BsUserDTO>("9").ToList();
-        //    //user.Should().NotBeNullOrEmpty();
-        //}
+        //    redisContext.Cache.KeyExists<BsUserDTO>().Should().BeTrue();
 
-        //private void SetHashedToCache<T>(IRedisContext context, T o, string[] tags) where T : DtoBase<int>
-        //{
-        //    context.Cache.SetHashed(o.Id, o, tags);
-        //}
+        //    // Remove tag for the key
+        //    redisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tags_1);
+        //    redisContext.Cache.RemoveTagsFromKey<BsUserDTO>(tags_2);
 
-        //[Fact(DisplayName = "GetHashed_Test_OK")]
-        //[Trait(TraitName, TraitValue)]
-        //public void GetHashed_Test_OK()
-        //{
-        //    var location = redisContext.Cache.GetHashed<BsLocationDTO>(1655);
-        //    location.Should().NotBeNull();
-        //    redisContext.Cache.AddTagsToKey("111", new[] { "aaaa" });
-        //    //IDictionary<string, BsItemDTO> items = await redisContext.Cache.GetHashedAllAsync<BsItemDTO>("items:hash");
+        //    // Assert
+        //    redisContext.Cache.GetAllTags().Should().NotContain(tags);
 
-        //    //IDictionary<string, BsLocationDTO> result = await redisContext.Cache.GetHashedAllAsync<BsLocationDTO>("locations:hash");
+        //    // Add tags to the key
+        //    redisContext.Cache.AddTagsToKey<BsUserDTO>(first.Id, tags_1);
+        //    redisContext.Cache.AddTagsToKey<BsUserDTO>(last.Id, tags_2);
 
-        //    //var scan = redisContext.Cache.ScanHashed<BsLocationDTO>("locations:hash", "location:id:15*");
-        //    //var a = scan.Where(x => x.Value.Id == 1574).FirstOrDefault();
-        //    //var v = scan.Where(x => x.Value.Id == 1608).FirstOrDefault();
-
-        //    //var scan1 = redisContext.Cache.ScanHashed<BsItemDTO>("items:hash", "item:*");
-        //    //var aaa = scan1.Where(x => x.Value.Id == 847684).FirstOrDefault();            
-        //}
-
-        //[Fact(DisplayName = "GetObject_Test_OK", Skip = "true")]
-        //[Trait(TraitName, TraitValue)]
-        //public void GetObject_Test_OK()
-        //{
-        //    var location = redisContext.Cache.GetObjectA<BsLocationDTO>(1655);
-        //    location.Should().NotBeNull();
-        //}
-
-        //[Fact]
-        //public void GetByTag()
-        //{
-        //    var location = redisContext.Cache.GetKeysByTag(new[] { "101", "aaaa" }).ToArray();
-
-        //    var loc1 = redisContext.Cache.GetObjectsByTag<BsLocationDTO>("1655").ToList();
-        //    var loc2 = redisContext.Cache.GetObjectsByTag<BsLocationDTO>("101").ToList();
-
-        //}
-
-
-        //[Fact]
-        //public void AddTagsToHashField_Test()
-        //{
-        //    string[] tags = new[] { "AddTagsToHashField_Test-1", "AddTagsToHashField_Test-2" };
-        //    redisContext.Cache.AddTagsToHashField<BsLocationDTO>(856, tags);
-
-        //    redisContext.Cache.GetAllTags().Should().Contain(tags[0]);
-        //}
-
-        //[Fact(DisplayName = "FetchHashed_Test_OK")]
-        //[Trait(TraitName, TraitValue)]
-        //public void FetchHashed_Test_OK()
-        //{
-        //    var locationId = 908;
-        //    Func<BsLocationDTO> func = () => CallService((IBsLocationService x) => x.GetById(locationId));
-        //    var location = redisContext.Cache.FetchHashed<BsLocationDTO>(locationId, func);
-        //    location.Should().NotBeNull();
-        //    location.Id.Should().Equals(locationId);
-
-        //    var itemId = 334247;
-        //    var item = redisContext.Cache.FetchHashed<BsItemDTO>(itemId, () => CallService((IBsItemService x) => x.GetById(itemId)));
-        //    item.Should().NotBeNull();
-        //    item.Id.Should().Equals(itemId);
-        //}
-
-        //[Fact(DisplayName = "TryGetHashed_Test_OK")]
-        //[Trait(TraitName, TraitValue)]
-        //public void TryGetHashed_Test_OK()
-        //{
-        //    BsLocationDTO value;
-        //    int id = 830;
-        //    bool result = redisContext.Cache.TryGetHashed<BsLocationDTO>(id, out value);
-        //    result.Should().BeTrue();
-        //    value.Should().NotBeNull();
-        //}
-
-        //[Fact(DisplayName = "FetchObject_Test_OK")]
-        //[Trait(TraitName, TraitValue)]
-        //public void FetchObject_Test_OK()
-        //{
-        //    int id = 830;
-        //    var location = redisContext.Cache.FetchObject<BsLocationDTO>(id, () => CallService((IBsLocationService x) => x.GetById(id)));
-        //    location.Should().NotBeNull();
-
-        //    id = 828;
-        //    location = redisContext.Cache.FetchObject<BsLocationDTO>(id, () => CallService((IBsLocationService x) => x.GetById(id)));
-        //    location.Should().NotBeNull();
+        //    // Assert the tags for the key should be contain in cache
+        //    redisContext.Cache.GetAllTags().Should().Contain(tags);
         //}
         #endregion
+
+        [Fact]
+        public void TEST()
+        {
+            var keys = RedisContext.Cache.GetKeysByTag(new[] { "The_Tag_1_For_The_First_User"});
+            var rowKeys = RedisContext.Cache.GetRawKeysByTag(new[] { "The_Tag_1_For_The_First_User" }).Distinct();
+        }
     }
 }

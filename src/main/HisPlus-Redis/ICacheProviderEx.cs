@@ -16,21 +16,28 @@ namespace HisPlus.Redis
         private const string ObjectKeyFormat = "{0}:{1}";
         #endregion        
 
+        #region Add Tags
         public static void AddTagsToHashField<T>(this ICacheProvider cacheProvider, object key, string[] tags)
         {
-            cacheProvider.AddTagsToHashField(GetHashedKey<T>(), GetHashedField<T>(key), tags);
+            var redisKey = GetRedisKey<T>(CacheType.Hash);
+            var field = GetHashField<T>(key);
+
+            cacheProvider.AddTagsToHashField(redisKey, field, tags);
         }
 
-        public static void AddTagsToKey<T>(this ICacheProvider cacheProvider, object key, string[] tags)
+        public static void AddTagsToKey<T>(this ICacheProvider cacheProvider, string[] tags, CacheType cacheType = CacheType.Hash, object key = null)
         {
-            cacheProvider.AddTagsToKey(GetObjectKey<T>(key), tags);
+            var redisKey = GetRedisKey<T>(cacheType, key);
+            cacheProvider.AddTagsToKey(redisKey, tags);
         }
 
         public static void AddTagsToSetMember<T>(this ICacheProvider cacheProvider, T member, string[] tags)
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region Add to Set
         public static void AddToSet<T>(this ICacheProvider cacheProvider, T value, string[] tags = null, TimeSpan? ttl = null)
         {
             throw new NotImplementedException();
@@ -40,38 +47,48 @@ namespace HisPlus.Redis
         {
             throw new NotImplementedException();
         }
+        #endregion
 
         #region FetchHashed
         public static T FetchHashed<T>(this ICacheProvider cacheProvider, object key, Func<T> func, TimeSpan? expiry = null)
         {
-            return cacheProvider.FetchHashed(GetHashedKey<T>(), GetHashedField<T>(key), func, expiry);
+            var redisKey = GetRedisKey<T>(CacheType.Hash);
+            var field = GetHashField<T>(key);
+            return cacheProvider.FetchHashed(redisKey, field, func, expiry);
         }
 
         public static T FetchHashed<T>(this ICacheProvider cacheProvider, object key, Func<T> func, Func<T, string[]> tagsBuilder, TimeSpan? expiry = null)
         {
-            return cacheProvider.FetchHashed(GetHashedKey<T>(), GetHashedField<T>(key), func, tagsBuilder, expiry);
+            var redisKey = GetRedisKey<T>(CacheType.Hash);
+            var field = GetHashField<T>(key);
+            return cacheProvider.FetchHashed(redisKey, field, func, tagsBuilder, expiry);
         }
 
         public static T FetchHashed<T>(this ICacheProvider cacheProvider, object key, Func<T> func, string[] tags, TimeSpan? expiry = null)
         {
-            return cacheProvider.FetchHashed(GetHashedKey<T>(), GetHashedField<T>(key), func, tags, expiry);
+            var redisKey = GetRedisKey<T>(CacheType.Hash);
+            var field = GetHashField<T>(key);
+            return cacheProvider.FetchHashed(redisKey, field, func, tags, expiry);
         }
         #endregion
 
         #region FetchObject
         public static T FetchObject<T>(this ICacheProvider cacheProvider, object key, Func<T> func, TimeSpan? expiry = null)
         {
-            return cacheProvider.FetchObject(GetObjectKey<T>(key), func, expiry);
+            var redisKey = GetRedisKey<T>(CacheType.Object, key);
+            return cacheProvider.FetchObject(redisKey, func, expiry);
         }
 
         public static T FetchObject<T>(this ICacheProvider cacheProvider, object key, Func<T> func, Func<T, string[]> tagsBuilder, TimeSpan? expiry = null)
         {
-            return cacheProvider.FetchObject(GetObjectKey<T>(key), func, tagsBuilder, expiry);
+            var redisKey = GetRedisKey<T>(CacheType.Object, key);
+            return cacheProvider.FetchObject(redisKey, func, tagsBuilder, expiry);
         }
 
         public static T FetchObject<T>(this ICacheProvider cacheProvider, object key, Func<T> func, string[] tags, TimeSpan? expiry = null)
         {
-            return cacheProvider.FetchObject(GetObjectKey<T>(key), func, tags, expiry);
+            var redisKey = GetRedisKey<T>(CacheType.Object, key);
+            return cacheProvider.FetchObject(redisKey, func, tags, expiry);
         }
         #endregion
 
@@ -82,17 +99,20 @@ namespace HisPlus.Redis
         #region GetHashed
         public static T GetHashed<T>(this ICacheProvider cacheProvider, object key)
         {
-            return cacheProvider.GetHashed<T>(GetHashedKey<T>(), GetHashedField<T>(key));
+            var redisKey = GetRedisKey<T>(CacheType.Hash);
+            var field = GetHashField<T>(key);
+            return cacheProvider.GetHashed<T>(redisKey, field);
         }
 
-        public static TV GetHashed<TK, TV>(this ICacheProvider cacheProvider, object key, TK field)
+        public static TV GetHashed<TK, TV>(this ICacheProvider cacheProvider, long key, TK field)
         {
             throw new NotImplementedException();
         }
         
         public static IDictionary<string, T> GetHashedAll<T>(this ICacheProvider cacheProvider)
         {
-            return cacheProvider.GetHashedAll<T>(GetHashedKey<T>());
+            var redisKey = GetRedisKey<T>(CacheType.Hash);
+            return cacheProvider.GetHashedAll<T>(redisKey);
         }
         #endregion
 
@@ -100,29 +120,39 @@ namespace HisPlus.Redis
 
         //IEnumerable<string> GetKeysByTag(string[] tags, bool cleanUp = false);
 
-        public static IEnumerable<string> GetKeysByTagA(this ICacheProvider cacheProvider, string[] tags, bool cleanUp = false)
+        public static IEnumerable<string> GetRawKeysByTag(this ICacheProvider cacheProvider, string[] tags, CacheType cacheType = CacheType.Hash,  bool cleanUp = false)
         {
             var keys = new List<string>();
             var result = cacheProvider.GetKeysByTag(tags, cleanUp).ToList();
             result.ForEach(x => 
             {
-                var key = x.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+                var key = "";
+                if (cacheType == CacheType.Hash)
+                {
+                    key = x.Split('$').FirstOrDefault().TrimEnd(':');
+                }
+                else
+                {
+                    key = x.Split(':').LastOrDefault().Trim();
+                }
                 keys.Add(key);
             });
 
-            return keys;
+            return keys.Distinct();
         }
 
-        public static T GetObjectA<T>(this ICacheProvider cacheProvider, object key)
+        public static T GetObject<T>(this ICacheProvider cacheProvider, object key)
         {
-            return cacheProvider.GetObject<T>(GetObjectKey<T>(key));
+            var redisKey = GetRedisKey<T>(CacheType.Object, key);
+            return cacheProvider.GetObject<T>(redisKey);
         }
 
         //IEnumerable<T> GetObjectsByTag<T>(params string[] tags);
 
         public static T GetSetObject<T>(this ICacheProvider cacheProvider, object key, T value)
         {
-            return cacheProvider.GetSetObject(GetObjectKey<T>(key), value);
+            var redisKey = GetRedisKey<T>(CacheType.Object, key);
+            return cacheProvider.GetSetObject(redisKey, value);
         }
 
         //bool HyperLogLogAdd<T>(string key, T item);
@@ -133,90 +163,87 @@ namespace HisPlus.Redis
 
         //void InvalidateKeysByTag(params string[] tags);
 
-        public static bool KeyExists<T>(this ICacheProvider cacheProvider, object key)
+        public static bool KeyExists<T>(this ICacheProvider cacheProvider, CacheType cacheType = CacheType.Hash, object key = null)
         {
-            return cacheProvider.KeyExists(GetObjectKey<T>(key));
+            var redisKey = GetRedisKey<T>(cacheType, key);
+            return cacheProvider.KeyExists(redisKey);
         }
 
-        public static bool KeyExpire<T>(this ICacheProvider cacheProvider, object key, DateTime expiration)
+        public static bool KeyExpire<T>(this ICacheProvider cacheProvider, DateTime expiration, CacheType cacheType = CacheType.Hash, object key = null)
         {
-            return cacheProvider.KeyExpire(GetObjectKey<T>(key), expiration);
+            var redisKey = GetRedisKey<T>(cacheType, key);
+            return cacheProvider.KeyExpire(redisKey, expiration);
         }
 
-        public static bool KeyPersist<T>(this ICacheProvider cacheProvider, object key)
+        public static bool KeyPersist<T>(this ICacheProvider cacheProvider, CacheType cacheType = CacheType.Hash, object key = null)
         {
-            return cacheProvider.KeyPersist(GetObjectKey<T>(key));
+            var redisKey = GetRedisKey<T>(cacheType, key);
+            return cacheProvider.KeyPersist(redisKey);
         }
 
-        public static TimeSpan? KeyTimeToLive<T>(this ICacheProvider cacheProvider)
+        public static TimeSpan? KeyTimeToLive<T>(this ICacheProvider cacheProvider, CacheType cacheType = CacheType.Hash, object key = null)
         {
-            return cacheProvider.KeyTimeToLive(GetHashedKey<T>());
+            var redisKey = GetRedisKey<T>(cacheType, key);
+            return cacheProvider.KeyTimeToLive(redisKey);
         }
 
-        public static bool KeyTimeToLive<T>(this ICacheProvider cacheProvider, TimeSpan ttl)
+        public static bool KeyTimeToLive<T>(this ICacheProvider cacheProvider, TimeSpan ttl, CacheType cacheType = CacheType.Hash, object key = null)
         {
-            return cacheProvider.KeyTimeToLive(GetHashedKey<T>(), ttl);
+            var redisKey = GetRedisKey<T>(cacheType, key);
+            return cacheProvider.KeyTimeToLive(redisKey, ttl);
         }
 
-        public static bool Remove<T>(this ICacheProvider cacheProvider, object key, CacheType cacheType = CacheType.Object)
+        public static bool RemoveKey<T>(this ICacheProvider cacheProvider, CacheType cacheType = CacheType.Hash, object key = null)
         {
-            return cacheProvider.Remove(GetKeyByCacheType<T>(key));
+            var redisKey = GetRedisKey<T>(cacheType, key);
+            return cacheProvider.Remove(redisKey);
         }
 
-        public static void Remove<T>(this ICacheProvider cacheProvider, object[] keys, CacheType cacheType = CacheType.Object)
+        public static void RemoveKey<T>(this ICacheProvider cacheProvider, object[] keys)
         {
-            var cacheKeys = new List<string>();
-            keys.ToList().ForEach(x => 
+            string[] redisKeys = new string[keys.Length];
+            for (int i = 0; i < keys.Length; i++)
             {
-                cacheKeys.Add(GetKeyByCacheType<T>(x));
-            });
+                redisKeys[i] = GetRedisKey<T>(CacheType.Object, keys[i]);
+            }
 
-            cacheProvider.Remove(cacheKeys.ToArray());
+            cacheProvider.Remove(redisKeys);
         }
 
         //bool RemoveFromSet<T>(string key, T value);
 
         //bool RemoveFromSortedSet<T>(string key, T value);
-        
+
         public static bool RemoveHashed<T>(this ICacheProvider cacheProvider, object key)
         {
-            return cacheProvider.RemoveHashed(GetHashedKey<T>(), GetHashedField<T>(key));
+            var redisKey = GetRedisKey<T>(CacheType.Hash);
+            var field = GetHashField<T>(key);
+            return cacheProvider.RemoveHashed(redisKey, field);
         }
 
-        public static void RemoveTagsFromHashField<T>(this ICacheProvider cacheProvider, string field, string[] tags) 
+        public static void RemoveTagsFromHashField<T>(this ICacheProvider cacheProvider, object field, string[] tags) 
         {
-            cacheProvider.RemoveTagsFromHashField(GetHashedKey<T>(), field, tags);
+            var redisKey = GetRedisKey<T>(CacheType.Hash);
+            if (field == null)
+            {
+                throw new ArgumentNullException("field");
+            }
+                
+            cacheProvider.RemoveTagsFromHashField(redisKey, GetHashField<T>(field), tags);
         }
 
-        private static string GetKeyByCacheType<T>(object key = null, CacheType cacheType = CacheType.Object)
+        public static void RemoveTagsFromKey<T>(this ICacheProvider cacheProvider, string[] tags, CacheType cacheType = CacheType.Hash, object key = null)
         {
-            var cacheKey = "";
-            if (cacheType == CacheType.Hashed)
-            {
-                cacheKey = GetHashedKey<T>();
-            }
-            else
-            {
-                if (key == null)
-                {
-                    throw new ArgumentNullException("key");
-                }
-                cacheKey = GetObjectKey<T>(key);
-            }
-
-            return cacheKey;
-        }
-
-        public static void RemoveTagsFromKey<T>(this ICacheProvider cacheProvider, object key, string[] tags, CacheType cacheType = CacheType.Object) 
-        {            
-            cacheProvider.RemoveTagsFromKey(GetKeyByCacheType<T>(key, cacheType), tags);
+            var redisKey = GetRedisKey<T>(cacheType, key);
+            cacheProvider.RemoveTagsFromKey(redisKey, tags);
         }
 
         //void RemoveTagsFromSetMember<T>(string key, T member, string[] tags) { throw new NotImplementedException(); }
 
         public static void RenameTagForHashField<T>(this ICacheProvider cacheProvider, string field, string currentTag, string newTag) 
         {
-            cacheProvider.RenameTagForHashField(GetHashedKey<T>(), field, currentTag, newTag);
+            var redisKey = GetRedisKey<T>(CacheType.Hash);
+            cacheProvider.RenameTagForHashField(redisKey, field, currentTag, newTag);
         }
 
         //void RenameTagForKey(string key, string currentTag, string newTag) { throw new NotImplementedException(); }
@@ -227,41 +254,63 @@ namespace HisPlus.Redis
 
         public static void SetHashed<T>(this ICacheProvider cacheProvider, IDictionary<string, T> fieldValues)
         {
-            cacheProvider.SetHashed<T>(GetHashedKey<T>(), fieldValues);
+            var redisKey = GetRedisKey<T>(CacheType.Hash);
+            cacheProvider.SetHashed<T>(redisKey, fieldValues);
+        }
+
+        public static void SetHashed<T>(this ICacheProvider cacheProvider, IDictionary<object, T> fieldValues)
+        {
+            var redisKey = GetRedisKey<T>(CacheType.Hash);
+            IDictionary<string, T> redisFieldValues = new Dictionary<string, T>();
+            
+            foreach(var fldValue in fieldValues)
+            {
+                var key = GetHashField<T>(fldValue.Key);
+                redisFieldValues.Add(key, fldValue.Value);
+            };
+            cacheProvider.SetHashed<T>(redisKey, redisFieldValues);
         }
 
         public static void SetHashed<T>(this ICacheProvider cacheProvider, object key, T value, TimeSpan? ttl = null, When when = When.Always)
         {
-            cacheProvider.SetHashed<T>(GetHashedKey<T>(), GetHashedField<T>(key), value, ttl, when);
+            var redisKey = GetRedisKey<T>(CacheType.Hash);
+            var field = GetHashField<T>(key);
+            cacheProvider.SetHashed<T>(redisKey, field, value, ttl, when);
         }
 
         //public static void SetHashed<TK, TV>(this ICacheProvider cacheProvider, string key, TK field, TV value, TimeSpan? ttl = null, When when = When.Always);
 
         public static void SetHashed<T>(this ICacheProvider cacheProvider, object key, T value, string[] tags, TimeSpan? ttl = null, When when = When.Always)
         {
-            cacheProvider.SetHashed<T>(GetHashedKey<T>(), GetHashedField<T>(key), value, tags, ttl, when);
+            var redisKey = GetRedisKey<T>(CacheType.Hash);
+            var field = GetHashField<T>(key);
+            cacheProvider.SetHashed<T>(redisKey, field, value, tags, ttl, when);
         }
 
         //public static void SetHashed<TK, TV>(string key, TK field, TV value, string[] tags, TimeSpan? ttl = null, When when = When.Always) { }
 
         public static void SetObject<T>(this ICacheProvider cacheProvider, object key, T value, TimeSpan? ttl = null, When when = When.Always)
         {
-            cacheProvider.SetObject<T>(GetObjectKey<T>(key), value, ttl, when);
+            var redisKey = GetRedisKey<T>(CacheType.Object, key);
+            cacheProvider.SetObject<T>(redisKey, value, ttl, when);
         }
-            
+
         public static void SetObject<T>(this ICacheProvider cacheProvider, object key, T value, string[] tags, TimeSpan? ttl = null, When when = When.Always)
         {
-            cacheProvider.SetObject<T>(GetObjectKey<T>(key), value, tags, ttl, when);
+            var redisKey = GetRedisKey<T>(CacheType.Object, key);
+            cacheProvider.SetObject<T>(redisKey, value, tags, ttl, when);
         }
 
         public static bool TryGetHashed<T>(this ICacheProvider cacheProvider, object key, out T value)
         {
-            return cacheProvider.TryGetHashed<T>(GetHashedKey<T>(), GetHashedField<T>(key), out value);
+            var redisKey = GetRedisKey<T>(CacheType.Hash);
+            return cacheProvider.TryGetHashed<T>(redisKey, GetHashField<T>(key), out value);
         }
 
         public static bool TryGetObject<T>(this ICacheProvider cacheProvider, object key, out T value)
         {
-            return cacheProvider.TryGetObject<T>(GetObjectKey<T>(key), out value);
+            var redisKey = GetRedisKey<T>(CacheType.Object, key);
+            return cacheProvider.TryGetObject<T>(redisKey, out value);
         }
        
         #region private method(s)
@@ -271,19 +320,34 @@ namespace HisPlus.Redis
             return typeof(T).Name.Replace("DTO", "").Replace("Info", "");
         }
 
-        private static string GetHashedKey<T>()
-        {
-            return string.Format(HashedKeyFormat, GetTableName<T>());
-        }
+        //private static string GetHashedKey<T>()
+        //{
+        //    return string.Format(HashedKeyFormat, GetTableName<T>());
+        //}
 
-        private static string GetHashedField<T>(object key)
+        private static string GetHashField<T>(object key)
         {
             return string.Format(HashedFieldFormat, GetTableName<T>(), key);
         }
 
-        private static string GetObjectKey<T>(object id)
+        //private static string GetObjectKey<T>(object key)
+        //{
+        //    return string.Format(ObjectKeyFormat, GetTableName<T>(), key);
+        //}
+
+        private static string GetRedisKey<T>(CacheType cacheType, object key = null) 
         {
-            return string.Format(ObjectKeyFormat, GetTableName<T>(), id);
+            string redisKey = "";
+            if (cacheType == CacheType.Hash)
+            {
+                redisKey = string.Format(HashedKeyFormat, GetTableName<T>());
+            }
+            else
+            {
+                redisKey = string.Format(ObjectKeyFormat, GetTableName<T>(), key);
+            }
+
+            return redisKey;
         }
         #endregion
     }
