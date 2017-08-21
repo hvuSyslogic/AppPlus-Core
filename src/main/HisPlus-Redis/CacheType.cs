@@ -13,5 +13,6 @@ namespace HisPlus.Redis
         Set = 2,
         SortedSet = 4,
         String = 5,
+        HashField = 6,
     }
 }

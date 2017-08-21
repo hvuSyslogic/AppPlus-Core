@@ -120,7 +120,7 @@ namespace HisPlus.Redis
 
         //IEnumerable<string> GetKeysByTag(string[] tags, bool cleanUp = false);
 
-        public static IEnumerable<string> GetRawKeysByTag(this ICacheProvider cacheProvider, string[] tags, CacheType cacheType = CacheType.Hash,  bool cleanUp = false)
+        public static IList<string> GetRawKeysByTag(this ICacheProvider cacheProvider, string[] tags, CacheType cacheType = CacheType.Hash,  bool cleanUp = false)
         {
             var keys = new List<string>();
             var result = cacheProvider.GetKeysByTag(tags, cleanUp).ToList();
@@ -132,13 +132,17 @@ namespace HisPlus.Redis
                     key = x.Split('$').FirstOrDefault().TrimEnd(':');
                 }
                 else
-                {
-                    key = x.Split(':').LastOrDefault().Trim();
+                {                                            
+                    key = x.Split(':').LastOrDefault().Trim();                    
                 }
-                keys.Add(key);
+
+                if (!string.IsNullOrWhiteSpace(key))
+                {
+                    keys.Add(key);
+                }               
             });
 
-            return keys.Distinct();
+            return keys.Distinct().ToList();
         }
 
         public static T GetObject<T>(this ICacheProvider cacheProvider, object key)

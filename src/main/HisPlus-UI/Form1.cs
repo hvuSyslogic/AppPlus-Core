@@ -32,7 +32,6 @@ namespace HisPlus.UI
                 var result = ServiceHandler.CallService((IBsUserService x) => x.GetCurrentDateTime());
                 IsInitialized = true;
             }).Start();
-
         }
 
         public Form1()
@@ -96,6 +95,6 @@ namespace HisPlus.UI
         {
            TxtUserId.Text = "999999";
            TxtPasswrod.Text = "1";
-        }      
+        }
     }
 }
