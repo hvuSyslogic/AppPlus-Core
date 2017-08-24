@@ -8,7 +8,7 @@ using FluentAssertions;
 
 namespace HisPlus.UnitTesting
 {
-    public class ClassAttributeUnitTests
+    public class ClassAttributeTests
     {
         [Fact]
         public void Null_Attribute_Test_OK()

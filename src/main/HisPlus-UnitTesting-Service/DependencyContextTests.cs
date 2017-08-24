@@ -19,7 +19,7 @@ using HisPlus.Core.Abstractions.Support;
 
 namespace HisPlus.UnitTesting
 {
-    public class DependencyContextUnitTests
+    public class DependencyContextTests
     {
         const string TraitName = "DependencyContextUnitTests";
         const string DisplayName = "DependenyInjection";

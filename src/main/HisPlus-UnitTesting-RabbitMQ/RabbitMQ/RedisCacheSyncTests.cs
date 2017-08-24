@@ -10,7 +10,7 @@ using Xunit;
 
 namespace HisPlus.UnitTesting.RabbitMQ
 {
-    public class RedisCacheSyncUnitTests 
+    public class RedisCacheSyncTests 
     {
         private const string HostName = "localhost";
         private string CacheKey = "BsGfxe";

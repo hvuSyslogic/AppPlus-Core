@@ -98,7 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Redis\RedisCacheUnitTests.For.Object.cs" />
+    <Compile Include="Redis\RedisCacheTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Redis\RedisTestBase.cs" />
   </ItemGroup>

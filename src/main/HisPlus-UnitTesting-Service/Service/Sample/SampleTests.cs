@@ -20,7 +20,7 @@ using HisPlus.UnitTesting.Common;
 
 namespace HisPlus.UnitTesting.Service.Sample
 {
-    public partial class SampleUnitTests : TestBase
+    public partial class SampleTests : TestBase
     {
         const string TraitName = "SampleUnitTests";
         const string TraitValue = "Multi_Test";

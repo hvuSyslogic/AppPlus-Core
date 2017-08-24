@@ -8,7 +8,7 @@ using Xunit;
 
 namespace HisPlus.UnitTesting.RabbitMQ
 {    
-    public partial class MessageSenderUnitTests
+    public partial class MessageSenderTests
     {
         const string TraitName = "MessageSenderUnitTests";
         const string TraitValue = "MessageQueue";

@@ -14,7 +14,7 @@ using Xunit;
 
 namespace HisPlus.UnitTesting
 {
-    public class CastleFacilityUnitTests
+    public class CastleFacilityTests
     {
         [Fact(Skip="true")]
         public void Test_BasicHttpBinding()

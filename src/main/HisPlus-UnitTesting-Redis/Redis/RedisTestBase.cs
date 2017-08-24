@@ -37,6 +37,7 @@ namespace HisPlus.UnitTesting.Redis
     {
         protected static readonly IRedisContext RedisContext = IoCManager.Container.Resolve<IRedisContext>();
         //protected static readonly IRedisContext RedisContext = new RedisContext("192.168.1.225:6379, connectRetry=10, abortConnect=false, allowAdmin=true");
+        
         protected static string[] TheFirstUserTags = new[] { "TheFirstUserTags_1", "TheFirstUserTag_2" };
         protected static string[] TheSecondUserTags = new[] { "TheSecondUserTag_1", "TheSecondUserTag_2" };
         protected static string[] UserTags = TheFirstUserTags.Union(TheSecondUserTags).ToArray();

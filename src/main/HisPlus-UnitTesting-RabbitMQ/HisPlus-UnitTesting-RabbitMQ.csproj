@@ -93,12 +93,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RabbitMQ\MessageSenderUnitTests.cs" />
+    <Compile Include="RabbitMQ\MessageSenderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RabbitMQ\MessageSenderUnitTests.Designer.cs">
-      <DependentUpon>MessageSenderUnitTests.cs</DependentUpon>
+    <Compile Include="RabbitMQ\MessageSenderTests.Designer.cs">
+      <DependentUpon>MessageSenderTests.cs</DependentUpon>
     </Compile>
-    <Compile Include="RabbitMQ\RedisCacheSyncUnitTests.cs" />
+    <Compile Include="RabbitMQ\RedisCacheSyncTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

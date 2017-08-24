@@ -106,15 +106,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CastleFacilityUnitTests.cs" />
-    <Compile Include="ClassAttributeUnitTests.cs" />
+    <Compile Include="CastleFacilityTests.cs" />
+    <Compile Include="ClassAttributeTests.cs" />
     <Compile Include="Service\BsGfxeServiceTestsFixture.cs" />
-    <Compile Include="Service\BS\BsGfxeServiceUnitTests.cs" />
+    <Compile Include="Service\BS\BsGfxeServiceTests.cs" />
     <Compile Include="Service\Constants.cs" />
     <Compile Include="Service\GblRoleServiceTestsFixture.cs" />
-    <Compile Include="DependencyContextUnitTests.cs" />
+    <Compile Include="DependencyContextTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\Sample\SampleUnitTests.cs" />
+    <Compile Include="Service\Sample\SampleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
