@@ -16,67 +16,120 @@ namespace HisPlus.UnitTesting.Redis
 {
     public partial class RedisCacheUnitTests : RedisTestBase, IClassFixture<RedisTestFixture>
     {
+        #region private constant(s)
         private const string TraitName = "RedisCacheUnitTests";
         private const string TraitCacheObjectValue = "Object";
         private const string TraitCacheHashedValue = "Hashed";
+        #endregion
 
-        Func<BsUserDTO, string> KeyBuilder = (x) => { return "BsUser:" + x.Id; };
-        Func<string> HashKeyBuilder = () => { return "BsUser:hash"; };
-        Func<BsUserDTO, string[]> tagsBuilder = (x) => { return new string[] { "TheFirstUserTags_1", "TheFirstUserTags_2" }; };
-        Func<BsUserDTO, string> fieldBuilder = (x) => { return string.Format("BsUser:ID:{0}", x.Id); };
+        static Func<BsUserDTO, string> KeyBuilder = (x) => 
+        {
+            return string.Format("{0}:{1}", x.GetKey(), x.Id);
+        };
+
+        static Func<BsUserDTO, string> HashFieldBuilder = (x) =>
+        {
+            return string.Format("{0}:ID:{1}", x.GetKey(), x.Id);
+        };
+
+        Func<BsUserDTO[], string[]> KeysBuilder = (x) => 
+        {
+            string[] keys = new string[x.Length];
+
+            for (int i = 0; i < x.Length; i++)
+            {
+                keys[i] = KeyBuilder.Invoke(x[i]);
+            }
+
+            return keys;
+        };
+
+        Func<string, string> HashKeyBuilder = (x) =>
+        {
+            return string.Format("{0}:{1}", x, "HASH");;
+        };
+
+        Func<BsUserDTO, string[]> TagsBuilder = (x) => 
+        {
+            return new string[]
+            { 
+                string.Format("{0}:{1}:{2}", x.GetKey(), "Name", x.Name), 
+                string.Format("{0}:{1}:{2}", x.GetKey(), "Mobile", x.Mobile) 
+            };
+        };        
         
+        Func<BsUserDTO[], IDictionary<string, BsUserDTO>> HashFieldsBuilder = (x =>
+        {
+            IDictionary<string, BsUserDTO> fieldValues = new Dictionary<string, BsUserDTO>();
+            for (int i = 0; i < x.Length; i++)
+            {
+                fieldValues.Add(HashFieldBuilder.Invoke(x[i]), x[i]);
+            }
+
+            return fieldValues;
+        });
+
+        public RedisCacheUnitTests()
+        {
+            UserTags = TagsBuilder.Invoke(TheFirstUser).Union(TagsBuilder.Invoke(TheSecondUser)).ToArray();
+        }
+
         #region Object cache testing
         [Fact(DisplayName = "SetObject_OK")]
         [Trait(TraitName, TraitCacheObjectValue)]
         public void SetObject_OK()
-        {                        
-            RedisContext.Cache.RemoveKey<BsUserDTO>(UserKeys);
+        {
+            Redis.Cache.RemoveKey<BsUserDTO>(Users, KeysBuilder);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeFalse();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeFalse();
-         
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheFirstUser);
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheSecondUser);
-         
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeTrue();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeFalse();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeFalse();
+
+            Redis.Cache.SetObject<BsUserDTO>(TheFirstUser, KeyBuilder);
+            Redis.Cache.SetObject<BsUserDTO>(TheSecondUser, KeyBuilder);
+
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeTrue();
         }
 
         [Fact(DisplayName = "SetObject_With_TTL_OK")]
         [Trait(TraitName, TraitCacheObjectValue)]
         public void SetObject_With_TTL_OK()
-        {            
-            RedisContext.Cache.RemoveKey<BsUserDTO>(UserKeys);
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeFalse();
+        {
+            Redis.Cache.RemoveKey<BsUserDTO>(Users, KeysBuilder);
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeFalse();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeFalse();
 
             int count = 0;
-         
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheFirstUser, TimeSpan.FromSeconds(5));           
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeTrue();            
-            count.Should().Be(0);
-            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(5.2));
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeFalse();
+
+            Redis.Cache.SetObject<BsUserDTO>(TheFirstUser, KeyBuilder, TimeSpan.FromSeconds(5));
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeTrue();            
             
-            RedisContext.Cache.FetchObject<BsUserDTO>(TheFirstUser.Id, () => { count++; return new BsUserDTO(); });            
+            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(5.2));
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeFalse();
+            
+            count.Should().Be(0);
+            
+            Redis.Cache.FetchObject<BsUserDTO>(TheFirstUser, KeyBuilder, () => { count++; return new BsUserDTO(); });
             count.Should().Be(1);
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeTrue();
+            
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeTrue();
         }
 
         [Fact(DisplayName = "GetObject_OK")]
         [Trait(TraitName, TraitCacheObjectValue)]
         public void GetObject_OK()
-        {           
-            RedisContext.Cache.RemoveKey<BsUserDTO>(UserKeys);
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeFalse();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeFalse();
+        {
+            Redis.Cache.RemoveKey<BsUserDTO>(Users, KeysBuilder);
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeFalse();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeFalse();
 
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheFirstUser);
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheSecondUser);
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeTrue();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeTrue();
+            Redis.Cache.SetObject<BsUserDTO>(TheFirstUser, KeyBuilder);
+            Redis.Cache.SetObject<BsUserDTO>(TheSecondUser, KeyBuilder);
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeTrue();
 
-            var theFirstUser = RedisContext.Cache.GetObject<BsUserDTO>(KeyBuilder, TheFirstUser);
-            var theSecondUser = RedisContext.Cache.GetObject<BsUserDTO>(KeyBuilder, TheSecondUser);
+            var theFirstUser = Redis.Cache.GetObject<BsUserDTO>(TheFirstUser, KeyBuilder);
+            var theSecondUser = Redis.Cache.GetObject<BsUserDTO>(TheSecondUser, KeyBuilder);
 
             theFirstUser.Should().NotBeNull();
             theFirstUser.Should().Equals(TheFirstUser);
@@ -88,53 +141,53 @@ namespace HisPlus.UnitTesting.Redis
         [Trait(TraitName, TraitCacheObjectValue)]
         public void GetObjectByTags_OK()
         {
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUserTags, CacheType.Object, TheFirstUser.Id);
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUserTags, CacheType.Object, TheSecondUser.Id);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUser, KeyBuilder, TagsBuilder);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUser, KeyBuilder, TagsBuilder);
 
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheFirstUser, tagsBuilder);
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheSecondUser, tagsBuilder);
+            Redis.Cache.SetObject<BsUserDTO>(TheFirstUser, KeyBuilder, TagsBuilder);
+            Redis.Cache.SetObject<BsUserDTO>(TheSecondUser, KeyBuilder, TagsBuilder);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeTrue();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeTrue();
 
-            var objects = RedisContext.Cache.GetObjectsByTag<BsUserDTO>(UserTags).ToList();
+            var objects = Redis.Cache.GetObjectsByTag<BsUserDTO>(UserTags).ToList();
             objects.Should().NotBeNullOrEmpty();
 
-            var redisKeys = objects.Select(x => x.Id.ToString());
-            redisKeys.Should().NotBeNullOrEmpty();
-            redisKeys.Should().Contain(UserKeys);
+            var keys = objects.Select(x => x.Id.ToString());
+            keys.Should().NotBeNullOrEmpty();
+            keys.Should().Contain(UserKeys);
         }
 
         [Fact(DisplayName = "RemoveKey_Object_OK")]
         [Trait(TraitName, TraitCacheObjectValue)]
         public void RemoveKey_Object_OK()
         {
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheFirstUser);
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheSecondUser);
+            Redis.Cache.SetObject<BsUserDTO>(TheFirstUser, KeyBuilder);
+            Redis.Cache.SetObject<BsUserDTO>(TheSecondUser, KeyBuilder);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeTrue();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeTrue();
 
-            RedisContext.Cache.RemoveKey<BsUserDTO>(new object[] { TheFirstUser.Id, TheSecondUser.Id });
+            Redis.Cache.RemoveKey<BsUserDTO>(Users, KeysBuilder);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeFalse();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeFalse();
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeFalse();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeFalse();
         }
 
         [Fact(DisplayName = "SetObject_With_Tag_OK")]
         [Trait(TraitName, TraitCacheObjectValue)]
         public void SetObject_With_Tag_OK()
         {
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUserTags, CacheType.Object, TheFirstUser.Id);
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUserTags, CacheType.Object, TheSecondUser.Id);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUser, KeyBuilder, TagsBuilder);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUser, KeyBuilder, TagsBuilder);
 
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheFirstUser, tagsBuilder);
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheSecondUser, tagsBuilder);
+            Redis.Cache.SetObject<BsUserDTO>(TheFirstUser, KeyBuilder, TagsBuilder);
+            Redis.Cache.SetObject<BsUserDTO>(TheSecondUser, KeyBuilder, TagsBuilder);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeTrue();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeTrue();           
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeTrue();           
 
-            var redisKeys = RedisContext.Cache.GetRawKeysByTag(UserTags, CacheType.Object);
+            var redisKeys = Redis.Cache.GetRawKeysByTag(UserTags, CacheType.Object);
             var keys = new[] { TheFirstUser.Id.ToString(), TheSecondUser.Id.ToString() };
             redisKeys.Should().Contain(keys);            
         }
@@ -143,35 +196,33 @@ namespace HisPlus.UnitTesting.Redis
         [Trait(TraitName, TraitCacheObjectValue)]
         public void AddTagsToKey_Object_OK()
         {
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheFirstUser);
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheSecondUser);
+            Redis.Cache.SetObject<BsUserDTO>(TheFirstUser, KeyBuilder);
+            Redis.Cache.SetObject<BsUserDTO>(TheSecondUser, KeyBuilder);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeTrue();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeTrue();
 
-            // Remove tag for the key
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUserTags, CacheType.Object, TheFirstUser.Id);
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUserTags, CacheType.Object, TheSecondUser.Id);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUser, KeyBuilder, TagsBuilder);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUser, KeyBuilder, TagsBuilder);
 
-            RedisContext.Cache.GetKeysByTag(UserTags).Should().NotContain(UserKeys);
-            
-            // Add tags to the key
-            RedisContext.Cache.AddTagsToKey<BsUserDTO>(TheFirstUserTags, CacheType.Object, TheFirstUser.Id);
-            RedisContext.Cache.AddTagsToKey<BsUserDTO>(TheSecondUserTags, CacheType.Object, TheSecondUser.Id);
+            Redis.Cache.GetKeysByTag(UserTags).Should().NotContain(UserKeys);
+                        
+            Redis.Cache.AddTagsToKey<BsUserDTO>(TheFirstUser, KeyBuilder, TagsBuilder);
+            Redis.Cache.AddTagsToKey<BsUserDTO>(TheSecondUser, KeyBuilder, TagsBuilder);
 
-            RedisContext.Cache.GetRawKeysByTag(UserTags, CacheType.Object).Should().Contain(UserKeys);
+            Redis.Cache.GetRawKeysByTag(UserTags, CacheType.Object).Should().Contain(UserKeys);
         }
 
         [Fact(DisplayName = "TryGetObject_OK")]
         [Trait(TraitName, TraitCacheObjectValue)]
         public void TryGetObject_OK()
         {
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheFirstUser);
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheSecondUser);
+            Redis.Cache.SetObject<BsUserDTO>(TheFirstUser, KeyBuilder);
+            Redis.Cache.SetObject<BsUserDTO>(TheSecondUser, KeyBuilder);
             BsUserDTO firstUserDTO;
             BsUserDTO lastUserDTO;
-            RedisContext.Cache.TryGetObject<BsUserDTO>(TheFirstUser.Id, out firstUserDTO).Should().BeTrue();
-            RedisContext.Cache.TryGetObject<BsUserDTO>(TheSecondUser.Id, out lastUserDTO).Should().BeTrue();
+            Redis.Cache.TryGetObject<BsUserDTO>(TheFirstUser, KeyBuilder, out firstUserDTO).Should().BeTrue();
+            Redis.Cache.TryGetObject<BsUserDTO>(TheSecondUser, KeyBuilder, out lastUserDTO).Should().BeTrue();
             firstUserDTO.Should().NotBeNull();
             lastUserDTO.Should().NotBeNull();
         }
@@ -180,17 +231,17 @@ namespace HisPlus.UnitTesting.Redis
         [Trait(TraitName, TraitCacheObjectValue)]
         public void RemoveTagsFromObjectKey_OK()
         {
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheFirstUser, tagsBuilder);
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheSecondUser, tagsBuilder);
+            Redis.Cache.SetObject<BsUserDTO>(TheFirstUser, KeyBuilder, TagsBuilder);
+            Redis.Cache.SetObject<BsUserDTO>(TheSecondUser, KeyBuilder, TagsBuilder);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeTrue();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeTrue();
 
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUserTags, CacheType.Object, TheFirstUser.Id);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUser, KeyBuilder, TagsBuilder);
 
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUserTags, CacheType.Object, TheSecondUser.Id);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUser, KeyBuilder, TagsBuilder);
             
-            var redisKeys = RedisContext.Cache.GetKeysByTag(UserTags);
+            var redisKeys = Redis.Cache.GetKeysByTag(UserTags);
 
             redisKeys.Should().NotContain(UserKeys);
         }
@@ -199,34 +250,30 @@ namespace HisPlus.UnitTesting.Redis
         [Trait(TraitName, TraitCacheObjectValue)]
         public void FetchObject_NoCacheHit_OK()
         {
-            RedisContext.Cache.RemoveKey<BsUserDTO>(UserKeys);
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeFalse();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeFalse();
+            Redis.Cache.RemoveKey<BsUserDTO>(Users, KeysBuilder);
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeFalse();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeFalse();
             int theFirstUserId = 10000;
             int theSecondUserId = 20000;
             int count = 0;
 
-            // None cahe hit
-            RedisContext.Cache.FetchObject<BsUserDTO>(TheFirstUser.Id, () => { count++; return new BsUserDTO() { Id = theFirstUserId }; });
+            Redis.Cache.FetchObject<BsUserDTO>(TheFirstUser, KeyBuilder, () => { count++; return new BsUserDTO() { Id = theFirstUserId }; });
             count.Should().Be(1);
-
-            // Cache hit
-            RedisContext.Cache.FetchObject<BsUserDTO>(TheFirstUser.Id, () => { count++; return new BsUserDTO() { Id = theFirstUserId }; });
-            count.Should().Be(1);
-
-            // None cahe hit
-            RedisContext.Cache.FetchObject<BsUserDTO>(TheSecondUser.Id, () => { count++; return new BsUserDTO() { Id = theSecondUserId }; });
-            count.Should().Be(2);
             
-            // Cache hit
-            RedisContext.Cache.FetchObject<BsUserDTO>(TheSecondUser.Id, () => { count++; return new BsUserDTO() { Id = theSecondUserId }; });
+            Redis.Cache.FetchObject<BsUserDTO>(TheFirstUser, KeyBuilder, () => { count++; return new BsUserDTO() { Id = theFirstUserId }; });
+            count.Should().Be(1);
+
+            Redis.Cache.FetchObject<BsUserDTO>(TheSecondUser, KeyBuilder, () => { count++; return new BsUserDTO() { Id = theSecondUserId }; });
+            count.Should().Be(2);
+                        
+            Redis.Cache.FetchObject<BsUserDTO>(TheSecondUser, KeyBuilder, () => { count++; return new BsUserDTO() { Id = theSecondUserId }; });
             count.Should().Be(2);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeTrue();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeTrue();
 
-            var firstCache = RedisContext.Cache.GetObject<BsUserDTO>(KeyBuilder, TheFirstUser);
-            var lastCache = RedisContext.Cache.GetObject<BsUserDTO>(KeyBuilder, TheSecondUser);
+            var firstCache = Redis.Cache.GetObject<BsUserDTO>(TheFirstUser, KeyBuilder);
+            var lastCache = Redis.Cache.GetObject<BsUserDTO>(TheSecondUser, KeyBuilder);
 
             firstCache.Should().NotBeNull();
             lastCache.Should().NotBeNull();
@@ -238,25 +285,23 @@ namespace HisPlus.UnitTesting.Redis
         [Trait(TraitName, TraitCacheObjectValue)]
         public void FetchObject_CacheHit_OK()
         {
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheFirstUser);
-            RedisContext.Cache.SetObject<BsUserDTO>(KeyBuilder, TheSecondUser);
+            Redis.Cache.SetObject<BsUserDTO>(TheFirstUser, KeyBuilder);
+            Redis.Cache.SetObject<BsUserDTO>(TheSecondUser, KeyBuilder);
 
             int theFirstUserId = 10000;
             int theSecondUserId = 20000;
             int count = 0;
-
-            // Cache hit
-            RedisContext.Cache.FetchObject<BsUserDTO>(TheFirstUser.Id, () => { count++; return new BsUserDTO() { Id = theFirstUserId }; });
-            // Cache hit
-            RedisContext.Cache.FetchObject<BsUserDTO>(TheSecondUser.Id, () => { count++; return new BsUserDTO() { Id = theSecondUserId }; });
+            
+            Redis.Cache.FetchObject<BsUserDTO>(TheFirstUser, KeyBuilder, () => { count++; return new BsUserDTO() { Id = theFirstUserId }; });            
+            Redis.Cache.FetchObject<BsUserDTO>(TheSecondUser, KeyBuilder, () => { count++; return new BsUserDTO() { Id = theSecondUserId }; });
             
             count.Should().Be(0);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeTrue();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeTrue();
 
-            var firstCache = RedisContext.Cache.GetObject<BsUserDTO>(KeyBuilder, TheFirstUser);
-            var lastCache = RedisContext.Cache.GetObject<BsUserDTO>(KeyBuilder, TheSecondUser);
+            var firstCache = Redis.Cache.GetObject<BsUserDTO>(TheFirstUser, KeyBuilder);
+            var lastCache = Redis.Cache.GetObject<BsUserDTO>(TheSecondUser, KeyBuilder);
 
             firstCache.Should().NotBeNull();
             lastCache.Should().NotBeNull();
@@ -272,78 +317,72 @@ namespace HisPlus.UnitTesting.Redis
             int theSecondUserId = 20000;
             int count = 0;
 
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUserTags, CacheType.Object, TheFirstUser.Id);
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUserTags, CacheType.Object, TheSecondUser.Id);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUser, KeyBuilder, TagsBuilder);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUser, KeyBuilder, TagsBuilder);
 
-            RedisContext.Cache.RemoveKey<BsUserDTO>(UserKeys);
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeFalse();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeFalse();
+            Redis.Cache.RemoveKey<BsUserDTO>(Users, KeysBuilder);
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeFalse();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeFalse();
                        
-            RedisContext.Cache.GetRawKeysByTag(UserTags, CacheType.Object).Should().NotContain(UserKeys);
+            Redis.Cache.GetRawKeysByTag(UserTags, CacheType.Object).Should().NotContain(UserKeys);
 
             count.Should().Be(0);
 
-            RedisContext.Cache.FetchObject<BsUserDTO>(TheFirstUser.Id,
-                () => { count++; return new BsUserDTO() { Id = theFirstUserId }; }, TheFirstUserTags);
+            Redis.Cache.FetchObject<BsUserDTO>(TheFirstUser, KeyBuilder, () => { count++; return new BsUserDTO() { Id = theFirstUserId }; }, TagsBuilder);
 
             count.Should().Be(1);
 
-            RedisContext.Cache.FetchObject<BsUserDTO>(TheSecondUser.Id,
-                () => { count++; return new BsUserDTO() { Id = theSecondUserId }; }, TheSecondUserTags);
+            Redis.Cache.FetchObject<BsUserDTO>(TheSecondUser, KeyBuilder, () => { count++; return new BsUserDTO() { Id = theSecondUserId }; }, TagsBuilder);
 
             count.Should().Be(2);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeTrue();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeTrue();
 
-            var firstCache = RedisContext.Cache.GetObject<BsUserDTO>(KeyBuilder, TheFirstUser);
-            var lastCache = RedisContext.Cache.GetObject<BsUserDTO>(KeyBuilder, TheSecondUser);
+            var firstCache = Redis.Cache.GetObject<BsUserDTO>(TheFirstUser, KeyBuilder);
+            var lastCache = Redis.Cache.GetObject<BsUserDTO>(TheSecondUser, KeyBuilder);
 
             firstCache.Should().NotBeNull();
             lastCache.Should().NotBeNull();
             firstCache.Id.Should().Equals(theFirstUserId);
             lastCache.Id.Should().Equals(theSecondUserId);
 
-            RedisContext.Cache.GetAllTags().Should().Contain(UserTags);
+            Redis.Cache.GetAllTags().Should().Contain(UserTags);
         }
 
         [Fact(DisplayName = "FetchObjectWithTagBuilder_OK")]
         [Trait(TraitName, TraitCacheObjectValue)]
         public void FetchObjectWithTagBuilder_OK()
         {
-            RedisContext.Cache.FlushAll();
+            Redis.Cache.FlushAll();
 
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUserTags, CacheType.Object, TheFirstUser.Id);
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUserTags, CacheType.Object, TheSecondUser.Id);
-            RedisContext.Cache.RemoveKey<BsUserDTO>(UserKeys);
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeFalse();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeFalse();
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUser, KeyBuilder, TagsBuilder);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUser, KeyBuilder, TagsBuilder);
+            Redis.Cache.RemoveKey<BsUserDTO>(Users, KeysBuilder);
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeFalse();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeFalse();
             
-            RedisContext.Cache.GetRawKeysByTag(UserTags, CacheType.Object).Should().NotContain(UserKeys);
+            Redis.Cache.GetRawKeysByTag(UserTags, CacheType.Object).Should().NotContain(UserKeys);
             
             int count = 0;
-            RedisContext.Cache.FetchObject<BsUserDTO>(TheFirstUser.Id,
-                () => { count++; return new BsUserDTO() { Id = TheFirstUser.Id }; }, 
-                x => new[] { string.Format("TAG_{0}_1", x.Id), string.Format("TAG_{0}_2", x.Id) });
+            Redis.Cache.FetchObject<BsUserDTO>(TheFirstUser, KeyBuilder, () => { count++; return new BsUserDTO() { Id = TheFirstUser.Id }; }, TagsBuilder);
             count.Should().Be(1);
 
-            RedisContext.Cache.FetchObject<BsUserDTO>(TheSecondUser.Id,
-                () => { count++; return new BsUserDTO() { Id = TheSecondUser.Id }; }, 
-                x => new[] { string.Format("TAG_{0}_1", x.Id), string.Format("TAG_{0}_2", x.Id) });
+            Redis.Cache.FetchObject<BsUserDTO>(TheSecondUser, KeyBuilder, () => { count++; return new BsUserDTO() { Id = TheSecondUser.Id }; }, TagsBuilder);
             count.Should().Be(2);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheFirstUser).Should().BeTrue();
-            RedisContext.Cache.KeyExists<BsUserDTO>(KeyBuilder, TheSecondUser).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheFirstUser, KeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(TheSecondUser, KeyBuilder).Should().BeTrue();
 
-            var theFirstUser = RedisContext.Cache.GetObject<BsUserDTO>(KeyBuilder, TheFirstUser);
-            var theSecondUser = RedisContext.Cache.GetObject<BsUserDTO>(KeyBuilder, TheSecondUser);
+            var theFirstUser = Redis.Cache.GetObject<BsUserDTO>(TheFirstUser, KeyBuilder);
+            var theSecondUser = Redis.Cache.GetObject<BsUserDTO>(TheSecondUser, KeyBuilder);
 
             theFirstUser.Should().NotBeNull();
             theSecondUser.Should().NotBeNull();
             theFirstUser.Id.Should().Equals(TheFirstUser.Id);
             theSecondUser.Id.Should().Equals(TheFirstUser.Id);
             
-            RedisContext.Cache.GetRawKeysByTag(RedisContext.Cache.GetAllTags().ToArray(), CacheType.Object).Should().Contain(UserKeys);
+            Redis.Cache.GetRawKeysByTag(Redis.Cache.GetAllTags().ToArray(), CacheType.Object).Should().Contain(UserKeys);
         }
         #endregion
 
@@ -352,33 +391,25 @@ namespace HisPlus.UnitTesting.Redis
         [Trait(TraitName, TraitCacheHashedValue)]
         public void SetHashed_OK()
         {
-            RedisContext.Cache.RemoveKey<BsUserDTO>();
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeFalse();
-            IDictionary<object, BsUserDTO> fieldValues = new Dictionary<object, BsUserDTO>();
-            AllUsers.ToList().ForEach(x =>
-            {
-                fieldValues.Add(x.Id, x);
-            });
-            RedisContext.Cache.SetHashed<BsUserDTO>(fieldValues);
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
+            Redis.Cache.RemoveKey<BsUserDTO>(HashKeyBuilder);
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeFalse();
+
+            Redis.Cache.SetHashed<BsUserDTO>(Users, HashKeyBuilder, HashFieldsBuilder);
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
         }
 
         [Fact(DisplayName = "GetHash_OK")]
         [Trait(TraitName, TraitCacheHashedValue)]
         public void GetHash_OK()
         {
-            RedisContext.Cache.RemoveKey<BsUserDTO>();
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeFalse();
-            IDictionary<object, BsUserDTO> fieldValues = new Dictionary<object, BsUserDTO>();
-            AllUsers.ToList().ForEach(x =>
-            {
-                fieldValues.Add(x.Id, x);
-            });
-            RedisContext.Cache.SetHashed<BsUserDTO>(fieldValues);
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
+            Redis.Cache.RemoveKey<BsUserDTO>(HashKeyBuilder);
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeFalse();
 
-            var theFirstUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheFirstUser.Id);
-            var theLastUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheSecondUser.Id);
+            Redis.Cache.SetHashed<BsUserDTO>(Users, HashKeyBuilder, HashFieldsBuilder);
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
+
+            var theFirstUser = Redis.Cache.GetHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder);
+            var theLastUser = Redis.Cache.GetHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder);
             theFirstUser.Should().NotBeNull();
             theFirstUser.Should().Equals(TheFirstUser);
             theLastUser.Should().NotBeNull();
@@ -389,15 +420,15 @@ namespace HisPlus.UnitTesting.Redis
         [Trait(TraitName, TraitCacheHashedValue)]
         public void GetHashByTags_OK()
         {
-            RedisContext.Cache.RemoveTagsFromHashField<BsUserDTO>(TheFirstUser.Id, TheFirstUserTags);
-            RedisContext.Cache.RemoveTagsFromHashField<BsUserDTO>(TheSecondUser.Id, TheSecondUserTags);
+            Redis.Cache.RemoveTagsFromHashField<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder);
+            Redis.Cache.RemoveTagsFromHashField<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder);
 
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheFirstUser.Id, TheFirstUser, TheFirstUserTags);
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheSecondUser.Id, TheSecondUser, TheSecondUserTags);
+            Redis.Cache.SetHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder);
+            Redis.Cache.SetHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
 
-            var objects = RedisContext.Cache.GetObjectsByTag<BsUserDTO>(UserTags).ToList();
+            var objects = Redis.Cache.GetObjectsByTag<BsUserDTO>(UserTags).ToList();
             objects.Should().NotBeNullOrEmpty();
 
             var redisKeys = objects.Select(x => x.Id.ToString());
@@ -409,21 +440,17 @@ namespace HisPlus.UnitTesting.Redis
         [Trait(TraitName, TraitCacheHashedValue)]
         public void RemoveHashed_OK()
         {
-            RedisContext.Cache.RemoveKey<BsUserDTO>();
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeFalse();
-            IDictionary<object, BsUserDTO> fieldValues = new Dictionary<object, BsUserDTO>();
-            AllUsers.ToList().ForEach(x =>
-            {
-                fieldValues.Add(x.Id, x);
-            });
-            RedisContext.Cache.SetHashed<BsUserDTO>(fieldValues);
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
+            Redis.Cache.RemoveKey<BsUserDTO>(HashKeyBuilder);
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeFalse();
 
-            RedisContext.Cache.RemoveHashed<BsUserDTO>(TheFirstUser.Id);
-            RedisContext.Cache.RemoveHashed<BsUserDTO>(TheSecondUser.Id);
+            Redis.Cache.SetHashed<BsUserDTO>(Users.ToArray(), HashKeyBuilder, HashFieldsBuilder);
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
 
-            var theFirstUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheFirstUser.Id);
-            var theLastUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheSecondUser.Id);
+            Redis.Cache.RemoveHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder);
+            Redis.Cache.RemoveHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder);
+
+            var theFirstUser = Redis.Cache.GetHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder);
+            var theLastUser = Redis.Cache.GetHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder);
             theFirstUser.Should().BeNull();
             theLastUser.Should().BeNull();
         }
@@ -432,17 +459,17 @@ namespace HisPlus.UnitTesting.Redis
         [Trait(TraitName, TraitCacheHashedValue)]
         public void SetHash_With_Tag_OK()
         {
-            RedisContext.Cache.RemoveTagsFromHashField<BsUserDTO>(TheFirstUser.Id, TheFirstUserTags);
-            RedisContext.Cache.RemoveTagsFromHashField<BsUserDTO>(TheSecondUser.Id, TheSecondUserTags);
+            Redis.Cache.RemoveTagsFromHashField<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder);
+            Redis.Cache.RemoveTagsFromHashField<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder);
 
-            RedisContext.Cache.GetRawKeysByTag(UserTags).Should().NotContain(UserKeys);
+            Redis.Cache.GetRawKeysByTag(UserTags).Should().NotContain(UserKeys);
 
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheFirstUser.Id, TheFirstUser, TheFirstUserTags);
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheSecondUser.Id, TheSecondUser, TheSecondUserTags);
+            Redis.Cache.SetHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder);
+            Redis.Cache.SetHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
-            
-            var hashedKeys = RedisContext.Cache.GetRawKeysByTag(UserTags, CacheType.HashField);
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
+
+            var hashedKeys = Redis.Cache.GetRawKeysByTag(UserTags, CacheType.HashField);
             hashedKeys.Should().NotBeNullOrEmpty();
 
             hashedKeys.Should().Contain(UserKeys);
@@ -452,93 +479,83 @@ namespace HisPlus.UnitTesting.Redis
         [Trait(TraitName, TraitCacheHashedValue)]
         public void SetHash_With_TTL_OK()
         {
-            RedisContext.Cache.RemoveTagsFromHashField<BsUserDTO>(TheFirstUser.Id, TheFirstUserTags);
-            RedisContext.Cache.RemoveTagsFromHashField<BsUserDTO>(TheSecondUser.Id, TheSecondUserTags);
+            Redis.Cache.RemoveTagsFromHashField<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder);
+            Redis.Cache.RemoveTagsFromHashField<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder);
 
-            RedisContext.Cache.GetRawKeysByTag(UserTags).Should().NotContain(UserKeys);
+            Redis.Cache.GetRawKeysByTag(UserTags).Should().NotContain(UserKeys);
             int count = 0;
-            
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheFirstUser.Id, TheFirstUser, TheFirstUserTags, TimeSpan.FromSeconds(5));
+
+            Redis.Cache.SetHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder, TimeSpan.FromSeconds(5));
             count.Should().Be(0);
-            RedisContext.Cache.FetchHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, fieldBuilder, () => { count++; return new BsUserDTO(); });
+            Redis.Cache.FetchHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder, () => { count++; return new BsUserDTO(); });
             count.Should().Be(0);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
             System.Threading.Thread.Sleep(TimeSpan.FromSeconds(5.2));
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeFalse();
-            RedisContext.Cache.FetchHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, fieldBuilder, () => { count++; return new BsUserDTO(); });
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeFalse();
+            Redis.Cache.FetchHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder, () => { count++; return new BsUserDTO(); });
             count.Should().Be(1);
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
         }
 
         [Fact(DisplayName = "AddTagsToKey_Hashed_OK")]
         [Trait(TraitName, TraitCacheHashedValue)]
         public void AddTagsToKey_Hashed_OK()
         {
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheFirstUser.Id, TheFirstUser);
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheSecondUser.Id, TheSecondUser);
+            Redis.Cache.SetHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder);
+            Redis.Cache.SetHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
 
-            // Remove tag for the key
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(UserTags);
-            RedisContext.Cache.GetRawKeysByTag(UserTags).Should().NotContain(UserKeys);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUser, HashKeyBuilder, TagsBuilder);
+            Redis.Cache.GetRawKeysByTag(UserTags).Should().NotContain(UserKeys);
 
-            //var redisKeys = RedisContext.Cache.GetKeysByTag(Tags).ToList();
-            //var rawKeys = RedisContext.Cache.GetRawKeysByTag(Tags).ToList();
-
-            // Add tags to the key
-            RedisContext.Cache.AddTagsToKey<BsUserDTO>(UserTags);
-            RedisContext.Cache.GetRawKeysByTag(UserTags).Should().Contain(new string[] { "BsUser:hash" });
+            Redis.Cache.AddTagsToKey<BsUserDTO>(TheFirstUser, HashKeyBuilder, TagsBuilder);
+            Redis.Cache.GetRawKeysByTag(UserTags).Should().Contain(new string[] { "BsUser:hash" });
         }
 
-        [Fact(DisplayName = "AddTagsToHashField_OK")]
-        [Trait(TraitName, TraitCacheHashedValue)]
-        public void AddTagsToHashField_OK()
-        {
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheFirstUser.Id, TheFirstUser);
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheSecondUser.Id, TheSecondUser);
+        //[Fact(DisplayName = "AddTagsToHashField_OK")]
+        //[Trait(TraitName, TraitCacheHashedValue)]
+        //public void AddTagsToHashField_OK()
+        //{
+        //    Redis.Cache.SetHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder);
+        //    Redis.Cache.SetHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
+        //    Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
 
-            // Remove tag for the key
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(UserTags);
-            RedisContext.Cache.GetRawKeysByTag(UserTags).Should().NotContain(UserKeys);
+        //    Redis.Cache.RemoveTagsFromKey<BsUserDTO>(HashKeyBuilder);
+        //    Redis.Cache.GetRawKeysByTag(UserTags).Should().NotContain(UserKeys);
 
-            //var redisKeys = RedisContext.Cache.GetKeysByTag(tags).ToList();
-            //var rawKeys = RedisContext.Cache.GetRawKeysByTag(tags).ToList();
-
-            // Add tags to the hashed field
-            RedisContext.Cache.AddTagsToHashField<BsUserDTO>(TheFirstUser.Id, TheFirstUserTags);
-            RedisContext.Cache.AddTagsToHashField<BsUserDTO>(TheSecondUser.Id, TheSecondUserTags);
-        }
+        //    Redis.Cache.AddTagsToHashField<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder);
+        //    Redis.Cache.AddTagsToHashField<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder);
+        //}
 
         [Fact(DisplayName = "TryGetHashed_OK")]
         [Trait(TraitName, TraitCacheHashedValue)]
         public void TryGetHashed_OK()
         {
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheFirstUser.Id, TheFirstUser);
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheSecondUser.Id, TheSecondUser);
-            BsUserDTO firstUserDTO;
-            BsUserDTO lastUserDTO;
-            RedisContext.Cache.TryGetHashed<BsUserDTO>(TheFirstUser.Id, out firstUserDTO).Should().BeTrue();
-            RedisContext.Cache.TryGetHashed<BsUserDTO>(TheSecondUser.Id, out lastUserDTO).Should().BeTrue();
-            firstUserDTO.Should().NotBeNull();
-            lastUserDTO.Should().NotBeNull();
+            Redis.Cache.SetHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder);
+            Redis.Cache.SetHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder);
+            BsUserDTO theFirstUser;
+            BsUserDTO theSecondtUser;
+            Redis.Cache.TryGetHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder, out theFirstUser).Should().BeTrue();
+            Redis.Cache.TryGetHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder, out theSecondtUser).Should().BeTrue();
+            theFirstUser.Should().NotBeNull();
+            theSecondtUser.Should().NotBeNull();
         }
 
         [Fact(DisplayName = "RemoveTagsFromHashedKey_OK")]
         [Trait(TraitName, TraitCacheHashedValue)]
         public void RemoveTagsFromHashedKey_OK()
         {
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheFirstUser.Id, TheFirstUser, TheFirstUserTags);
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheSecondUser.Id, TheSecondUser, TheSecondUserTags);
+            Redis.Cache.SetHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder);
+            Redis.Cache.SetHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder, TagsBuilder);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
 
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(UserTags);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUser, HashKeyBuilder, UserTags);
 
-            var hashedKeys = RedisContext.Cache.GetKeysByTag(UserTags);
+            var hashedKeys = Redis.Cache.GetKeysByTag(UserTags);
 
             hashedKeys.Should().NotContain(UserKeys);
         }
@@ -547,23 +564,23 @@ namespace HisPlus.UnitTesting.Redis
         [Trait(TraitName, TraitCacheHashedValue)]
         public void FetchHashed_CacheHit_OK()
         {
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheFirstUser.Id, TheFirstUser);
-            RedisContext.Cache.SetHashed<BsUserDTO>(TheSecondUser.Id, TheSecondUser);
+            Redis.Cache.SetHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder);
+            Redis.Cache.SetHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder);
 
             int theFirstUserId = 10000;
             int theSecondUserId = 20000;
             int count = 0;
-            
-            RedisContext.Cache.FetchHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, fieldBuilder, () => { count++; return new BsUserDTO() { Id = theFirstUserId }; });
 
-            RedisContext.Cache.FetchHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, fieldBuilder, () => { count++; return new BsUserDTO() { Id = theSecondUserId }; });
+            Redis.Cache.FetchHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder, () => { count++; return new BsUserDTO() { Id = theFirstUserId }; });
+
+            Redis.Cache.FetchHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder, () => { count++; return new BsUserDTO() { Id = theSecondUserId }; });
 
             count.Should().Be(0);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();            
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
 
-            var theFirstUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheFirstUser.Id);
-            var theLastUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheSecondUser.Id);
+            var theFirstUser = Redis.Cache.GetHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder);
+            var theLastUser = Redis.Cache.GetHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder);
 
             theFirstUser.Should().NotBeNull();
             theLastUser.Should().NotBeNull();
@@ -579,71 +596,67 @@ namespace HisPlus.UnitTesting.Redis
             int theSecondUserId = 20000;
             int count = 0;
 
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUserTags);
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUserTags);
-            RedisContext.Cache.RemoveKey<BsUserDTO>();
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeFalse();
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUser, HashKeyBuilder, TagsBuilder);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUser, HashKeyBuilder, TagsBuilder);
+            Redis.Cache.RemoveKey<BsUserDTO>(HashKeyBuilder);
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeFalse();
 
-            RedisContext.Cache.GetRawKeysByTag(UserTags).Should().NotContain(UserKeys);
+            Redis.Cache.GetRawKeysByTag(UserTags).Should().NotContain(UserKeys);
 
             count.Should().Be(0);
-            RedisContext.Cache.FetchHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, fieldBuilder, () => { count++; return new BsUserDTO() { Id = theFirstUserId }; }, tagsBuilder);
+            Redis.Cache.FetchHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder, () => { count++; return new BsUserDTO() { Id = theFirstUserId }; }, TagsBuilder);
             count.Should().Be(1);
-            RedisContext.Cache.FetchHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, fieldBuilder, () => { count++; return new BsUserDTO() { Id = theSecondUserId }; }, tagsBuilder);
+            Redis.Cache.FetchHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder, () => { count++; return new BsUserDTO() { Id = theSecondUserId }; }, TagsBuilder);
             count.Should().Be(2);
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
 
-            var theFirstUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheFirstUser.Id);
-            var theSecondUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheSecondUser.Id);
+            var theFirstUser = Redis.Cache.GetHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder);
+            var theSecondUser = Redis.Cache.GetHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder);
 
             theFirstUser.Should().NotBeNull();
             theSecondUser.Should().NotBeNull();
             theFirstUser.Id.Should().Equals(theFirstUserId);
             theSecondUser.Id.Should().Equals(theSecondUserId);
 
-            RedisContext.Cache.GetAllTags().Should().Contain(UserTags);
+            Redis.Cache.GetAllTags().Should().Contain(UserTags);
         }
 
         [Fact(DisplayName = "FetchHashedWithTagBuilder_OK")]
         [Trait(TraitName, TraitCacheHashedValue)]
         public void FetchHashedWithTagBuilder_OK()
         {
-            RedisContext.Cache.FlushAll();
+            Redis.Cache.FlushAll();
 
             int count = 0;
 
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUserTags);
-            RedisContext.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUserTags);
-            RedisContext.Cache.RemoveKey<BsUserDTO>();
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeFalse();
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheFirstUser, KeyBuilder, TagsBuilder);
+            Redis.Cache.RemoveTagsFromKey<BsUserDTO>(TheSecondUser, KeyBuilder, TagsBuilder);
+            Redis.Cache.RemoveKey<BsUserDTO>(HashKeyBuilder);
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeFalse();
 
-            RedisContext.Cache.GetAllTags().Should().NotContain(UserTags);
-            
+            Redis.Cache.GetAllTags().Should().NotContain(UserTags);
+
             count.Should().Be(0);
 
-            RedisContext.Cache.FetchHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, fieldBuilder, 
-                () => { count++; return new BsUserDTO() { Id = TheFirstUser.Id }; }, 
-                x => new[] { string.Format("TAG_{0}_1", x.Id), string.Format("TAG_{0}_2", x.Id) });
-            
+            Redis.Cache.FetchHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder, () => { count++; return new BsUserDTO() { Id = TheFirstUser.Id }; }, TagsBuilder);
+
             count.Should().Be(1);
 
-            RedisContext.Cache.FetchHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, fieldBuilder,
-                () => { count++; return new BsUserDTO() { Id = TheSecondUser.Id }; },
-                x => new[] { string.Format("TAG_{0}_1", x.Id), string.Format("TAG_{0}_2", x.Id) });
+            Redis.Cache.FetchHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder, () => { count++; return new BsUserDTO() { Id = TheSecondUser.Id }; }, TagsBuilder);
 
             count.Should().Be(2);
 
-            RedisContext.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
+            Redis.Cache.KeyExists<BsUserDTO>(HashKeyBuilder).Should().BeTrue();
 
-            var theFirstUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheFirstUser.Id);
-            var theSecondUser = RedisContext.Cache.GetHashed<BsUserDTO>(TheSecondUser.Id);
+            var theFirstUser = Redis.Cache.GetHashed<BsUserDTO>(TheFirstUser, HashKeyBuilder, HashFieldBuilder);
+            var theSecondUser = Redis.Cache.GetHashed<BsUserDTO>(TheSecondUser, HashKeyBuilder, HashFieldBuilder);
 
             theFirstUser.Should().NotBeNull();
             theSecondUser.Should().NotBeNull();
             theFirstUser.Id.Should().Equals(TheFirstUser.Id);
             theSecondUser.Id.Should().Equals(TheSecondUser.Id);
-            
-            RedisContext.Cache.GetRawKeysByTag(RedisContext.Cache.GetAllTags().ToArray(), CacheType.HashField).Should().Contain(UserKeys); 
+
+            Redis.Cache.GetRawKeysByTag(Redis.Cache.GetAllTags().ToArray(), CacheType.HashField).Should().Contain(UserKeys);
         }
         #endregion
     }
