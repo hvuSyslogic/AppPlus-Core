@@ -28,8 +28,6 @@ namespace HisPlus.UnitTesting.Redis
 
             RedisTestBase.TheFirstUser = theFirstUser;
             RedisTestBase.TheSecondUser = theSecondUser;
-
-            RedisTestBase.UserKeys = new string[] { theFirstUser.Id.ToString(), theSecondUser.Id.ToString() };            
         }
     }     
 
@@ -38,7 +36,6 @@ namespace HisPlus.UnitTesting.Redis
         protected static readonly IRedisContext Redis = IoCManager.Container.Resolve<IRedisContext>();
         //protected static readonly IRedisContext RedisContext = new RedisContext("192.168.1.225:6379, connectRetry=10, abortConnect=false, allowAdmin=true");
 
-        public static string[] UserTags = new string[] { };
         public static string[] UserKeys = new string[] { };
 
         public static BsUserDTO TheFirstUser { get; set; }

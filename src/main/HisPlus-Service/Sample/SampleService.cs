@@ -32,13 +32,13 @@ namespace HisPlus.Services
         public PatientInHosInfoDTO GetPatientInHosInfo(string cardNo)
         {
             return UnitOfWork.Do(uow => 
-            {
+            {                
                 var queryable = uow.Repo<BsPatient>().Get(x => x.CardNo == cardNo).Join(
                     uow.Repo<InHosInfo>().Get(),
                     x => x.InPatNo,
                     y => y.InPatNo,
                     (x, y) => new PatientInHosInfo { Patient = x, InHosInfo = y });
-
+                
                 if (queryable.LongCount() > 0)
                 {
                     var result = queryable.First();
@@ -52,8 +52,6 @@ namespace HisPlus.Services
 
                 return null;
             });
-
-            
         }
 
         public IEnumerable<GblRoleDTO> L1CacheTest()
