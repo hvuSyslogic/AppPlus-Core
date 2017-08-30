@@ -365,16 +365,9 @@ namespace HisPlus.UnitTesting.Redis
             Redis.Cache.SetHashed<BsUserDTO>(TheSecondUser, HashFieldBuilder, TagsBuilder);
 
             Redis.Cache.KeyExists<BsUserDTO>().Should().BeTrue();
-
-            var tags = CacheProviderEx.GetTags<BsUserDTO>(TheFirstUser, TagsBuilder)
-                .Union(CacheProviderEx.GetTags<BsUserDTO>(TheSecondUser, TagsBuilder)).ToArray();
-
-            var objects = Redis.Cache.GetObjectsByTag<BsUserDTO>(tags);
-            objects.Should().NotBeNullOrEmpty();
-
-            var keys = objects.Select(x => x.Id.ToString()).ToList();
-            keys.Should().NotBeNullOrEmpty();
-            keys.Should().Contain(UserKeys);
+           
+            Redis.Cache.GetObjectsByTag<BsUserDTO>(TheFirstUser, TagsBuilder).Select(x => x.Id).Should().Contain(TheFirstUser.Id);
+            Redis.Cache.GetObjectsByTag<BsUserDTO>(TheSecondUser, TagsBuilder).Select(x => x.Id).Should().Contain(TheSecondUser.Id);
         }
 
         [Fact(DisplayName = "remove_hash_field")]
