@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("HisPlus-Client")]
 [assembly: AssemblyDescription("HisPlus client library to invoke service layer")]
-//[assembly: AssemblyProduct("HisPlus")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
