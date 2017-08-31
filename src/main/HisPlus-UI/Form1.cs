@@ -41,10 +41,15 @@ namespace HisPlus.UI
 
         private void AssertInitializationCompleted()
         {
-            while (!IsInitialized)
+            int ms = 1;
+
+            new Thread((ThreadStart)delegate()
             {
-                System.Threading.Thread.Sleep(100);
-            }
+                while (!IsInitialized)
+                {
+                    Thread.Sleep(ms);
+                }
+            }).Start();
         }
 
         private void BtnOK_Click(object sender, EventArgs e)

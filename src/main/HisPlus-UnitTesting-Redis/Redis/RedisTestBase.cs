@@ -33,8 +33,14 @@ namespace HisPlus.UnitTesting.Redis
 
     public class RedisTestBase : TestBase
     {
-        protected static readonly IRedisContext Redis = IoCManager.Container.Resolve<IRedisContext>();
+         
+        static readonly IRedisContext _context = IoCManager.Container.Resolve<IRedisContext>();
         //protected static readonly IRedisContext RedisContext = new RedisContext("192.168.1.225:6379, connectRetry=10, abortConnect=false, allowAdmin=true");
+
+        protected static CachingFramework.Redis.Contracts.Providers.ICacheProvider Cache
+        {
+            get { return _context.Cache; }
+        }
 
         public static string[] UserKeys = new string[] { };
 
