@@ -78,7 +78,7 @@ namespace HisPlus.UI
                 MessageBox.Show("UserId or Password is invalid", "login", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
+            
             MainForm mainForm = new MainForm(userInfo);
             mainForm.Show();
         }

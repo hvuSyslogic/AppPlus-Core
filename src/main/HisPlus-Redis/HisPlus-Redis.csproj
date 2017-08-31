@@ -58,7 +58,6 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="CacheType.cs" />
     <Compile Include="CacheProviderEx.cs" />
     <Compile Include="IRedisContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
